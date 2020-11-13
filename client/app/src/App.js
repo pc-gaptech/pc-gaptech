@@ -12,6 +12,8 @@ import Login from './pages/Login';
 import Navbar from './components/Navbar'
 import Register from './pages/Register'
 import Detail from './pages/Detail'
+import PartList from './pages/PartList'
+
 
 
 
@@ -34,12 +36,18 @@ function App() {
             <li>
               <Link to="/parts/detail">Part Details</Link>
             </li>
+            <li>
+              <Link to="/parts/motherboards">Part List</Link>
+            </li>
           </ul>
         </nav>
         <div className="container">
           <Switch>
           <Route path="/parts/detail">
               <Detail />
+            </Route>
+            <Route path="/parts/motherboards">
+              <PartList />
             </Route>
           <Route path="/register">
               <Register />

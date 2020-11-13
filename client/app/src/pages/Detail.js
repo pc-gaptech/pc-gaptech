@@ -3,16 +3,10 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import {
-  Card,
-  CardMedia,
   Grid,
   makeStyles,
-  Paper,
-  CardContent,
-  CardHeader,
   TableContainer,
   Table,
-  TableHead,
   TableCell,
   TableBody,
   TableRow,
@@ -22,6 +16,7 @@ import {
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 
 import Image from 'material-ui-image'
+import PartItem from '../components/PartItem'
 
 const useStyles = makeStyles((theme) => ({
   root: {
