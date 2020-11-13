@@ -3,14 +3,14 @@
 const jwt = require("jsonwebtoken");
 
 const createToken = (obj) => {
-	return jwt.sign(obj, process.env.JWT_SECRET);
+  return jwt.sign(obj, "rahasia");
 };
 
 const decodeToken = (token) => {
-	return jwt.verify(token, process.env.JWT_SECRET);
+  return jwt.verify(token, "rahasia");
 };
 
 module.exports = {
-	createToken,
-	decodeToken,
+  createToken,
+  decodeToken,
 };
