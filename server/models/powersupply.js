@@ -1,28 +1,100 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class PowerSupply extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-    }
-  };
-  PowerSupply.init({
-    name: DataTypes.STRING,
-    efficiency: DataTypes.STRING,
-    max_power: DataTypes.INTEGER,
-    manufacturer: DataTypes.STRING,
-    price: DataTypes.INTEGER,
-    picture_url: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'PowerSupply',
-  });
-  return PowerSupply;
+	class PowerSupply extends Model {
+		/**
+		 * Helper method for defining associations.
+		 * This method is not a part of Sequelize lifecycle.
+		 * The `models/index` file will call this method automatically.
+		 */
+		static associate(models) {
+			// define association here
+		}
+	}
+	PowerSupply.init(
+		{
+			name: {
+				type: DataTypes.STRING,
+				allowNull: false,
+				validate: {
+					notEmpty: {
+						msg: "Power Supply name is Required",
+					},
+					notNull: {
+						msg: "Power Supply name is Required",
+					},
+				},
+			},
+			efficiency: {
+				type: DataTypes.STRING,
+				allowNull: false,
+				validate: {
+					notEmpty: {
+						msg: "Power Supply efficiency rating is Required",
+					},
+					notNull: {
+						msg: "Power Supply efficiency rating is Required",
+					},
+				},
+			},
+			max_power: {
+				type: DataTypes.INTEGER,
+				allowNull: false,
+				validate: {
+					notEmpty: {
+						msg: "Power Supply Max Power Rating is Required",
+					},
+					min: {
+						args: 1,
+						msg: "Power Supply Max Power Rating is Invalid",
+					},
+				},
+			},
+			manufacturer: {
+				type: DataTypes.STRING,
+				allowNull: false,
+				validate: {
+					notEmpty: {
+						msg: "Power Supply Manufacturer name is Required",
+					},
+					notNull: {
+						msg: "Power Supply Manufacturer name is Required",
+					},
+				},
+			},
+			price: {
+				type: DataTypes.INTEGER,
+				allowNull: false,
+				validate: {
+					notEmpty: {
+						msg: "Power Supply Price is Required",
+					},
+					min: {
+						args: 10000,
+						msg: "Power Supply Price is Invalid",
+					},
+				},
+			},
+			picture_url: {
+				type: DataTypes.STRING,
+				allowNull: false,
+				validate: {
+					notEmpty: {
+						msg: "Power Supply Picture URL is Required",
+					},
+					notNull: {
+						msg: "Power Supply Picture URL is Required",
+					},
+					isUrl: {
+						msg: "Power Supply Picture URL is Invalid",
+					},
+				},
+			},
+		},
+		{
+			sequelize,
+			modelName: "PowerSupply",
+		},
+	);
+	return PowerSupply;
 };
