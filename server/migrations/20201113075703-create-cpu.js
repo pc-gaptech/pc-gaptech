@@ -1,57 +1,57 @@
-'use strict';
+"use strict";
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('CPUs', {
+    await queryInterface.createTable("CPUs", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       socket: {
-        type: Sequelize.ARRAY({type: Sequelize.STRING})
+        type: Sequelize.ARRAY(Sequelize.STRING),
       },
       chipset: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       TDP: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       manufacturer: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       power_draw: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       core_count: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       isIGPU: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
       },
       max_rating: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       price: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       picture_url: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('CPUs');
-  }
+    await queryInterface.dropTable("CPUs");
+  },
 };

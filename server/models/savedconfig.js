@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class SavedConfig extends Model {
     /**
@@ -12,22 +10,25 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
     }
-  };
-  SavedConfig.init({
-    name: DataTypes.STRING,
-    rating: DataTypes.INTEGER,
-    UserId: DataTypes.INTEGER,
-    CPUId: DataTypes.INTEGER,
-    CPU_coolerId: DataTypes.INTEGER,
-    motherboardId: DataTypes.INTEGER,
-    GPUId: DataTypes.INTEGER,
-    RAMId: DataTypes.INTEGER,
-    storageId: DataTypes.INTEGER,
-    power_supplyId: DataTypes.INTEGER,
-    casingId: DataTypes.INTEGER
-  }, {
-    sequelize,
-    modelName: 'SavedConfig',
-  });
+  }
+  SavedConfig.init(
+    {
+      name: DataTypes.STRING,
+      rating: DataTypes.INTEGER,
+      UserId: DataTypes.INTEGER,
+      CPUId: DataTypes.INTEGER,
+      CPUCoolerId: DataTypes.INTEGER,
+      MotherboardId: DataTypes.INTEGER,
+      GPUId: DataTypes.INTEGER,
+      RAMId: DataTypes.INTEGER,
+      StorageId: DataTypes.INTEGER,
+      PowerSupplyId: DataTypes.INTEGER,
+      CasingId: DataTypes.INTEGER,
+    },
+    {
+      sequelize,
+      modelName: "SavedConfig",
+    }
+  );
   return SavedConfig;
 };
