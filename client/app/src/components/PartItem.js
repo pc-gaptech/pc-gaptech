@@ -6,6 +6,7 @@ import Image from 'material-ui-image'
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
 import SaveIcon from '@material-ui/icons/Save'
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 
 
@@ -35,8 +36,8 @@ const useStyle = makeStyles((theme) => ({
         color: "white",
         backgroundColor: "grey",
         fontSize: "0.7em",
-        paddingLeft: "10px",
-        paddingRight: "10px"
+        paddingLeft: "20px",
+        paddingRight: "20px"
     },
 
     name: {
@@ -58,7 +59,7 @@ export default function PartItem() {
             </Grid>
             <Grid item xs={4} className={classes.center}>
                 <Typography className={classes.name}>
-                Asus ROG STRIX B550-F GAMING (WI-FI) ATX AM4
+                    Asus ROG STRIX B550-F GAMING (WI-FI) ATX AM4
                     </Typography>
                 <Button
                     size={"small"}
@@ -69,32 +70,32 @@ export default function PartItem() {
                     </Button>
             </Grid>
             <Grid xs={2} className={classes.center}>
-            <Button
-        variant="contained"
-        color="primary"
-        size="small"
-        className={classes.buttonsave}
-        startIcon={<SaveIcon />}
-      >Add</Button>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    size="medium"
+                    className={classes.buttonsave}
+                    startIcon={<AddCircleIcon />}
+                >Add</Button>
             </Grid>
-            <Grid xs={2} className={classes.center} style={{fontWeight: "bold"}}>
+            <Grid xs={2} className={classes.center} style={{ fontWeight: "bold" }}>
                 Rp.2.100.000
             </Grid>
             <Grid xs={1} className={classes.center}>
-            <IconButton color="primary" aria-label="add to shopping cart">
-        <AddShoppingCartIcon />
-      </IconButton>
-                </Grid>
+                <IconButton style={{ color: "#40CB53" }} title="Research price in Tokopedia" aria-label="add to shopping cart">
+                    <AddShoppingCartIcon />
+                </IconButton>
+            </Grid>
             <Grid xs={1} className={classes.center}>
-            <IconButton color="primary" aria-label="add to shopping cart">
-        <AddShoppingCartIcon />
-      </IconButton>
-                </Grid>
+                <IconButton style={{ color: "#FF2F00" }} title="Research price in Shopee" aria-label="add to shopping cart">
+                    <AddShoppingCartIcon />
+                </IconButton>
+            </Grid>
             <Grid xs={1} className={classes.center}>
-            <IconButton color="primary" aria-label="add to shopping cart">
-        <AddShoppingCartIcon />
-      </IconButton>
-                </Grid>
+                <IconButton style={{ color: "#E00034" }} title="Research price in Bukalapak" aria-label="add to shopping cart">
+                    <AddShoppingCartIcon />
+                </IconButton>
+            </Grid>
         </Grid>
     )
 }

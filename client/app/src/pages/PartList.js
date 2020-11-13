@@ -14,16 +14,19 @@ import bukalapak from '../assets/bukalapak.png'
 
 const useStyle = makeStyles((theme) => ({
     container: {
-        paddingTop: "20px",
-        paddingBottom: "20px",
+        paddingTop: "10px",
+        paddingBottom: "10px",
         borderTop: "1px solid #bbbfca",
         borderBottom: "1px solid #bbbfca",
-        margin: "auto",
         textAlign: "center"
     },
     logo: {
-        maxWidth: "100%",
-        height: "auto"
+        alignSelf: "center",
+        maxWidth: "70%",
+        height: "auto",
+        margin: "auto",
+        paddingTop: "33px",
+        paddingBottom: "33px",
     },
 
     center: {
@@ -32,19 +35,25 @@ const useStyle = makeStyles((theme) => ({
         fontWeight: "bold"
     },
 
+    header: {
+        fontWeight: "bold",
+        fontSize: "1.3em",
+        marginBottom: "15px"
+    }
+
 }))
 
 export default function PartList() {
     const classes = useStyle()
 
-    return(
+    return (
         <Container>
             <Typography className={classes.header}>
-            Select Available Motherboards
+                Select Available Motherboards
             </Typography>
             <Grid container spacing={1} className={classes.container}>
                 <Grid item xs={1}>
-                     
+
                 </Grid>
                 <Grid xs={4} className={classes.center}>
                     Products
@@ -57,26 +66,35 @@ export default function PartList() {
                 </Grid>
                 <Grid xs={1}>
                     <Image
+                        imageStyle={{ width: 'inherit', height: 'inherit' }}
                         className={classes.logo}
                         src={tokopedia}
                     />
                 </Grid>
                 <Grid xs={1}>
-                <Image
+                    <Image
+                    imageStyle={{ width: 'inherit', height: 'inherit', margin: 'auto' }}
                         className={classes.logo}
                         src={shopee}
                     />
                 </Grid>
                 <Grid xs={1}>
-                <Image
+                    <Image
+                    imageStyle={{ width: 'inherit', height: 'inherit' }}
                         className={classes.logo}
                         src={bukalapak}
                     />
                 </Grid>
             </Grid>
-            <Partitem/>
-            <Partitem/>
-            <Partitem/>
+            <Partitem />
+            <Partitem />
+            <Partitem />
+            <Partitem />
+            <Partitem />
+            <Partitem />
+            <Partitem />
+            <Partitem />
+            <Partitem />
         </Container>
     )
 }
