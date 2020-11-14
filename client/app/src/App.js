@@ -8,6 +8,8 @@ import {
 } from "react-router-dom";
 
 import Home from './pages/Home'
+
+import Build from './pages/Build'
 import Login from './pages/Login';
 import Navbar from './components/Navbar'
 import Register from './pages/Register'
@@ -39,10 +41,16 @@ function App() {
             <li>
               <Link to="/parts/motherboards">Part List</Link>
             </li>
+            <li>
+              <Link to="/build">Build PC</Link>
+            </li>
           </ul>
         </nav>
         <div className="container">
           <Switch>
+          <Route path="/build">
+              <Build />
+            </Route>
           <Route path="/parts/detail">
               <Detail />
             </Route>
