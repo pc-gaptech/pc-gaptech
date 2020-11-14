@@ -2,13 +2,39 @@
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
 	class RecommendedConfig extends Model {
-		/**
-		 * Helper method for defining associations.
-		 * This method is not a part of Sequelize lifecycle.
-		 * The `models/index` file will call this method automatically.
-		 */
 		static associate(models) {
-			// define association here
+			RecommendedConfig.belongsTo(models.CPU, {
+				targetKey: "id",
+				foreignKey: "CPUId",
+			});
+			RecommendedConfig.belongsTo(models.CPUCooler, {
+				targetKey: "id",
+				foreignKey: "CPUCoolerId",
+			});
+			RecommendedConfig.belongsTo(models.GPU, {
+				targetKey: "id",
+				foreignKey: "GPUId",
+			});
+			RecommendedConfig.belongsTo(models.Casing, {
+				targetKey: "id",
+				foreignKey: "CasingId",
+			});
+			RecommendedConfig.belongsTo(models.Motherboard, {
+				targetKey: "id",
+				foreignKey: "MotherboardId",
+			});
+			RecommendedConfig.belongsTo(models.PowerSupply, {
+				targetKey: "id",
+				foreignKey: "PowerSupplyId",
+			});
+			RecommendedConfig.belongsTo(models.RAM, {
+				targetKey: "id",
+				foreignKey: "RAMId",
+			});
+			RecommendedConfig.belongsTo(models.Storage, {
+				targetKey: "id",
+				foreignKey: "StorageId",
+			});
 		}
 	}
 	RecommendedConfig.init(

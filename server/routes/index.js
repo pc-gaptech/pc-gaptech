@@ -1,6 +1,17 @@
-const router = require('express').Router()
-const components = require('./componentsRoute') 
+const router = require("express").Router();
+const componentRoute = require("./componentsRoute");
+const favoritesRoute = require("./favoritesRoute");
+const gamesRoute = require("./gamesRoute");
 
-router.use('/parts/:components',components)
+router.post("/login");
+router.post("/register");
 
-module.exports = router
+// AUTHENTICATION DI SINI
+
+router.post("/checkconfig");
+
+router.use("/parts", componentRoute);
+router.use("/favorites", favoritesRoute);
+router.use("/favorites", gamesRoute);
+
+module.exports = router;

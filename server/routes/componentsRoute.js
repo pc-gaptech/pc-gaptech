@@ -1,14 +1,9 @@
-const router = require('express').Router()
-const { CPU } = require('../models/index')
+const router = require("express").Router();
 
-router.get('/', (req,res) => {
-    res.send('test')
-    console.log('masok')
-})
+router.get("/:component");
+router.get("/:component/:id/detail");
+router.post("/:component/add");
+router.delete("/:component/:id/delete");
+router.put("/:component/:id/detail");
 
-router.post('/', (req,res) => {
-    res.send('test')
-    console.log('masok')
-})
-
-module.exports = router
+module.exports = router;
