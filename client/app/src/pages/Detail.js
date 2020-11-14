@@ -14,9 +14,15 @@ import {
 } from '@material-ui/core';
 
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import SaveIcon from '@material-ui/icons/Save';
 
 import Image from 'material-ui-image'
 import PartItem from '../components/PartItem'
+import PartList from '../pages/PartList'
+
+import tokopedia from '../assets/tokopedia.png'
+import shopee from '../assets/shopee.png'
+import bukalapak from '../assets/bukalapak.png'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,16 +33,25 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     color: theme.palette.text.secondary,
   },
-  price: { 
-    fontWeight: "bold", 
-    fontSize: "2em", 
-    backgroundColor:"#f8efd4", 
-    textAlign: "center", 
-    margin: "auto", 
-    padding: "10px", 
-    marginBottom: "20px", 
-    width:"100%", 
+  price: {
+    fontWeight: "bold",
+    fontSize: "2em",
+    backgroundColor: "#f8efd4",
+    textAlign: "center",
+    margin: "auto",
+    padding: "10px",
+    marginBottom: "20px",
+    width: "100%",
     verticalAlign: "middle"
+  },
+  logo: {
+    maxWidth: "70%",
+    height: "auto",
+    margin: "auto",
+  },
+  button: {
+    margin: "auto",
+    textAlign: "center"
   }
 }));
 
@@ -48,10 +63,19 @@ export default function Detail() {
       <CssBaseline />
       <Container>
         <Grid container spacing={2}>
-          <Grid item xs={3}>
+          <Grid item xs={3} style={{margin: "auto", textAlign: "center"}}>
             <Image
               src="https://cdna.pcpartpicker.com/static/forever/images/product/c7baf2c9c9cc15ae23adb24c2f4316fc.256p.jpg"
             />
+            <Button
+              variant="contained"
+              color="primary"
+              size="large"
+              className={classes.button}
+              startIcon={<SaveIcon />}
+            >
+              Add to Your Build
+      </Button>
           </Grid>
           <Grid item xs={9}>
             <Typography variant="h5" style={{ fontWeight: "bold", marginBottom: "50px" }}>ASRock H310CM-HDV 9th Gen Micro ATX Motherboard.</Typography>
@@ -60,8 +84,8 @@ export default function Detail() {
                 <TableContainer>
                   <Table className={classes.table} size="small" aria-label="a dense table">
                     <TableBody>
-                    <TableRow>
-                        <TableCell align="left" style={{fontWeight: "bold", fontSize: "1.2em" }}>Descriptions</TableCell>
+                      <TableRow>
+                        <TableCell align="left" style={{ fontWeight: "bold", fontSize: "1.2em" }}>Descriptions</TableCell>
                         <TableCell align="left"></TableCell>
                       </TableRow>
                       <TableRow>
@@ -102,12 +126,37 @@ export default function Detail() {
                 </Grid>
                 <Grid item xs={12} container>
                   <Grid item xs={6}>
-                    <Typography style={{ fontWeight: "bold" }}>Tokopedia</Typography>
+                    {/* <Typography style={{ fontWeight: "bold" }}>Tokopedia</Typography> */}
+                    <Image
+                      imageStyle={{ width: 'inherit', height: 'inherit' }}
+                      className={classes.logo}
+                      src={tokopedia}
+                    />
                   </Grid>
                   <Grid item xs={6}>
                     <Button
                       variant="contained"
-                      style={{backgroundColor: "green", color: "white"}}
+                      style={{ backgroundColor: "green", color: "white" }}
+                      size="small"
+                      className={classes.button}
+                      startIcon={<AddShoppingCartIcon />}
+                    >
+                      See Price
+                    </Button>
+                  </Grid>
+                </Grid>
+                <Grid item xs={12} container style={{ backgroundColor: "yellow", padding: "0px", margin: "0px" }}>
+                  <Grid item xs={6} style={{ backgroundColor: "yellow", padding: "0px", margin: "0px" }}>
+                    <Image
+                      imageStyle={{ width: 'inherit', height: 'inherit' }}
+                      className={classes.logo}
+                      src={shopee}
+                    />
+                  </Grid>
+                  <Grid item xs={6} style={{ padding: "0px" }}>
+                    <Button
+                      variant="contained"
+                      style={{ backgroundColor: "orange", color: "white", paddingBottom: "0px" }}
                       size="small"
                       className={classes.button}
                       startIcon={<AddShoppingCartIcon />}
@@ -118,28 +167,16 @@ export default function Detail() {
                 </Grid>
                 <Grid item xs={12} container>
                   <Grid item xs={6}>
-                    <Typography style={{ fontWeight: "bold" }}>Shopee</Typography>
+                    <Image
+                      imageStyle={{ width: 'inherit', height: 'inherit' }}
+                      className={classes.logo}
+                      src={bukalapak}
+                    />
                   </Grid>
                   <Grid item xs={6}>
                     <Button
                       variant="contained"
-                      style={{backgroundColor: "orange", color: "white"}}
-                      size="small"
-                      className={classes.button}
-                      startIcon={<AddShoppingCartIcon />}
-                    >
-                      See Price
-                    </Button>
-                  </Grid>
-                </Grid>
-                <Grid item xs={12} container>
-                  <Grid item xs={6}>
-                    <Typography style={{ fontWeight: "bold" }}>Bukalapak</Typography>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Button
-                      variant="contained"
-                      style={{backgroundColor: "red", color: "white"}}
+                      style={{ backgroundColor: "red", color: "white" }}
                       size="small"
                       className={classes.button}
                       startIcon={<AddShoppingCartIcon />}
@@ -152,6 +189,7 @@ export default function Detail() {
             </Grid>
           </Grid>
         </Grid>
+        <PartList/>
       </Container>
     </React.Fragment>
   );
