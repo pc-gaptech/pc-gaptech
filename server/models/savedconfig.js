@@ -2,13 +2,43 @@
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
 	class SavedConfig extends Model {
-		/**
-		 * Helper method for defining associations.
-		 * This method is not a part of Sequelize lifecycle.
-		 * The `models/index` file will call this method automatically.
-		 */
 		static associate(models) {
-			// define association here
+			SavedConfig.belongsTo(models.CPU, {
+				targetKey: "id",
+				foreignKey: "CPUId",
+			});
+			SavedConfig.belongsTo(models.CPUCooler, {
+				targetKey: "id",
+				foreignKey: "CPUCoolerId",
+			});
+			SavedConfig.belongsTo(models.GPU, {
+				targetKey: "id",
+				foreignKey: "GPUId",
+			});
+			SavedConfig.belongsTo(models.Casing, {
+				targetKey: "id",
+				foreignKey: "CasingId",
+			});
+			SavedConfig.belongsTo(models.Motherboard, {
+				targetKey: "id",
+				foreignKey: "MotherboardId",
+			});
+			SavedConfig.belongsTo(models.PowerSupply, {
+				targetKey: "id",
+				foreignKey: "PowerSupplyId",
+			});
+			SavedConfig.belongsTo(models.RAM, {
+				targetKey: "id",
+				foreignKey: "RAMId",
+			});
+			SavedConfig.belongsTo(models.Storage, {
+				targetKey: "id",
+				foreignKey: "StorageId",
+			});
+			SavedConfig.belongsTo(models.User, {
+				targetKey: "id",
+				foreignKey: "UserId",
+			});
 		}
 	}
 	SavedConfig.init(
