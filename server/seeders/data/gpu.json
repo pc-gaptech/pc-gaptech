@@ -1,0 +1,74 @@
+[
+	{
+		"name": "GeForce RTX 3080 10 GB Founders Edition",
+		"power_draw": 315,
+		"manufacturer": "Nvidia",
+		"gpu_chipset": "RTX 3080",
+		"price": 22000000,
+		"rating": 10,
+		"picture_url": "https://cdna.pcpartpicker.com/static/forever/images/product/71def5c09fd2c9eae67e254c191d84cb.256p.jpg"
+	},
+	{
+		"name": "GeForce RTX 3070 8 GB Founders Edition",
+		"power_draw": 250,
+		"manufacturer": "Nvidia",
+		"gpu_chipset": "RTX 3070",
+		"price": 13000000,
+		"rating": 9,
+		"picture_url": "https://cdna.pcpartpicker.com/static/forever/images/product/7b87f1151133cd104c83a41914b02457.256p.jpg"
+	},
+	{
+		"name": "MSI GeForce RTX 2080 SUPER",
+		"power_draw": 280,
+		"manufacturer": "Nvidia",
+		"gpu_chipset": "RTX 2080 Super",
+		"price": 12500000,
+		"rating": 8,
+		"picture_url": "https://cdna.pcpartpicker.com/static/forever/images/product/abced9af1928e503aa4eb528e9c211a2.256p.jpg"
+	},
+	{
+		"name": "ASUS Radeon RX 5700 XT 8 GB",
+		"power_draw": 280,
+		"manufacturer": "AMD",
+		"gpu_chipset": "RX 5700 XT",
+		"price": 7500000,
+		"rating": 7,
+		"picture_url": "https://cdna.pcpartpicker.com/static/forever/images/product/9b43155f0c4f0e430260ea936adb84e8.256p.jpg"
+	},
+	{
+		"name": "Sapphire Radeon RX 5600 XT",
+		"power_draw": 200,
+		"manufacturer": "AMD",
+		"gpu_chipset": "RX 5600 XT",
+		"price": 5500000,
+		"rating": 6,
+		"picture_url": "https://cdna.pcpartpicker.com/static/forever/images/product/24ad4188c413268598690df41a4051b3.256p.jpg"
+	},
+	{
+		"name": "MSI GeForce GTX 1660 Ti 6 G",
+		"power_draw": 160,
+		"manufacturer": "Nvideo",
+		"gpu_chipset": "GTX 1660 Ti",
+		"price": 3500000,
+		"rating": 5,
+		"picture_url": "https://pcpartpicker.com/product/K8fhP6/msi-geforce-gtx-1660-ti-6-gb-gaming-x-video-card-gtx-1660-ti-gaming-x-6g"
+	},
+	{
+		"name": "MSI Radeon RX 580 8 GB ARMOR ",
+		"power_draw": 230,
+		"manufacturer": "AMD",
+		"gpu_chipset": "RX 580",
+		"price": 2300000,
+		"rating": 4,
+		"picture_url": "https://cdna.pcpartpicker.com/static/forever/images/product/d53db7190559b6287a4ff549f3bf5904.256p.jpg"
+	},
+	{
+		"name": "MSI GeForce GTX 1650 4 GB",
+		"power_draw": 120,
+		"manufacturer": "Nvidia",
+		"gpu_chipset": "GTX 1650",
+		"price": 200000,
+		"rating": 3,
+		"picture_url": "https://cdna.pcpartpicker.com/static/forever/images/product/7c1e7333e1775876216de870a84ae86c.256p.jpg"
+	}
+]

@@ -1,0 +1,11 @@
+[
+	{
+		"name": "Hyper 212 EVO",
+		"socket": ["AM4", "LGA1151", "LGA1200"],
+		"TDP": 200,
+		"manufacturer": "Cooler Master",
+		"power_draw": 20,
+		"price": 560000,
+		"picture_url": "https://cdna.pcpartpicker.com/static/forever/images/product/ddea57de9797549e80d05fb3acb2e83d.med.256p.jpg"
+	}
+]
