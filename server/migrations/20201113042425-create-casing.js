@@ -12,7 +12,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       form_factor: {
-        type: Sequelize.ARRAY(Sequelize.STRING),
+        type: Sequelize.STRING,
       },
       manufacturer: {
         type: Sequelize.STRING,

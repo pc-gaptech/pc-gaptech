@@ -12,7 +12,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       memory_type: {
-        type: Sequelize.ARRAY(Sequelize.STRING),
+        type: Sequelize.STRING,
       },
       chipset: {
         type: Sequelize.ARRAY(Sequelize.STRING),

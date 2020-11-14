@@ -35,21 +35,19 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
-
-      price: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        validate: {
-          notNull: {
-            msg: "Price should not null",
-          },
-          min: {
-            args: 10000,
-            msg: "Price min 10000",
-          },
-        },
-      },
-
+			price: {
+				type: DataTypes.INTEGER,
+				allowNull: false,
+				validate: {
+					notNull: {
+						msg: "Price should not null",
+					},
+					min: {
+						args: 10000,
+						msg: "Price min 10000",
+					},
+				},
+			},
       picture_url: {
         type: DataTypes.STRING,
         validate: {

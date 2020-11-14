@@ -13,13 +13,13 @@ module.exports = {
         type: Sequelize.STRING
       },
       socket: {
-        type: Sequelize.ARRAY({type: Sequelize.STRING})
+        type: Sequelize.STRING
       },
       chipset: {
-        type: Sequelize.ARRAY({type: Sequelize.STRING})
+        type: Sequelize.STRING
       },
       form_factor: {
-        type: Sequelize.ARRAY({type: Sequelize.STRING})
+        type: Sequelize.STRING
       },
       manufacturer: {
         type: Sequelize.STRING
