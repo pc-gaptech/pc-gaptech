@@ -1,0 +1,28 @@
+[
+	{
+		"name": "Vengeance LPX 16 GB (2 x 8 GB)",
+		"memory_speed": 3200,
+		"memory_type": "DDR4",
+		"power_draw": 10,
+		"manufacturer": "Corsair",
+		"chipset": [
+			"A350",
+			"B350",
+			"B450",
+			"B550",
+			"X370",
+			"X470",
+			"X570",
+			"B365",
+			"H370",
+			"Z370",
+			"Z390",
+			"Z490",
+			"H470",
+			"B460",
+			"H410"
+		],
+		"price": 1600000,
+		"picture_url": "https://pcpartpicker.com/product/p6RFf7/corsair-memory-cmk16gx4m2b3200c16"
+	}
+]
