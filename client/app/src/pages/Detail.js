@@ -62,7 +62,7 @@ export default function Detail() {
     <React.Fragment>
       <CssBaseline />
       <Container>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} style={{marginBottom: "50px"}}>
           <Grid item xs={3} style={{margin: "auto", textAlign: "center"}}>
             <Image
               src="https://cdna.pcpartpicker.com/static/forever/images/product/c7baf2c9c9cc15ae23adb24c2f4316fc.256p.jpg"
@@ -125,12 +125,13 @@ export default function Detail() {
                   <Typography className={classes.price}>Rp.1.230.000</Typography>
                 </Grid>
                 <Grid item xs={12} container>
-                  <Grid item xs={6}>
+                  <Grid item xs={6} style={{padding: "0"}}>
                     {/* <Typography style={{ fontWeight: "bold" }}>Tokopedia</Typography> */}
                     <Image
                       imageStyle={{ width: 'inherit', height: 'inherit' }}
                       className={classes.logo}
                       src={tokopedia}
+                      style={{paddingTop: "0px"}}
                     />
                   </Grid>
                   <Grid item xs={6}>
@@ -145,12 +146,13 @@ export default function Detail() {
                     </Button>
                   </Grid>
                 </Grid>
-                <Grid item xs={12} container style={{ backgroundColor: "yellow", padding: "0px", margin: "0px" }}>
-                  <Grid item xs={6} style={{ backgroundColor: "yellow", padding: "0px", margin: "0px" }}>
+                <Grid item xs={12} container style={{ padding: "0px", margin: "0px" }}>
+                  <Grid item xs={6} style={{padding: "0px", margin: "0px" }}>
                     <Image
                       imageStyle={{ width: 'inherit', height: 'inherit' }}
                       className={classes.logo}
                       src={shopee}
+                      style={{paddingTop: "0px"}}
                     />
                   </Grid>
                   <Grid item xs={6} style={{ padding: "0px" }}>
@@ -171,6 +173,7 @@ export default function Detail() {
                       imageStyle={{ width: 'inherit', height: 'inherit' }}
                       className={classes.logo}
                       src={bukalapak}
+                      style={{paddingTop: "0px"}}
                     />
                   </Grid>
                   <Grid item xs={6}>
