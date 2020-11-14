@@ -1,19 +1,20 @@
 "use strict";
 
 const { ApolloServer, gql, makeExecutableSchema } = require("apollo-server");
+const componentSchema = require("./schemas/componentSchema");
 
 const typeDefs = gql`
   type Query
   type Mutation
-`
+`;
 
 const schema = makeExecutableSchema({
-	typeDefs: [typeDefs],
-	resolvers: [],
+  typeDefs: [typeDefs, componentSchema.typeDefs],
+  resolvers: [componentSchema.resolvers],
 });
 
 const server = new ApolloServer({ schema });
 
 server.listen().then(({ url }) => {
-	console.log(`Ready at ${url}`);
+  console.log(`Ready at ${url}`);
 });
