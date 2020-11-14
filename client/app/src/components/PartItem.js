@@ -76,7 +76,7 @@ export default function PartItem() {
                     size="medium"
                     className={classes.buttonsave}
                     startIcon={<AddCircleIcon />}
-                >Edit</Button>
+                >Add</Button>
             </Grid>
             <Grid item xs={2} className={classes.center} style={{ fontWeight: "bold" }}>
                 Rp.2.100.000

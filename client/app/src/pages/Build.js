@@ -1,11 +1,8 @@
 import React from 'react'
 import { Container, Grid, makeStyles, Typography } from "@material-ui/core";
 
-
-
 import PartItemHome from '../components/PartItemHome'
 import Image from 'material-ui-image'
-
 import tokopedia from '../assets/tokopedia.png'
 import shopee from '../assets/shopee.png'
 import bukalapak from '../assets/bukalapak.png'
