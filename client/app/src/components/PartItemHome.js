@@ -5,15 +5,11 @@ import { Button, Container, Grid, Typography, IconButton } from '@material-ui/co
 import Image from 'material-ui-image'
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
-import SaveIcon from '@material-ui/icons/Save'
 import AddCircleIcon from '@material-ui/icons/AddCircle';
-
-
 
 const useStyle = makeStyles((theme) => ({
     header: {
         fontWeight: "bold",
-
     },
     container: {
         paddingTop: "5px",
@@ -24,7 +20,6 @@ const useStyle = makeStyles((theme) => ({
         textAlign: "center",
         margin: "auto"
     },
-
     button: {
         marginTop: "2px",
         color: "grey",
@@ -46,10 +41,8 @@ const useStyle = makeStyles((theme) => ({
 
 }))
 
-export default function PartItem() {
+export default function PartItemHome() {
     const classes = useStyle()
-
-
     return (
         <Grid container spacing={1} className={classes.container}>
             <Grid item xs={1}>
