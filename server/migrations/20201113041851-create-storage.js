@@ -15,7 +15,7 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       storage_type: {
-        type: Sequelize.ARRAY(Sequelize.STRING),
+        type: Sequelize.STRING,
       },
       power_draw: {
         type: Sequelize.INTEGER,

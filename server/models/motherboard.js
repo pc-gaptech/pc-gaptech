@@ -63,7 +63,7 @@ module.exports = (sequelize, DataTypes) => {
 						msg: "Motherboard Power Draw is Required",
 					},
 					min: {
-						args: 10000,
+						args: 1,
 						msg: "Motherboard Power Draw is Invalid",
 					},
 				},

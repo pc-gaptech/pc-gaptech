@@ -11,7 +11,7 @@ router.post("/register");
 router.post("/checkconfig");
 
 router.use("/parts", componentRoute);
-router.use("/favorites", favoritesRoute);
-router.use("/favorites", gamesRoute);
+// router.use("/favorites", favoritesRoute);
+// router.use("/favorites", gamesRoute);
 
 module.exports = router;

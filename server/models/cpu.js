@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
 		{
 			name: {
 				type: DataTypes.STRING,
+				allowNull: false,
 				validate: {
 					notEmpty: {
 						msg: "Name should not empty",
@@ -43,6 +44,7 @@ module.exports = (sequelize, DataTypes) => {
 			},
 			TDP: {
 				type: DataTypes.INTEGER,
+				allowNull: false,
 				validate: {
 					notNull: {
 						msg: "Name should not null",
@@ -88,11 +90,7 @@ module.exports = (sequelize, DataTypes) => {
 					min: {
 						args: 1,
 						msg: "Min Rating 1",
-					},
-					max: {
-						args: 10,
-						msg: "Max Power Draw 10",
-					},
+					}
 				},
 			},
 			price: {
