@@ -1,5 +1,3 @@
-const partRAM = require("./partRAM");
-
 const partGPU = `
 id:ID
 name: String
