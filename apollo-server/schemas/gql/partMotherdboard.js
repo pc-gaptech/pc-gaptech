@@ -1,9 +1,9 @@
 const partMotherboard = `
     id: ID
     name: String
-    socket: [Socket]
-    chipset: [Chipset]
-    form_factor: [FormFactor]
+    socket: String
+    chipset: String
+    form_factor: String
     manufacturer: String
     power_draw: Int
     price: Int
