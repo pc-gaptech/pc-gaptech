@@ -12,8 +12,8 @@ const useStyle = makeStyles((theme) => ({
         fontWeight: "bold",
     },
     container: {
-        paddingTop: "5px",
-        paddingBottom: "5px",
+        paddingTop: "15px",
+        paddingBottom: "15px",
         borderBottom: "0.5px solid #e8e8e8"
     },
     center: {

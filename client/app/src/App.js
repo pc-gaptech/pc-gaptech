@@ -15,7 +15,7 @@ import Navbar from './components/Navbar'
 import Register from './pages/Register'
 import Detail from './pages/Detail'
 import PartList from './pages/PartList'
-
+import MyBuild from './pages/MyBuild'
 
 
 
@@ -44,12 +44,18 @@ function App() {
             <li>
               <Link to="/build">Build PC</Link>
             </li>
+            <li>
+              <Link to="/mybuild">My Build</Link>
+            </li>
           </ul>
         </nav>
         <div className="container">
           <Switch>
           <Route path="/build">
               <Build />
+            </Route>
+            <Route path="/mybuild">
+              <MyBuild />
             </Route>
           <Route path="/parts/detail">
               <Detail />
