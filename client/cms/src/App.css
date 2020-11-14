@@ -7,6 +7,18 @@
   pointer-events: none;
 }
 
+.main {
+  margin-top: 20px;
+  width: 60%;
+  margin-bottom: 30px;
+}
+.input-group-text {
+  width: 40px;
+}
+/* .radioGpu {
+  width: 20%;
+} */
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -26,6 +38,11 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.textHeaders {
+  text-align: center;
+  color: #61dafb !important;
 }
 
 @keyframes App-logo-spin {
