@@ -95,9 +95,8 @@ class RecommendedConfigController {
 
 			// if Success
 			const configRating =
-				pickedGPU.rating >= pickedCPU.rating ? pickedCPU.rating : pickedGPU.rating;
-
-			const config = await SavedConfig.create({
+				pickedGPU.rating >= pickedCPU.max_rating ? pickedCPU.max_rating : pickedGPU.rating;
+			const config = await RecommendedConfig.create({
 				CPUId,
 				GPUId,
 				MotherboardId,
@@ -108,10 +107,9 @@ class RecommendedConfigController {
 				PowerSupplyId,
 				name,
 				rating: configRating,
-				UserId,
 			});
 
-			const result = await SavedConfig.findByPk(config.id, { include: { all: true } });
+			const result = await RecommendedConfig.findByPk(config.id, { include: { all: true } });
 
 			res.status(201).json(result);
 		} catch (err) {
@@ -124,17 +122,16 @@ class RecommendedConfigController {
 			let gamesId = req.query.gamesId;
 			gamesId = gamesId.split(",");
 
-			const highestRating = 0;
-			gamesId.forEach(async (id) => {
-				try {
-					const game = await Game.findByPk(id);
-					if (game.rating > highestRating) {
-						highestRating = game.rating;
-					}
-				} catch (err) {
-					next(err);
+			let highestRating = 0;
+
+			for (let i = 0; i < gamesId.length; i++) {
+				const game = await Game.findByPk(gamesId[i]);
+				if (+game.rating > +highestRating) {
+					highestRating = +game.rating;
 				}
-			});
+			}
+
+			console.log(highestRating, "Highest");
 
 			const result = await RecommendedConfig.findOne({ where: { rating: highestRating } });
 			res.status(200).json(result);

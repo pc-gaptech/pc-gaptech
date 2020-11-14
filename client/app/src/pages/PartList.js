@@ -1,14 +1,25 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { Container, Grid, makeStyles, Typography } from "@material-ui/core";
+import { useQuery } from '@apollo/client'
 
-
-
-import Partitem from '../components/PartItem'
+import PartItem from '../components/PartItem'
 import Image from 'material-ui-image'
 
 import tokopedia from '../assets/tokopedia.png'
 import shopee from '../assets/shopee.png'
 import bukalapak from '../assets/bukalapak.png'
+
+import {
+    FETCH_CPU,
+    FETCH_RAM,
+    FETCH_MOTHERBOARD,
+    FETCH_STORAGE,
+    FETCH_GPU,
+    FETCH_POWERSUPPLY,
+    FETCH_CPUCOOLER,
+    FETCH_CASING
+} from '../graphql/queries'
+import { useParams } from 'react-router-dom';
 
 
 
@@ -45,9 +56,49 @@ const useStyle = makeStyles((theme) => ({
 
 export default function PartList() {
     const classes = useStyle()
+    const {loading, error, data} = useQuery(FETCH_ALL)
+    // const [cpu, setCpu] = useState({})
+    // const [motherboard, setMotherboard] = useState({})
+    // const [cpuCooler, setCpuCooler] = useState({})
+    // const [powerSupply, setPowerSupply] = useState({})
+    // const [casing, setCasing] = useState({})
+    // const [ram, setram] = useState({})
+    // const [storage, setStorage] = useState({})
+    // const [gpu, setGpu] = useState({})
+
+    const [result, setResult] = useState({})
+    const { type } = useParams()
+
+    useEffect(() => {
+        if(type === 'cpus') {
+            setResult(data.cpu)
+        } else if(type === 'motherboards') {
+            setResult(data.motherboard)
+        } else if(type === 'cpucoolers') {
+            setResult(data.cpu)
+        } else if(type === 'powersupplies') {
+            setResult(data.cpu)
+        } else if(type === 'casings') {
+            setResult(data.cpu)
+        } else if(type === 'storages') {
+            setResult(data.cpu)
+        } else if(type === 'rams') {
+            setResult(data.cpu)
+        } else if(type === 'gpus') {
+            setResult(data.cpu)
+        } 
+
+    }, [data])
+
+    useParams
+
+    
+    if (loading) return <p>Loading..</p>
+    if (error) return <p>{error}</p>
 
     return (
         <Container>
+            {JSON.stringify(result)}
             <Typography className={classes.header}>
                 Select Available Motherboards
             </Typography>
@@ -86,15 +137,15 @@ export default function PartList() {
                     />
                 </Grid>
             </Grid>
-            <Partitem />
-            <Partitem />
-            <Partitem />
-            <Partitem />
-            <Partitem />
-            <Partitem />
-            <Partitem />
-            <Partitem />
-            <Partitem />
+            <PartItem />
+            <PartItem />
+            <PartItem />
+            <PartItem />
+            <PartItem />
+            <PartItem />
+            <PartItem />
+            <PartItem />
+            <PartItem />
         </Container>
     )
 }

@@ -90,9 +90,8 @@ class CheckConfigController {
 				next({ name: "BadRequest", message: "Power Supply is incefficient" });
 			}
 
-      // if Part Compatible
-      
-			
+			// if Part Compatible
+			res.status(200).json(req.body);
 		} catch (err) {
 			next(err);
 		}

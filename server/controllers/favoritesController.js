@@ -59,7 +59,7 @@ class FavoriteController {
 		try {
 			const UserId = req.userData.id;
 			const favorites = await SavedConfig.findAll({
-				where: { id: UserId },
+				where: { UserId },
 				include: { all: true },
 			});
 			res.status(200).json(favorites);

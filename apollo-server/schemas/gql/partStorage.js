@@ -2,7 +2,7 @@ const partStorage = `
 id: ID
 name: String
 capacity: Int
-storage_type: [StorageType]
+storage_type: String
 power_draw: Int
 manufacturer: String
 price: Int

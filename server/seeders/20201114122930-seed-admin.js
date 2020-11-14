@@ -13,6 +13,7 @@ module.exports = {
 					lastname: "Admin Last Name",
 					email: "admin@admin.com",
 					password: encryptPassword("adminpassword"),
+					is_admin: true,
 					createdAt: new Date(),
 					updatedAt: new Date(),
 				},

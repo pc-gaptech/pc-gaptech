@@ -16,19 +16,26 @@ const typeDefs = gql`
 enum Socket {
   AM4
   LGA1151
+  LGA1200
 }
 
 enum Chipset {
-  A350
-  B450
+  A320
+  B350
   X370
+  B450
   X470
   B550
   X570
-  B360
+  Z490
+  B460
+  H470
+  H410
+  Z390
+  B365
   H370
   Z370
-  Z390
+  A350
 }
 
 enum StorageType {
@@ -81,11 +88,18 @@ type GPU {
 }
 
 type all {
-  DataGPU: [GPU]
-  DataCPU: [CPU]
+  dataCPU: [CPU]
+  dataRAM: [RAM]
+  dataPowerSupply: [PowerSupply]
+  dataMotherboard: [Motherboard]
+  dataCPUCooler: [CPUCooler]
+  dataCasing: [Casing]
+  dataStorage: [Storage]
+  dataGPU: [GPU]
 }
 
 extend type Query {
+  fetchAll: all
   fetchCPU: [CPU]
   fetchRAM: [RAM]
   fetchPowerSupply: [PowerSupply]
@@ -99,18 +113,51 @@ extend type Query {
 
 const resolvers = {
   Query: {
+    fetchAll: async () => {
+      try {
+        // const all = await redis.get("all");
+        // if (all) {
+        //   console.log("chace kepanggil");
+        //   return JSON.parse("all");
+        // }
+        // else {
+        return axios
+          .get(urlComponents)
+          .then(async ({ data }) => {
+            console.log("chace ke set");
+
+            const resultFetchAllComponents = {
+              dataCPU: data.CPU,
+              dataRAM: data.RAM,
+              dataPowerSupply: data.PowerSupply,
+              dataMotherboard: data.Motherboard,
+              dataCPUCooler: data.CPUCooler,
+              dataCasing: data.Casing,
+              dataStorage: data.Storage,
+              dataGPU: data.GPU,
+            };
+            // await redis.set("all", JSON.stringify(resultFetchAllComponents));
+            return resultFetchAllComponents;
+          })
+          .catch((err) => {
+            throw new ApolloError(err);
+          });
+        // }
+      } catch (err) {
+        throw new ApolloError(err);
+      }
+    },
+
     fetchCPU: async () => {
       try {
-        console.log("masuk");
         const CPUsCache = await redis.get("cpu");
         if (CPUsCache) {
           console.log("chace kepanggil");
           return JSON.parse(CPUsCache);
         } else {
           return axios
-            .get(urlComponents)
+            .get(urlComponents + "cpu")
             .then(async ({ data }) => {
-              console.log(data);
               console.log("chace ke set");
               await redis.set("cpu", JSON.stringify(data));
               return data;
@@ -134,7 +181,6 @@ const resolvers = {
           return axios
             .get(urlComponents + "ram")
             .then(async ({ data }) => {
-              console.log(data);
               console.log("chace ke set");
               await redis.set("ram", JSON.stringify(data));
               return data;
@@ -158,7 +204,6 @@ const resolvers = {
           return axios
             .get(urlComponents + "powerSupply")
             .then(async ({ data }) => {
-              console.log(data);
               console.log("chace ke set");
               await redis.set("powerSupply", JSON.stringify(data));
               return data;
@@ -182,7 +227,6 @@ const resolvers = {
           return axios
             .get(urlComponents + "motherboard")
             .then(async ({ data }) => {
-              console.log(data);
               console.log("chace ke set");
               await redis.set("motherboard", JSON.stringify(data));
               return data;
@@ -206,7 +250,6 @@ const resolvers = {
           return axios
             .get(urlComponents + "cpucooler")
             .then(async ({ data }) => {
-              console.log(data);
               console.log("chace ke set");
               await redis.set("cpucooler", JSON.stringify(data));
               return data;
@@ -230,7 +273,6 @@ const resolvers = {
           return axios
             .get(urlComponents + "casing")
             .then(async ({ data }) => {
-              console.log(data);
               console.log("chace ke set");
               await redis.set("casing", JSON.stringify(data));
               return data;
@@ -254,7 +296,6 @@ const resolvers = {
           return axios
             .get(urlComponents + "gpu")
             .then(async ({ data }) => {
-              console.log(data);
               console.log("chace ke set");
               await redis.set("gpu", JSON.stringify(data));
               return data;
@@ -278,7 +319,6 @@ const resolvers = {
           return axios
             .get(urlComponents + "storage")
             .then(async ({ data }) => {
-              console.log(data);
               console.log("chace ke set");
               await redis.set("storage", JSON.stringify(data));
               return data;
