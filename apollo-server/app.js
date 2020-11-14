@@ -5,7 +5,6 @@ const componentSchema = require("./schemas/componentSchema");
 
 const typeDefs = gql`
   type Query
-  type Mutation
 `;
 
 const schema = makeExecutableSchema({
