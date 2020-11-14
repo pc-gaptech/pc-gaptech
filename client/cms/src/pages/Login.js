@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { Container, Jumbotron, Form, Button } from "react-bootstrap"
+import { useHistory } from "react-router-dom"
 
 const Login = () => {
+    const history = useHistory()
     const [inputForm, setInputForm] = useState({
         email: "",
         password: "",
@@ -15,6 +17,7 @@ const Login = () => {
     }
     function loginForm(e) {
         e.preventDefault()
+        history.push("/")
         console.log(inputForm)
     }
 

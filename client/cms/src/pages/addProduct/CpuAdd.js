@@ -1,6 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ChipInput from 'material-ui-chip-input'
 import { Form, Button, Container, InputGroup } from "react-bootstrap"
+import { dataEdit } from "../../graphQl/cache"
+import { useReactiveVar } from "@apollo/client"
+
 
 // name	string
 // socket	string
@@ -19,6 +22,8 @@ import { Form, Button, Container, InputGroup } from "react-bootstrap"
 // price	integer($int64)
 // picture_url	string
 function CpuAdd() {
+    const editProduct = useReactiveVar(dataEdit)
+    const [checkStatus, setCheckStatus] = useState(false)
     const [state, setstate] = useState({
         name: "",
         socket: "",
@@ -32,6 +37,28 @@ function CpuAdd() {
         price: 0,
         picture_url: ""
     })
+
+    useEffect(() => {
+        if (editProduct) {
+            setstate(editProduct)
+            setCheckStatus(true)
+        } else {
+            setstate({
+                name: "",
+                socket: "",
+                chipset: [],
+                TDP: 0,
+                manufacturer: "",
+                power_draw: 0,
+                core_count: 0,
+                is_iGPU: "",
+                max_rating: 0,
+                price: 0,
+                picture_url: ""
+            })
+            setCheckStatus(false)
+        }
+    }, [editProduct])
     function submitCpu(e) {
         e.preventDefault()
         state.TDP = +state.TDP
@@ -40,7 +67,12 @@ function CpuAdd() {
         state.power_draw = +state.power_draw
         state.max_rating = +state.max_rating
         state.is_iGPU = state.is_iGPU === "yes" ? true : false
-        console.log(state)
+        if (checkStatus) {
+            // edit method
+            console.log(state)
+        } else {
+            console.log(state)
+        }
     }
     function handleChipset(e) {
         setstate({
@@ -59,28 +91,32 @@ function CpuAdd() {
     return (
 
         <Container className="main">
+            {checkStatus ? <h1>Edit Cpu Product</h1>
+                :
+                <h1>Add Cpu Product</h1>}
             <Form onSubmit={submitCpu}>
-                <h1>Add Cpu Product</h1>
                 <Form.Group controlId="formBasicText">
                     <Form.Label>CPU Name</Form.Label>
                     <Form.Control
+                        defaultValue={checkStatus ? editProduct.name : ""}
                         type="text"
                         placeholder="Enter CPU Coller Name"
                         name="name"
                         onChange={handleChange}
+                        required
                     />
                 </Form.Group>
                 <Form.Group controlId="exampleForm.SelectCustom">
                     <Form.Label>Socket</Form.Label>
                     <Form.Control
                         name="socket" as="select" onChange={handleChange}>
-                        <option >Please Selecet</option>
-                        <option value="AM4">AM4</option>
-                        <option value="LGA1151">LGA1151</option>
+                        <option >Please Select</option>
+                        <option selected={checkStatus && editProduct.socket === "AM4"} value="AM4">AM4</option>
+                        <option selected={checkStatus && editProduct.socket === "LGA1151"} value="LGA1151">LGA1151</option>
                     </Form.Control>
                 </Form.Group>
                 <ChipInput
-                    defaultValue={['A350', 'B450']}
+                    defaultValue={checkStatus ? editProduct.chipset : ['A350', 'B450']}
                     fullWidth
                     label='Chipset'
                     placeholder='A350, B450, X370, b450, X470, b550, X570, B360, H370, Z370, Z390'
@@ -90,6 +126,7 @@ function CpuAdd() {
                 <Form.Group controlId="formBasicNumber">
                     <Form.Label>TDP</Form.Label>
                     <Form.Control
+                        defaultValue={checkStatus ? editProduct.TDP : ""}
                         type="number"
                         placeholder="Enter TDP"
                         name="TDP"
@@ -99,6 +136,7 @@ function CpuAdd() {
                 <Form.Group controlId="formBasicText">
                     <Form.Label>Manufacturer</Form.Label>
                     <Form.Control
+                        defaultValue={checkStatus ? editProduct.manufacturer : ""}
                         type="text"
                         placeholder="Enter Manufacturer"
                         name="manufacturer"
@@ -108,6 +146,7 @@ function CpuAdd() {
                 <Form.Group controlId="formBasicNumber">
                     <Form.Label>Power Draw</Form.Label>
                     <Form.Control
+                        defaultValue={checkStatus ? editProduct.power_draw : ""}
                         type="number"
                         placeholder="Enter Power Draw"
                         name="power_draw"
@@ -120,6 +159,7 @@ function CpuAdd() {
                 <div>
                     <Form.Label>Yes</Form.Label>
                     <InputGroup.Radio
+                        checked={checkStatus && editProduct.is_iGPU === true}
                         name="is_iGPU"
                         value="yes"
                         onChange={handleChange}
@@ -127,6 +167,7 @@ function CpuAdd() {
                     />
                     <Form.Label>No</Form.Label>
                     <InputGroup.Radio
+                        checked={checkStatus && editProduct.is_iGPU === false}
                         name="is_iGPU"
                         value="no"
                         onChange={handleChange}
@@ -138,6 +179,7 @@ function CpuAdd() {
                 <Form.Group controlId="formBasicNumber">
                     <Form.Label>Core Count</Form.Label>
                     <Form.Control
+                        defaultValue={checkStatus ? editProduct.core_count : ""}
                         type="number"
                         placeholder="Enter Core Count"
                         name="core_count"
@@ -147,6 +189,7 @@ function CpuAdd() {
                 <Form.Group controlId="formBasicNumber">
                     <Form.Label>Max Rating</Form.Label>
                     <Form.Control
+                        defaultValue={checkStatus ? editProduct.max_rating : ""}
                         type="number"
                         placeholder="Enter Max Rating"
                         name="max_rating"
@@ -156,6 +199,7 @@ function CpuAdd() {
                 <Form.Group controlId="formBasicText">
                     <Form.Label>Price</Form.Label>
                     <Form.Control
+                        defaultValue={checkStatus ? editProduct.price : ""}
                         type="number"
                         placeholder="Enter Price"
                         name="price"
@@ -165,15 +209,18 @@ function CpuAdd() {
                 <Form.Group controlId="formBasicText">
                     <Form.Label>Picture Url</Form.Label>
                     <Form.Control
+                        defaultValue={checkStatus ? editProduct.picture_url : ""}
                         type="text"
                         placeholder="Enter picture_url"
                         name="picture_url"
                         onChange={handleChange}
                     />
                 </Form.Group>
-                <Button variant="primary" type="submit">
-                    Add Product
-                    </Button>
+                {checkStatus ? <Button variant="primary" type="submit">
+                    Edit Product
+                    </Button> : <Button variant="primary" type="submit">
+                        Add Product
+                    </Button>}
             </Form>
         </Container>
 

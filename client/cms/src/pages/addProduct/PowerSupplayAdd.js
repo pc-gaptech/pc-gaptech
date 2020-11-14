@@ -1,8 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Form, Button, Container } from "react-bootstrap"
-
+import { dataEdit } from "../../graphQl/cache"
+import { useReactiveVar } from "@apollo/client"
 
 function PowerSupplayAdd() {
+    const editProduct = useReactiveVar(dataEdit)
+    const [checkStatus, setCheckStatus] = useState(false)
     const [state, setstate] = useState({
         name: "",
         efficiency: "",
@@ -11,19 +14,33 @@ function PowerSupplayAdd() {
         price: 0,
         picture_url: "",
     })
+
+    useEffect(() => {
+        if (editProduct) {
+            setstate(editProduct)
+            setCheckStatus(true)
+        } else {
+            setstate({
+                name: "",
+                efficiency: "",
+                max_power: 0,
+                manufacturer: "",
+                price: 0,
+                picture_url: "",
+            })
+            setCheckStatus(false)
+        }
+    }, [editProduct])
     function SumbitPowerSupplay(e) {
         e.preventDefault()
-        // let { name, efficiency, max_power, manufacturer, price, picture_url } = state
-        // setstate({
-        //     name,
-        //     efficiency,
-        //     max_power: +max_power,
-        //     manufacturer,
-        //     price: +price,
-        //     picture_url
-        // })
         state.max_power = +state.max_power
         state.price = +state.price
+        if (checkStatus) {
+            // edit method
+            console.log(state, "EDIT")
+        } else {
+            console.log(state, "POST")
+        }
         console.log(state)
     }
     function handleChange(e) {
@@ -36,11 +53,14 @@ function PowerSupplayAdd() {
     return (
         <div>
             <Container className="main">
-                <h1>Add Power Supplay</h1>
+                {checkStatus ? <h1>Edit Power Supplay Product</h1>
+                    :
+                    <h1>Add Power Supplay Product</h1>}
                 <Form onSubmit={SumbitPowerSupplay}>
                     <Form.Group controlId="formBasicText">
                         <Form.Label>Power Supplay Name</Form.Label>
                         <Form.Control
+                            defaultValue={checkStatus ? editProduct.name : ""}
                             type="text"
                             placeholder="Enter Product Name"
                             name="name"
@@ -50,6 +70,7 @@ function PowerSupplayAdd() {
                     <Form.Group controlId="formBasicText">
                         <Form.Label>Efficiency</Form.Label>
                         <Form.Control
+                            defaultValue={checkStatus ? editProduct.efficiency : ""}
                             type="text"
                             placeholder="Enter efficiency"
                             name="efficiency"
@@ -59,6 +80,7 @@ function PowerSupplayAdd() {
                     <Form.Group controlId="formBasicNumber">
                         <Form.Label>Max Power</Form.Label>
                         <Form.Control
+                            defaultValue={checkStatus ? editProduct.max_power : ""}
                             type="number"
                             placeholder="Enter Max Power"
                             name="max_power"
@@ -68,6 +90,7 @@ function PowerSupplayAdd() {
                     <Form.Group controlId="formBasicText">
                         <Form.Label>Power Supplay Manufacturer</Form.Label>
                         <Form.Control
+                            defaultValue={checkStatus ? editProduct.manufacturer : ""}
                             type="text"
                             placeholder="Enter GPU manufacturer"
                             name="manufacturer"
@@ -77,6 +100,7 @@ function PowerSupplayAdd() {
                     <Form.Group controlId="formBasicText">
                         <Form.Label>Price</Form.Label>
                         <Form.Control
+                            defaultValue={checkStatus ? editProduct.price : ""}
                             type="number"
                             placeholder="Enter Price"
                             name="price"
@@ -86,6 +110,7 @@ function PowerSupplayAdd() {
                     <Form.Group controlId="formBasicText">
                         <Form.Label>Picture Url</Form.Label>
                         <Form.Control
+                            defaultValue={checkStatus ? editProduct.picture_url : ""}
                             type="text"
                             placeholder="Enter picture_url"
                             name="picture_url"
@@ -93,9 +118,11 @@ function PowerSupplayAdd() {
                         />
                     </Form.Group>
 
-                    <Button variant="primary" type="submit">
-                        Add Product
-                    </Button>
+                    {checkStatus ? <Button variant="primary" type="submit">
+                        Edit Product
+                    </Button> : <Button variant="primary" type="submit">
+                            Add Product
+                    </Button>}
                 </Form>
             </Container>
 

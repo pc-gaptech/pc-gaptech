@@ -1,8 +1,11 @@
 import './App.css';
 import {
-  Home, Login, GpuAdd, CasingAdd,
+  GpuAdd, CasingAdd,
   CpuAdd, CpuCollerAdd, MotherBoardAdd,
   PowerSupplayAdd, RamAdd, StorageAdd
+} from "./pages/addProduct"
+import {
+  Home, Login
 } from "./pages"
 import client from "./config/grapql"
 import { ApolloProvider } from "@apollo/client"
@@ -14,6 +17,7 @@ import {
 } from "react-router-dom";
 import Navbar from "./components/NavbarHome"
 import PrivateRoutes from "./components/PrivateRoutes"
+import PublicRoute from "./components/PublicRoute"
 
 function App() {
   return (
@@ -22,36 +26,18 @@ function App() {
       <Router>
         <Navbar />
         <Switch>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/addcpu">
-            <CpuAdd />
-          </Route>
-          <Route path="/addcpucoller">
-            <CpuCollerAdd />
-          </Route>
-          <Route path="/addmotherboard">
-            <MotherBoardAdd />
-          </Route>
-          <Route path="/addgpu">
-            <GpuAdd />
-          </Route>
-          <Route path="/addram">
-            <RamAdd />
-          </Route>
-          <Route path="/addstorage">
-            <StorageAdd />
-          </Route>
-          <Route path="/addcasing">
-            <CasingAdd />
-          </Route>
-          <Route path="/addpowersupplay">
-            <PowerSupplayAdd />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
+
+          <PublicRoute path="/login" component={Login} />
+          <PrivateRoutes path="/addcpu" component={CpuAdd} />
+          <PrivateRoutes path="/addcpucoller" component={CpuCollerAdd} />
+          <PrivateRoutes path="/addmotherboard" component={MotherBoardAdd} />
+          <PrivateRoutes path="/addgpu" component={GpuAdd} />
+          <PrivateRoutes path="/addram" component={RamAdd} />
+          <PrivateRoutes path="/addstorage" component={StorageAdd} />
+          <PrivateRoutes path="/addcasing" component={CasingAdd} />
+          <PrivateRoutes path="/addpowersupplay" component={PowerSupplayAdd} />
+          <PrivateRoutes path="/" component={Home} />
+
         </Switch>
       </Router>
     </ApolloProvider>
