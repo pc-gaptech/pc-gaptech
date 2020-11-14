@@ -50,6 +50,15 @@ const useStyle = makeStyles((theme) => ({
 export default function PartList() {
     const classes = useStyle()
     const {loading, error, data} = useQuery(FETCH_ALL)
+    // const [cpu, setCpu] = useState({})
+    // const [motherboard, setMotherboard] = useState({})
+    // const [cpuCooler, setCpuCooler] = useState({})
+    // const [powerSupply, setPowerSupply] = useState({})
+    // const [casing, setCasing] = useState({})
+    // const [ram, setram] = useState({})
+    // const [storage, setStorage] = useState({})
+    // const [gpu, setGpu] = useState({})
+
     const [result, setResult] = useState({})
     const { type } = useParams()
 
@@ -82,7 +91,7 @@ export default function PartList() {
 
     return (
         <Container>
-            {JSON.stringify(result)}
+            {JSON.stringify(result[0])}
             <Typography className={classes.header}>
                 Select Available Motherboards
             </Typography>

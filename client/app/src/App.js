@@ -7,8 +7,11 @@ import {
   Link
 } from "react-router-dom";
 
-import Home from './pages/Home'
+import client from "./config/grapql"
+import { ApolloProvider } from "@apollo/client"
 
+
+import Home from './pages/Home'
 import Build from './pages/Build'
 import Login from './pages/Login';
 import Navbar from './components/Navbar'
@@ -22,9 +25,10 @@ import MyBuild from './pages/MyBuild'
 function App() {
   return (
     <div className="App">
+      <ApolloProvider client={client}>
       <Router>
-        <Navbar/>
-      <nav>
+        <Navbar />
+        <nav>
           <ul>
             <li>
               <Link to="/">Home</Link>
@@ -45,28 +49,34 @@ function App() {
               <Link to="/build">Build PC</Link>
             </li>
             <li>
-              <Link to="/mybuild">My Build</Link>
+              <Link to="parts/cpus">CPU</Link>
+            </li>
+            <li>
+              <Link to="parts/motherboards">Motheboard</Link>
             </li>
           </ul>
         </nav>
         <div className="container">
           <Switch>
-          <Route path="/build">
+            <Route path="/build">
               <Build />
+            </Route>
+            <Route path="/parts/:type">
+              <PartList />
             </Route>
             <Route path="/mybuild">
               <MyBuild />
             </Route>
-          <Route path="/parts/detail">
+            <Route path="/parts/detail">
               <Detail />
             </Route>
             <Route path="/parts/motherboards">
               <PartList />
             </Route>
-          <Route path="/register">
+            <Route path="/register">
               <Register />
             </Route>
-          <Route path="/login">
+            <Route path="/login">
               <Login />
             </Route>
             <Route path="/">
@@ -75,6 +85,7 @@ function App() {
           </Switch>
         </div>
       </Router>
+      </ApolloProvider>
     </div>
   );
 }
