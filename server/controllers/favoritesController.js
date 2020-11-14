@@ -49,8 +49,8 @@ class FavoriteController {
 				UserId,
 			});
 
-			await SavedConfig.findByPk(config.id, { include: { all: true } });
-			res.status(201).json();
+			const result = await SavedConfig.findByPk(config.id, { include: { all: true } });
+			res.status(201).json(result);
 		} catch (err) {
 			next(err);
 		}
