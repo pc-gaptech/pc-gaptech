@@ -9,7 +9,7 @@ const partStorage = require("./gql/partStorage");
 const partPowerSupply = require("./gql/partPowerSupply");
 const partRAM = require("./gql/partRAM");
 const partGPU = require("./gql/partGPU");
-const urlComponents = "http://localhost:3000/parts/";
+const urlComponents = "http://localhost:3001/parts/";
 
 const typeDefs = gql`
 
