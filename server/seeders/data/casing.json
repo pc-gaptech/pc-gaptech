@@ -1,0 +1,23 @@
+[
+	{
+		"name": "H510 ATX Mid Tower Case",
+		"form_factor": "ATX",
+		"manufacturer": "NZXT",
+		"price": 2100000,
+		"picture_url": "https://cdna.pcpartpicker.com/static/forever/images/product/d84b1172d3913665a3e6de7b377fb0dd.256p.jpg"
+	},
+	{
+		"name": "Versa H15",
+		"form_factor": "Micro-ATX",
+		"manufacturer": "Thermaltake",
+		"price": 5400000,
+		"picture_url": "https://images-na.ssl-images-amazon.com/images/I/51TRJHMBWUL.jpg"
+	},
+	{
+		"name": "SG13 V2 Mini ITX Tower Case",
+		"form_factor": "Mini-ITX",
+		"manufacturer": "Silverstone",
+		"price": 980000,
+		"picture_url": "https://m.media-amazon.com/images/I/5173qS6iKoL.jpg"
+	}
+]

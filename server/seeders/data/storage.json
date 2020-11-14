@@ -1,0 +1,29 @@
+[
+	{
+		"name": "Samusung 970 EVO",
+		"capacity": 1000,
+		"storage_type": "NVME SSD",
+		"power_draw": 10,
+		"manufacturer": "Samsung",
+		"price": 3450000,
+		"picture_url": "https://cdna.pcpartpicker.com/static/forever/images/product/09a31f32abb3daaf5ed9b849bd60e675.256p.jpg"
+	},
+	{
+		"name": "Samusung 860 EVO",
+		"capacity": 512,
+		"storage_type": "SATA SSD",
+		"power_draw": 10,
+		"manufacturer": "Samsung",
+		"price": 750000,
+		"picture_url": "https://images-na.ssl-images-amazon.com/images/I/41qR7C253KL.jpg"
+	},
+	{
+		"name": "Barracuda Compute 2 TB",
+		"capacity": 2000,
+		"storage_type": "SATA HDD",
+		"power_draw": 10,
+		"manufacturer": "Seagate",
+		"price": 650000,
+		"picture_url": "https://cdna.pcpartpicker.com/static/forever/images/product/c7b5b7dacbecdcdd0e073b761193eef6.1600.jpg"
+	}
+]

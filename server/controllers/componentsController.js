@@ -57,7 +57,7 @@ class ComponentsController {
 				case "ram":
 					result = await RAM.findAll();
 					break;
-				case "cpuooler":
+				case "cpucooler":
 					result = await CPUCooler.findAll();
 					break;
 				case "storage":
@@ -379,7 +379,7 @@ class ComponentsController {
 				case "ram":
 					result = await RAM.destroy({ where: { id } });
 					break;
-				case "cpuooler":
+				case "cpucooler":
 					result = await CPUCooler.destroy({ where: { id } });
 					break;
 				case "storage":

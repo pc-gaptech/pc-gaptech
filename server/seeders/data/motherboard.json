@@ -1,0 +1,52 @@
+[
+	{
+		"name": "B450 TOMAHAWK MAX",
+		"socket": "AM4",
+		"chipset": "B450",
+		"form_factor": "ATX",
+		"manufacturer": "MSI",
+		"power_draw": 15,
+		"price": 2100000,
+		"picture_url": "https://cdna.pcpartpicker.com/static/forever/images/product/0a8a0ca77620c63b68fec6323537d50a.256p.jpg"
+	},
+	{
+		"name": "PRIME A320M-K",
+		"socket": "AM4",
+		"chipset": "A320",
+		"form_factor": "Micro-ATX",
+		"manufacturer": "Asus",
+		"power_draw": 10,
+		"price": 1100000,
+		"picture_url": "https://images-na.ssl-images-amazon.com/images/I/61NTgBYFVfL.jpg"
+	},
+	{
+		"name": "X570 I AORUS PRO WIFI",
+		"socket": "AM4",
+		"chipset": "X570",
+		"form_factor": "Mini-ITX",
+		"manufacturer": "Gigabyte",
+		"power_draw": 15,
+		"price": 3100000,
+		"picture_url": "https://cdna.pcpartpicker.com/static/forever/images/product/9565cb7b88f9b718ecc1c13397f9093e.256p.jpg"
+	},
+	{
+		"name": "ROG STRIX Z490-E GAMING",
+		"socket": "LGA1200",
+		"chipset": "Z490",
+		"form_factor": "ATX",
+		"manufacturer": "Asus",
+		"power_draw": 15,
+		"price": 4100000,
+		"picture_url": "https://cdna.pcpartpicker.com/static/forever/images/product/cecf707cb59521400fc68f887de78eb0.256p.jpg"
+	},
+	{
+		"name": "Z390-A PRO",
+		"socket": "LGA1151",
+		"chipset": "Z390",
+		"form_factor": "Mini-ITX",
+		"manufacturer": "MSI",
+		"power_draw": 15,
+		"price": 3100000,
+		"picture_url": "https://cdna.pcpartpicker.com/static/forever/images/product/65d2e2e1dd6c41fe051500c6d88ffe0c.256p.jpg"
+	}
+]

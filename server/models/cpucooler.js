@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
 				},
 			},
 			socket: {
-				type: DataTypes.ENUM(["AM4", "LGA1151"]),
+				type: DataTypes.ENUM(["AM4", "LGA1151", "LGA1200"]),
 			},
 			TDP: {
 				type: DataTypes.INTEGER,
