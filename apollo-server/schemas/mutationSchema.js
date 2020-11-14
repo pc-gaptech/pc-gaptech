@@ -1,74 +1,81 @@
-const { gql, ApolloError } = require("apollo-server");
+const { gql, } = require("apollo-server");
 const redis = require("../config/redisConfig")
-const { partCPU, inputCpu } = require("./mutation/CpuMutationType")
-// const { partCpuColler, inputCpuColler } = require("./mutation/CpuCollerMutation")
-// const { partMotherboard, inputMotherboard } = require("./mutation/motherboardMutation")
-// const { partCasing, inputCasing } = require("./mutation/casingMutation")
-// const { partGPU, inputGPU } = require("./mutation/GpuMutation")
-// const { partPowerSupplay, inputPowerSupplay } = require("./mutation/powerSupplayMutation")
-// const { partRAM, inputRAM } = require("./mutation/RamMutation")
-// const { partStorage, inputStorage } = require("./mutation/storageMutation")
+const { inputCpuColler } = require("./mutation/CpuCollerMutation")
+const { inputCpu } = require("./mutation/CpuMutationType")
+const { inputMotherboard } = require("./mutation/motherboardMutation")
+const { inputCasing } = require("./mutation/casingMutation")
+const { inputGPU } = require("./mutation/GpuMutation")
+const { inputPowerSupplay } = require("./mutation/powerSupplayMutation")
+const { inputRAM } = require("./mutation/RamMutation")
+const { inputStorage } = require("./mutation/storageMutation")
+const axios = require("axios")
+const baseUrl = "http://localhost:3000"
 
+const typeDefs = gql`
 
-const typeDef = gql`
-enum Socket {
-    AM4
-    LGA1151
-  }
-  
-  enum Chipset {
-    A350
-    B450
-    X370
-    X470
-    B550
-    X570
-    B360
-    H370
-    Z370
-    Z390
-  }
-  
-  enum StorageType {
-    SATA_HDD
-    SATA_SSD
-    NVME_SSD
-  }
-  
-  enum FormFactor {
-    ATX
-    Micro_ATX
-    Mini_ITX
-  }
-  
-  enum MemoryType {
-    DDR3
-    DDR4
-  }
- 
-type CPU {
-    ${partCPU}
+input inputCpuColler {
+    ${inputCpuColler}
 }
-input inputCPU{
+
+input inputMotherboard {
+    ${inputMotherboard}
+}
+
+input inputCasing {
+    ${inputCasing}
+}
+
+input inputGPU {
+    ${inputGPU}
+}
+
+input inputPowerSupplay {
+    ${inputPowerSupplay}
+}
+
+input inputRAM {
+    ${inputRAM}
+}
+
+input inputStorage {
+    ${inputStorage}
+}
+
+input inputCPU {
     ${inputCpu}
 }
-
-
 extend type Mutation {
-    addCpu(part:String, addCpu:inputCPU):CPU
-    
+    addCpu(addcpu:inputCPU):CPU 
+    addCpuColler(addCPU:inputCpuColler):CPUCooler
+    addMotherboard(addMotherboard:inputMotherboard):Motherboard
+    addCasing(addCasing:inputCasing):Casing
+    addGPU(addGPU:inputGPU):GPU
+    addPowerSupplay(addPowerSupplay:inputPowerSupplay):PowerSupply
+    addRAM(addRAM:inputRAM):RAM
+    addStorage(addStorage:inputStorage):Storage
 }
 `
 
-const resolver = {
+const resolvers = {
     Mutation: {
         addCpu: async (_, args) => {
-            console.log(args, "<<<")
+            console.log(args.addcpu, "<<<")
+            const { name, socket, chipset,
+                TDP, manufacturer, power_draw,
+                core_count, isIGPU, max_rating,
+                price, picture_url
+            } = args.addcpu
+            try {
+
+                axios.post(`${baseUrl}/cpu/add`)
+            } catch (error) {
+
+            }
         }
     }
 }
 
 module.exports = {
-    typeDef,
-    resolver
+    typeDefs,
+    resolvers
 }

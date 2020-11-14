@@ -85,7 +85,6 @@ type all {
   DataCPU: [CPU]
 }
 
-
 extend type Query {
   fetchCPU: [CPU]
   fetchRAM: [RAM]

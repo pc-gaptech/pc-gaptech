@@ -3,6 +3,8 @@ import ChipInput from 'material-ui-chip-input'
 import { Form, Button, Container, InputGroup } from "react-bootstrap"
 import { dataEdit } from "../../graphQl/cache"
 import { useReactiveVar } from "@apollo/client"
+import { ADD_CPU } from "../../graphQl/mutation"
+import { useMutation } from "@apollo/client"
 
 
 // name	string
@@ -24,6 +26,7 @@ import { useReactiveVar } from "@apollo/client"
 function CpuAdd() {
     const editProduct = useReactiveVar(dataEdit)
     const [checkStatus, setCheckStatus] = useState(false)
+    const [addCpu, { data }] = useMutation(ADD_CPU)
     const [state, setstate] = useState({
         name: "",
         socket: "",
@@ -32,7 +35,7 @@ function CpuAdd() {
         manufacturer: "",
         power_draw: 0,
         core_count: 0,
-        is_iGPU: "",
+        isIGPU: "",
         max_rating: 0,
         price: 0,
         picture_url: ""
@@ -51,7 +54,7 @@ function CpuAdd() {
                 manufacturer: "",
                 power_draw: 0,
                 core_count: 0,
-                is_iGPU: "",
+                isIGPU: "",
                 max_rating: 0,
                 price: 0,
                 picture_url: ""
@@ -66,12 +69,32 @@ function CpuAdd() {
         state.core_count = +state.core_count
         state.power_draw = +state.power_draw
         state.max_rating = +state.max_rating
-        state.is_iGPU = state.is_iGPU === "yes" ? true : false
+        state.isIGPU = state.isIGPU === "yes" ? true : false
         if (checkStatus) {
             // edit method
             console.log(state)
         } else {
             console.log(state)
+            addCpu({
+                variables: {
+                    addcpu: {
+                        name: state.name,
+                        socket: state.socket,
+                        chipset: state.chipset,
+                        TDP: state.TDP,
+                        manufacturer: state.manufacturer,
+                        power_draw: state.power_draw,
+                        core_count: state.core_count,
+                        isIGPU: state.isIGPU,
+                        max_rating: state.max_rating,
+                        price: state.price,
+                        picture_url: state.picture_url
+                    }
+
+                }
+            })
+            console.log("masuk")
+            // console.log(state)
         }
     }
     function handleChipset(e) {
@@ -136,7 +159,7 @@ function CpuAdd() {
                 <Form.Group controlId="formBasicText">
                     <Form.Label>Manufacturer</Form.Label>
                     <Form.Control
-                        defaultValue={checkStatus ? editProduct.manufacturer : ""}
+                        // defaultValue={checkStatus ? editProduct.manufacturer : ""}
                         type="text"
                         placeholder="Enter Manufacturer"
                         name="manufacturer"
@@ -146,7 +169,7 @@ function CpuAdd() {
                 <Form.Group controlId="formBasicNumber">
                     <Form.Label>Power Draw</Form.Label>
                     <Form.Control
-                        defaultValue={checkStatus ? editProduct.power_draw : ""}
+                        // defaultValue={checkStatus ? editProduct.power_draw : ""}
                         type="number"
                         placeholder="Enter Power Draw"
                         name="power_draw"
@@ -159,16 +182,16 @@ function CpuAdd() {
                 <div>
                     <Form.Label>Yes</Form.Label>
                     <InputGroup.Radio
-                        checked={checkStatus && editProduct.is_iGPU === true}
-                        name="is_iGPU"
+                        // checked={checkStatus && editProduct.isIGPU === true}
+                        name="isIGPU"
                         value="yes"
                         onChange={handleChange}
                         className="radioGpu"
                     />
                     <Form.Label>No</Form.Label>
                     <InputGroup.Radio
-                        checked={checkStatus && editProduct.is_iGPU === false}
-                        name="is_iGPU"
+                        // checked={checkStatus && editProduct.isIGPU === false}
+                        name="isIGPU"
                         value="no"
                         onChange={handleChange}
                         className="radioGpu"

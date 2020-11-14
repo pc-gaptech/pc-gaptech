@@ -11,12 +11,11 @@ isIGPU: Boolean
 max_rating: Int
 price: Int
 picture_url: String
-
 `
 
 const inputCpu = `
 name: String
-socket: [Socket]
+socket: Socket
 chipset: [Chipset]
 TDP: Int
 manufacturer: String

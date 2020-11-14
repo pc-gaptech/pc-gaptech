@@ -1,5 +1,3 @@
-const partCasing = require("./partCasing");
-
 const partStorage = `
 id: ID
 name: String
