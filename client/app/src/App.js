@@ -19,6 +19,7 @@ import Register from './pages/Register'
 import Detail from './pages/Detail'
 import PartList from './pages/PartList'
 import MyBuild from './pages/MyBuild'
+import Motherboards from './pages/Motherboards'
 
 
 
@@ -61,9 +62,6 @@ function App() {
             <Route path="/build">
               <Build />
             </Route>
-            <Route path="/parts/:type">
-              <PartList />
-            </Route>
             <Route path="/mybuild">
               <MyBuild />
             </Route>
@@ -71,7 +69,7 @@ function App() {
               <Detail />
             </Route>
             <Route path="/parts/motherboards">
-              <PartList />
+              <Motherboards />
             </Route>
             <Route path="/register">
               <Register />
