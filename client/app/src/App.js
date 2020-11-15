@@ -30,7 +30,8 @@ import CpuCoolers from './pages/CpuCoolers'
 import Casings from './pages/Casings'
 import Gpus from './pages/Gpus'
 
-
+// PC Component Details
+import DetailCpu from './pages/details/DetailCpu'
 
 
 function App() {
@@ -84,14 +85,23 @@ function App() {
           </nav>
           <div className="container">
             <Switch>
+              <Route path="/parts/cpus/:id">
+                <DetailCpu />
+              </Route>
               <Route path="/build">
                 <Build />
               </Route>
               <Route path="/mybuild">
                 <MyBuild />
               </Route>
+
               <Route path="/parts/detail">
                 <Detail />
+              </Route>
+              
+
+              <Route path="/components/:type">
+                <PartList />
               </Route>
 
               <Route path="/parts/motherboards">

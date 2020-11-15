@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, Container, Grid, Typography, IconButton, Link } from '@material-ui/core';
 
@@ -7,6 +7,7 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
 import SaveIcon from '@material-ui/icons/Save'
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import { useHistory } from 'react-router-dom';
 
 
 
@@ -48,6 +49,35 @@ const useStyle = makeStyles((theme) => ({
 
 export default function PartItem(props) {
     const { item } = props
+    console.log(item)
+    let type
+
+    if(item.__typename === "CPU") {
+        type = "cpus"
+    } else if(item.__typename === "RAM") {
+        type = "rams"
+    } else if(item.__typename === "Motherboard") {
+        type = "motherboards"
+    } else if(item.__typename === "GPU") {
+        type = "gpus"
+    } else if(item.__typename === "CPUCooler") {
+        type = "cpucoolers"
+    } else if(item.__typename === "PowerSupply") {
+        type = "powersupplies"
+    } else if(item.__typename === "Casing") {
+        type = "casings"
+    } else if(item.__typename === "Storage") {
+        type = "storages"
+    }
+    
+
+    const history = useHistory()
+
+    const getDetail = (e) => {
+        e.preventDefault()
+        history.push(`/parts/${type}/${item.id}`)
+    }
+
     const classes = useStyle()
     return (
         <Grid container spacing={1} className={classes.container}>
@@ -64,6 +94,7 @@ export default function PartItem(props) {
                     size={"small"}
                     className={classes.button}
                     startIcon={<VisibilityIcon />}
+                    onClick={(e) => getDetail(e)}
                 >
                     See details
                     </Button>

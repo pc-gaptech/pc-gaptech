@@ -1,7 +1,7 @@
 const { gql, ApolloError } = require("apollo-server");
 const redis = require("../config/redisConfig");
-const { inputCpuColler } = require("./mutation/CpuCollerMutation");
-const { inputCpu } = require("./mutation/CpuMutationType");
+const { inputCPUColler } = require("./mutation/CpuCollerMutation");
+const { inputCPU } = require("./mutation/CpuMutationType");
 const { inputMotherboard } = require("./mutation/motherboardMutation");
 const { inputCasing } = require("./mutation/casingMutation");
 const { inputGPU } = require("./mutation/GpuMutation");
@@ -14,7 +14,7 @@ const baseUrl = "http://localhost:3000";
 const typeDefs = gql`
 
 input inputCPUCooler {
-    ${inputCpuColler}
+    ${inputCPUColler}
 }
 
 input inputMotherboard {
@@ -42,7 +42,7 @@ input inputStorage {
 }
 
 input inputCPU {
-    ${inputCpu}
+    ${inputCPU}
 }
 
 type DeleteMessage {
@@ -50,10 +50,10 @@ type DeleteMessage {
 }
 extend type Mutation {
     addCpu(access_token:String, addcpu:inputCPU):CPU 
-    addCpuColler(access_token:String,addCPU:inputCPUCooler):CPUCooler
+    addCpuCooler(access_token:String,addCPU:inputCPUCooler):CPUCooler
     addMotherboard(access_token:String,dataMotherboard:inputMotherboard):Motherboard
     addCasing(access_token:String,dataCasing:inputCasing):Casing
-    addGPU(access_token:String,dataGpu:inputGPU):GPU
+    addGPU(access_token:String,dataGPU:inputGPU):GPU
     addPowerSupply(access_token:String,dataPowerSupply:inputPowerSupply):PowerSupply
     addRAM(access_token:String,dataRAM:inputRAM):RAM
     addStorage(access_token:String,dataStorage:inputStorage):Storage
@@ -176,7 +176,7 @@ const resolvers = {
         throw new ApolloError(error);
       }
     },
-    addCpuColler: async (_, { access_token, addCPU }) => {
+    addCpuCooler: async (_, { access_token, addCPU }) => {
       console.log(addCPU);
       const {
         name,
@@ -245,8 +245,8 @@ const resolvers = {
         throw new ApolloError(error);
       }
     },
-    addGPU: async (_, { access_token, dataGpu }) => {
-      console.log(dataGpu);
+    addGPU: async (_, { access_token, dataGPU }) => {
+      console.log(dataGPU);
       try {
         const { data } = await axios({
           method: "POST",
@@ -254,7 +254,7 @@ const resolvers = {
           headers: {
             access_token,
           },
-          data: dataGpu,
+          data: dataGPU,
         });
         redis.del("gpu");
         return data;
