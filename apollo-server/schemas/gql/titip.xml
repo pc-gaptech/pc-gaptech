@@ -265,3 +265,78 @@ findOneGPUById (id: 2, access_token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJp
     picture_url
 }
 
+editOneCPU (
+    id: 1
+    dataCPU : {
+      name: "dasdas"
+    socket: AM4
+    chipset: [A320]
+    TDP: 324
+    manufacturer: "AMD"
+    power_draw: 321
+    core_count: 321
+    isIGPU: false
+    max_rating: 342
+    price: 342323
+    picture_url: "https://cdna.pcpartpicker.com/static/forever/images/product/09a31f32abb3daaf5ed9b849bd60e675.256p.jpg"
+    }
+    access_token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1NDEwNzA0fQ.XJrYw_ccCWZBL4kXSt4Isr4FVILMzlefSIaqVCVgpuk"
+  )
+  {
+    message
+  }
+
+editOneStorage (
+    id: 1,
+    dataStorage: {
+      name: "zaaaaza"
+      capacity: 131
+      storage_type: "NVME SSD"
+      power_draw: 312
+      manufacturer: "Samsul"
+      price: 132311
+      picture_url: "https://cdna.pcpartpicker.com/static/forever/images/product/09a31f32abb3daaf5ed9b849bd60e675.256p.jpg"
+    },
+    access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1NDEwNzA0fQ.XJrYw_ccCWZBL4kXSt4Isr4FVILMzlefSIaqVCVgpuk"
+  ){
+    message
+  }
+
+editOneCasing (id: Int, dataCasing: inputCasing, access_token: String) : ComponentStatus
+editOneCPUCooler (id: Int, dataCPUCooler: inputCPUCooler, access_token: String) : ComponentStatus
+editOneMotherboard (id: Int, dataMotherboard: inputMotherboard, access_token: String) : ComponentStatus
+editOnePowerSupply (id: Int, dataPowerSupply: inputPowerSupply, access_token: String) : ComponentStatus
+editOneRAM (id: Int, dataRAM: inputRAM, access_token: String) : ComponentStatus
+editOneGPU (id: Int, dataGPU: inputGPU, access_token: String) : ComponentStatus
+
+input inputCasing {
+  ${inputCasing}
+}
+
+input inputCPUCooler {
+  ${inputCPUCooler}
+}
+
+input inputMotherboard {
+  ${inputMotherboard}
+}
+
+input inputPowerSupply {
+  ${inputPowerSupply}
+}
+
+input inputRAM {
+  ${inputRAM}
+}
+
+input inputGPU {
+  ${inputGPU}
+}
+
+input inputStorage {
+  ${inputStorage}
+}
+
+input inputCPU {
+  ${inputCPU}
+} 

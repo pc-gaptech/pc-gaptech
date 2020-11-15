@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button, Container } from "react-bootstrap";
 import { dataEdit } from "../../graphQl/cache";
-import { useReactiveVar } from "@apollo/client";
+import { useReactiveVar, useMutation } from "@apollo/client";
 import axios from "axios";
+import { FECTH_ALL } from "../../graphQl/query";
+import { useHistory } from "react-router-dom";
+import { EDIT_CASING } from "../../graphQl/mutationEdit";
 
 function CasingAdd() {
+  const history = useHistory();
   const editProduct = useReactiveVar(dataEdit);
   const [checkStatus, setCheckStatus] = useState(false);
   const [state, setstate] = useState({
@@ -13,6 +17,17 @@ function CasingAdd() {
     manufacturer: "",
     price: 0,
     picture_url: 0,
+  });
+  const [editCasing] = useMutation(EDIT_CASING, {
+    refetchQueries: [
+      {
+        query: FECTH_ALL,
+        variables: { access_token: localStorage.access_token },
+      },
+    ],
+    onCompleted: () => {
+      history.push("/");
+    },
   });
 
   useEffect(() => {
@@ -32,24 +47,43 @@ function CasingAdd() {
   }, [editProduct]);
   function SumbitCasing(e) {
     e.preventDefault();
+    state.id = +state.id;
     state.price = +state.price;
     if (checkStatus) {
-      // edit method
-      axios({
-        method: "PUT",
-        url: `http://localhost:3000/parts/casing/${editProduct.id}/update`,
-        headers: {
-          access_token: localStorage.getItem("access_token"),
-          // access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
+      const dataCasing = {
+        name: state.name,
+        form_factor: state.form_factor,
+        manufacturer: state.manufacturer,
+        price: state.price,
+        picture_url: state.picture_url,
+      };
+
+      const vars = {
+        variables: {
+          id: state.id,
+          dataCasing,
+          access_token: localStorage.access_token,
         },
-        data: state,
-      })
-        .then(({ data }) => {
-          console.log(data);
-        })
-        .catch((err) => {
-          console.log(err.response);
-        });
+      };
+
+      editCasing(vars);
+      // edit method
+      // axios({
+      //   method: "PUT",
+      //   url: `http://localhost:3000/parts/casing/${editProduct.id}/update`,
+      //   headers: {
+      //     access_token: localStorage.getItem("access_token"),
+      //     // access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
+      //   },
+      //   data: state,
+      // })
+      //   .then(({ data }) => {
+      //     history.push("/");
+      //     console.log(data);
+      //   })
+      //   .catch((err) => {
+      //     console.log(err.response);
+      //   });
       console.log(state, "EDIT");
     } else {
       axios({
@@ -62,12 +96,12 @@ function CasingAdd() {
         data: state,
       })
         .then(({ data }) => {
+          history.push("/");
           console.log(data);
         })
         .catch((err) => {
           console.log(err.response);
         });
-      console.log(state, "POST");
     }
     console.log(state);
   }

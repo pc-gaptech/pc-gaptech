@@ -1,7 +1,7 @@
 const { gql, ApolloError } = require("apollo-server");
 const redis = require("../config/redisConfig");
-const { inputCpuColler } = require("./mutation/CpuCollerMutation");
-const { inputCpu } = require("./mutation/CpuMutationType");
+const { inputCPUColler } = require("./mutation/CpuCollerMutation");
+const { inputCPU } = require("./mutation/CpuMutationType");
 const { inputMotherboard } = require("./mutation/motherboardMutation");
 const { inputCasing } = require("./mutation/casingMutation");
 const { inputGPU } = require("./mutation/GpuMutation");
@@ -13,8 +13,8 @@ const baseUrl = "http://localhost:3000";
 
 const typeDefs = gql`
 
-input inputCpuColler {
-    ${inputCpuColler}
+input inputCPUCooler {
+    ${inputCPUColler}
 }
 
 input inputMotherboard {
@@ -29,7 +29,7 @@ input inputGPU {
     ${inputGPU}
 }
 
-input inputPowerSupplay {
+input inputPowerSupply {
     ${inputPowerSupplay}
 }
 
@@ -42,7 +42,7 @@ input inputStorage {
 }
 
 input inputCPU {
-    ${inputCpu}
+    ${inputCPU}
 }
 
 type DeleteMessage {
@@ -50,11 +50,11 @@ type DeleteMessage {
 }
 extend type Mutation {
     addCpu(access_token:String, addcpu:inputCPU):CPU 
-    addCpuColler(access_token:String,addCPU:inputCpuColler):CPUCooler
+    addCpuColler(access_token:String,addCPU:inputCPUCooler):CPUCooler
     addMotherboard(access_token:String,addMotherboard:inputMotherboard):Motherboard
     addCasing(access_token:String,addCasing:inputCasing):Casing
     addGPU(access_token:String,addGPU:inputGPU):GPU
-    addPowerSupplay(access_token:String,addPowerSupplay:inputPowerSupplay):PowerSupply
+    addPowerSupplay(access_token:String,addPowerSupplay:inputPowerSupply):PowerSupply
     addRAM(access_token:String,addRAM:inputRAM):RAM
     addStorage(access_token:String,addStorage:inputStorage):Storage
     deleteProduct(access_token:String,id:ID,part:String):DeleteMessage

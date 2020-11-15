@@ -52,6 +52,7 @@ export default function PartList() {
     const {loading, error, data} = useQuery(FETCH_ALL)
     const [result, setResult] = useState({})
     const { type } = useParams()
+    console.log(type)
 
     useEffect(() => {
         if(type === 'cpus') {
@@ -73,8 +74,6 @@ export default function PartList() {
         } 
 
     }, [data])
-
-
 
     
     if (loading) return <p>Loading..</p>

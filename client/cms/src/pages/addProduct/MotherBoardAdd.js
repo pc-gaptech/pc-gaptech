@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button, Container } from "react-bootstrap";
 import { dataEdit } from "../../graphQl/cache";
-import { useReactiveVar } from "@apollo/client";
+import { useReactiveVar, useMutation } from "@apollo/client";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
+import { EDIT_MOTHERBOARD } from "../../graphQl/mutationEdit";
+import { FECTH_ALL } from "../../graphQl/query";
 
 function MotherBoardAdd() {
+  const history = useHistory();
   const editProduct = useReactiveVar(dataEdit);
   const [checkStatus, setCheckStatus] = useState(false);
   const [state, setstate] = useState({
@@ -16,6 +20,17 @@ function MotherBoardAdd() {
     power_draw: 0,
     price: 0,
     picture_url: "",
+  });
+  const [editMotherboard] = useMutation(EDIT_MOTHERBOARD, {
+    refetchQueries: [
+      {
+        query: FECTH_ALL,
+        variables: { access_token: localStorage.access_token },
+      },
+    ],
+    onCompleted: () => {
+      history.push("/");
+    },
   });
   useEffect(() => {
     if (editProduct) {
@@ -37,25 +52,46 @@ function MotherBoardAdd() {
   }, [editProduct]);
   function SumbitMotherBoard(e) {
     e.preventDefault();
+    state.id = +state.id;
     state.power_draw = +state.power_draw;
     state.price = +state.price;
     if (checkStatus) {
-      // edit method
-      axios({
-        method: "PUT",
-        url: `http://localhost:3000/parts/motherboard/${editProduct.id}/update`,
-        headers: {
-          access_token: localStorage.getItem("access_token"),
-          // access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
+      const dataMotherboard = {
+        name: state.name,
+        socket: state.socket,
+        chipset: state.chipset,
+        form_factor: state.form_factor,
+        manufacturer: state.manufacturer,
+        power_draw: state.power_draw,
+        price: state.price,
+        picture_url: state.picture_url,
+      };
+
+      const vars = {
+        variables: {
+          id: state.id,
+          dataMotherboard,
+          access_token: localStorage.access_token,
         },
-        data: state,
-      })
-        .then(({ data }) => {
-          console.log(data);
-        })
-        .catch((err) => {
-          console.log(err.response);
-        });
+      };
+
+      editMotherboard(vars);
+      // edit method
+      // axios({
+      //   method: "PUT",
+      //   url: `http://localhost:3000/parts/motherboard/${editProduct.id}/update`,
+      //   headers: {
+      //     access_token: localStorage.getItem("access_token"),
+      //     // access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
+      //   },
+      //   data: state,
+      // })
+      //   .then(({ data }) => {
+      //     history.push("/");
+      //   })
+      //   .catch((err) => {
+      //     console.log(err.response);
+      //   });
       console.log(state);
     } else {
       axios({
@@ -204,7 +240,7 @@ function MotherBoardAdd() {
                 ATX
               </option>
               <option
-                value="Micro-ATX"
+                value="Micro_ATX"
                 selected={
                   checkStatus && editProduct.form_factor === "Micro-ATX"
                 }
@@ -212,7 +248,7 @@ function MotherBoardAdd() {
                 Micro-ATX
               </option>
               <option
-                value="Mini-ITX"
+                value="Mini_ITX"
                 selected={checkStatus && editProduct.form_factor === "Mini-ITX"}
               >
                 Mini-ITX

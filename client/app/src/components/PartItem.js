@@ -2,6 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Container, Grid, Typography, IconButton, Link } from "@material-ui/core";
 
+
 import Image from "material-ui-image";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
@@ -57,7 +58,6 @@ export default function PartItem(props) {
         console.log(config(), "HAHAHAAH")
         history.push("/build")
 	};
-
 	return (
 		<Grid container spacing={1} className={classes.container}>
 			<Grid item xs={1}>
