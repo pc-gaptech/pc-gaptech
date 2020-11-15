@@ -12,14 +12,10 @@ const typeDefs = gql`
 `;
 
 const schema = makeExecutableSchema({
-  typeDefs: [typeDefs, componentSchema.typeDefs,
-    userSchema.typeDefs,
-    gamesSchema.typeDefs,
-    mutationSchema.typeDefs
-  ],
-  resolvers: [componentSchema.resolvers, userSchema.resolvers, gamesSchema.resolvers,
-  mutationSchema.resolvers
-  ],
+
+  typeDefs: [typeDefs, componentSchema.typeDefs, userSchema.typeDefs, gamesSchema.typeDefs],
+  resolvers: [componentSchema.resolvers, userSchema.resolvers, gamesSchema.resolvers],
+
 });
 
 const server = new ApolloServer({ schema });
