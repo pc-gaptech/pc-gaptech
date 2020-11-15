@@ -45,6 +45,7 @@ function CasingAdd() {
         data: state,
       })
         .then(({ data }) => {
+          history.push("/");
           console.log(data);
         })
         .catch((err) => {
@@ -62,12 +63,12 @@ function CasingAdd() {
         data: state,
       })
         .then(({ data }) => {
+          history.push("/");
           console.log(data);
         })
         .catch((err) => {
           console.log(err.response);
         });
-      console.log(state, "POST");
     }
     console.log(state);
   }

@@ -3,8 +3,10 @@ import { Form, Button, Container } from "react-bootstrap";
 import { dataEdit } from "../../graphQl/cache";
 import { useReactiveVar } from "@apollo/client";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 function MotherBoardAdd() {
+  const history = useHistory();
   const editProduct = useReactiveVar(dataEdit);
   const [checkStatus, setCheckStatus] = useState(false);
   const [state, setstate] = useState({
@@ -51,7 +53,7 @@ function MotherBoardAdd() {
         data: state,
       })
         .then(({ data }) => {
-          console.log(data);
+          history.push("/");
         })
         .catch((err) => {
           console.log(err.response);

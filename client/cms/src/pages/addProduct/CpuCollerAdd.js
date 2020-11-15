@@ -68,6 +68,7 @@ function CpuCollerAdd() {
         },
       })
         .then(({ data }) => {
+          history.push("/");
           console.log(data);
         })
         .catch((err) => {
@@ -93,7 +94,7 @@ function CpuCollerAdd() {
         },
       })
         .then(({ data }) => {
-          console.log(data);
+          history.push("/");
         })
         .catch((err) => {
           console.log(err.response);
