@@ -1,5 +1,4 @@
-const partCasing = `
-    id: ID
+const inputCasing = `
     name: String
     form_factor: String
     manufacturer: String
@@ -7,4 +6,4 @@ const partCasing = `
     picture_url: String
 `;
 
-module.exports = partCasing;
+module.exports = inputCasing;

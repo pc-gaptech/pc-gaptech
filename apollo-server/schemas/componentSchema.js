@@ -2,13 +2,21 @@ const { gql, ApolloError } = require("apollo-server");
 const axios = require("axios");
 const redis = require("../config/redisConfig");
 const partCPU = require("./gql/partCPU");
+const inputCPU = require("./inputType/inputCPU");
 const partCPUCooler = require("./gql/partCpuCooler");
+const inputCPUCooler = require("./inputType/inputCPUCooler");
 const partMotherboard = require("./gql/partMotherdboard");
+const inputMotherboard = require("./inputType/inputMotherboard");
 const partCasing = require("./gql/partCasing");
+const inputCasing = require("./inputType/inputCasing");
 const partStorage = require("./gql/partStorage");
+const inputStorage = require("./inputType/inputStorage");
 const partPowerSupply = require("./gql/partPowerSupply");
+const inputPowerSupply = require("./gql/partPowerSupply");
 const partRAM = require("./gql/partRAM");
+const inputRAM = require("./inputType/inputRAM");
 const partGPU = require("./gql/partGPU");
+const inputGPU = require("./inputType/inputGPU");
 const typeAll = require("./gql/typeAll");
 const typeQuery = require("./gql/typeQuery");
 const urlComponents = "http://localhost:3000/parts/";
@@ -42,12 +50,6 @@ enum Chipset {
   A350
 }
 
-enum StorageType {
-  SATA_HDD
-  SATA_SSD
-  NVME_SSD
-}
-
 enum FormFactor {
   ATX
   Micro_ATX
@@ -63,48 +65,260 @@ type CPU {
   ${partCPU}
 }
 
+input inputCPU {
+  ${inputCPU}
+}
+
 type Storage {
   ${partStorage}
+}
+
+input inputStorage {
+  ${inputStorage}
 }
 
 type Casing {
   ${partCasing}
 }
 
+input inputCasing {
+  ${inputCasing}
+}
+
 type CPUCooler {
   ${partCPUCooler}
+}
+
+input inputCPUCooler {
+  ${inputCPUCooler}
 }
 
 type Motherboard {
   ${partMotherboard}
 }
 
+input inputMotherboard {
+  ${inputMotherboard}
+}
+
 type PowerSupply {
   ${partPowerSupply}
+}
+
+input inputPowerSupply {
+  ${inputPowerSupply}
 }
 
 type RAM {
   ${partRAM}
 }
 
+input inputRAM {
+  ${inputRAM}
+}
+
 type GPU {
   ${partGPU}
 }
 
+input inputGPU {
+  ${inputGPU}
+} 
+
 type all {
   ${typeAll}
+}
+
+type ComponentStatus {
+  message: String
 }
 
 extend type Query {
   ${typeQuery}
 }
 
+extend type Mutation {
+  editOneCPU (id: Int, dataCPU: inputCPU access_token: String) : ComponentStatus
+  editOneStorage (id: Int, dataStorage: inputStorage, access_token: String) : ComponentStatus
+  editOneCasing (id: Int, dataCasing: inputCasing, access_token: String) : ComponentStatus
+  editOneCPUCooler (id: Int, dataCPUCooler: inputCPUCooler, access_token: String) : ComponentStatus
+  editOneMotherboard (id: Int, dataMotherboard: inputMotherboard, access_token: String) : ComponentStatus
+  editOnePowerSupply (id: Int, dataPowerSupply: inputPowerSupply, access_token: String) : ComponentStatus
+  editOneRAM (id: Int, dataRAM: inputRAM, access_token: String) : ComponentStatus
+  editOneGPU (id: Int, dataGPU: inputGPU, access_token: String) : ComponentStatus
+}
+
 `;
-//ganti akses token disini
-// let access_token =
-//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1NDA0NzM1fQ.7fHAJulBFK-dcW1xeqTKx6jDLxryG0o0EnFTn_XZTtU";
 
 const resolvers = {
+  Mutation: {
+    editOneCPU: async (parent, { id, dataCPU, access_token }) => {
+      try {
+        return axios({
+          url: `${urlComponents}/cpu/${id}/update`,
+          method: "put",
+          data: dataCPU,
+          headers: { access_token },
+        })
+          .then(async ({ data }) => {
+            await redis.del("cpu");
+            return data;
+          })
+          .catch((err) => {
+            throw new ApolloError(err);
+          });
+      } catch (err) {
+        throw new ApolloError(err);
+      }
+    },
+
+    editOneStorage: async (parent, { id, dataStorage, access_token }) => {
+      console.log("masuk");
+      try {
+        return axios({
+          url: `${urlComponents}/storage/${id}/update`,
+          method: "put",
+          data: dataStorage,
+          headers: { access_token },
+        })
+          .then(async ({ data }) => {
+            await redis.del("storage");
+            return data;
+          })
+          .catch((err) => {
+            throw new ApolloError(err);
+          });
+      } catch (err) {
+        throw new ApolloError(err);
+      }
+    },
+
+    editOneCasing: async (parent, { id, dataCasing, access_token }) => {
+      try {
+        return axios({
+          url: `${urlComponents}/casing/${id}/update`,
+          method: "put",
+          data: dataCasing,
+          headers: { access_token },
+        })
+          .then(async ({ data }) => {
+            await redis.del("casing");
+            return data;
+          })
+          .catch((err) => {
+            throw new ApolloError(err);
+          });
+      } catch (err) {
+        throw new ApolloError(err);
+      }
+    },
+
+    editOneCPUCooler: async (parent, { id, dataCPUCooler, access_token }) => {
+      try {
+        return axios({
+          url: `${urlComponents}/cpucooler/${id}/update`,
+          method: "put",
+          data: dataCPUCooler,
+          headers: { access_token },
+        })
+          .then(async ({ data }) => {
+            await redis.del("cpucooler");
+            return data;
+          })
+          .catch((err) => {
+            throw new ApolloError(err);
+          });
+      } catch (err) {
+        throw new ApolloError(err);
+      }
+    },
+
+    editOneMotherboard: async (
+      parent,
+      { id, dataMotherboard, access_token }
+    ) => {
+      try {
+        return axios({
+          url: `${urlComponents}/motherboard/${id}/update`,
+          method: "put",
+          data: dataMotherboard,
+          headers: { access_token },
+        })
+          .then(async ({ data }) => {
+            await redis.del("motherboard");
+            return data;
+          })
+          .catch((err) => {
+            throw new ApolloError(err);
+          });
+      } catch (err) {
+        throw new ApolloError(err);
+      }
+    },
+
+    editOnePowerSupply: async (
+      parent,
+      { id, dataPowerSupply, access_token }
+    ) => {
+      try {
+        return axios({
+          url: `${urlComponents}/powerSupply/${id}/update`,
+          method: "put",
+          data: dataPowerSupply,
+          headers: { access_token },
+        })
+          .then(async ({ data }) => {
+            await redis.del("powerSupply");
+            return data;
+          })
+          .catch((err) => {
+            throw new ApolloError(err);
+          });
+      } catch (err) {
+        throw new ApolloError(err);
+      }
+    },
+
+    editOneRAM: async (parent, { id, dataRAM, access_token }) => {
+      try {
+        return axios({
+          url: `${urlComponents}/ram/${id}/update`,
+          method: "put",
+          data: dataRAM,
+          headers: { access_token },
+        })
+          .then(async ({ data }) => {
+            await redis.del("ram");
+            return data;
+          })
+          .catch((err) => {
+            throw new ApolloError(err);
+          });
+      } catch (err) {
+        throw new ApolloError(err);
+      }
+    },
+
+    editOneGPU: async (parent, { id, dataGPU, access_token }) => {
+      try {
+        return axios({
+          url: `${urlComponents}/gpu/${id}/update`,
+          method: "put",
+          data: dataGPU,
+          headers: { access_token },
+        })
+          .then(async ({ data }) => {
+            await redis.del("gpu");
+            return data;
+          })
+          .catch((err) => {
+            throw new ApolloError(err);
+          });
+      } catch (err) {
+        throw new ApolloError(err);
+      }
+    },
+  },
   Query: {
     fetchAll: async (parent, { access_token }) => {
       try {
