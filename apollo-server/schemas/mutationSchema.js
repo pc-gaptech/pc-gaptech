@@ -45,21 +45,20 @@ input inputCPU {
     ${inputCpu}
 }
 extend type Mutation {
-    addCpu(addcpu:inputCPU):CPU 
-    addCpuColler(addCPU:inputCpuColler):CPUCooler
-    addMotherboard(addMotherboard:inputMotherboard):Motherboard
-    addCasing(addCasing:inputCasing):Casing
-    addGPU(addGPU:inputGPU):GPU
-    addPowerSupplay(addPowerSupplay:inputPowerSupplay):PowerSupply
-    addRAM(addRAM:inputRAM):RAM
-    addStorage(addStorage:inputStorage):Storage
+    addCpu(access_token:String, addcpu:inputCPU):CPU 
+    addCpuColler(access_token:String,addCPU:inputCpuColler):CPUCooler
+    addMotherboard(access_token:String,addMotherboard:inputMotherboard):Motherboard
+    addCasing(access_token:String,addCasing:inputCasing):Casing
+    addGPU(access_token:String,addGPU:inputGPU):GPU
+    addPowerSupplay(access_token:String,addPowerSupplay:inputPowerSupplay):PowerSupply
+    addRAM(access_token:String,addRAM:inputRAM):RAM
+    addStorage(access_token:String,addStorage:inputStorage):Storage
 }
 `
-
 const resolvers = {
     Mutation: {
         addCpu: async (_, args) => {
-            console.log(args.addcpu, "<<<")
+            console.log(args, "<<<")
             const { name, socket, chipset,
                 TDP, manufacturer, power_draw,
                 core_count, isIGPU, max_rating,

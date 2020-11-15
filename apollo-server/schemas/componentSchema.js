@@ -9,7 +9,7 @@ const partStorage = require("./gql/partStorage");
 const partPowerSupply = require("./gql/partPowerSupply");
 const partRAM = require("./gql/partRAM");
 const partGPU = require("./gql/partGPU");
-const urlComponents = "http://localhost:3000/parts/";
+const urlComponents = "http://localhost:3001/parts/";
 
 const typeDefs = gql`
 
@@ -108,6 +108,14 @@ extend type Query {
   fetchCasing: [Casing]
   fetchStorage: [Storage]
   fetchGPU: [GPU]
+  findOneCPUById (id: Int): CPU
+  findOneRAMById (id: Int): RAM
+  findOnePowerSupplyById (id: Int): PowerSupply
+  findOneMotherboardById (id: Int): Motherboard
+  findOneCPUCoolerById (id: Int): CPUCooler
+  findOneCasingById (id: Int): Casing
+  findOneStorageById (id: Int): Storage
+  findOneGPUById (id: Int): GPU
 }
 `;
 
@@ -327,6 +335,166 @@ const resolvers = {
               throw new ApolloError(err);
             });
         }
+      } catch (err) {
+        throw new ApolloError(err);
+      }
+    },
+
+    findOneCPUById: async (_, { id }) => {
+      try {
+        return axios
+          .get(`${urlComponents}/cpu/${id}/detail`, {
+            headers: {
+              access_token:
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1MzY4OTQ1fQ.jLhsRCuu_vQEmAdMGmKZDFyCM6lB-MKsPy41_9s5_aI",
+            },
+          })
+          .then(async ({ data }) => {
+            return data;
+          })
+          .catch((err) => {
+            throw new ApolloError(err);
+          });
+      } catch (err) {
+        throw new ApolloError(err);
+      }
+    },
+
+    findOneRAMById: async (_, { id }) => {
+      try {
+        return axios
+          .get(`${urlComponents}/ram/${id}/detail`, {
+            headers: {
+              access_token:
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1MzY4OTQ1fQ.jLhsRCuu_vQEmAdMGmKZDFyCM6lB-MKsPy41_9s5_aI",
+            },
+          })
+          .then(async ({ data }) => {
+            return data;
+          })
+          .catch((err) => {
+            throw new ApolloError(err);
+          });
+      } catch (err) {
+        throw new ApolloError(err);
+      }
+    },
+
+    findOnePowerSupplyById: async (_, { id }) => {
+      try {
+        return axios
+          .get(`${urlComponents}/powerSupply/${id}/detail`, {
+            headers: {
+              access_token:
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1MzY4OTQ1fQ.jLhsRCuu_vQEmAdMGmKZDFyCM6lB-MKsPy41_9s5_aI",
+            },
+          })
+          .then(async ({ data }) => {
+            return data;
+          })
+          .catch((err) => {
+            throw new ApolloError(err);
+          });
+      } catch (err) {
+        throw new ApolloError(err);
+      }
+    },
+
+    findOneMotherboardById: async (_, { id }) => {
+      try {
+        return axios
+          .get(`${urlComponents}/motherboard/${id}/detail`, {
+            headers: {
+              access_token:
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1MzY4OTQ1fQ.jLhsRCuu_vQEmAdMGmKZDFyCM6lB-MKsPy41_9s5_aI",
+            },
+          })
+          .then(async ({ data }) => {
+            return data;
+          })
+          .catch((err) => {
+            throw new ApolloError(err);
+          });
+      } catch (err) {
+        throw new ApolloError(err);
+      }
+    },
+
+    findOneCPUCoolerById: async (_, { id }) => {
+      try {
+        return axios
+          .get(`${urlComponents}/cpucooler/${id}/detail`, {
+            headers: {
+              access_token:
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1MzY4OTQ1fQ.jLhsRCuu_vQEmAdMGmKZDFyCM6lB-MKsPy41_9s5_aI",
+            },
+          })
+          .then(async ({ data }) => {
+            return data;
+          })
+          .catch((err) => {
+            throw new ApolloError(err);
+          });
+      } catch (err) {
+        throw new ApolloError(err);
+      }
+    },
+
+    findOneCasingById: async (_, { id }) => {
+      try {
+        return axios
+          .get(`${urlComponents}/casing/${id}/detail`, {
+            headers: {
+              access_token:
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1MzY4OTQ1fQ.jLhsRCuu_vQEmAdMGmKZDFyCM6lB-MKsPy41_9s5_aI",
+            },
+          })
+          .then(async ({ data }) => {
+            return data;
+          })
+          .catch((err) => {
+            throw new ApolloError(err);
+          });
+      } catch (err) {
+        throw new ApolloError(err);
+      }
+    },
+
+    findOneStorageById: async (_, { id }) => {
+      try {
+        return axios
+          .get(`${urlComponents}/storage/${id}/detail`, {
+            headers: {
+              access_token:
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1MzY4OTQ1fQ.jLhsRCuu_vQEmAdMGmKZDFyCM6lB-MKsPy41_9s5_aI",
+            },
+          })
+          .then(async ({ data }) => {
+            return data;
+          })
+          .catch((err) => {
+            throw new ApolloError(err);
+          });
+      } catch (err) {
+        throw new ApolloError(err);
+      }
+    },
+
+    findOneGPUById: async (_, { id }) => {
+      try {
+        return axios
+          .get(`${urlComponents}/gpu/${id}/detail`, {
+            headers: {
+              access_token:
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1MzY4OTQ1fQ.jLhsRCuu_vQEmAdMGmKZDFyCM6lB-MKsPy41_9s5_aI",
+            },
+          })
+          .then(async ({ data }) => {
+            return data;
+          })
+          .catch((err) => {
+            throw new ApolloError(err);
+          });
       } catch (err) {
         throw new ApolloError(err);
       }

@@ -87,27 +87,34 @@ function CpuAdd() {
                 })
             console.log(state)
         } else {
-            axios({
-                method: "POST",
-                url: "http://localhost:3000/parts/cpu/add",
-                headers: {
-                    access_token: localStorage.getItem("access_token")
-                    // access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
-                },
-                data: {
-                    name, socket,
-                    chipset_cpu: chipset,
-                    TDP, manufacturer, power_draw,
-                    core_count, isIGPU, max_rating,
-                    price, picture_url
+            addCpu({
+                variables: {
+                    access_token: localStorage.getItem("access_token"),
+                    addcpu: state
                 }
             })
-                .then(({ data }) => {
-                    console.log(data)
-                })
-                .catch(err => {
-                    console.log(err.response)
-                })
+            console.log("masuk")
+            // axios({
+            //     method: "POST",
+            //     url: "http://localhost:3000/parts/cpu/add",
+            //     headers: {
+            //         access_token: localStorage.getItem("access_token")
+            //         // access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
+            //     },
+            //     data: {
+            //         name, socket,
+            //         chipset_cpu: chipset,
+            //         TDP, manufacturer, power_draw,
+            //         core_count, isIGPU, max_rating,
+            //         price, picture_url
+            //     }
+            // })
+            //     .then(({ data }) => {
+            //         console.log(data)
+            //     })
+            //     .catch(err => {
+            //         console.log(err.response)
+            //     })
         }
     }
     function handleChipset(e) {
