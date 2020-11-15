@@ -1,4 +1,4 @@
-fetchCPU{
+fetchCPU (access_token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1NDA0NzM1fQ.7fHAJulBFK-dcW1xeqTKx6jDLxryG0o0EnFTn_XZTtU"){
     id
     name
     socket
@@ -13,7 +13,7 @@ fetchCPU{
     picture_url
 }
 
-fetchRAM{
+fetchRAM (access_token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1NDA0NzM1fQ.7fHAJulBFK-dcW1xeqTKx6jDLxryG0o0EnFTn_XZTtU"){
     id
     name
     memory_type
@@ -25,7 +25,7 @@ fetchRAM{
     picture_url
 }
 
-fetchPowerSupply{
+fetchPowerSupply (access_token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1NDA0NzM1fQ.7fHAJulBFK-dcW1xeqTKx6jDLxryG0o0EnFTn_XZTtU"){
    	id
     name
     efficiency
@@ -35,7 +35,7 @@ fetchPowerSupply{
     picture_url
 }
 
-fetchMotherboard {
+fetchMotherboard (access_token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1NDA0NzM1fQ.7fHAJulBFK-dcW1xeqTKx6jDLxryG0o0EnFTn_XZTtU"){
     id
     name
     socket
@@ -47,7 +47,7 @@ fetchMotherboard {
     picture_url
 }
 
-fetchCPUCooler{
+fetchCPUCooler (access_token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1NDA0NzM1fQ.7fHAJulBFK-dcW1xeqTKx6jDLxryG0o0EnFTn_XZTtU"){
     id
     name
     socket
@@ -58,7 +58,7 @@ fetchCPUCooler{
     picture_url
 }
 
-fetchCasing{
+fetchCasing (access_token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1NDA0NzM1fQ.7fHAJulBFK-dcW1xeqTKx6jDLxryG0o0EnFTn_XZTtU"){
     id
     name
     form_factor
@@ -67,7 +67,7 @@ fetchCasing{
     picture_url
 }
 
-fetchStorage {
+fetchStorage (access_token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1NDA0NzM1fQ.7fHAJulBFK-dcW1xeqTKx6jDLxryG0o0EnFTn_XZTtU"){
     id
     name
     capacity
@@ -78,7 +78,7 @@ fetchStorage {
     picture_url
 }
 
-fetchGPU {
+fetchGPU (access_token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1NDA0NzM1fQ.7fHAJulBFK-dcW1xeqTKx6jDLxryG0o0EnFTn_XZTtU"){
     id
     name
     power_draw
@@ -89,7 +89,7 @@ fetchGPU {
     picture_url
 }
 
-fetchAll {
+fetchAll (access_token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1NDA0NzM1fQ.7fHAJulBFK-dcW1xeqTKx6jDLxryG0o0EnFTn_XZTtU"){
     dataCPU{
         id
         name
@@ -174,7 +174,7 @@ fetchAll {
     }
 }
 
-findOneCPUById (id: 2){
+findOneCPUById (id: 2, access_token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1NDA0NzM1fQ.7fHAJulBFK-dcW1xeqTKx6jDLxryG0o0EnFTn_XZTtU"){
     id
     name
     socket
@@ -189,7 +189,7 @@ findOneCPUById (id: 2){
     picture_url
 }
 
-findOneRAMById (id: 2){
+findOneRAMById (id: 2, access_token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1NDA0NzM1fQ.7fHAJulBFK-dcW1xeqTKx6jDLxryG0o0EnFTn_XZTtU"){
     id
     name
     memory_type
@@ -201,7 +201,7 @@ findOneRAMById (id: 2){
     picture_url
 }
 
-findOnePowerSupplyById (id: 2){
+findOnePowerSupplyById (id: 2, access_token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1NDA0NzM1fQ.7fHAJulBFK-dcW1xeqTKx6jDLxryG0o0EnFTn_XZTtU"){
     id
     name
     efficiency
@@ -211,7 +211,7 @@ findOnePowerSupplyById (id: 2){
     picture_url
 }
 
-findOneMotherboardById (id: 2){
+findOneMotherboardById (id: 2, access_token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1NDA0NzM1fQ.7fHAJulBFK-dcW1xeqTKx6jDLxryG0o0EnFTn_XZTtU"){
     id
     name
     socket
@@ -223,7 +223,7 @@ findOneMotherboardById (id: 2){
     picture_url
 }
 
-findOneCPUCoolerById (id: 2){
+findOneCPUCoolerById (id: 2, access_token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1NDA0NzM1fQ.7fHAJulBFK-dcW1xeqTKx6jDLxryG0o0EnFTn_XZTtU"){
     id
     name
     socket
@@ -234,7 +234,7 @@ findOneCPUCoolerById (id: 2){
     picture_url
 }
 
-findOneCasingById (id: 2){
+findOneCasingById (id: 2, access_token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1NDA0NzM1fQ.7fHAJulBFK-dcW1xeqTKx6jDLxryG0o0EnFTn_XZTtU"){
     id
     name
     form_factor
@@ -243,7 +243,7 @@ findOneCasingById (id: 2){
     picture_url
 }
 
-findOneStorageById (id: 2){
+findOneStorageById (id: 2, access_token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1NDA0NzM1fQ.7fHAJulBFK-dcW1xeqTKx6jDLxryG0o0EnFTn_XZTtU"){
     id
     name
     capacity
@@ -254,7 +254,7 @@ findOneStorageById (id: 2){
     picture_url
 }
 
-findOneGPUById (id: 2){
+findOneGPUById (id: 2, access_token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1NDA0NzM1fQ.7fHAJulBFK-dcW1xeqTKx6jDLxryG0o0EnFTn_XZTtU"){
     id
     name
     power_draw
