@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button, Container } from "react-bootstrap";
 import { dataEdit } from "../../graphQl/cache";
-import { useReactiveVar } from "@apollo/client";
+import { useReactiveVar, useMutation } from "@apollo/client";
 import ChipInput from "material-ui-chip-input";
 import axios from "axios";
+import { EDIT_CPUCOOLER } from "../../graphQl/mutationEdit";
+import { FECTH_ALL } from "../../graphQl/query";
 import { useHistory } from "react-router-dom";
 
 function CpuCollerAdd() {
@@ -18,6 +20,17 @@ function CpuCollerAdd() {
     power_draw: 0,
     price: 0,
     picture_url: "",
+  });
+  const [editCPUCooler] = useMutation(EDIT_CPUCOOLER, {
+    refetchQueries: [
+      {
+        query: FECTH_ALL,
+        variables: { access_token: localStorage.access_token },
+      },
+    ],
+    onCompleted: () => {
+      history.push("/");
+    },
   });
   useEffect(() => {
     if (editProduct) {
@@ -38,6 +51,7 @@ function CpuCollerAdd() {
   }, [editProduct]);
   function SumbitCpuColler(e) {
     e.preventDefault();
+    state.id = +state.id;
     state.TDP = +state.TDP;
     state.price = +state.price;
     state.power_draw = +state.power_draw;
@@ -51,31 +65,49 @@ function CpuCollerAdd() {
       picture_url,
     } = state;
     if (checkStatus) {
+      const dataCPUCooler = {
+        name: state.name,
+        socket: state.socket,
+        TDP: state.TDP,
+        manufacturer: state.manufacturer,
+        power_draw: state.power_draw,
+        price: state.price,
+        picture_url: state.picture_url,
+      };
+
+      const vars = {
+        variables: {
+          id: state.id,
+          dataCPUCooler,
+          access_token: localStorage.access_token,
+        },
+      };
+      editCPUCooler(vars);
       // edit method
-      axios({
-        method: "PUT",
-        url: `http://localhost:3000/parts/cpucooler/${editProduct.id}/update`,
-        headers: {
-          access_token: localStorage.getItem("access_token"),
-          // access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
-        },
-        data: {
-          name,
-          socket_cpu_cooler: socket,
-          TDP,
-          manufacturer,
-          power_draw,
-          price,
-          picture_url,
-        },
-      })
-        .then(({ data }) => {
-          history.push("/");
-          console.log(data);
-        })
-        .catch((err) => {
-          console.log(err.response);
-        });
+      // axios({
+      //   method: "PUT",
+      //   url: `http://localhost:3000/parts/cpucooler/${editProduct.id}/update`,
+      //   headers: {
+      //     access_token: localStorage.getItem("access_token"),
+      //     // access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
+      //   },
+      //   data: {
+      //     name,
+      //     socket_cpu_cooler: socket,
+      //     TDP,
+      //     manufacturer,
+      //     power_draw,
+      //     price,
+      //     picture_url,
+      //   },
+      // })
+      //   .then(({ data }) => {
+      //     history.push("/");
+      //     console.log(data);
+      //   })
+      //   .catch((err) => {
+      //     console.log(err.response);
+      //   });
       console.log(state);
     } else {
       axios({

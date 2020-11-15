@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button, Container } from "react-bootstrap";
 import { dataEdit } from "../../graphQl/cache";
-import { useReactiveVar } from "@apollo/client";
+import { useReactiveVar, useMutation } from "@apollo/client";
 import axios from "axios";
+import { EDIT_STORAGE } from "../../graphQl/mutationEdit";
+import { FECTH_ALL } from "../../graphQl/query";
+import { useHistory } from "react-router-dom";
 
 function StorageAdd() {
+  const history = useHistory();
   const editProduct = useReactiveVar(dataEdit);
   const [checkStatus, setCheckStatus] = useState(false);
   const [state, setstate] = useState({
@@ -15,6 +19,17 @@ function StorageAdd() {
     manufacturer: "",
     price: 0,
     picture_url: "",
+  });
+  const [editStorage] = useMutation(EDIT_STORAGE, {
+    refetchQueries: [
+      {
+        query: FECTH_ALL,
+        variables: { access_token: localStorage.access_token },
+      },
+    ],
+    onCompleted: () => {
+      history.push("/");
+    },
   });
   useEffect(() => {
     if (editProduct) {
@@ -35,26 +50,46 @@ function StorageAdd() {
   }, [editProduct]);
   function SumbitStorage(e) {
     e.preventDefault();
+    state.id = +state.id;
     state.capacity = +state.capacity;
     state.power_draw = +state.power_draw;
     state.price = +state.price;
     if (checkStatus) {
-      // edit method
-      axios({
-        method: "PUT",
-        url: `http://localhost:3000/parts/storage/${editProduct.id}/update`,
-        headers: {
-          access_token: localStorage.getItem("access_token"),
-          // access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
+      const dataStorage = {
+        name: state.name,
+        capacity: state.capacity,
+        storage_type: state.storage_type,
+        power_draw: state.power_draw,
+        manufacturer: state.manufacturer,
+        price: state.price,
+        picture_url: state.picture_url,
+      };
+
+      const vars = {
+        variables: {
+          id: state.id,
+          dataStorage,
+          access_token: localStorage.access_token,
         },
-        data: state,
-      })
-        .then(({ data }) => {
-          console.log(data);
-        })
-        .catch((err) => {
-          console.log(err.response);
-        });
+      };
+
+      editStorage(vars);
+      // edit method
+      // axios({
+      //     method: "PUT",
+      //     url: `http://localhost:3000/parts/storage/${editProduct.id}/update`,
+      //     headers: {
+      //         access_token: localStorage.getItem("access_token")
+      //         // access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
+      //     },
+      //     data: state
+      // })
+      //     .then(({ data }) => {
+      //         console.log(data)
+      //     })
+      //     .catch(err => {
+      //         console.log(err.response)
+      //     })
     } else {
       axios({
         method: "POST",

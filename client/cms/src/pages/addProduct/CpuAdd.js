@@ -9,6 +9,7 @@ import { allProdcutVar } from "../../graphQl/cache";
 import { useMutation, useQuery } from "@apollo/client";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import { EDIT_CPU } from "../../graphQl/mutationEdit";
 
 function CpuAdd() {
   const history = useHistory();
@@ -29,6 +30,18 @@ function CpuAdd() {
     picture_url: "",
   });
   console.log(editProduct);
+
+  const [editCPU] = useMutation(EDIT_CPU, {
+    refetchQueries: [
+      {
+        query: FECTH_ALL,
+        variables: { access_token: localStorage.access_token },
+      },
+    ],
+    onCompleted: () => {
+      history.push("/");
+    },
+  });
 
   useEffect(() => {
     if (editProduct) {
@@ -53,6 +66,7 @@ function CpuAdd() {
   }, [editProduct]);
   function submitCpu(e) {
     e.preventDefault();
+    state.id = +state.id;
     state.TDP = +state.TDP;
     state.price = +state.price;
     state.core_count = +state.core_count;
@@ -73,34 +87,57 @@ function CpuAdd() {
       picture_url,
     } = state;
     if (checkStatus) {
+      const dataCPU = {
+        name: state.name,
+        socket: state.socket,
+        chipset: state.chipset,
+        TDP: state.TDP,
+        manufacturer: state.manufacturer,
+        power_draw: state.power_draw,
+        core_count: state.core_count,
+        isIGPU: state.isIGPU,
+        max_rating: state.max_rating,
+        price: state.price,
+        picture_url: state.picture_url,
+      };
+
+      const vars = {
+        variables: {
+          id: state.id,
+          dataCPU,
+          access_token: localStorage.access_token,
+        },
+      };
+
+      editCPU(vars);
       // edit method
-      axios({
-        method: "PUT",
-        url: `http://localhost:3000/parts/cpu/${editProduct.id}/update`,
-        headers: {
-          access_token: localStorage.getItem("access_token"),
-          // access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
-        },
-        data: {
-          name,
-          socket,
-          chipset_cpu: chipset,
-          TDP,
-          manufacturer,
-          power_draw,
-          core_count,
-          isIGPU,
-          max_rating,
-          price,
-          picture_url,
-        },
-      })
-        .then(({ data }) => {
-          history.push("/");
-        })
-        .catch((err) => {
-          console.log(err.response);
-        });
+      // axios({
+      //   method: "PUT",
+      //   url: `http://localhost:3000/parts/cpu/${editProduct.id}/update`,
+      //   headers: {
+      //     access_token: localStorage.getItem("access_token"),
+      //     // access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
+      //   },
+      //   data: {
+      //     name,
+      //     socket,
+      //     chipset_cpu: chipset,
+      //     TDP,
+      //     manufacturer,
+      //     power_draw,
+      //     core_count,
+      //     isIGPU,
+      //     max_rating,
+      //     price,
+      //     picture_url,
+      //   },
+      // })
+      //   .then(({ data }) => {
+      //     history.push("/");
+      //   })
+      //   .catch((err) => {
+      //     console.log(err.response);
+      //   });
       console.log(state);
     } else {
       //   addCpu({
