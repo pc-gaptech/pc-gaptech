@@ -1,8 +1,9 @@
 import React from 'react'
-import { Route, Redirect, Router } from "react-router-dom"
+import { Route, Redirect } from "react-router-dom"
 
 const PrivateRoutes = ({ component: Component, ...rest }) => {
-    let token = true
+    let token = localStorage.access_token
+    // let token = true
     return (
         <div>
             <Route

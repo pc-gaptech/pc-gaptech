@@ -13,13 +13,13 @@ const typeDefs = gql`
 
 const schema = makeExecutableSchema({
 
-	typeDefs: [typeDefs, componentSchema.typeDefs, userSchema.typeDefs, gamesSchema.typeDefs],
-	resolvers: [componentSchema.resolvers, userSchema.resolvers, gamesSchema.resolvers],
+  typeDefs: [typeDefs, componentSchema.typeDefs, userSchema.typeDefs, gamesSchema.typeDefs],
+  resolvers: [componentSchema.resolvers, userSchema.resolvers, gamesSchema.resolvers],
 
 });
 
 const server = new ApolloServer({ schema });
 
 server.listen().then(({ url }) => {
-	console.log(`Ready at ${url}`);
+  console.log(`Ready at ${url}`);
 });

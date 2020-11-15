@@ -52,7 +52,7 @@ const NavbarHome = () => {
         }
     }
     function logout() {
-        // localStorage.removeItem
+        localStorage.clear()
         history.push("/login")
     }
     return (

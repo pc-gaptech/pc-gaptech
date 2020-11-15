@@ -5,26 +5,10 @@ import { dataEdit } from "../../graphQl/cache"
 import { useReactiveVar } from "@apollo/client"
 import { ADD_CPU } from "../../graphQl/mutation"
 import { useMutation } from "@apollo/client"
+import axios from "axios"
 
-
-// name	string
-// socket	string
-// Enum:
-// [ AM4, LGA1151 ]
-// chipset	[string
-// Enum:
-// [ A350, B450, X370, b450, X470, b550, X570, B360, H370, Z370, Z390 ]
-// ]
-// TDP	integer($int64)
-// manufacturer	string
-// power_draw	integer($int64)
-// core_count	integer($int64)
-// is_iGPU	boolean
-// max_rating	integer($int64)
-// price	integer($int64)
-// picture_url	string
 function CpuAdd() {
-    const editProduct = useReactiveVar(dataEdit)
+    const editProduct = dataEdit()
     const [checkStatus, setCheckStatus] = useState(false)
     const [addCpu, { data }] = useMutation(ADD_CPU)
     const [state, setstate] = useState({
@@ -40,6 +24,7 @@ function CpuAdd() {
         price: 0,
         picture_url: ""
     })
+    console.log(editProduct)
 
     useEffect(() => {
         if (editProduct) {
@@ -70,31 +55,66 @@ function CpuAdd() {
         state.power_draw = +state.power_draw
         state.max_rating = +state.max_rating
         state.isIGPU = state.isIGPU === "yes" ? true : false
+        const {
+            name, socket, chipset,
+            TDP, manufacturer, power_draw,
+            core_count, isIGPU, max_rating,
+            price, picture_url
+        } = state
         if (checkStatus) {
             // edit method
-            console.log(state)
-        } else {
-            console.log(state)
-            addCpu({
-                variables: {
-                    addcpu: {
-                        name: state.name,
-                        socket: state.socket,
-                        chipset: state.chipset,
-                        TDP: state.TDP,
-                        manufacturer: state.manufacturer,
-                        power_draw: state.power_draw,
-                        core_count: state.core_count,
-                        isIGPU: state.isIGPU,
-                        max_rating: state.max_rating,
-                        price: state.price,
-                        picture_url: state.picture_url
-                    }
+            axios({
+                method: "PUT",
+                url: `http://localhost:3000/parts/cpu/${editProduct.id}/update`,
+                headers: {
+                    access_token: localStorage.getItem("access_token")
+                    // access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
+                },
+                data: {
+                    name, socket,
+                    chipset_cpu: chipset,
+                    TDP, manufacturer, power_draw,
+                    core_count, isIGPU, max_rating,
+                    price, picture_url
 
                 }
             })
+                .then(({ data }) => {
+                    console.log(data)
+                })
+                .catch(err => {
+                    console.log(err.response)
+                })
+            console.log(state)
+        } else {
+            addCpu({
+                variables: {
+                    access_token: localStorage.getItem("access_token"),
+                    addcpu: state
+                }
+            })
             console.log("masuk")
-            // console.log(state)
+            // axios({
+            //     method: "POST",
+            //     url: "http://localhost:3000/parts/cpu/add",
+            //     headers: {
+            //         access_token: localStorage.getItem("access_token")
+            //         // access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
+            //     },
+            //     data: {
+            //         name, socket,
+            //         chipset_cpu: chipset,
+            //         TDP, manufacturer, power_draw,
+            //         core_count, isIGPU, max_rating,
+            //         price, picture_url
+            //     }
+            // })
+            //     .then(({ data }) => {
+            //         console.log(data)
+            //     })
+            //     .catch(err => {
+            //         console.log(err.response)
+            //     })
         }
     }
     function handleChipset(e) {
@@ -176,28 +196,15 @@ function CpuAdd() {
                         onChange={handleChange}
                     />
                 </Form.Group>
-                {/* isGPU */}
-                {/* <Form.Group controlId="formBasicNumber"> */}
-                <Form.Label>GPU</Form.Label>
-                <div>
-                    <Form.Label>Yes</Form.Label>
-                    <InputGroup.Radio
-                        // checked={checkStatus && editProduct.isIGPU === true}
-                        name="isIGPU"
-                        value="yes"
-                        onChange={handleChange}
-                        className="radioGpu"
-                    />
-                    <Form.Label>No</Form.Label>
-                    <InputGroup.Radio
-                        // checked={checkStatus && editProduct.isIGPU === false}
-                        name="isIGPU"
-                        value="no"
-                        onChange={handleChange}
-                        className="radioGpu"
-                    />
-                </div>
-                {/* </Form.Group> */}
+                <Form.Group controlId="exampleForm.SelectCustom">
+                    <Form.Label>GPU</Form.Label>
+                    <Form.Control
+                        name="socket" as="select" onChange={handleChange}>
+                        <option >Please Select</option>
+                        <option selected={checkStatus && editProduct.isIGPU === true} value="yes">yes</option>
+                        <option selected={checkStatus && editProduct.isIGPU === false} value="no">no</option>
+                    </Form.Control>
+                </Form.Group>
 
                 <Form.Group controlId="formBasicNumber">
                     <Form.Label>Core Count</Form.Label>
