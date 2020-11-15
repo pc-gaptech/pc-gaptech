@@ -37,7 +37,7 @@ const resolvers = {
 				});
 				return data;
 			} catch (err) {
-				return new ApolloError(err);
+				return new ApolloError(err.response.data.message, err);
 			}
 		},
 		getGamesConfig: async (parent, { access_token, configRating }, context, info) => {
@@ -49,7 +49,7 @@ const resolvers = {
 				});
 				return data;
 			} catch (err) {
-				return new ApolloError(err);
+				return new ApolloError(err.response.data.message, err);
 			}
 		},
 	},
@@ -64,7 +64,7 @@ const resolvers = {
 				});
 				return data;
 			} catch (err) {
-				return new ApolloError(err);
+				return new ApolloError(err.response.data.message, err);
 			}
 		},
 	},
