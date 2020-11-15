@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Button, Container, Grid, Typography, IconButton } from '@material-ui/core';
+import { Button, Container, Grid, Typography, IconButton, Link } from '@material-ui/core';
 
 import Image from 'material-ui-image'
 import VisibilityIcon from '@material-ui/icons/Visibility';
@@ -46,21 +46,20 @@ const useStyle = makeStyles((theme) => ({
 
 }))
 
-export default function PartItem() {
+export default function PartItem(props) {
+    const { item } = props
     const classes = useStyle()
-
-
     return (
         <Grid container spacing={1} className={classes.container}>
             <Grid item xs={1}>
                 <Image
-                    src="https://cdna.pcpartpicker.com/static/forever/images/product/0a8a0ca77620c63b68fec6323537d50a.256p.jpg"
+                    src={item.picture_url}
                 />
             </Grid>
             <Grid item xs={4} className={classes.center}>
                 <Typography className={classes.name}>
-                    Asus ROG STRIX B550-F GAMING (WI-FI) ATX AM4
-                    </Typography>
+                    {item.name}
+                </Typography>
                 <Button
                     size={"small"}
                     className={classes.button}
@@ -79,7 +78,7 @@ export default function PartItem() {
                 >Add</Button>
             </Grid>
             <Grid item xs={2} className={classes.center} style={{ fontWeight: "bold" }}>
-                Rp.2.100.000
+                {item.price}
             </Grid>
             <Grid item xs={1} className={classes.center}>
                 <IconButton style={{ color: "#40CB53" }} title="Research price in Tokopedia" aria-label="add to shopping cart">
@@ -87,9 +86,12 @@ export default function PartItem() {
                 </IconButton>
             </Grid>
             <Grid item xs={1} className={classes.center}>
-                <IconButton style={{ color: "#FF2F00" }} title="Research price in Shopee" aria-label="add to shopping cart">
+                <a href={`https://www.tokopedia.com/search?st=product&q=${item.name}`}>
+                <IconButton
+                    style={{ color: "#FF2F00" }} title="Research price in Shopee" aria-label="add to shopping cart">
                     <AddShoppingCartIcon />
                 </IconButton>
+                </a>
             </Grid>
             <Grid item xs={1} className={classes.center}>
                 <IconButton style={{ color: "#E00034" }} title="Research price in Bukalapak" aria-label="add to shopping cart">

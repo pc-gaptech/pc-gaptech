@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -14,6 +14,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 import Copyright from '../components/Copyright'
+
+import axios from 'axios'
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -37,10 +40,37 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Register() {
   const classes = useStyles();
+  const [input, setInput] = useState({
+    username: "",
+    firstname: "",
+    lastname: "",
+    email: "",
+    password: ""
+  })
+
+  const changeInput = (e) => {
+    const { name, value } = e.target
+    setInput({
+      ...input,
+      [name]: value
+    })
+  }
+
+  const history = useHistory()
+  const register = (e) => {
+    console.log(input)
+    e.preventDefault()
+    axios.post("http://localhost:3000/register", input)
+      .then(data => {
+        history.push('/login')
+      })
+      .catch(err => console.log(err))
+  }
 
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
+  <p>{JSON.stringify(input)}</p>
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
@@ -59,28 +89,31 @@ export default function Register() {
             name="username"
             autoComplete="username"
             autoFocus
+            onChange={(e) => changeInput(e)}
           />
           <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
-            id="firstName"
+            id="firstname"
             label="First Name"
-            name="firstName"
-            autoComplete="firstName"
+            name="firstname"
+            autoComplete="firstname"
             autoFocus
+            onChange={(e) => changeInput(e)}
           />
           <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
-            id="lastName"
+            id="lastname"
             label="Last Name"
-            name="lastName"
-            autoComplete="lastName"
+            name="lastname"
+            autoComplete="lastname"
             autoFocus
+            onChange={(e) => changeInput(e)}
           />
           <TextField
             variant="outlined"
@@ -92,6 +125,7 @@ export default function Register() {
             name="email"
             autoComplete="email"
             autoFocus
+            onChange={(e) => changeInput(e)}
           />
           <TextField
             variant="outlined"
@@ -103,6 +137,7 @@ export default function Register() {
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={(e) => changeInput(e)}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
@@ -114,6 +149,7 @@ export default function Register() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={(e) => {register(e)}}
           >
             Sign In
           </Button>

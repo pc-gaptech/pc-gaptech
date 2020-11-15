@@ -131,9 +131,10 @@ class RecommendedConfigController {
 				}
 			}
 
-			console.log(highestRating, "Highest");
-
-			const result = await RecommendedConfig.findOne({ where: { rating: highestRating } });
+			const result = await RecommendedConfig.findOne({
+				where: { rating: highestRating },
+				include: { all: true },
+			});
 			res.status(200).json(result);
 		} catch (err) {
 			next(err);

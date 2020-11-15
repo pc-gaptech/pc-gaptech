@@ -31,6 +31,7 @@ enum Socket {
 }
 
 enum Chipset {
+  b450
   A320
   B350
   X370
@@ -329,6 +330,9 @@ const resolvers = {
         // else {
         return axios
           .get(urlComponents, {
+            data: {
+              test: "sds",
+            },
             headers: {
               access_token,
             },
