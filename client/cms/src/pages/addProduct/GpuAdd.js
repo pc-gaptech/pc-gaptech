@@ -3,8 +3,10 @@ import { Form, Button, Container } from "react-bootstrap";
 import { dataEdit } from "../../graphQl/cache";
 import { useReactiveVar } from "@apollo/client";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 function GpuAdd() {
+  const history = useHistory();
   const editProduct = useReactiveVar(dataEdit);
   const [checkStatus, setCheckStatus] = useState(false);
   const [state, setstate] = useState({

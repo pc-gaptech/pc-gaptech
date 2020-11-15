@@ -4,8 +4,10 @@ import { dataEdit } from "../../graphQl/cache";
 import { useReactiveVar } from "@apollo/client";
 import ChipInput from "material-ui-chip-input";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 function CpuCollerAdd() {
+  const history = useHistory();
   const editProduct = useReactiveVar(dataEdit);
   const [checkStatus, setCheckStatus] = useState(false);
   const [state, setstate] = useState({

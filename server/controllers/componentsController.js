@@ -117,6 +117,7 @@ class ComponentsController {
   }
 
   static async addOne(req, res, next) {
+    console.log(req.body);
     try {
       const {
         name,

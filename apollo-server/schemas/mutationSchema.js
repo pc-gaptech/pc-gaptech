@@ -51,12 +51,12 @@ type DeleteMessage {
 extend type Mutation {
     addCpu(access_token:String, addcpu:inputCPU):CPU 
     addCpuColler(access_token:String,addCPU:inputCPUCooler):CPUCooler
-    addMotherboard(access_token:String,addMotherboard:inputMotherboard):Motherboard
-    addCasing(access_token:String,addCasing:inputCasing):Casing
-    addGPU(access_token:String,addGPU:inputGPU):GPU
-    addPowerSupplay(access_token:String,addPowerSupplay:inputPowerSupply):PowerSupply
-    addRAM(access_token:String,addRAM:inputRAM):RAM
-    addStorage(access_token:String,addStorage:inputStorage):Storage
+    addMotherboard(access_token:String,dataMotherboard:inputMotherboard):Motherboard
+    addCasing(access_token:String,dataCasing:inputCasing):Casing
+    addGPU(access_token:String,dataGpu:inputGPU):GPU
+    addPowerSupply(access_token:String,dataPowerSupply:inputPowerSupply):PowerSupply
+    addRAM(access_token:String,dataRAM:inputRAM):RAM
+    addStorage(access_token:String,dataStorage:inputStorage):Storage
     deleteProduct(access_token:String,id:ID,part:String):DeleteMessage
 }
 `;
@@ -79,22 +79,210 @@ const resolvers = {
         throw new ApolloError(error);
       }
     },
+    addPowerSupply: async (_, { access_token, dataPowerSupply }) => {
+      console.log(dataPowerSupply);
+      try {
+        const { data } = await axios({
+          method: "post",
+          url: `${baseUrl}/parts/powersupply/add`,
+          data: dataPowerSupply,
+          headers: {
+            access_token,
+          },
+        });
+        // redis.del("powersupply");
+        return data;
+      } catch (error) {
+        throw new ApolloError(error);
+      }
+    },
+    addRAM: async (_, { access_token, dataRAM }) => {
+      console.log(dataRAM, access_token);
+      const {
+        name,
+        memory_type,
+        chipset,
+        manufacturer,
+        power_draw0,
+        memory_speed,
+        price,
+        picture_url,
+      } = dataRAM;
+      try {
+        const { data } = await axios({
+          method: "POST",
+          url: `${baseUrl}/parts/ram/add`,
+          headers: {
+            access_token,
+          },
+          data: {
+            name,
+            memory_type,
+            chipset_memory: chipset,
+            manufacturer,
+            power_draw0,
+            memory_speed,
+            price,
+            picture_url,
+          },
+        });
+        redis.del("ram");
+        return data;
+      } catch (error) {
+        throw new ApolloError(error);
+      }
+    },
 
-    addCpu: async (_, args) => {
-      console.log(args, "<<<");
-      // const { name, socket, chipset,
-      //     TDP, manufacturer, power_draw,
-      //     core_count, isIGPU, max_rating,
-      //     price, picture_url
-      // } = args.addcpu
-      // try {
+    addCpu: async (_, { access_token, addcpu }) => {
+      //   console.log(args, "<<<");
+      const {
+        name,
+        socket,
+        chipset,
+        TDP,
+        manufacturer,
+        power_draw,
+        core_count,
+        isIGPU,
+        max_rating,
+        price,
+        picture_url,
+      } = addcpu;
+      console.log(addcpu);
+      try {
+        const { data } = await axios({
+          method: "POST",
+          url: `${baseUrl}/parts/cpu/add`,
+          data: {
+            name,
+            socket,
+            chipset_cpu: chipset,
+            TDP,
+            manufacturer,
+            power_draw,
+            core_count,
+            isIGPU,
+            max_rating,
+            price,
+            picture_url,
+          },
+          headers: {
+            access_token,
+          },
+        });
+        await redis.del("cpu");
+        return data;
+      } catch (error) {
+        throw new ApolloError(error);
+      }
+    },
+    addCpuColler: async (_, { access_token, addCPU }) => {
+      console.log(addCPU);
+      const {
+        name,
+        socket,
+        TDP,
+        manufacturer,
+        power_draw,
+        price,
+        picture_url,
+      } = addCPU;
+      try {
+        let { data } = axios({
+          method: "POST",
+          url: `${baseUrl}/parts/cpucooler/add`,
+          data: {
+            name,
+            socket_cpu_cooler: socket,
+            TDP,
+            manufacturer,
+            power_draw,
+            price,
+            picture_url,
+          },
+          headers: {
+            access_token,
+          },
+        });
+        await redis.del("cpucooler");
+        return data;
+      } catch (error) {
+        throw new ApolloError(error);
+      }
+    },
+    addMotherboard: async (_, { access_token, dataMotherboard }) => {
+      console.log(dataMotherboard);
+      try {
+        const { data } = await axios({
+          method: "POST",
+          url: `${baseUrl}/parts/motherboard/add`,
+          data: dataMotherboard,
+          headers: {
+            access_token,
+          },
+        });
+        redis.del("motherboard");
+        return data;
+      } catch (error) {
+        throw new ApolloError(error);
+      }
+    },
 
-      //     axios.post(`${baseUrl}/cpu/add`)
-      // } catch (error) {
+    addCasing: async (_, { access_token, dataCasing }) => {
+      console.log(dataCasing);
+      try {
+        const { data } = await axios({
+          method: "POST",
+          url: `${baseUrl}/parts/casing/add`,
+          headers: {
+            access_token,
+          },
+          data: dataCasing,
+        });
+        redis.del("casing");
+        return data;
+      } catch (error) {
+        throw new ApolloError(error);
+      }
+    },
+    addGPU: async (_, { access_token, dataGpu }) => {
+      console.log(dataGpu);
+      try {
+        const { data } = await axios({
+          method: "POST",
+          url: `${baseUrl}/parts/gpu/add`,
+          headers: {
+            access_token,
+          },
+          data: dataGpu,
+        });
+        redis.del("gpu");
+        return data;
+      } catch (error) {
+        throw new ApolloError(error);
+      }
+    },
 
-      // }
+    addStorage: async (_, { access_token, dataStorage }) => {
+      console.log(dataStorage);
+      try {
+        const { data } = await axios({
+          method: "POST",
+          url: `${baseUrl}/parts/storage/add`,
+          headers: {
+            access_token,
+          },
+          data: dataStorage,
+        });
+        redis.del("storage");
+        return data;
+      } catch (error) {
+        throw new ApolloError(error);
+      }
     },
   },
+  //
+  //
 };
 
 module.exports = {
