@@ -1,15 +1,57 @@
 const request = require("supertest");
 const app = require("../app");
 const { expect, test } = require("@jest/globals");
-const { describe } = require("yargs");
+const {sequelize, User} = require("../models/index")
+const {createToken} = require("../helpers/jwt")
+
+let access_token
+beforeAll((done) => {
+  const userData = {
+    username: "test_username",
+    firstname: "test_firstname",
+    lastname: "test_lastname",
+    email: "test_email@email.com",
+    password: "test_password",
+    is_admin: true
+  }
+  User.create(userData)
+      .then(data => {
+          return User.findOne({where: {id: data.id}})
+      })
+      .then(data => {
+          access_token = createToken({
+            id: data.id,
+            email: data.email,
+            is_admin: data.is_admin
+          })
+          done()
+      })
+      .catch(err => {
+          done(err)
+      })
+})
+
+afterAll((done) => {
+  User.destroy({truncate: true})
+      .then(ok => {
+          done()
+      })
+      .catch(err => {
+          done()
+      })
+})
+
+
 
 describe("Test Get all one type of component, (/parts/:component)", () => {
   test("Get All CPU", (done) => {
     request(app)
-      .get("/parts/CPU")
+      .get("/parts/cpu")
+      .set('access_token', access_token)
       .then((res) => {
         const { body, status } = res;
         expect(status).toBe(200);
+        console.log(body[0], "<<<<<<<<<<<<<<<<<<<<<")
         expect(body).toEqual(
           expect.arrayContaining([
             expect.objectContaining({
@@ -21,7 +63,7 @@ describe("Test Get all one type of component, (/parts/:component)", () => {
               manufacturer: expect.any(String),
               power_draw: expect.any(Number),
               core_count: expect.any(Number),
-              is_iGPU: expect.any(Boolean),
+              isIGPU: expect.any(Boolean),
               max_rating: expect.any(Number),
               price: expect.any(Number),
               picture_url: expect.any(String),
@@ -1041,4 +1083,5 @@ describe("Test post new component", () => {
         done();
       });
   });
+  
 });

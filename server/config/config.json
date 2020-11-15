@@ -8,7 +8,7 @@
   },
   "test": {
     "username": "postgres",
-    "password": 11223344,
+    "password": "999999999",
     "database": "test-pc-gaptech",
     "host": "127.0.0.1",
     "dialect": "postgres"
