@@ -18,9 +18,8 @@ export default function ButtonChooser({ component }) {
 	const history = useHistory();
 	const handleChooseParts = (e) => {
 		e.preventDefault();
-		history.push(`/parts/${component}`);
+		history.push(`/configurator/parts/${component}`);
 	};
-
 	const classes = useStyle();
 	return (
 		<Button

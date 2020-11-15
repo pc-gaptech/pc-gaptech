@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Container, Grid, makeStyles, Typography } from "@material-ui/core";
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
+import { FETCH_ALL } from "../../graphql/query";
+import { useHistory, useParams } from "react-router-dom";
 
-import PartItem from "../components/PartItem";
+import PartItem from "../../components/configurator/PartItem";
 import Image from "material-ui-image";
-import tokopedia from "../assets/tokopedia.png";
-import shopee from "../assets/shopee.png";
-import bukalapak from "../assets/bukalapak.png";
-import axios from "axios";
+import tokopedia from "../../assets/tokopedia.png";
+import shopee from "../../assets/shopee.png";
+import bukalapak from "../../assets/bukalapak.png";
 
-import { FETCH_MOTHERBOARD } from "../graphql/queries";
 const useStyle = makeStyles((theme) => ({
 	container: {
 		paddingTop: "10px",
@@ -40,36 +40,22 @@ const useStyle = makeStyles((theme) => ({
 	},
 }));
 
-export default function Motherboards() {
+export default function PartList() {
 	const classes = useStyle();
-	// const {loading, error, data} = useQuery(FETCH_MOTHERBOARD)
+	const { componentType } = useParams();
+	const history = useHistory();
+	const { loading, error, data } = useQuery(FETCH_ALL, {
+		variables: { access_token: localStorage.getItem("access_token") },
+	});
 
-	// if (loading) return <p>Loading..</p>
-	// if (error) return <p>{error}</p>
+	if (loading) return <p>Loading..</p>;
+	if (error) return <p>{error}</p>;
 
-	const [motherboards, setMotherboards] = useState("");
-	const [loading, setLoading] = useState(true);
-	useEffect(() => {
-		axios({
-			url: `http://localhost:3000/parts/motherboard`,
-			method: "GET",
-			headers: {
-				access_token:
-					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ1c2VyMUB1c2VyLmNvbSIsImlzX2FkbWluIjpmYWxzZSwiaWF0IjoxNjA1NDI2MDI0fQ.GBiVLYiNUE3J26sMxOYi3tb3QkbSQbdTUxLJ3Vn0psk",
-			},
-		})
-			.then(({ data }) => {
-				setMotherboards(data);
-				setLoading(false);
-			})
-			.catch((err) => {
-				console.log(err);
-			});
-	}, []);
-	if (loading) return <p>Loading</p>;
+	console.log(data.fetchAll[`data${componentType}`]);
 	return (
 		<Container>
-			<Typography className={classes.header}>Select Available Motherboards</Typography>
+			<Typography className={classes.header}>Select Available CPUs</Typography>
+			{/* <p>{JSON.stringify(data)}</p> */}
 			<Grid container spacing={1} className={classes.container}>
 				<Grid item xs={1}></Grid>
 				<Grid xs={4} className={classes.center}>
@@ -103,9 +89,10 @@ export default function Motherboards() {
 					/>
 				</Grid>
 			</Grid>
-			{motherboards.map(item => {
-                return <PartItem item={item} key={item.id} component={"MotherboardId"}/>
-            })}
+
+			{data.fetchAll[`data${componentType}`].map((item) => {
+				return <PartItem item={item} key={item.id} componentId={`${componentType}Id`} />;
+			})}
 		</Container>
 	);
 }

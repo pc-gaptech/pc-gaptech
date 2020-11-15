@@ -1,14 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Button, Container, Grid, Typography, IconButton } from "@material-ui/core";
+import { Button, Grid, Typography, IconButton } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 
 import Image from "material-ui-image";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 
-import axios from "axios";
-import { config } from "../graphql/reactiveVars";
+import { useQuery } from "@apollo/client";
+import {
+	FETCH_CPU_BY_ID,
+	FETCH_CPUCooler_BY_ID,
+	FETCH_GPU_BY_ID,
+	FETCH_MOTHERBOARD_BY_ID,
+	FETCH_POWER_SUPPLY_BY_ID,
+	FETCH_RAM_BY_ID,
+	FETCH_STORAGE_BY_ID,
+	FETCH_CASING_BY_ID,
+} from "../../graphql/query";
 
 const useStyle = makeStyles((theme) => ({
 	header: {
@@ -44,36 +54,58 @@ const useStyle = makeStyles((theme) => ({
 }));
 
 export default function PartItemHome({ component, ID }) {
-	const [detail, setDetail] = useState("");
-
-	useEffect(() => {
-		console.log("manngil", component)
-		axios({
-			url: `http://localhost:3000/parts/${component}/${ID}/detail`,
-			method: "GET",
-			headers: {
-				access_token:
-					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ1c2VyMUB1c2VyLmNvbSIsImlzX2FkbWluIjpmYWxzZSwiaWF0IjoxNjA1NDI2MDI0fQ.GBiVLYiNUE3J26sMxOYi3tb3QkbSQbdTUxLJ3Vn0psk",
-			},
-		})
-			.then(({ data }) => {
-				setDetail(data);
-			})
-			.catch((err) => {
-				console.log(err);
-			});
-	}, []);
-
 	const classes = useStyle();
+	const history = useHistory();
+	let query = null;
+	switch (component) {
+		case "CPU":
+			query = FETCH_CPU_BY_ID;
+			break;
+		case "CPUCooler":
+			query = FETCH_CPUCooler_BY_ID;
+			break;
+		case "GPU":
+			query = FETCH_GPU_BY_ID;
+			break;
+		case "RAM":
+			query = FETCH_RAM_BY_ID;
+			break;
+		case "Storage":
+			query = FETCH_STORAGE_BY_ID;
+			break;
+		case "PowerSupply":
+			query = FETCH_POWER_SUPPLY_BY_ID;
+			break;
+		case "Casing":
+			query = FETCH_CASING_BY_ID;
+			break;
+		case "Motherboard":
+			query = FETCH_MOTHERBOARD_BY_ID;
+			break;
+		default:
+			break;
+	}
+
+	const { loading, error, data } = useQuery(query, {
+		variables: { id: ID, access_token: localStorage.getItem("access_token") },
+	});
+
+	const handleEdit = (e) => {
+		e.preventDefault();
+		history.push(`/configurator/parts/${component}`);
+	};
+
+	if (loading) return <p>Loading...</p>;
+	if (error) return <p>Error in fetch</p>;
+
+
 	return (
 		<Grid container spacing={1} className={classes.container}>
 			<Grid item xs={1}>
-				<Image src={detail.picture_url} />
+				<Image src={data[`findOne${component}ById`].picture_url} />
 			</Grid>
 			<Grid item xs={4} className={classes.center}>
-				<Typography className={classes.name}>
-					{detail.name}
-				</Typography>
+				<Typography className={classes.name}>{data[`findOne${component}ById`].name}</Typography>
 				<Button size={"small"} className={classes.button} startIcon={<VisibilityIcon />}>
 					See details
 				</Button>
@@ -85,12 +117,15 @@ export default function PartItemHome({ component, ID }) {
 					size="medium"
 					className={classes.buttonsave}
 					startIcon={<AddCircleIcon />}
+					onClick={(e) => {
+						handleEdit(e);
+					}}
 				>
 					Edit
 				</Button>
 			</Grid>
 			<Grid item xs={2} className={classes.center} style={{ fontWeight: "bold" }}>
-				{detail.price}
+				{data[`findOne${component}ById`].price}
 			</Grid>
 			<Grid item xs={1} className={classes.center}>
 				<IconButton

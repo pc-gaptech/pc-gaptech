@@ -58,7 +58,7 @@ class ComponentsController {
         case "ram":
           result = await RAM.findAll();
           break;
-        case "cpuooler":
+        case "cpucooler":
           result = await CPUCooler.findAll();
           break;
         case "storage":
