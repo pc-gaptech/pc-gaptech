@@ -12,6 +12,7 @@ const {
 
 class ComponentsController {
   static async getAll(req, res, next) {
+    console.log(req.body);
     try {
       const cpuData = await CPU.findAll();
       const gpuData = await GPU.findAll();
@@ -360,6 +361,7 @@ class ComponentsController {
   }
 
   static async deleteOne(req, res, next) {
+    console.log(req.params);
     try {
       let result = {};
       const { component, id } = req.params;
@@ -373,13 +375,13 @@ class ComponentsController {
         case "motherboard":
           result = await Motherboard.destroy({ where: { id } });
           break;
-        case "powerSupply":
+        case "powersupply":
           result = await PowerSupply.destroy({ where: { id } });
           break;
         case "ram":
           result = await RAM.destroy({ where: { id } });
           break;
-        case "cpuooler":
+        case "cpucooler":
           result = await CPUCooler.destroy({ where: { id } });
           break;
         case "storage":

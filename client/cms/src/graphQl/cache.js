@@ -1,3 +1,5 @@
-import { makeVar } from "@apollo/client"
+import { makeVar } from "@apollo/client";
 
-export const dataEdit = makeVar({})
+export const allProdcutVar = makeVar({});
+export const loadingvar = makeVar();
+export const dataEdit = makeVar({});
