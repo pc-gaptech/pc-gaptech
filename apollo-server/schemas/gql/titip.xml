@@ -1,15 +1,4 @@
-fetchStorage {
-  id
-  name
-  capacity
-  storage_type
-  power_draw
-  manufacturer
-  price
-  picture_url
-}
-
-fetchCPU{
+fetchCPU (access_token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1NDA0NzM1fQ.7fHAJulBFK-dcW1xeqTKx6jDLxryG0o0EnFTn_XZTtU"){
     id
     name
     socket
@@ -24,7 +13,7 @@ fetchCPU{
     picture_url
 }
 
-fetchRAM{
+fetchRAM (access_token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1NDA0NzM1fQ.7fHAJulBFK-dcW1xeqTKx6jDLxryG0o0EnFTn_XZTtU"){
     id
     name
     memory_type
@@ -36,7 +25,7 @@ fetchRAM{
     picture_url
 }
 
-fetchPowerSupply{
+fetchPowerSupply (access_token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1NDA0NzM1fQ.7fHAJulBFK-dcW1xeqTKx6jDLxryG0o0EnFTn_XZTtU"){
    	id
     name
     efficiency
@@ -46,7 +35,7 @@ fetchPowerSupply{
     picture_url
 }
 
-fetchMotherboard {
+fetchMotherboard (access_token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1NDA0NzM1fQ.7fHAJulBFK-dcW1xeqTKx6jDLxryG0o0EnFTn_XZTtU"){
     id
     name
     socket
@@ -58,7 +47,7 @@ fetchMotherboard {
     picture_url
 }
 
-fetchCPUCooler{
+fetchCPUCooler (access_token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1NDA0NzM1fQ.7fHAJulBFK-dcW1xeqTKx6jDLxryG0o0EnFTn_XZTtU"){
     id
     name
     socket
@@ -69,7 +58,7 @@ fetchCPUCooler{
     picture_url
 }
 
-fetchCasing{
+fetchCasing (access_token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1NDA0NzM1fQ.7fHAJulBFK-dcW1xeqTKx6jDLxryG0o0EnFTn_XZTtU"){
     id
     name
     form_factor
@@ -78,7 +67,18 @@ fetchCasing{
     picture_url
 }
 
-fetchGPU {
+fetchStorage (access_token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1NDA0NzM1fQ.7fHAJulBFK-dcW1xeqTKx6jDLxryG0o0EnFTn_XZTtU"){
+    id
+    name
+    capacity
+    storage_type
+    power_draw
+    manufacturer
+    price
+    picture_url
+}
+
+fetchGPU (access_token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1NDA0NzM1fQ.7fHAJulBFK-dcW1xeqTKx6jDLxryG0o0EnFTn_XZTtU"){
     id
     name
     power_draw
@@ -89,7 +89,7 @@ fetchGPU {
     picture_url
 }
 
-fetchAll {
+fetchAll (access_token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1NDA0NzM1fQ.7fHAJulBFK-dcW1xeqTKx6jDLxryG0o0EnFTn_XZTtU"){
     dataCPU{
         id
         name
@@ -173,3 +173,95 @@ fetchAll {
         picture_url
     }
 }
+
+findOneCPUById (id: 2, access_token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1NDA0NzM1fQ.7fHAJulBFK-dcW1xeqTKx6jDLxryG0o0EnFTn_XZTtU"){
+    id
+    name
+    socket
+    chipset
+    TDP
+    manufacturer
+    power_draw
+    core_count
+    isIGPU
+    max_rating
+    price
+    picture_url
+}
+
+findOneRAMById (id: 2, access_token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1NDA0NzM1fQ.7fHAJulBFK-dcW1xeqTKx6jDLxryG0o0EnFTn_XZTtU"){
+    id
+    name
+    memory_type
+    chipset
+    manufacturer
+    power_draw
+    memory_speed
+    price
+    picture_url
+}
+
+findOnePowerSupplyById (id: 2, access_token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1NDA0NzM1fQ.7fHAJulBFK-dcW1xeqTKx6jDLxryG0o0EnFTn_XZTtU"){
+    id
+    name
+    efficiency
+    max_power
+    manufacturer
+    price
+    picture_url
+}
+
+findOneMotherboardById (id: 2, access_token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1NDA0NzM1fQ.7fHAJulBFK-dcW1xeqTKx6jDLxryG0o0EnFTn_XZTtU"){
+    id
+    name
+    socket
+    chipset
+    form_factor
+    manufacturer
+    power_draw
+    price
+    picture_url
+}
+
+findOneCPUCoolerById (id: 2, access_token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1NDA0NzM1fQ.7fHAJulBFK-dcW1xeqTKx6jDLxryG0o0EnFTn_XZTtU"){
+    id
+    name
+    socket
+    TDP
+    manufacturer
+    power_draw
+    price
+    picture_url
+}
+
+findOneCasingById (id: 2, access_token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1NDA0NzM1fQ.7fHAJulBFK-dcW1xeqTKx6jDLxryG0o0EnFTn_XZTtU"){
+    id
+    name
+    form_factor
+    manufacturer
+    price
+    picture_url
+}
+
+findOneStorageById (id: 2, access_token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1NDA0NzM1fQ.7fHAJulBFK-dcW1xeqTKx6jDLxryG0o0EnFTn_XZTtU"){
+    id
+    name
+    capacity
+    storage_type
+    power_draw
+    manufacturer
+    price
+    picture_url
+}
+
+findOneGPUById (id: 2, access_token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1NDA0NzM1fQ.7fHAJulBFK-dcW1xeqTKx6jDLxryG0o0EnFTn_XZTtU"){
+    id
+    name
+    power_draw
+    manufacturer
+    GPU_chipset
+    price
+    rating
+    picture_url
+}
+
