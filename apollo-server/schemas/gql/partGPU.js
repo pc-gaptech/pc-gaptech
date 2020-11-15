@@ -8,4 +8,5 @@ price: Int
 rating: Int
 picture_url: String
 `;
+
 module.exports = partGPU;
