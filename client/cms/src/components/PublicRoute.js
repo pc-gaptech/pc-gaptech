@@ -1,8 +1,8 @@
 import React from 'react'
-import { Route, Redirect, Router } from "react-router-dom"
+import { Route, Redirect } from "react-router-dom"
 
 function PublicRoute({ component: Component, ...rest }) {
-    let token = true
+    let token = localStorage.access_token
     return (
         <div>
             <Route

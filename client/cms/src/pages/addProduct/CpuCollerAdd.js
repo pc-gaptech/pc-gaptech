@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react'
 import { Form, Button, Container } from "react-bootstrap"
 import { dataEdit } from "../../graphQl/cache"
 import { useReactiveVar } from "@apollo/client"
+import ChipInput from "material-ui-chip-input"
+import axios from "axios"
 
 function CpuCollerAdd() {
     const editProduct = useReactiveVar(dataEdit)
     const [checkStatus, setCheckStatus] = useState(false)
     const [state, setstate] = useState({
         name: "",
-        socket: "",
+        socket: [],
         TDP: 0,
         manufacturer: "",
         power_draw: 0,
@@ -23,7 +25,7 @@ function CpuCollerAdd() {
             setCheckStatus(false)
             setstate({
                 name: "",
-                socket: "",
+                socket: [],
                 TDP: 0,
                 manufacturer: "",
                 power_draw: 0,
@@ -37,19 +39,77 @@ function CpuCollerAdd() {
         state.TDP = +state.TDP
         state.price = +state.price
         state.power_draw = +state.power_draw
+        const { name,
+            socket,
+            TDP,
+            manufacturer,
+            power_draw,
+            price,
+            picture_url } = state
         if (checkStatus) {
             // edit method
+            axios({
+                method: "PUT",
+                url: `http://localhost:3000/parts/cpucooler/${editProduct.id}/update`,
+                headers: {
+                    access_token: localStorage.getItem("access_token")
+                    // access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
+                },
+                data: {
+                    name,
+                    socket_cpu_cooler: socket,
+                    TDP,
+                    manufacturer,
+                    power_draw,
+                    price,
+                    picture_url
+                }
+            })
+                .then(({ data }) => {
+                    console.log(data)
+                })
+                .catch(err => {
+                    console.log(err.response)
+                })
             console.log(state)
         } else {
-            console.log(state)
+            axios({
+                method: "POST",
+                url: "http://localhost:3000/parts/cpucooler/add",
+                headers: {
+                    access_token: localStorage.getItem("access_token")
+                    // access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
+                },
+                data: {
+                    name,
+                    socket_cpu_cooler: socket,
+                    TDP,
+                    manufacturer,
+                    power_draw,
+                    price,
+                    picture_url
+                }
+            })
+                .then(({ data }) => {
+                    console.log(data)
+                })
+                .catch(err => {
+                    console.log(err.response)
+                })
         }
-        console.log(state)
+
     }
     function handleChange(e) {
         const { name, value } = e.target
         setstate({
             ...state,
             [name]: value
+        })
+    }
+    function handleChipset(e) {
+        setstate({
+            ...state,
+            socket: e
         })
     }
     return (
@@ -70,15 +130,15 @@ function CpuCollerAdd() {
                             onChange={handleChange}
                         />
                     </Form.Group>
-                    <Form.Group controlId="exampleForm.SelectCustom">
-                        <Form.Label>Socket</Form.Label>
-                        <Form.Control
-                            name="socket" as="select" onChange={handleChange}>
-                            <option >Please Select</option>
-                            <option value="AM4" selected={checkStatus && editProduct.socket === "AM4"}>AM4</option>
-                            <option value="LGA1151" selected={checkStatus && editProduct.socket === "LGA1151"}>LGA1151</option>
-                        </Form.Control>
-                    </Form.Group>
+                    <ChipInput
+                        defaultValue={checkStatus ? editProduct.socket : ['LGA1151',]}
+                        fullWidth
+                        label='Socket'
+                        placeholder='AM4,LGA1151'
+                        onChange={handleChipset}
+                        name="socket"
+                    />
+                    <Form.Group controlId="formBasicText"></Form.Group>
                     <Form.Group controlId="formBasicNumber">
                         <Form.Label>TDP</Form.Label>
                         <Form.Control

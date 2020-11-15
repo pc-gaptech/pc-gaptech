@@ -2,15 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { Form, Button, Container } from "react-bootstrap"
 import { dataEdit } from "../../graphQl/cache"
 import { useReactiveVar } from "@apollo/client"
+import axios from "axios"
 
-// id	integer($int64)
-// name	string
-// form_factor	string
-// Enum:
-// [ ATX, Micro-ATX, Mini-ITX ]
-// manufacturer	string
-// price	integer($int64)
-// picture_url	string
 function CasingAdd() {
     const editProduct = useReactiveVar(dataEdit)
     const [checkStatus, setCheckStatus] = useState(false)
@@ -42,12 +35,43 @@ function CasingAdd() {
         state.price = +state.price
         if (checkStatus) {
             // edit method
+            axios({
+                method: "PUT",
+                url: `http://localhost:3000/parts/casing/${editProduct.id}/update`,
+                headers: {
+                    access_token: localStorage.getItem("access_token")
+                    // access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
+                },
+                data: state
+            })
+                .then(({ data }) => {
+                    console.log(data)
+                })
+                .catch(err => {
+                    console.log(err.response)
+                })
             console.log(state, "EDIT")
         } else {
+            axios({
+                method: "POST",
+                url: "http://localhost:3000/parts/casing/add",
+                headers: {
+                    access_token: localStorage.getItem("access_token")
+                    // access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
+                },
+                data: state
+            })
+                .then(({ data }) => {
+                    console.log(data)
+                })
+                .catch(err => {
+                    console.log(err.response)
+                })
             console.log(state, "POST")
         }
         console.log(state)
     }
+    console.log(localStorage.getItem("access_token"))
     function handleChange(e) {
         const { name, value } = e.target
         setstate({

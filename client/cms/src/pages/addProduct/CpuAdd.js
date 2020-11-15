@@ -3,27 +3,14 @@ import ChipInput from 'material-ui-chip-input'
 import { Form, Button, Container, InputGroup } from "react-bootstrap"
 import { dataEdit } from "../../graphQl/cache"
 import { useReactiveVar } from "@apollo/client"
+import { ADD_CPU } from "../../graphQl/mutation"
+import { useMutation } from "@apollo/client"
+import axios from "axios"
 
-
-// name	string
-// socket	string
-// Enum:
-// [ AM4, LGA1151 ]
-// chipset	[string
-// Enum:
-// [ A350, B450, X370, b450, X470, b550, X570, B360, H370, Z370, Z390 ]
-// ]
-// TDP	integer($int64)
-// manufacturer	string
-// power_draw	integer($int64)
-// core_count	integer($int64)
-// is_iGPU	boolean
-// max_rating	integer($int64)
-// price	integer($int64)
-// picture_url	string
 function CpuAdd() {
-    const editProduct = useReactiveVar(dataEdit)
+    const editProduct = dataEdit()
     const [checkStatus, setCheckStatus] = useState(false)
+    const [addCpu, { data }] = useMutation(ADD_CPU)
     const [state, setstate] = useState({
         name: "",
         socket: "",
@@ -32,11 +19,12 @@ function CpuAdd() {
         manufacturer: "",
         power_draw: 0,
         core_count: 0,
-        is_iGPU: "",
+        isIGPU: "",
         max_rating: 0,
         price: 0,
         picture_url: ""
     })
+    console.log(editProduct)
 
     useEffect(() => {
         if (editProduct) {
@@ -51,7 +39,7 @@ function CpuAdd() {
                 manufacturer: "",
                 power_draw: 0,
                 core_count: 0,
-                is_iGPU: "",
+                isIGPU: "",
                 max_rating: 0,
                 price: 0,
                 picture_url: ""
@@ -66,12 +54,67 @@ function CpuAdd() {
         state.core_count = +state.core_count
         state.power_draw = +state.power_draw
         state.max_rating = +state.max_rating
-        state.is_iGPU = state.is_iGPU === "yes" ? true : false
+        state.isIGPU = state.isIGPU === "yes" ? true : false
+        const {
+            name, socket, chipset,
+            TDP, manufacturer, power_draw,
+            core_count, isIGPU, max_rating,
+            price, picture_url
+        } = state
         if (checkStatus) {
             // edit method
+            axios({
+                method: "PUT",
+                url: `http://localhost:3000/parts/cpu/${editProduct.id}/update`,
+                headers: {
+                    access_token: localStorage.getItem("access_token")
+                    // access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
+                },
+                data: {
+                    name, socket,
+                    chipset_cpu: chipset,
+                    TDP, manufacturer, power_draw,
+                    core_count, isIGPU, max_rating,
+                    price, picture_url
+
+                }
+            })
+                .then(({ data }) => {
+                    console.log(data)
+                })
+                .catch(err => {
+                    console.log(err.response)
+                })
             console.log(state)
         } else {
-            console.log(state)
+            addCpu({
+                variables: {
+                    access_token: localStorage.getItem("access_token"),
+                    addcpu: state
+                }
+            })
+            console.log("masuk")
+            // axios({
+            //     method: "POST",
+            //     url: "http://localhost:3000/parts/cpu/add",
+            //     headers: {
+            //         access_token: localStorage.getItem("access_token")
+            //         // access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
+            //     },
+            //     data: {
+            //         name, socket,
+            //         chipset_cpu: chipset,
+            //         TDP, manufacturer, power_draw,
+            //         core_count, isIGPU, max_rating,
+            //         price, picture_url
+            //     }
+            // })
+            //     .then(({ data }) => {
+            //         console.log(data)
+            //     })
+            //     .catch(err => {
+            //         console.log(err.response)
+            //     })
         }
     }
     function handleChipset(e) {
@@ -136,7 +179,7 @@ function CpuAdd() {
                 <Form.Group controlId="formBasicText">
                     <Form.Label>Manufacturer</Form.Label>
                     <Form.Control
-                        defaultValue={checkStatus ? editProduct.manufacturer : ""}
+                        // defaultValue={checkStatus ? editProduct.manufacturer : ""}
                         type="text"
                         placeholder="Enter Manufacturer"
                         name="manufacturer"
@@ -146,35 +189,22 @@ function CpuAdd() {
                 <Form.Group controlId="formBasicNumber">
                     <Form.Label>Power Draw</Form.Label>
                     <Form.Control
-                        defaultValue={checkStatus ? editProduct.power_draw : ""}
+                        // defaultValue={checkStatus ? editProduct.power_draw : ""}
                         type="number"
                         placeholder="Enter Power Draw"
                         name="power_draw"
                         onChange={handleChange}
                     />
                 </Form.Group>
-                {/* isGPU */}
-                {/* <Form.Group controlId="formBasicNumber"> */}
-                <Form.Label>GPU</Form.Label>
-                <div>
-                    <Form.Label>Yes</Form.Label>
-                    <InputGroup.Radio
-                        checked={checkStatus && editProduct.is_iGPU === true}
-                        name="is_iGPU"
-                        value="yes"
-                        onChange={handleChange}
-                        className="radioGpu"
-                    />
-                    <Form.Label>No</Form.Label>
-                    <InputGroup.Radio
-                        checked={checkStatus && editProduct.is_iGPU === false}
-                        name="is_iGPU"
-                        value="no"
-                        onChange={handleChange}
-                        className="radioGpu"
-                    />
-                </div>
-                {/* </Form.Group> */}
+                <Form.Group controlId="exampleForm.SelectCustom">
+                    <Form.Label>GPU</Form.Label>
+                    <Form.Control
+                        name="socket" as="select" onChange={handleChange}>
+                        <option >Please Select</option>
+                        <option selected={checkStatus && editProduct.isIGPU === true} value="yes">yes</option>
+                        <option selected={checkStatus && editProduct.isIGPU === false} value="no">no</option>
+                    </Form.Control>
+                </Form.Group>
 
                 <Form.Group controlId="formBasicNumber">
                     <Form.Label>Core Count</Form.Label>

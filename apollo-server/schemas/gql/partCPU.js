@@ -1,7 +1,7 @@
 const partCPU = `
     id: ID
     name: String
-    socket: String
+    socket: Socket
     chipset: [Chipset]
     TDP: Int
     manufacturer: String

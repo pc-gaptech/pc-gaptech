@@ -26,7 +26,6 @@ function App() {
       <Router>
         <Navbar />
         <Switch>
-
           <PublicRoute path="/login" component={Login} />
           <PrivateRoutes path="/addcpu" component={CpuAdd} />
           <PrivateRoutes path="/addcpucoller" component={CpuCollerAdd} />
@@ -37,7 +36,6 @@ function App() {
           <PrivateRoutes path="/addcasing" component={CasingAdd} />
           <PrivateRoutes path="/addpowersupplay" component={PowerSupplayAdd} />
           <PrivateRoutes path="/" component={Home} />
-
         </Switch>
       </Router>
     </ApolloProvider>

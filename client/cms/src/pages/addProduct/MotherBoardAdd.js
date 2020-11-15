@@ -2,21 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { Form, Button, Container } from "react-bootstrap"
 import { dataEdit } from "../../graphQl/cache"
 import { useReactiveVar } from "@apollo/client"
+import axios from "axios"
 
-// name	string
-// socket	string
-// Enum:
-// [ AM4, LGA1151 ]
-// chipset	string
-// Enum:
-// [ A350, B450, X370, b450, X470, b550, X570, B360, H370, Z370, Z390 ]
-// form_factor	string
-// Enum:
-// [ ATX, Micro-ATX, Mini-ITX ]
-// manufacturer	string
-// power_draw	integer($int64)
-// price	integer($int64)
-// picture_url	string
 function MotherBoardAdd() {
     const editProduct = useReactiveVar(dataEdit)
     const [checkStatus, setCheckStatus] = useState(false)
@@ -54,11 +41,40 @@ function MotherBoardAdd() {
         state.price = +state.price
         if (checkStatus) {
             // edit method
+            axios({
+                method: "PUT",
+                url: `http://localhost:3000/parts/motherboard/${editProduct.id}/update`,
+                headers: {
+                    access_token: localStorage.getItem("access_token")
+                    // access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
+                },
+                data: state
+            })
+                .then(({ data }) => {
+                    console.log(data)
+                })
+                .catch(err => {
+                    console.log(err.response)
+                })
             console.log(state)
         } else {
+            axios({
+                method: "POST",
+                url: "http://localhost:3000/parts/motherboard/add",
+                headers: {
+                    access_token: localStorage.getItem("access_token")
+                    // access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
+                },
+                data: state
+            })
+                .then(({ data }) => {
+                    console.log(data)
+                })
+                .catch(err => {
+                    console.log(err.response)
+                })
             console.log(state)
         }
-        console.log(state)
     }
     function handleChange(e) {
         const { name, value } = e.target
