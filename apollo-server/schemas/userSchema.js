@@ -46,7 +46,7 @@ const resolvers = {
 				});
 				return data;
 			} catch (err) {
-				return new ApolloError(err);
+				return new ApolloError(err.response.data.message, err);
 			}
 		},
 		login: async (parent, { user }, context, info) => {
@@ -59,7 +59,7 @@ const resolvers = {
 				});
 				return data;
 			} catch (err) {
-				return new ApolloError(err);
+				return new ApolloError(err.response.data.message, err);
 			}
 		},
 	},
