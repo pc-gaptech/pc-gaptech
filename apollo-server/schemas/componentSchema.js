@@ -19,6 +19,7 @@ enum Socket {
   AM4
   LGA1151
   LGA1200
+  LGA1150
 }
 
 enum Chipset {
