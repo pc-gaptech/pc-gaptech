@@ -54,8 +54,8 @@ function RamAdd() {
                 method: "PUT",
                 url: `http://localhost:3000/parts/ram/${editProduct.id}/update`,
                 headers: {
-                    // access_token : localStorage.getItem("access_token")
-                    access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
+                    access_token: localStorage.getItem("access_token")
+                    // access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
                 },
                 data: {
                     name,
@@ -80,8 +80,8 @@ function RamAdd() {
                 method: "POST",
                 url: "http://localhost:3000/parts/ram/add",
                 headers: {
-                    // access_token : localStorage.getItem("access_token")
-                    access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
+                    access_token: localStorage.getItem("access_token")
+                    // access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
                 },
                 data: {
                     name,
@@ -137,10 +137,10 @@ function RamAdd() {
                     <Form.Group controlId="exampleForm.SelectCustom">
                         <Form.Label>Memory Type</Form.Label>
                         <Form.Control
-                            name="socket" as="select" onChange={handleChange}>
+                            name="memory_type" as="select" onChange={handleChange}>
                             <option >Please Select</option>
-                            <option value="DDR3" selected={checkStatus && editProduct.socket === "DDR3"}>DDR3</option>
-                            <option value="DDR4" selected={checkStatus && editProduct.socket === "DDR4"}>DDR4</option>
+                            <option value="DDR3" selected={checkStatus && editProduct.memory_type === "DDR3"}>DDR3</option>
+                            <option value="DDR4" selected={checkStatus && editProduct.memory_type === "DDR4"}>DDR4</option>
                         </Form.Control>
                     </Form.Group>
                     <ChipInput

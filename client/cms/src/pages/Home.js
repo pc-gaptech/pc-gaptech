@@ -1,29 +1,23 @@
 import React from 'react'
-import { Breadcrumb, Container, Tabs, Tab } from "react-bootstrap"
-import ListProduct from "../components/ListProduct"
+import { Container, Tabs, Tab } from "react-bootstrap"
 import {
     CasingHome, CpuColler, CpuHome,
     GpuHome, MotherBoard, PowerSupplay,
     RamHome, Storage
 } from "./ListProduct"
-import { Route, Switch, Link } from "react-router-dom"
-
-
+import { useQuery } from "@apollo/client"
+import { FECTH_ALL } from "../graphQl/query"
 
 const Home = () => {
-
-    function goToHome() {
-
-    }
+    const { loading, error, data } = useQuery(FECTH_ALL)
+    console.log(data)
+    if (loading) return <p>loading....</p>
     return (
         <div>
+            {JSON.stringify(data)}
             <Container>
                 <h1>List Product</h1>
-                <Tabs>
-                    <Tab>
-                        <Link to="/casing" >Casing </Link>
-                    </Tab>
-                </Tabs>
+                {JSON.stringify(data)}
                 <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
                     <Tab eventKey="cpu" title="CPU">
                         <CpuHome />
@@ -50,46 +44,6 @@ const Home = () => {
                         <CasingHome />
                     </Tab>
                 </Tabs>
-                {/* <Breadcrumb>
-                    <Breadcrumb.Item >
-                        <Link to="/cpu"> CPU </Link>
-                    </Breadcrumb.Item>
-                    <Breadcrumb.Item >
-                        <Link to="/cpucoller" >CPU Coller </Link>
-                    </Breadcrumb.Item>
-                    <Breadcrumb.Item >
-                        <Link to="/casing" >Casing </Link>
-                    </Breadcrumb.Item>
-                    <Breadcrumb.Item >
-                        <Link to="/motherboard" >Motherboard </Link>
-                    </Breadcrumb.Item>
-                    <Breadcrumb.Item >
-                        <Link to="/gpu" >GPU  </Link>
-                    </Breadcrumb.Item>
-                    <Breadcrumb.Item >
-                        <Link to="/ram" > RAM </Link>
-                    </Breadcrumb.Item>
-                    <Breadcrumb.Item >
-                        <Link to="/casing" >Casing </Link>
-                    </Breadcrumb.Item>
-                    <Breadcrumb.Item >
-                        <Link to="/casing" >Casing </Link>
-                    </Breadcrumb.Item>
-                    <Breadcrumb.Item >
-                        <Link to="/casing" >Casing </Link>
-                    </Breadcrumb.Item>
-                    <Breadcrumb.Item active>Data</Breadcrumb.Item>
-                    <Switch>
-                        <Route path="/cpu" component={CpuHome} />
-                        <Route path="/cpucoller" component={CpuColler} />
-                        <Route path="/motherboard" component={MotherBoard} />
-                        <Route path="/gpu" component={GpuHome} />
-                        <Route path="/ram" component={RamHome} />
-                        <Route path="/storage" component={Storage} />
-                        <Route path="/powersupplay" component={PowerSupplay} />
-                        <Route path="/casing" component={CasingHome} />
-                    </Switch>
-                </Breadcrumb> */}
             </Container>
         </div>
     )

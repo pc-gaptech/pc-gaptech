@@ -39,8 +39,8 @@ function CasingAdd() {
                 method: "PUT",
                 url: `http://localhost:3000/parts/casing/${editProduct.id}/update`,
                 headers: {
-                    // access_token : localStorage.getItem("access_token")
-                    access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
+                    access_token: localStorage.getItem("access_token")
+                    // access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
                 },
                 data: state
             })
@@ -56,8 +56,8 @@ function CasingAdd() {
                 method: "POST",
                 url: "http://localhost:3000/parts/casing/add",
                 headers: {
-                    // access_token : localStorage.getItem("access_token")
-                    access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
+                    access_token: localStorage.getItem("access_token")
+                    // access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
                 },
                 data: state
             })
@@ -71,6 +71,7 @@ function CasingAdd() {
         }
         console.log(state)
     }
+    console.log(localStorage.getItem("access_token"))
     function handleChange(e) {
         const { name, value } = e.target
         setstate({

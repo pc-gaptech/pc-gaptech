@@ -143,7 +143,6 @@ class ComponentsController {
 				storage_type,
 			} = req.body;
 			const { component } = req.params;
-			console.log(req.params, req.body)
 			let result = {};
 			let componentInput = {
 				name,
@@ -265,7 +264,6 @@ class ComponentsController {
 				storage_type,
 			} = req.body;
 			const { component, id } = req.params;
-			console.log(req.params, req.body)
 			let result = {};
 			let componentInput = {
 				name,

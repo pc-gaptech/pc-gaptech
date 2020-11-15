@@ -6,7 +6,7 @@ const data = [
     {
         id: 1,
         name: "AMD Ryzen 5 1600X 3.6 GHz 6-Core Processor",
-        socket: "AM4",
+        socket: ["AM4"],
         TDP: 100,
         manufacturer: "AMD",
         power_draw: 100,
