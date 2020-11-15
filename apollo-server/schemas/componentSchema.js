@@ -105,7 +105,7 @@ let access_token =
 
 const resolvers = {
   Query: {
-    fetchAll: async () => {
+    fetchAll: async (parent, { access_token }) => {
       try {
         // const all = await redis.get("all");
         // if (all) {
@@ -142,7 +142,7 @@ const resolvers = {
       }
     },
 
-    fetchCPU: async () => {
+    fetchCPU: async (parent, { access_token }) => {
       try {
         const CPUsCache = await redis.get("cpu");
         if (CPUsCache) {
@@ -169,7 +169,7 @@ const resolvers = {
       }
     },
 
-    fetchRAM: async () => {
+    fetchRAM: async (parent, { access_token }) => {
       try {
         const RAMsCache = await redis.get("ram");
         if (RAMsCache) {
@@ -196,7 +196,7 @@ const resolvers = {
       }
     },
 
-    fetchPowerSupply: async () => {
+    fetchPowerSupply: async (parent, { access_token }) => {
       try {
         const powerSupply = await redis.get("powerSupply");
         if (powerSupply) {
@@ -223,7 +223,7 @@ const resolvers = {
       }
     },
 
-    fetchMotherboard: async () => {
+    fetchMotherboard: async (parent, { access_token }) => {
       try {
         const motherboard = await redis.get("motherboard");
         if (motherboard) {
@@ -250,7 +250,7 @@ const resolvers = {
       }
     },
 
-    fetchCPUCooler: async () => {
+    fetchCPUCooler: async (parent, { access_token }) => {
       try {
         const CPUsCache = await redis.get("cpucooler");
         if (CPUsCache) {
@@ -277,7 +277,7 @@ const resolvers = {
       }
     },
 
-    fetchCasing: async () => {
+    fetchCasing: async (parent, { access_token }) => {
       try {
         const CasingCache = await redis.get("casing");
         if (CasingCache) {
@@ -304,7 +304,7 @@ const resolvers = {
       }
     },
 
-    fetchGPU: async () => {
+    fetchGPU: async (parent, { access_token }) => {
       try {
         const GPUCache = await redis.get("gpu");
         if (GPUCache) {
