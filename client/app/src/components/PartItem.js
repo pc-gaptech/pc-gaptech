@@ -86,12 +86,12 @@ export default function PartItem(props) {
                 </IconButton>
             </Grid>
             <Grid item xs={1} className={classes.center}>
-            <Link href={`https://www.tokopedia.com/search?st=product&q=${item.name}`}>
+                <a href={`https://www.tokopedia.com/search?st=product&q=${item.name}`}>
                 <IconButton
                     style={{ color: "#FF2F00" }} title="Research price in Shopee" aria-label="add to shopping cart">
                     <AddShoppingCartIcon />
                 </IconButton>
-                </Link>
+                </a>
             </Grid>
             <Grid item xs={1} className={classes.center}>
                 <IconButton style={{ color: "#E00034" }} title="Research price in Bukalapak" aria-label="add to shopping cart">

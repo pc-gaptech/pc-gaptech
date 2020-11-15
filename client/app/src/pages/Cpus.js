@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container, Grid, makeStyles, Typography } from "@material-ui/core";
 import { gql, useQuery } from '@apollo/client'
 
@@ -8,7 +8,8 @@ import tokopedia from '../assets/tokopedia.png'
 import shopee from '../assets/shopee.png'
 import bukalapak from '../assets/bukalapak.png'
 
-import { FETCH_MOTHERBOARD } from "../graphql/queries"
+import { FETCH_CPU } from "../graphql/queries"
+
 const useStyle = makeStyles((theme) => ({
     container: {
         paddingTop: "10px",
@@ -40,17 +41,20 @@ const useStyle = makeStyles((theme) => ({
 
 }))
 
-export default function Motherboards() {
+
+export default function Cpus() {
     const classes = useStyle()
-    const {loading, error, data} = useQuery(FETCH_MOTHERBOARD)
+    const { loading, error, data } = useQuery(FETCH_CPU)
 
     if (loading) return <p>Loading..</p>
     if (error) return <p>{error}</p>
+
     return (
         <Container>
             <Typography className={classes.header}>
                 Select Available Motherboards
             </Typography>
+            {/* <p>{JSON.stringify(data)}</p> */}
             <Grid container spacing={1} className={classes.container}>
                 <Grid item xs={1}>
 
@@ -73,21 +77,21 @@ export default function Motherboards() {
                 </Grid>
                 <Grid xs={1}>
                     <Image
-                    imageStyle={{ width: 'inherit', height: 'inherit', margin: 'auto' }}
+                        imageStyle={{ width: 'inherit', height: 'inherit', margin: 'auto' }}
                         className={classes.logo}
                         src={shopee}
                     />
                 </Grid>
                 <Grid xs={1}>
                     <Image
-                    imageStyle={{ width: 'inherit', height: 'inherit' }}
+                        imageStyle={{ width: 'inherit', height: 'inherit' }}
                         className={classes.logo}
                         src={bukalapak}
                     />
                 </Grid>
             </Grid>
-            
-            {data.fetchMotherboard.map(item => {
+
+            {data.fetchCPU.map(item => {
                 return <PartItem item={item} key={item.id}/>
             })}
         </Container>
