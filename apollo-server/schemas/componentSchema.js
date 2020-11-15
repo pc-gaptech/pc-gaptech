@@ -109,7 +109,7 @@ extend type Query {
 }
 
 extend type Mutation {
-  editOneCPU (id: Int, dataCPU: inputCPU access_token: String) : ComponentStatus
+  editOneCPU (id: Int, dataCPU: inputCPU, access_token: String) : ComponentStatus
   editOneStorage (id: Int, dataStorage: inputStorage, access_token: String) : ComponentStatus
   editOneCasing (id: Int, dataCasing: inputCasing, access_token: String) : ComponentStatus
   editOneCPUCooler (id: Int, dataCPUCooler: inputCPUCooler, access_token: String) : ComponentStatus
