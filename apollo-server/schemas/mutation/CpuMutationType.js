@@ -11,9 +11,9 @@ isIGPU: Boolean
 max_rating: Int
 price: Int
 picture_url: String
-`
+`;
 
-const inputCpu = `
+const inputCPU = `
 name: String
 socket: Socket
 chipset: [Chipset]
@@ -25,9 +25,9 @@ isIGPU: Boolean
 max_rating: Int
 price: Int
 picture_url: String
-`
+`;
 
 module.exports = {
-    partCPU,
-    inputCpu
-}
+  partCPU,
+  inputCPU,
+};

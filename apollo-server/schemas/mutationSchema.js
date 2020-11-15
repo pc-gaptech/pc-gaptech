@@ -1,7 +1,7 @@
 const { gql, ApolloError } = require("apollo-server");
 const redis = require("../config/redisConfig");
-const { inputCpuColler } = require("./mutation/CpuCollerMutation");
-const { inputCpu } = require("./mutation/CpuMutationType");
+const { inputCPUColler } = require("./mutation/CpuCollerMutation");
+const { inputCPU } = require("./mutation/CpuMutationType");
 const { inputMotherboard } = require("./mutation/motherboardMutation");
 const { inputCasing } = require("./mutation/casingMutation");
 const { inputGPU } = require("./mutation/GpuMutation");
@@ -14,7 +14,7 @@ const baseUrl = "http://localhost:3000";
 const typeDefs = gql`
 
 input inputCPUCooler {
-    ${inputCpuColler}
+    ${inputCPUColler}
 }
 
 input inputMotherboard {
@@ -42,7 +42,7 @@ input inputStorage {
 }
 
 input inputCPU {
-    ${inputCpu}
+    ${inputCPU}
 }
 
 type DeleteMessage {
