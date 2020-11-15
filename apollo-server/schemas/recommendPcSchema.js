@@ -49,7 +49,7 @@ const resolvers = {
 		getRecommendedPC: async (parent, { gamesId, access_token }, context, info) => {
 			try {
 				const { data } = await axios({
-					url: `http://localhost:3001/recommendpc?gamesId=${gamesId}`,
+					url: `http://localhost:3000/recommendpc?gamesId=${gamesId}`,
 					method: "GET",
 					headers: { access_token },
 				});
@@ -63,7 +63,7 @@ const resolvers = {
 		addRecommendedPC: async (parent, { config, access_token }, context, info) => {
 			try {
 				const { data } = await axios({
-					url: "http://localhost:3001/recommendpc",
+					url: "http://localhost:3000/recommendpc",
 					method: "POST",
 					headers: { "Content-Type": "application/json", access_token },
 					data: config,

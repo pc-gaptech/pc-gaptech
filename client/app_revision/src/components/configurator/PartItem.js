@@ -1,15 +1,13 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Button, Container, Grid, Typography, IconButton, Link } from "@material-ui/core";
-
+import { Button, Grid, Typography, IconButton } from "@material-ui/core";
 
 import Image from "material-ui-image";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
-import SaveIcon from "@material-ui/icons/Save";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
-import { config } from "../graphql/reactiveVars";
-import {useHistory} from "react-router-dom"
+import { config } from "../../graphql/reactiveVars";
+import { useHistory } from "react-router-dom";
 
 const useStyle = makeStyles((theme) => ({
 	header: {
@@ -46,18 +44,20 @@ const useStyle = makeStyles((theme) => ({
 }));
 
 export default function PartItem(props) {
-	const { item, component } = props;
-    const classes = useStyle();
-    const history = useHistory()
+	const { item, componentId } = props;
+	const classes = useStyle();
+	const history = useHistory();
 
 	const handleAddtoConfig = (e) => {
 		e.preventDefault(e);
 		let newConfig = JSON.parse(JSON.stringify(config()));
-        newConfig[component] = item.id;
-        config(newConfig)
-        console.log(config(), "HAHAHAAH")
-        history.push("/build")
+		console.log(item.id);
+		newConfig[componentId] = +item.id;
+		config(newConfig);
+		console.log(config(), "HAHAHAAH");
+		history.push("/configurator");
 	};
+
 	return (
 		<Grid container spacing={1} className={classes.container}>
 			<Grid item xs={1}>

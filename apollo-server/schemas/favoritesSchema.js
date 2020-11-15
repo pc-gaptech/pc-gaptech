@@ -57,7 +57,7 @@ const resolvers = {
 		getAllFavoritesConfig: async (parent, { access_token }, context, info) => {
 			try {
 				const { data } = await axios({
-					url: "http://localhost:3001/favorites",
+					url: "http://localhost:3000/favorites",
 					method: "GET",
 					headers: { access_token },
 				});
@@ -69,7 +69,7 @@ const resolvers = {
 		getOneFavoriteConfig: async (parent, { id, access_token }, context, info) => {
 			try {
 				const { data } = await axios({
-					url: `http://localhost:3001/favorites/${id}/detail`,
+					url: `http://localhost:3000/favorites/${id}/detail`,
 					method: "GET",
 					headers: { access_token },
 				});
@@ -83,7 +83,7 @@ const resolvers = {
 		addFavoriteConfig: async (parent, { config, access_token }, context, info) => {
 			try {
 				const { data } = await axios({
-					url: "http://localhost:3001/favorites/add",
+					url: "http://localhost:3000/favorites/add",
 					method: "POST",
 					headers: { "Content-Type": "application/json", access_token },
 					data: config,
@@ -96,7 +96,7 @@ const resolvers = {
 		deleteFavoriteConfig: async (parent, { id, access_token }, context, info) => {
 			try {
 				const { data } = await axios({
-					url: `http://localhost:3001/favorites/${id}/delete`,
+					url: `http://localhost:3000/favorites/${id}/delete`,
 					method: "DELETE",
 					headers: { access_token },
 				});

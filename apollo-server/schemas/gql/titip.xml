@@ -190,15 +190,15 @@ findOneCPUById (id: 2, access_token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJp
 }
 
 findOneRAMById (id: 2, access_token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1NDA0NzM1fQ.7fHAJulBFK-dcW1xeqTKx6jDLxryG0o0EnFTn_XZTtU"){
-    id
-    name
-    memory_type
-    chipset
-    manufacturer
-    power_draw
-    memory_speed
-    price
-    picture_url
+        id
+        name
+        memory_type
+        chipset
+        manufacturer
+        power_draw
+        memory_speed
+        price
+        picture_url
 }
 
 findOnePowerSupplyById (id: 2, access_token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1NDA0NzM1fQ.7fHAJulBFK-dcW1xeqTKx6jDLxryG0o0EnFTn_XZTtU"){

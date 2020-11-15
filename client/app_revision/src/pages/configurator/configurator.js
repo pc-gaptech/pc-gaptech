@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Container, Grid, makeStyles, Typography } from "@material-ui/core";
+import { useMutation } from "@apollo/client";
+import { useHistory } from "react-router-dom";
 
-import PartItemHome from "../components/PartItemHome";
+import PartItemHome from "../../components/configurator/PartItemHome";
 import Image from "material-ui-image";
-import tokopedia from "../assets/tokopedia.png";
-import shopee from "../assets/shopee.png";
-import bukalapak from "../assets/bukalapak.png";
-import ButtonChooser from "../components/ButtonChooser";
-import { config } from "../graphql/reactiveVars";
-
-import axios from "axios";
+import tokopedia from "../../assets/tokopedia.png";
+import shopee from "../../assets/shopee.png";
+import bukalapak from "../../assets/bukalapak.png";
+import ButtonChooser from "../../components/configurator/ButtonChooser";
+import { config } from "../../graphql/reactiveVars";
+import { CHECK_CONFIG } from "../../graphql/mutations";
 
 const useStyle = makeStyles((theme) => ({
 	container: {
@@ -46,13 +47,45 @@ const useStyle = makeStyles((theme) => ({
 	},
 }));
 
-export default function Build() {
+export default function Configurator() {
 	const classes = useStyle();
-	const [displayedConfig, setDisplayedConfig] = useState(config());
+	const history = useHistory();
+	const [displayedConfig] = useState(config());
+	const [isConfigValid, setIsConfigValid] = useState(true);
+
+	const [checkConfig] = useMutation(CHECK_CONFIG);
+
+	const handleCheck = async (e) => {
+		e.preventDefault();
+		try {
+			await checkConfig({
+				variables: {
+					access_token: localStorage.getItem("access_token"),
+					config: {
+						...displayedConfig,
+					},
+				},
+			});
+			console.log("BERHASILLLLL");
+		} catch (err) {
+			setIsConfigValid(false);
+			setTimeout(() => {
+				setIsConfigValid(true);
+			}, 5000);
+		}
+	};
 
 	return (
 		<Container>
 			<Typography className={classes.header}>Build your PC</Typography>
+			<button
+				onClick={(e) => {
+					handleCheck(e);
+				}}
+			>
+				CHECK CONFIG
+			</button>
+			{!isConfigValid ? <p>CONFIG TIDAK COMPATIBLE</p> : <p>CONFIG COMPATIBLE</p>}
 			<Grid container spacing={1} className={classes.container}>
 				<Grid item xs={2} className={classes.componentType}>
 					Choose CPU
@@ -97,9 +130,9 @@ export default function Build() {
 				</Grid>
 				<Grid item xs={10}>
 					{displayedConfig.CPUId ? (
-						<PartItemHome ID={displayedConfig.CPUId} component={"cpu"} />
+						<PartItemHome ID={displayedConfig.CPUId} component={"CPU"} />
 					) : (
-						<ButtonChooser component={"cpus"} />
+						<ButtonChooser component={"CPU"} />
 					)}
 				</Grid>
 			</Grid>
@@ -109,9 +142,9 @@ export default function Build() {
 				</Grid>
 				<Grid item xs={10}>
 					{displayedConfig.MotherboardId ? (
-						<PartItemHome ID={displayedConfig.MotherboardId} component={"motherboard"} />
+						<PartItemHome ID={displayedConfig.MotherboardId} component={"Motherboard"} />
 					) : (
-						<ButtonChooser component={"motherboards"} />
+						<ButtonChooser component={"Motherboard"} />
 					)}
 				</Grid>
 			</Grid>
@@ -121,9 +154,9 @@ export default function Build() {
 				</Grid>
 				<Grid item xs={10}>
 					{displayedConfig.RAMId ? (
-						<PartItemHome ID={displayedConfig.MotherboardId} component={"ram"} />
+						<PartItemHome ID={displayedConfig.MotherboardId} component={"RAM"} />
 					) : (
-						<ButtonChooser component={"rams"} />
+						<ButtonChooser component={"RAM"} />
 					)}
 				</Grid>
 			</Grid>
@@ -133,9 +166,9 @@ export default function Build() {
 				</Grid>
 				<Grid item xs={10}>
 					{displayedConfig.PowerSupplyId ? (
-						<PartItemHome ID={displayedConfig.PowerSupplyId} component={"powerSupply"} />
+						<PartItemHome ID={displayedConfig.PowerSupplyId} component={"PowerSupply"} />
 					) : (
-						<ButtonChooser component={"powersupplies"} />
+						<ButtonChooser component={"PowerSupply"} />
 					)}
 				</Grid>
 			</Grid>
@@ -144,10 +177,10 @@ export default function Build() {
 					Video Card
 				</Grid>
 				<Grid item xs={10}>
-				{displayedConfig.GPUId ? (
-						<PartItemHome ID={displayedConfig.GPUId} component={"gpu"} />
+					{displayedConfig.GPUId ? (
+						<PartItemHome ID={displayedConfig.GPUId} component={"GPU"} />
 					) : (
-						<ButtonChooser component={"gpus"} />
+						<ButtonChooser component={"GPU"} />
 					)}
 				</Grid>
 			</Grid>
@@ -156,10 +189,10 @@ export default function Build() {
 					Case
 				</Grid>
 				<Grid item xs={10}>
-				{displayedConfig.CasingId ? (
-						<PartItemHome ID={displayedConfig.CasingId} component={"casing"} />
+					{displayedConfig.CasingId ? (
+						<PartItemHome ID={displayedConfig.CasingId} component={"Casing"} />
 					) : (
-						<ButtonChooser component={"casings"} />
+						<ButtonChooser component={"Casing"} />
 					)}
 				</Grid>
 			</Grid>
@@ -168,10 +201,10 @@ export default function Build() {
 					CPU Coolers
 				</Grid>
 				<Grid item xs={10}>
-				{displayedConfig.CPUCoolerId ? (
-						<PartItemHome ID={displayedConfig.CPUCoolerId} component={"cpucooler"} />
+					{displayedConfig.CPUCoolerId ? (
+						<PartItemHome ID={displayedConfig.CPUCoolerId} component={"CPUCooler"} />
 					) : (
-						<ButtonChooser component={"cpucoolers"} />
+						<ButtonChooser component={"CPUCooler"} />
 					)}
 				</Grid>
 			</Grid>
@@ -180,10 +213,10 @@ export default function Build() {
 					Storage
 				</Grid>
 				<Grid item xs={10}>
-				{displayedConfig.StorageId ? (
-						<PartItemHome ID={displayedConfig.StorageId} component={"storage"} />
+					{displayedConfig.StorageId ? (
+						<PartItemHome ID={displayedConfig.StorageId} component={"Storage"} />
 					) : (
-						<ButtonChooser component={"storages"} />
+						<ButtonChooser component={"Storage"} />
 					)}
 				</Grid>
 			</Grid>

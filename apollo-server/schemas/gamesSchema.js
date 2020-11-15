@@ -31,7 +31,7 @@ const resolvers = {
 		getGames: async (parent, { access_token }, context, info) => {
 			try {
 				const { data } = await axios({
-					url: "http://localhost:3001/games",
+					url: "http://localhost:3000/games",
 					method: "GET",
 					headers: { access_token },
 				});
@@ -43,7 +43,7 @@ const resolvers = {
 		getGamesConfig: async (parent, { access_token, configRating }, context, info) => {
 			try {
 				const { data } = await axios({
-					url: `http://localhost:3001/games/recommend?config_rating=${configRating}`,
+					url: `http://localhost:3000/games/recommend?config_rating=${configRating}`,
 					method: "GET",
 					headers: { access_token },
 				});
@@ -57,7 +57,7 @@ const resolvers = {
 		addGame: async (parent, { game, access_token }, context, info) => {
 			try {
 				const { data } = await axios({
-					url: "http://localhost:3001/games/add",
+					url: "http://localhost:3000/games/add",
 					method: "POST",
 					headers: { "Content-Type": "application/json", access_token },
 					data: game,

@@ -37,7 +37,7 @@ const resolvers = {
 		checkPcConfig: async (parent, { config, access_token }, context, info) => {
 			try {
 				const { data } = await axios({
-					url: "http://localhost:3001/checkconfig",
+					url: "http://localhost:3000/checkconfig",
 					method: "POST",
 					headers: { "Content-Type": "application/json", access_token },
 					data: config,

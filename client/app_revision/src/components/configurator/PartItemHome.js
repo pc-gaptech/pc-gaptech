@@ -1,30 +1,38 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Button, Container, Grid, Typography, IconButton, Link } from "@material-ui/core";
-
+import { Button, Grid, Typography, IconButton } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 
 import Image from "material-ui-image";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
-import SaveIcon from "@material-ui/icons/Save";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
-import { config } from "../graphql/reactiveVars";
-import {useHistory} from "react-router-dom"
+
+import { useQuery } from "@apollo/client";
+import {
+	FETCH_CPU_BY_ID,
+	FETCH_CPUCooler_BY_ID,
+	FETCH_GPU_BY_ID,
+	FETCH_MOTHERBOARD_BY_ID,
+	FETCH_POWER_SUPPLY_BY_ID,
+	FETCH_RAM_BY_ID,
+	FETCH_STORAGE_BY_ID,
+	FETCH_CASING_BY_ID,
+} from "../../graphql/query";
 
 const useStyle = makeStyles((theme) => ({
 	header: {
 		fontWeight: "bold",
 	},
 	container: {
-		paddingTop: "5px",
-		paddingBottom: "5px",
+		paddingTop: "15px",
+		paddingBottom: "15px",
 		borderBottom: "0.5px solid #e8e8e8",
 	},
 	center: {
 		textAlign: "center",
 		margin: "auto",
 	},
-
 	button: {
 		marginTop: "2px",
 		color: "grey",
@@ -45,26 +53,59 @@ const useStyle = makeStyles((theme) => ({
 	},
 }));
 
-export default function PartItem(props) {
-	const { item, component } = props;
-    const classes = useStyle();
-    const history = useHistory()
+export default function PartItemHome({ component, ID }) {
+	const classes = useStyle();
+	const history = useHistory();
+	let query = null;
+	switch (component) {
+		case "CPU":
+			query = FETCH_CPU_BY_ID;
+			break;
+		case "CPUCooler":
+			query = FETCH_CPUCooler_BY_ID;
+			break;
+		case "GPU":
+			query = FETCH_GPU_BY_ID;
+			break;
+		case "RAM":
+			query = FETCH_RAM_BY_ID;
+			break;
+		case "Storage":
+			query = FETCH_STORAGE_BY_ID;
+			break;
+		case "PowerSupply":
+			query = FETCH_POWER_SUPPLY_BY_ID;
+			break;
+		case "Casing":
+			query = FETCH_CASING_BY_ID;
+			break;
+		case "Motherboard":
+			query = FETCH_MOTHERBOARD_BY_ID;
+			break;
+		default:
+			break;
+	}
 
-	const handleAddtoConfig = (e) => {
-		e.preventDefault(e);
-		let newConfig = JSON.parse(JSON.stringify(config()));
-        newConfig[component] = item.id;
-        config(newConfig)
-        console.log(config(), "HAHAHAAH")
-        history.push("/build")
+	const { loading, error, data } = useQuery(query, {
+		variables: { id: ID, access_token: localStorage.getItem("access_token") },
+	});
+
+	const handleEdit = (e) => {
+		e.preventDefault();
+		history.push(`/configurator/parts/${component}`);
 	};
+
+	if (loading) return <p>Loading...</p>;
+	if (error) return <p>Error in fetch</p>;
+
+
 	return (
 		<Grid container spacing={1} className={classes.container}>
 			<Grid item xs={1}>
-				<Image src={item.picture_url} />
+				<Image src={data[`findOne${component}ById`].picture_url} />
 			</Grid>
 			<Grid item xs={4} className={classes.center}>
-				<Typography className={classes.name}>{item.name}</Typography>
+				<Typography className={classes.name}>{data[`findOne${component}ById`].name}</Typography>
 				<Button size={"small"} className={classes.button} startIcon={<VisibilityIcon />}>
 					See details
 				</Button>
@@ -77,14 +118,14 @@ export default function PartItem(props) {
 					className={classes.buttonsave}
 					startIcon={<AddCircleIcon />}
 					onClick={(e) => {
-						handleAddtoConfig(e);
+						handleEdit(e);
 					}}
 				>
-					Add
+					Edit
 				</Button>
 			</Grid>
 			<Grid item xs={2} className={classes.center} style={{ fontWeight: "bold" }}>
-				{item.price}
+				{data[`findOne${component}ById`].price}
 			</Grid>
 			<Grid item xs={1} className={classes.center}>
 				<IconButton
@@ -96,15 +137,13 @@ export default function PartItem(props) {
 				</IconButton>
 			</Grid>
 			<Grid item xs={1} className={classes.center}>
-				<a href={`https://www.tokopedia.com/search?st=product&q=${item.name}`}>
-					<IconButton
-						style={{ color: "#FF2F00" }}
-						title="Research price in Shopee"
-						aria-label="add to shopping cart"
-					>
-						<AddShoppingCartIcon />
-					</IconButton>
-				</a>
+				<IconButton
+					style={{ color: "#FF2F00" }}
+					title="Research price in Shopee"
+					aria-label="add to shopping cart"
+				>
+					<AddShoppingCartIcon />
+				</IconButton>
 			</Grid>
 			<Grid item xs={1} className={classes.center}>
 				<IconButton

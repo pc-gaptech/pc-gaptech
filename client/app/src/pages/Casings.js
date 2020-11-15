@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { Container, Grid, makeStyles, Typography } from "@material-ui/core";
 import { useQuery } from '@apollo/client'
 
@@ -8,6 +8,7 @@ import tokopedia from '../assets/tokopedia.png'
 import shopee from '../assets/shopee.png'
 import bukalapak from '../assets/bukalapak.png'
 import { FETCH_ALL } from "../graphql/queries"
+import axios from "axios"
 
 const useStyle = makeStyles((theme) => ({
     container: {
@@ -43,10 +44,31 @@ const useStyle = makeStyles((theme) => ({
 
 export default function Casings() {
     const classes = useStyle()
-    const { loading, error, data } = useQuery(FETCH_ALL)
+    // const { loading, error, data } = useQuery(FETCH_ALL)
 
-    if (loading) return <p>Loading..</p>
-    if (error) return <p>{error}</p>
+    // if (loading) return <p>Loading..</p>
+    // if (error) return <p>{error}</p>
+
+    const [casings, setCasings] = useState("");
+	const [loading, setLoading] = useState(true);
+	useEffect(() => {
+		axios({
+			url: `http://localhost:3000/parts/casing`,
+			method: "GET",
+			headers: {
+				access_token:
+					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ1c2VyMUB1c2VyLmNvbSIsImlzX2FkbWluIjpmYWxzZSwiaWF0IjoxNjA1NDI2MDI0fQ.GBiVLYiNUE3J26sMxOYi3tb3QkbSQbdTUxLJ3Vn0psk",
+			},
+		})
+			.then(({ data }) => {
+				setCasings(data);
+				setLoading(false);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	}, []);
+	if (loading) return <p>Loading</p>;
 
     return (
         <Container>
@@ -90,8 +112,8 @@ export default function Casings() {
                 </Grid>
             </Grid>
 
-            {data.fetchAll.dataCasing.map(item => {
-                return <PartItem item={item} key={item.id}/>
+            {casings.map(item => {
+                return <PartItem item={item} key={item.id} component={"CasingId"}/>
             })}
         </Container>
     )

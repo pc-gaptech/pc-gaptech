@@ -9,6 +9,7 @@ import shopee from '../assets/shopee.png'
 import bukalapak from '../assets/bukalapak.png'
 
 import { FETCH_CPU } from "../graphql/queries"
+import axios from "axios"
 
 const useStyle = makeStyles((theme) => ({
     container: {
@@ -44,15 +45,36 @@ const useStyle = makeStyles((theme) => ({
 
 export default function Cpus() {
     const classes = useStyle()
-    const { loading, error, data } = useQuery(FETCH_CPU)
+    // const { loading, error, data } = useQuery(FETCH_CPU)
 
-    if (loading) return <p>Loading..</p>
-    if (error) return <p>{error}</p>
+    // if (loading) return <p>Loading..</p>
+    // if (error) return <p>{error}</p>
+
+    const [cpus, setcpus] = useState("");
+	const [loading, setLoading] = useState(true);
+	useEffect(() => {
+		axios({
+			url: `http://localhost:3000/parts/cpu`,
+			method: "GET",
+			headers: {
+				access_token:
+					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ1c2VyMUB1c2VyLmNvbSIsImlzX2FkbWluIjpmYWxzZSwiaWF0IjoxNjA1NDI2MDI0fQ.GBiVLYiNUE3J26sMxOYi3tb3QkbSQbdTUxLJ3Vn0psk",
+			},
+		})
+			.then(({ data }) => {
+				setcpus(data);
+				setLoading(false);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	}, []);
+	if (loading) return <p>Loading</p>;
 
     return (
         <Container>
             <Typography className={classes.header}>
-                Select Available Motherboards
+                Select Available CPUs
             </Typography>
             {/* <p>{JSON.stringify(data)}</p> */}
             <Grid container spacing={1} className={classes.container}>
@@ -91,8 +113,8 @@ export default function Cpus() {
                 </Grid>
             </Grid>
 
-            {data.fetchCPU.map(item => {
-                return <PartItem item={item} key={item.id}/>
+            {cpus.map(item => {
+                return <PartItem item={item} key={item.id} component={"CPUId"}/>
             })}
         </Container>
     )

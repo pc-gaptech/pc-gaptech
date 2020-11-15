@@ -39,7 +39,7 @@ const resolvers = {
 		register: async (parent, { user }, context, info) => {
 			try {
 				const { data } = await axios({
-					url: "http://localhost:3001/register",
+					url: "http://localhost:3000/register",
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
 					data: user,
@@ -52,7 +52,7 @@ const resolvers = {
 		login: async (parent, { user }, context, info) => {
 			try {
 				const { data } = await axios({
-					url: "http://localhost:3001/login",
+					url: "http://localhost:3000/login",
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
 					data: user,
