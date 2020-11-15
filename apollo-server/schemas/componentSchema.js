@@ -93,7 +93,6 @@ type all {
   ${typeAll}
 }
 
-
 extend type Query {
   ${typeQuery}
 }
