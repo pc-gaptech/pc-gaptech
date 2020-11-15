@@ -4,16 +4,8 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import {
     Grid,
-    makeStyles,
-    TableContainer,
-    Table,
-    TableCell,
-    TableBody,
-    TableRow,
-    Button
+    makeStyles
 } from '@material-ui/core';
-
-
 
 import Image from 'material-ui-image'
 import Build from './Build';
