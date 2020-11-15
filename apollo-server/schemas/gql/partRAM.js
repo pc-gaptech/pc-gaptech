@@ -1,7 +1,7 @@
 const partRAM = `
 id: ID
 name: String
-memory_type: [MemoryType]
+memory_type: String
 chipset: [Chipset]
 manufacturer: String
 power_draw: Int

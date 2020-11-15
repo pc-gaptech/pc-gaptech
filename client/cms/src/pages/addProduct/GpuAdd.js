@@ -2,14 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Form, Button, Container } from "react-bootstrap"
 import { dataEdit } from "../../graphQl/cache"
 import { useReactiveVar } from "@apollo/client"
-
-// name	string
-// power_draw	integer($int64)
-// manufacturer	string
-// GPU_chipset	string
-// price	integer($int64)
-// rating	integer($int64)
-// picture_url	string
+import axios from "axios"
 
 function GpuAdd() {
     const editProduct = useReactiveVar(dataEdit)
@@ -18,7 +11,7 @@ function GpuAdd() {
         name: "",
         power_draw: "",
         manufacturer: "",
-        GPU_chipset: "",
+        gpu_chipset: "",
         price: "",
         rating: "",
         picture_url: ""
@@ -32,7 +25,7 @@ function GpuAdd() {
                 name: "",
                 power_draw: "",
                 manufacturer: "",
-                GPU_chipset: "",
+                gpu_chipset: "",
                 price: "",
                 rating: "",
                 picture_url: ""
@@ -47,11 +40,39 @@ function GpuAdd() {
         state.rating = +state.rating
         if (checkStatus) {
             // edit method
+            axios({
+                method: "PUT",
+                url: `http://localhost:3000/parts/gpu/${editProduct.id}/update`,
+                headers: {
+                    // access_token : localStorage.getItem("access_token")
+                    access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
+                },
+                data: state
+            })
+                .then(({ data }) => {
+                    console.log(data)
+                })
+                .catch(err => {
+                    console.log(err.response)
+                })
             console.log(state, "EDIT")
         } else {
-            console.log(state, "POST")
+            axios({
+                method: "POST",
+                url: "http://localhost:3000/parts/gpu/add",
+                headers: {
+                    // access_token : localStorage.getItem("access_token")
+                    access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
+                },
+                data: state
+            })
+                .then(({ data }) => {
+                    console.log(data)
+                })
+                .catch(err => {
+                    console.log(err.response)
+                })
         }
-        console.log(state)
     }
 
     function handleChange(e) {
@@ -101,10 +122,10 @@ function GpuAdd() {
                     <Form.Group controlId="formBasicText">
                         <Form.Label>GPU Chipset</Form.Label>
                         <Form.Control
-                            defaultValue={checkStatus ? editProduct.GPU_chipset : ""}
+                            defaultValue={checkStatus ? editProduct.gpu_chipset : ""}
                             type="text"
                             placeholder="Enter GPU Chipset"
-                            name="GPU_chipset"
+                            name="gpu_chipset"
                             onChange={handleChange}
                         />
                     </Form.Group>
@@ -138,10 +159,11 @@ function GpuAdd() {
                             onChange={handleChange}
                         />
                     </Form.Group>
-
-                    <Button variant="primary" type="submit">
-                        Add Product
-                    </Button>
+                    {checkStatus ? <Button variant="primary" type="submit">
+                        Edit Product
+                    </Button> : <Button variant="primary" type="submit">
+                            Add Product
+                    </Button>}
                 </Form>
             </Container>
 

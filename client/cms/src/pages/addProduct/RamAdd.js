@@ -3,6 +3,7 @@ import ChipInput from 'material-ui-chip-input'
 import { Form, Button, Container } from "react-bootstrap"
 import { dataEdit } from "../../graphQl/cache"
 import { useReactiveVar } from "@apollo/client"
+import axios from "axios"
 
 function RamAdd() {
     const editProduct = useReactiveVar(dataEdit)
@@ -39,11 +40,66 @@ function RamAdd() {
         e.preventDefault()
         state.price = +state.price
         state.power_draw = +state.power_draw
+        const { name,
+            memory_type,
+            chipset,
+            manufacturer,
+            power_draw0,
+            memory_speed,
+            price,
+            picture_url } = state
         if (checkStatus) {
             // edit method
+            axios({
+                method: "PUT",
+                url: `http://localhost:3000/parts/ram/${editProduct.id}/update`,
+                headers: {
+                    // access_token : localStorage.getItem("access_token")
+                    access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
+                },
+                data: {
+                    name,
+                    memory_type,
+                    chipset_memory: chipset,
+                    manufacturer,
+                    power_draw0,
+                    memory_speed,
+                    price,
+                    picture_url
+                }
+            })
+                .then(({ data }) => {
+                    console.log(data)
+                })
+                .catch(err => {
+                    console.log(err.response)
+                })
             console.log(state, "EDIT")
         } else {
-            console.log(state, "POST")
+            axios({
+                method: "POST",
+                url: "http://localhost:3000/parts/ram/add",
+                headers: {
+                    // access_token : localStorage.getItem("access_token")
+                    access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
+                },
+                data: {
+                    name,
+                    memory_type,
+                    chipset_memory: chipset,
+                    manufacturer,
+                    power_draw0,
+                    memory_speed,
+                    price,
+                    picture_url
+                }
+            })
+                .then(({ data }) => {
+                    console.log(data)
+                })
+                .catch(err => {
+                    console.log(err.response)
+                })
         }
         console.log(state)
     }

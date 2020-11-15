@@ -51,6 +51,7 @@ class UserController {
         lastname: req.body.lastname,
         email: req.body.email,
         password: req.body.password,
+        is_admin: false
       };
       const dataUser = await User.create(obj);
 
@@ -59,8 +60,6 @@ class UserController {
         username: dataUser.username,
         firstname: dataUser.firstname,
         lastname: dataUser.lastname,
-        email: dataUser.email,
-        password: dataUser.password,
         email: dataUser.email,
       });
     } catch (err) {
