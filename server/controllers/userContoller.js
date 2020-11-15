@@ -23,7 +23,7 @@ class UserController {
       if (!data || !comparePassword(obj.password, data.password)) {
         next({
           name: "Unauthorized",
-          message: "Wrong email/password",
+          message: "Wrong Password/Email",
         });
       } else {
         const obj = {

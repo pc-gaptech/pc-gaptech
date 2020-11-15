@@ -2,6 +2,21 @@
 
 const request = require("supertest");
 const app = require("../app");
+const {sequelize} = require("../models/index")
+const {queryInterface} = sequelize
+// const {encryptPassword} = require("../helpers/bcrypt")
+
+
+afterAll((done) => {
+    queryInterface.bulkDelete('Users', null, {})
+        .then(() => {
+            done()
+        })
+        .catch(err => {
+            //console.log(err)
+            done()
+        })
+})
 
 describe("Test User Register and login feature", () => {
 	const userData = {
@@ -23,11 +38,11 @@ describe("Test User Register and login feature", () => {
 				expect(body).toEqual(
 					expect.objectContaining({
 						id: expect.any(Number),
-						username: userData.lastname,
+						username: userData.username,
 						firstname: userData.firstname,
 						lastname: userData.lastname,
 						email: userData.email,
-						password: expect.any(String),
+						// password: expect.any(String),
 					}),
 				);
 				done();
@@ -45,7 +60,7 @@ describe("Test User Register and login feature", () => {
 				expect(status).toBe(400);
 				expect(body).toEqual(
 					expect.objectContaining({
-						message: "E-mail is Required",
+						message: "Email is Required",
 					}),
 				);
 				done();
@@ -63,7 +78,7 @@ describe("Test User Register and login feature", () => {
 				expect(status).toBe(400);
 				expect(body).toEqual(
 					expect.objectContaining({
-						message: "E-mail is Invalid",
+						message: "Email is Invalid",
 					}),
 				);
 				done();
@@ -108,9 +123,47 @@ describe("Test User Register and login feature", () => {
 			});
 	});
 
+	test("Register User Failed, Invalid First Name", (done) => {
+		userData.username = "test_username";
+		userData.firstname = "";
+		request(app)
+			.post("/register")
+			.send(userData)
+			.set("Accept", "application/json")
+			.then((res) => {
+				const { status, body } = res;
+				expect(status).toBe(400);
+				expect(body).toEqual(
+					expect.objectContaining({
+						message: "First Name is Required",
+					}),
+				);
+				done();
+			});
+	});
+
+	test("Register User Failed, Invalid Last Name", (done) => {
+		userData.firstname = "test_firstname";
+		userData.lastname = "";
+		request(app)
+			.post("/register")
+			.send(userData)
+			.set("Accept", "application/json")
+			.then((res) => {
+				const { status, body } = res;
+				expect(status).toBe(400);
+				expect(body).toEqual(
+					expect.objectContaining({
+						message: "Last Name is Required",
+					}),
+				);
+				done();
+			});
+	});
+
 	test("Login is Successfull", (done) => {
 		const loginData = {
-			username: "test_username",
+			email: "test_email@email.com",
 			password: "test_password",
 		};
 		request(app)
@@ -122,16 +175,17 @@ describe("Test User Register and login feature", () => {
 				expect(status).toBe(201);
 				expect(body).toEqual(
 					expect.objectContaining({
-						token_key: expect.any(String),
+						access_token: expect.any(String),
+						is_admin: expect.any(Boolean)
 					}),
 				);
 				done();
 			});
 	});
 
-	test("login is Failed, Wrong username", () => {
+	test("login is Failed, Wrong Email", (done) => {
 		const loginData = {
-			username: "wrong_username",
+			email: "wrong_email@email.com",
 			password: "test_password",
 		};
 
@@ -151,9 +205,9 @@ describe("Test User Register and login feature", () => {
 			});
 	});
 
-	test("login is Failed, Wrong password", () => {
+	test("login is Failed, Wrong password", (done) => {
 		const loginData = {
-			username: "test_username",
+			email: "test_email@email.com",
 			password: "wrong_password",
 		};
 
@@ -173,3 +227,5 @@ describe("Test User Register and login feature", () => {
 			});
 	});
 });
+
+
