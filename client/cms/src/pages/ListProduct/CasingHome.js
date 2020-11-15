@@ -1,12 +1,15 @@
 import React from "react";
 import { Table, Container } from "react-bootstrap";
 import ListProduct from "../../components/ListProduct";
-import { allProdcutVar } from "../../graphQl/cache";
+import { allProdcutVar, loadingvar } from "../../graphQl/cache";
 
 function CasingHome() {
+  const loading = loadingvar();
   const data = allProdcutVar();
   console.log(allProdcutVar(), data);
   const components = "casing";
+
+  if (loading) return <p>loading...</p>;
   return (
     <div>
       <Container>

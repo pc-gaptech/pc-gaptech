@@ -116,6 +116,9 @@ const resolvers = {
         // else {
         return axios
           .get(urlComponents, {
+            data: {
+              test: "sds",
+            },
             headers: {
               access_token,
             },

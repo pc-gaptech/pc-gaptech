@@ -12,6 +12,7 @@ const {
 
 class ComponentsController {
   static async getAll(req, res, next) {
+    console.log(req.body);
     try {
       const cpuData = await CPU.findAll();
       const gpuData = await GPU.findAll();
@@ -360,6 +361,7 @@ class ComponentsController {
   }
 
   static async deleteOne(req, res, next) {
+    console.log(req.params);
     try {
       let result = {};
       const { component, id } = req.params;
