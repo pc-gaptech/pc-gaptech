@@ -19,9 +19,11 @@ enum Socket {
   AM4
   LGA1151
   LGA1200
+  LGA1150
 }
 
 enum Chipset {
+  b450
   A320
   B350
   X370
@@ -99,8 +101,8 @@ extend type Query {
 
 `;
 //ganti akses token disini
-let access_token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1NDA0NzM1fQ.7fHAJulBFK-dcW1xeqTKx6jDLxryG0o0EnFTn_XZTtU";
+// let access_token =
+//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpc19hZG1pbiI6dHJ1ZSwiaWF0IjoxNjA1NDA0NzM1fQ.7fHAJulBFK-dcW1xeqTKx6jDLxryG0o0EnFTn_XZTtU";
 
 const resolvers = {
   Query: {

@@ -7,17 +7,20 @@ import {
 } from "./ListProduct"
 import { useQuery } from "@apollo/client"
 import { FECTH_ALL } from "../graphQl/query"
+import { allProdcutVar } from "../graphQl/cache"
 
 const Home = () => {
-    const { loading, error, data } = useQuery(FECTH_ALL)
-    console.log(data)
+    const { loading, error, data } = useQuery(FECTH_ALL, {
+        variables: { access_token: localStorage.getItem("access_token") }
+    })
+    // data.fetchAll.dataCPU
+    // const product = data.fetchAll
     if (loading) return <p>loading....</p>
+    allProdcutVar(data)
     return (
         <div>
-            {JSON.stringify(data)}
             <Container>
                 <h1>List Product</h1>
-                {JSON.stringify(data)}
                 <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
                     <Tab eventKey="cpu" title="CPU">
                         <CpuHome />

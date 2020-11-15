@@ -373,13 +373,13 @@ class ComponentsController {
         case "motherboard":
           result = await Motherboard.destroy({ where: { id } });
           break;
-        case "powerSupply":
+        case "powersupply":
           result = await PowerSupply.destroy({ where: { id } });
           break;
         case "ram":
           result = await RAM.destroy({ where: { id } });
           break;
-        case "cpuooler":
+        case "cpucooler":
           result = await CPUCooler.destroy({ where: { id } });
           break;
         case "storage":

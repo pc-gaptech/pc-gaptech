@@ -8,7 +8,7 @@ import { useMutation } from "@apollo/client"
 import axios from "axios"
 
 function CpuAdd() {
-    const editProduct = dataEdit()
+    const editProduct = useReactiveVar(dataEdit)
     const [checkStatus, setCheckStatus] = useState(false)
     const [addCpu, { data }] = useMutation(ADD_CPU)
     const [state, setstate] = useState({
@@ -87,13 +87,14 @@ function CpuAdd() {
                 })
             console.log(state)
         } else {
-            addCpu({
-                variables: {
-                    access_token: localStorage.getItem("access_token"),
-                    addcpu: state
-                }
-            })
+            // addCpu({
+            //     variables: {
+            //         access_token: localStorage.getItem("access_token"),
+            //         addcpu: state
+            //     }
+            // })
             console.log("masuk")
+            console.log(state)
             // axios({
             //     method: "POST",
             //     url: "http://localhost:3000/parts/cpu/add",
@@ -199,7 +200,7 @@ function CpuAdd() {
                 <Form.Group controlId="exampleForm.SelectCustom">
                     <Form.Label>GPU</Form.Label>
                     <Form.Control
-                        name="socket" as="select" onChange={handleChange}>
+                        name="isIGPU" as="select" onChange={handleChange}>
                         <option >Please Select</option>
                         <option selected={checkStatus && editProduct.isIGPU === true} value="yes">yes</option>
                         <option selected={checkStatus && editProduct.isIGPU === false} value="no">no</option>
