@@ -13,7 +13,7 @@ const baseUrl = "http://localhost:3000";
 
 const typeDefs = gql`
 
-input inputCpuColler {
+input inputCPUCooler {
     ${inputCpuColler}
 }
 
@@ -29,7 +29,7 @@ input inputGPU {
     ${inputGPU}
 }
 
-input inputPowerSupplay {
+input inputPowerSupply {
     ${inputPowerSupplay}
 }
 
@@ -50,11 +50,11 @@ type DeleteMessage {
 }
 extend type Mutation {
     addCpu(access_token:String, addcpu:inputCPU):CPU 
-    addCpuColler(access_token:String,addCPU:inputCpuColler):CPUCooler
+    addCpuColler(access_token:String,addCPU:inputCPUCooler):CPUCooler
     addMotherboard(access_token:String,addMotherboard:inputMotherboard):Motherboard
     addCasing(access_token:String,addCasing:inputCasing):Casing
     addGPU(access_token:String,addGPU:inputGPU):GPU
-    addPowerSupplay(access_token:String,addPowerSupplay:inputPowerSupplay):PowerSupply
+    addPowerSupplay(access_token:String,addPowerSupplay:inputPowerSupply):PowerSupply
     addRAM(access_token:String,addRAM:inputRAM):RAM
     addStorage(access_token:String,addStorage:inputStorage):Storage
     deleteProduct(access_token:String,id:ID,part:String):DeleteMessage

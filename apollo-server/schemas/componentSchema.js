@@ -65,65 +65,36 @@ type CPU {
   ${partCPU}
 }
 
-input inputCPU {
-  ${inputCPU}
-}
-
 type Storage {
   ${partStorage}
-}
-
-input inputStorage {
-  ${inputStorage}
 }
 
 type Casing {
   ${partCasing}
 }
 
-input inputCasing {
-  ${inputCasing}
-}
-
 type CPUCooler {
   ${partCPUCooler}
-}
-
-input inputCPUCooler {
-  ${inputCPUCooler}
 }
 
 type Motherboard {
   ${partMotherboard}
 }
 
-input inputMotherboard {
-  ${inputMotherboard}
-}
-
 type PowerSupply {
   ${partPowerSupply}
 }
 
-input inputPowerSupply {
-  ${inputPowerSupply}
-}
 
 type RAM {
   ${partRAM}
 }
 
-input inputRAM {
-  ${inputRAM}
-}
 
 type GPU {
   ${partGPU}
 }
 
-input inputGPU {
-  ${inputGPU}
-} 
 
 type all {
   ${typeAll}
