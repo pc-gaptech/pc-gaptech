@@ -50,8 +50,7 @@ describe("Test Get all one type of component, (/parts/:component)", () => {
       .set('access_token', access_token)
       .then((res) => {
         const { body, status } = res;
-        expect(status).toBe(200);
-        console.log(body[0], "<<<<<<<<<<<<<<<<<<<<<")
+        expect(status).toBe(200)
         expect(body).toEqual(
           expect.arrayContaining([
             expect.objectContaining({
@@ -76,7 +75,8 @@ describe("Test Get all one type of component, (/parts/:component)", () => {
 
   test("Get All CPU_Cooler", (done) => {
     request(app)
-      .get("/parts/CPU_cooler")
+      .get("/parts/cpuooler")
+      .set('access_token', access_token)
       .then((res) => {
         const { body, status } = res;
         expect(status).toBe(200);
@@ -85,7 +85,7 @@ describe("Test Get all one type of component, (/parts/:component)", () => {
             expect.objectContaining({
               id: expect.any(Number),
               name: expect.any(String),
-              socket: expect.any(String),
+              socket: expect.arrayContaining([expect.any(String)]),
               TDP: expect.any(Number),
               manufacturer: expect.any(String),
               power_draw: expect.any(Number),
@@ -101,6 +101,7 @@ describe("Test Get all one type of component, (/parts/:component)", () => {
   test("Get All Motherboard", (done) => {
     request(app)
       .get("/parts/motherboard")
+      .set('access_token', access_token)
       .then((res) => {
         const { body, status } = res;
         expect(status).toBe(200);
@@ -126,6 +127,7 @@ describe("Test Get all one type of component, (/parts/:component)", () => {
   test("Get All Storage", (done) => {
     request(app)
       .get("/parts/storage")
+      .set('access_token', access_token)
       .then((res) => {
         const { body, status } = res;
         expect(status).toBe(200);
@@ -134,7 +136,7 @@ describe("Test Get all one type of component, (/parts/:component)", () => {
             expect.objectContaining({
               id: expect.any(Number),
               name: expect.any(String),
-              capacity: expect.any(String),
+              capacity: expect.any(Number),
               manufacturer: expect.any(String),
               power_draw: expect.any(Number),
               storage_type: expect.any(String),
@@ -149,7 +151,8 @@ describe("Test Get all one type of component, (/parts/:component)", () => {
 
   test("Get All RAM", (done) => {
     request(app)
-      .get("/parts/RAM")
+      .get("/parts/ram")
+      .set('access_token', access_token)
       .then((res) => {
         const { body, status } = res;
         expect(status).toBe(200);
@@ -174,7 +177,8 @@ describe("Test Get all one type of component, (/parts/:component)", () => {
 
   test("Get All GPU", (done) => {
     request(app)
-      .get("/parts/GPU")
+      .get("/parts/gpu")
+      .set('access_token', access_token)
       .then((res) => {
         const { body, status } = res;
         expect(status).toBe(200);
@@ -183,8 +187,8 @@ describe("Test Get all one type of component, (/parts/:component)", () => {
             expect.objectContaining({
               id: expect.any(Number),
               name: expect.any(String),
-              memory_type: expect.any(String),
-              GPU_chipset: expect.any(String),
+              // memory_type: expect.any(String),
+              gpu_chipset: expect.any(String),
               manufacturer: expect.any(String),
               power_draw: expect.any(Number),
               rating: expect.any(Number),
@@ -199,7 +203,8 @@ describe("Test Get all one type of component, (/parts/:component)", () => {
 
   test("Get All Power Supply", (done) => {
     request(app)
-      .get("/parts/power_supply")
+      .get("/parts/powerSupply")
+      .set('access_token', access_token)
       .then((res) => {
         const { body, status } = res;
         expect(status).toBe(200);
@@ -208,7 +213,7 @@ describe("Test Get all one type of component, (/parts/:component)", () => {
             expect.objectContaining({
               id: expect.any(Number),
               name: expect.any(String),
-              efficiency: expect.any(Number),
+              efficiency: expect.any(String),
               manufacturer: expect.any(String),
               max_power: expect.any(Number),
               price: expect.any(Number),
@@ -223,6 +228,7 @@ describe("Test Get all one type of component, (/parts/:component)", () => {
   test("Get All Casing", (done) => {
     request(app)
       .get("/parts/casing")
+      .set('access_token', access_token)
       .then((res) => {
         const { body, status } = res;
         expect(status).toBe(200);
@@ -245,12 +251,14 @@ describe("Test Get all one type of component, (/parts/:component)", () => {
   test("Component part name is wrong", (done) => {
     request(app)
       .get("/parts/random")
+      .set('access_token', access_token)
       .then((res) => {
         const { body, status } = res;
-        expect(status).toBe(404);
+        expect(status).toBe(400);
+        console.log(body, "<<<<<<<<<<<<<<<<<<<<<<")
         expect(body).toEqual(
           expect.objectContaining({
-            status: expect.any("Wrong Component Part"),
+            message: "Component type name Invalid"
           })
         );
         done();
@@ -261,7 +269,8 @@ describe("Test Get all one type of component, (/parts/:component)", () => {
 describe("Test get detail from components, (/parts/:component/:id/details)", () => {
   test("Get Detail of 1 CPU", (done) => {
     request(app)
-      .get("/parts/CPU/1/details")
+      .get("/parts/cpu/1/detail")
+      .set('access_token', access_token)
       .then((res) => {
         const { body, status } = res;
         expect(status).toBe(200);
@@ -269,13 +278,13 @@ describe("Test get detail from components, (/parts/:component/:id/details)", () 
           expect.objectContaining({
             id: expect.any(Number),
             name: expect.any(String),
-            socket: expect.any([expect.any(String)]),
-            chipset: expect.any([expect.any(String)]),
+            socket: expect.any(String),
+            chipset: expect.arrayContaining([expect.any(String)]),
             TDP: expect.any(Number),
             manufacturer: expect.any(String),
-            power_draw: expect.any(String),
+            power_draw: expect.any(Number),
             core_count: expect.any(Number),
-            is_iGPU: expect.any(Number),
+            isIGPU: expect.any(Boolean),
             max_rating: expect.any(Number),
             price: expect.any(Number),
             picture_url: expect.any(String),
@@ -287,7 +296,8 @@ describe("Test get detail from components, (/parts/:component/:id/details)", () 
 
   test("Get Detail of 1 CPU_Cooler", (done) => {
     request(app)
-      .get("/parts/CPU_Cooler/1/details")
+      .get("/parts/cpucooler/1/detail")
+      .set('access_token', access_token)
       .then((res) => {
         const { body, status } = res;
         expect(status).toBe(200);
@@ -295,10 +305,10 @@ describe("Test get detail from components, (/parts/:component/:id/details)", () 
           expect.objectContaining({
             id: expect.any(Number),
             name: expect.any(String),
-            socket: expect.any([expect.any(String)]),
+            socket: expect.arrayContaining([expect.any(String)]),
             TDP: expect.any(Number),
             manufacturer: expect.any(String),
-            power_draw: expect.any(String),
+            power_draw: expect.any(Number),
             price: expect.any(Number),
             picture_url: expect.any(String),
           })
@@ -309,7 +319,8 @@ describe("Test get detail from components, (/parts/:component/:id/details)", () 
 
   test("Get Detail of 1 Motherboard", (done) => {
     request(app)
-      .get("/parts/motherboard/1/details")
+      .get("/parts/motherboard/1/detail")
+      .set('access_token', access_token)
       .then((res) => {
         const { body, status } = res;
         expect(status).toBe(200);
@@ -317,11 +328,11 @@ describe("Test get detail from components, (/parts/:component/:id/details)", () 
           expect.objectContaining({
             id: expect.any(Number),
             name: expect.any(String),
-            socket: expect.any([expect.any(String)]),
-            chipset: expect.any([expect.any(String)]),
-            form_factor: expect.any([expect.any(String)]),
+            socket: expect.any(String),
+            chipset: expect.any(String),
+            form_factor: expect.any(String),
             manufacturer: expect.any(String),
-            power_draw: expect.any(String),
+            power_draw: expect.any(Number),
             price: expect.any(Number),
             picture_url: expect.any(String),
           })
@@ -332,15 +343,17 @@ describe("Test get detail from components, (/parts/:component/:id/details)", () 
 
   test("Get Detail of 1 Casing", (done) => {
     request(app)
-      .get("/parts/casing/1/details")
+      .get("/parts/casing/1/detail")
+      .set('access_token', access_token)
       .then((res) => {
         const { body, status } = res;
         expect(status).toBe(200);
+        console.log(body)
         expect(body).toEqual(
           expect.objectContaining({
             id: expect.any(Number),
             name: expect.any(String),
-            form_factor: expect.any([expect.any(String)]),
+            form_factor: expect.any(String),
             manufacturer: expect.any(String),
             price: expect.any(Number),
             picture_url: expect.any(String),
@@ -352,7 +365,8 @@ describe("Test get detail from components, (/parts/:component/:id/details)", () 
 
   test("Get Detail of 1 Power Supply", (done) => {
     request(app)
-      .get("/parts/power_supply/1/details")
+      .get("/parts/powerSupply/1/detail")
+      .set('access_token', access_token)
       .then((res) => {
         const { body, status } = res;
         expect(status).toBe(200);
@@ -360,7 +374,7 @@ describe("Test get detail from components, (/parts/:component/:id/details)", () 
           expect.objectContaining({
             id: expect.any(Number),
             name: expect.any(String),
-            efficiency: expect.any(expect.any(String)),
+            efficiency: expect.any(String),
             max_power: expect.any(Number),
             manufacturer: expect.any(String),
             price: expect.any(Number),
@@ -373,7 +387,8 @@ describe("Test get detail from components, (/parts/:component/:id/details)", () 
 
   test("Get Detail of 1 Storage", (done) => {
     request(app)
-      .get("/parts/storage/1/details")
+      .get("/parts/storage/1/detail")
+      .set('access_token', access_token)
       .then((res) => {
         const { body, status } = res;
         expect(status).toBe(200);
@@ -382,8 +397,8 @@ describe("Test get detail from components, (/parts/:component/:id/details)", () 
             id: expect.any(Number),
             name: expect.any(String),
             capacity: expect.any(Number),
-            storage_type: expect.any([expect.any(String)]),
-            power_draw: expect.any(String),
+            storage_type: expect.any(String),
+            power_draw: expect.any(Number),
             manufacturer: expect.any(String),
             price: expect.any(Number),
             picture_url: expect.any(String),
@@ -395,7 +410,8 @@ describe("Test get detail from components, (/parts/:component/:id/details)", () 
 
   test("Get Detail of 1 RAM", (done) => {
     request(app)
-      .get("/parts/RAM/1/details")
+      .get("/parts/ram/1/detail")
+      .set('access_token', access_token)
       .then((res) => {
         const { body, status } = res;
         expect(status).toBe(200);
@@ -403,11 +419,11 @@ describe("Test get detail from components, (/parts/:component/:id/details)", () 
           expect.objectContaining({
             id: expect.any(Number),
             name: expect.any(String),
-            memory_type: expect.any([expect.any(String)]),
-            chipset: expect.any([expect.any(String)]),
+            memory_type: expect.any(String),
+            chipset: expect.arrayContaining([expect.any(String)]),
             manufacturer: expect.any(String),
-            power_draw: expect.any(String),
-            memory_speed: expect.any(String),
+            power_draw: expect.any(Number),
+            memory_speed: expect.any(Number),
             price: expect.any(Number),
             picture_url: expect.any(String),
           })
@@ -418,19 +434,19 @@ describe("Test get detail from components, (/parts/:component/:id/details)", () 
 
   test("Get Detail of 1 GPU", (done) => {
     request(app)
-      .get("/parts/GPU/1/details")
+      .get("/parts/gpu/1/detail")
+      .set('access_token', access_token)
       .then((res) => {
         const { body, status } = res;
         expect(status).toBe(200);
+        console.log(body)
         expect(body).toEqual(
           expect.objectContaining({
             id: expect.any(Number),
             name: expect.any(String),
-            socket: expect.any([expect.any(String)]),
-            chipset: expect.any([expect.any(String)]),
-            form_factor: expect.any([expect.any(String)]),
+            price: expect.any(Number),
             manufacturer: expect.any(String),
-            power_draw: expect.any(String),
+            gpu_chipset: expect.any(String),
             price: expect.any(Number),
             picture_url: expect.any(String),
           })
@@ -441,25 +457,29 @@ describe("Test get detail from components, (/parts/:component/:id/details)", () 
 
   test("Component part name is wrong", (done) => {
     request(app)
-      .get("/parts/random/1/details")
+      .get("/parts/random/1/detail")
+      .set('access_token', access_token)
       .then((res) => {
         const { body, status } = res;
-        expect(status).toBe(404);
+        expect(status).toBe(400);
         expect(body).toEqual(
           expect.objectContaining({
-            status: expect.any("Wrong Component Part"),
+            message: "Component type name Invalid",
           })
         );
         done();
       });
   });
 
+  //?
   test("Component part id is wrong", (done) => {
     request(app)
-      .get("/parts/CPU/random/details")
+      .get("/parts/cpu/random/detail")
+      .set('access_token', access_token)
       .then((res) => {
         const { body, status } = res;
         expect(status).toBe(404);
+        console.log(body)
         expect(body).toEqual(
           expect.objectContaining({
             status: expect.any("Wrong ID Part"),
@@ -474,9 +494,11 @@ describe("Test of /games endpoint", () => {
   test("Succesfully fetch games", (done) => {
     request(app)
       .get("/games")
+      .set('access_token', access_token)
       .then((res) => {
         const { body, status } = res;
         expect(status).toBe(200);
+        console.log(body, "<<<<<<<<<<<<<<<")
         expect(body).toEqual(
           expect.arrayContaining([
             expect.objectContaining({
