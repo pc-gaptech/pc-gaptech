@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -14,6 +14,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 import Copyright from '../components/Copyright'
+
+import axios from 'axios'
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -36,11 +39,36 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Login() {
+  const [input, setInput] = useState({
+    email: "",
+    password: ""
+  })
   const classes = useStyles();
+
+
+  const changeInput = (e) => {
+    const { name, value } = e.target
+    setInput({
+      ...input,
+      [name]: value
+    })
+  }
+
+  const history = useHistory()
+  const login = (e) => {
+    e.preventDefault()
+    axios.post("http://localhost:3000/login", input)
+      .then(({data}) => {
+        localStorage.setItem('access_token', data.access_token)
+        history.push('/')
+      })
+      .catch(err => console.log(err))
+  }
 
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
+      <p>{JSON.stringify(input)}</p>
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
@@ -59,6 +87,7 @@ export default function Login() {
             name="email"
             autoComplete="email"
             autoFocus
+            onChange={(e) => changeInput(e)}
           />
           <TextField
             variant="outlined"
@@ -70,6 +99,7 @@ export default function Login() {
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={(e) => changeInput(e)}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
@@ -81,6 +111,7 @@ export default function Login() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={(e) => login(e)}
           >
             Sign In
           </Button>

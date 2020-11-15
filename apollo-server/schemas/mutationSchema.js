@@ -9,7 +9,7 @@ const { inputPowerSupplay } = require("./mutation/powerSupplayMutation")
 const { inputRAM } = require("./mutation/RamMutation")
 const { inputStorage } = require("./mutation/storageMutation")
 const axios = require("axios")
-const baseUrl = "http://localhost:3000"
+const baseUrl = "http://localhost:3001"
 
 const typeDefs = gql`
 

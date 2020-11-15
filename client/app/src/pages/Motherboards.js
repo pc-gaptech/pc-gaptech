@@ -47,12 +47,16 @@ export default function Motherboards() {
     const [result, setResult] = useState({})
 
     useEffect(() => {
-        axios.get("http://localhost:3001/parts/motherboard")
+        axios({
+            url: "http://localhost:3000/parts/motherboard",
+            headers: {access_token: localStorage.getItem('access_token')}
+        })
             .then(({data}) => {
+                console.log(data)
                 setResult(data)
             })
             .catch(err => console.log(err))
-    }, [])
+    }, [result])
 
     return (
         <Container>
