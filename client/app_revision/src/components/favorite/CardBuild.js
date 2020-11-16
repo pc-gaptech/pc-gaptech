@@ -1,5 +1,4 @@
 import {
-	Button,
 	Card,
 	CardActionArea,
 	CardActions,
@@ -15,6 +14,8 @@ import DesktopWindowsIcon from "@material-ui/icons/DesktopWindows";
 import { useMutation } from "@apollo/client";
 import { DELETE_ONE_FAVORITE } from "../../graphql/mutations";
 import { GET_ALL_FAVORITE_CONFIG } from "../../graphql/query";
+import { config } from "../../graphql/reactiveVars";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
 	root: {
@@ -28,6 +29,7 @@ const useStyles = makeStyles({
 export default function CardBuild(props) {
 	const classes = useStyles();
 	const { item } = props;
+	const history = useHistory();
 
 	const [deleteOneFavorite] = useMutation(DELETE_ONE_FAVORITE);
 
@@ -45,6 +47,22 @@ export default function CardBuild(props) {
 				},
 			],
 		});
+	};
+
+	const handleDetail = (e) => {
+		config({
+			name: "BUILD 1",
+			CPUId: item.CPUId,
+			CPUCoolerId: item.CPUCoolerId,
+			MotherboardId: item.MotherboardId,
+			GPUId: item.GPUId,
+			RAMId: item.RAMId,
+			StorageId: item.StorageId,
+			PowerSupplyId: item.PowerSupplyId,
+			CasingId: item.CasingId,
+			rating: item.rating,
+		});
+		history.push("/finished");
 	};
 
 	return (
@@ -67,7 +85,12 @@ export default function CardBuild(props) {
 					</CardContent>
 				</CardActionArea>
 				<CardActions style={{ borderTop: "0.4px solid #e8e8e8" }}>
-					<IconButton aria-label="favorite">
+					<IconButton
+						onClick={(e) => {
+							handleDetail(e);
+						}}
+						aria-label="favorite"
+					>
 						<DesktopWindowsIcon />
 					</IconButton>
 					<IconButton
