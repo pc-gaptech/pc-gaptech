@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Form, Button, Container } from "react-bootstrap";
 import { dataEdit } from "../../graphQl/cache";
 import { useReactiveVar, useMutation } from "@apollo/client";
-import axios from "axios";
 import { EDIT_GPU } from "../../graphQl/mutationEdit";
 import { FECTH_ALL } from "../../graphQl/query";
 import { useHistory } from "react-router-dom";
+import { ADD_GPU } from "../../graphQl/mutation";
 
 function GpuAdd() {
   const history = useHistory();
@@ -19,6 +19,17 @@ function GpuAdd() {
     price: "",
     rating: "",
     picture_url: "",
+  });
+  const [addGPU] = useMutation(ADD_GPU, {
+    refetchQueries: [
+      {
+        query: FECTH_ALL,
+        variables: { access_token: localStorage.access_token },
+      },
+    ],
+    onCompleted: () => {
+      history.push("/");
+    },
   });
   const [editGPU] = useMutation(EDIT_GPU, {
     refetchQueries: [
@@ -50,11 +61,12 @@ function GpuAdd() {
   }, [editProduct]);
   function SubmitGpu(e) {
     e.preventDefault();
-    state.id = +state.id;
+
     state.power_draw = +state.power_draw;
     state.price = +state.price;
     state.rating = +state.rating;
     if (checkStatus) {
+      state.id = +state.id;
       const dataGPU = {
         name: state.name,
         power_draw: state.power_draw,
@@ -74,40 +86,13 @@ function GpuAdd() {
       };
 
       editGPU(vars);
-      // edit method
-      // axios({
-      //   method: "PUT",
-      //   url: `http://localhost:3000/parts/gpu/${editProduct.id}/update`,
-      //   headers: {
-      //     access_token: localStorage.getItem("access_token"),
-      //     // access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
-      //   },
-      //   data: state,
-      // })
-      //   .then(({ data }) => {
-      //     history.push("/");
-      //     console.log(data);
-      //   })
-      //   .catch((err) => {
-      //     console.log(err.response);
-      //   });
-      console.log(state, "EDIT");
     } else {
-      axios({
-        method: "POST",
-        url: "http://localhost:3000/parts/gpu/add",
-        headers: {
+      addGPU({
+        variables: {
           access_token: localStorage.getItem("access_token"),
-          // access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
+          dataGPU: state,
         },
-        data: state,
-      })
-        .then(({ data }) => {
-          history.push("/");
-        })
-        .catch((err) => {
-          console.log(err.response);
-        });
+      });
     }
   }
 

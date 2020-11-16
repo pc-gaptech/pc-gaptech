@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Form, Button, Container } from "react-bootstrap";
 import { dataEdit } from "../../graphQl/cache";
 import { useReactiveVar, useMutation } from "@apollo/client";
-import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { EDIT_MOTHERBOARD } from "../../graphQl/mutationEdit";
 import { FECTH_ALL } from "../../graphQl/query";
+import { ADD_MOTHERBOARD } from "../../graphQl/mutation";
 
 function MotherBoardAdd() {
   const history = useHistory();
@@ -20,6 +20,17 @@ function MotherBoardAdd() {
     power_draw: 0,
     price: 0,
     picture_url: "",
+  });
+  const [addMotherboard] = useMutation(ADD_MOTHERBOARD, {
+    refetchQueries: [
+      {
+        query: FECTH_ALL,
+        variables: { access_token: localStorage.access_token },
+      },
+    ],
+    onCompleted: () => {
+      history.push("/");
+    },
   });
   const [editMotherboard] = useMutation(EDIT_MOTHERBOARD, {
     refetchQueries: [
@@ -52,10 +63,10 @@ function MotherBoardAdd() {
   }, [editProduct]);
   function SumbitMotherBoard(e) {
     e.preventDefault();
-    state.id = +state.id;
     state.power_draw = +state.power_draw;
     state.price = +state.price;
     if (checkStatus) {
+      state.id = +state.id;
       const dataMotherboard = {
         name: state.name,
         socket: state.socket,
@@ -76,40 +87,13 @@ function MotherBoardAdd() {
       };
 
       editMotherboard(vars);
-      // edit method
-      // axios({
-      //   method: "PUT",
-      //   url: `http://localhost:3000/parts/motherboard/${editProduct.id}/update`,
-      //   headers: {
-      //     access_token: localStorage.getItem("access_token"),
-      //     // access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
-      //   },
-      //   data: state,
-      // })
-      //   .then(({ data }) => {
-      //     history.push("/");
-      //   })
-      //   .catch((err) => {
-      //     console.log(err.response);
-      //   });
-      console.log(state);
     } else {
-      axios({
-        method: "POST",
-        url: "http://localhost:3000/parts/motherboard/add",
-        headers: {
+      addMotherboard({
+        variables: {
           access_token: localStorage.getItem("access_token"),
-          // access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
+          dataMotherboard: state,
         },
-        data: state,
-      })
-        .then(({ data }) => {
-          console.log(data);
-        })
-        .catch((err) => {
-          console.log(err.response);
-        });
-      console.log(state);
+      });
     }
   }
   function handleChange(e) {

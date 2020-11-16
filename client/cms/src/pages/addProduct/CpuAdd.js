@@ -15,7 +15,7 @@ function CpuAdd() {
   const history = useHistory();
   const editProduct = useReactiveVar(dataEdit);
   const [checkStatus, setCheckStatus] = useState(false);
-  const [addCpu, { data }] = useMutation(ADD_CPU);
+
   const [state, setstate] = useState({
     name: "",
     socket: "",
@@ -29,8 +29,17 @@ function CpuAdd() {
     price: 0,
     picture_url: "",
   });
-  console.log(editProduct);
-
+  const [addCpu] = useMutation(ADD_CPU, {
+    refetchQueries: [
+      {
+        query: FECTH_ALL,
+        variables: { access_token: localStorage.access_token },
+      },
+    ],
+    onCompleted: () => {
+      history.push("/");
+    },
+  });
   const [editCPU] = useMutation(EDIT_CPU, {
     refetchQueries: [
       {
@@ -66,27 +75,14 @@ function CpuAdd() {
   }, [editProduct]);
   function submitCpu(e) {
     e.preventDefault();
-    state.id = +state.id;
     state.TDP = +state.TDP;
     state.price = +state.price;
     state.core_count = +state.core_count;
     state.power_draw = +state.power_draw;
     state.max_rating = +state.max_rating;
     state.isIGPU = state.isIGPU === "yes" ? true : false;
-    const {
-      name,
-      socket,
-      chipset,
-      TDP,
-      manufacturer,
-      power_draw,
-      core_count,
-      isIGPU,
-      max_rating,
-      price,
-      picture_url,
-    } = state;
     if (checkStatus) {
+      state.id = +state.id;
       const dataCPU = {
         name: state.name,
         socket: state.socket,
@@ -110,83 +106,13 @@ function CpuAdd() {
       };
 
       editCPU(vars);
-      // edit method
-      // axios({
-      //   method: "PUT",
-      //   url: `http://localhost:3000/parts/cpu/${editProduct.id}/update`,
-      //   headers: {
-      //     access_token: localStorage.getItem("access_token"),
-      //     // access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
-      //   },
-      //   data: {
-      //     name,
-      //     socket,
-      //     chipset_cpu: chipset,
-      //     TDP,
-      //     manufacturer,
-      //     power_draw,
-      //     core_count,
-      //     isIGPU,
-      //     max_rating,
-      //     price,
-      //     picture_url,
-      //   },
-      // })
-      //   .then(({ data }) => {
-      //     history.push("/");
-      //   })
-      //   .catch((err) => {
-      //     console.log(err.response);
-      //   });
-      console.log(state);
     } else {
-      //   addCpu({
-      //     variables: {
-      //       access_token: localStorage.getItem("access_token"),
-      //       addcpu: {
-      //         name,
-      //         socket,
-      //         chipset_cpu: chipset,
-      //         TDP,
-      //         manufacturer,
-      //         // power_draw,
-      //         // core_count,
-      //         // isIGPU,
-      //         // max_rating,
-      //         // price,
-      //         // picture_url,
-      //       },
-      //     },
-      //   });
-      console.log("masuk");
-      console.log(state);
-      axios({
-        method: "POST",
-        url: "http://localhost:3000/parts/cpu/add",
-        headers: {
+      addCpu({
+        variables: {
           access_token: localStorage.getItem("access_token"),
-          // access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
+          addcpu: state,
         },
-        data: {
-          name,
-          socket,
-          chipset_cpu: chipset,
-          TDP,
-          manufacturer,
-          power_draw,
-          core_count,
-          isIGPU,
-          max_rating,
-          price,
-          picture_url,
-        },
-      })
-        .then((response) => {
-          history.push("/");
-        })
-        .catch((err) => {
-          console.log(err.response);
-        });
+      });
     }
   }
   function handleChipset(e) {
@@ -282,13 +208,13 @@ function CpuAdd() {
               selected={checkStatus && editProduct.isIGPU === true}
               value="yes"
             >
-              yes
+              YES
             </option>
             <option
               selected={checkStatus && editProduct.isIGPU === false}
               value="no"
             >
-              no
+              NO
             </option>
           </Form.Control>
         </Form.Group>

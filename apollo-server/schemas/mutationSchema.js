@@ -63,7 +63,6 @@ extend type Mutation {
 const resolvers = {
   Mutation: {
     deleteProduct: async (_, args) => {
-      console.log(args);
       try {
         let { data } = await axios.delete(
           `${baseUrl}/parts/${args.part}/${args.id}/delete`,
@@ -80,61 +79,70 @@ const resolvers = {
       }
     },
     addPowerSupply: async (_, { access_token, dataPowerSupply }) => {
-      console.log(dataPowerSupply);
+      console.log(dataPowerSupply, "<<<<");
       try {
-        const { data } = await axios({
-          method: "post",
-          url: `${baseUrl}/parts/powersupply/add`,
+        return axios({
+          method: "POST",
+          url: "http://localhost:3000/parts/powerSupply/add",
           data: dataPowerSupply,
           headers: {
             access_token,
           },
-        });
-        // redis.del("powersupply");
-        return data;
+        })
+          .then(async ({ data }) => {
+            await redis.del("powersupply");
+            return data;
+          })
+          .catch((err) => {
+            throw new ApolloError(err);
+          });
       } catch (error) {
-        throw new ApolloError(error);
+        throw new ApolloError(err);
       }
     },
     addRAM: async (_, { access_token, dataRAM }) => {
-      console.log(dataRAM, access_token);
-      const {
-        name,
-        memory_type,
-        chipset,
-        manufacturer,
-        power_draw0,
-        memory_speed,
-        price,
-        picture_url,
-      } = dataRAM;
+      console.log(dataRAM);
       try {
-        const { data } = await axios({
+        const {
+          name,
+          memory_type,
+          chipset,
+          manufacturer,
+          power_draw,
+          memory_speed,
+          price,
+          picture_url,
+        } = dataRAM;
+        return axios({
           method: "POST",
-          url: `${baseUrl}/parts/ram/add`,
-          headers: {
-            access_token,
-          },
+          url: "http://localhost:3000/parts/ram/add",
           data: {
             name,
             memory_type,
             chipset_memory: chipset,
             manufacturer,
-            power_draw0,
+            power_draw,
             memory_speed,
             price,
             picture_url,
           },
-        });
-        redis.del("ram");
-        return data;
+          headers: {
+            access_token,
+          },
+        })
+          .then(async ({ data }) => {
+            await redis.del("ram");
+            return data;
+          })
+          .catch((err) => {
+            throw new ApolloError(err);
+          });
       } catch (error) {
-        throw new ApolloError(error);
+        throw new ApolloError(err);
       }
     },
 
     addCpu: async (_, { access_token, addcpu }) => {
-      //   console.log(args, "<<<");
       const {
         name,
         socket,
@@ -177,7 +185,7 @@ const resolvers = {
       }
     },
     addCpuCooler: async (_, { access_token, addCPU }) => {
-      console.log(addCPU);
+      console.log(addCPU, access_token);
       const {
         name,
         socket,
@@ -246,7 +254,7 @@ const resolvers = {
       }
     },
     addGPU: async (_, { access_token, dataGPU }) => {
-      console.log(dataGPU);
+      console.log(dataGPU, "GPU");
       try {
         const { data } = await axios({
           method: "POST",
@@ -264,7 +272,7 @@ const resolvers = {
     },
 
     addStorage: async (_, { access_token, dataStorage }) => {
-      console.log(dataStorage);
+      console.log(dataStorage, "STORAGEE");
       try {
         const { data } = await axios({
           method: "POST",
@@ -281,8 +289,6 @@ const resolvers = {
       }
     },
   },
-  //
-  //
 };
 
 module.exports = {
