@@ -117,7 +117,6 @@ class ComponentsController {
   }
 
   static async addOne(req, res, next) {
-    console.log(req.body);
     try {
       const {
         name,
@@ -350,6 +349,7 @@ class ComponentsController {
           result = await Casing.update(componentInput, { where: { id } });
           break;
         default:
+          console.log("masuk sini bang");
           next({ name: "BadRequest", message: "Component type name Invalid" });
           break;
       }
@@ -357,6 +357,7 @@ class ComponentsController {
         res.status(201).json({ message: "Update Success" });
       }
     } catch (err) {
+      console.log("atau masuk sini");
       next(err);
     }
   }
