@@ -8,17 +8,16 @@ import Register from "./pages/user/Register";
 import Login from "./pages/user/Login";
 import Configurator from "./pages/configurator/configurator";
 import PartList from "./pages/configurator/PartList";
-import Favorites from "./pages/favorite/Favorites"
+import Favorites from "./pages/favorite/Favorites";
 import DetailPart from "./pages/detailPart";
 import FinishedBuild from "./pages/configurator/FinishedBuild";
-
 
 function App() {
 	return (
 		<div className="App">
 			<ApolloProvider client={Client}>
-				<Navbar />
 				<Router>
+					<Navbar />
 					<Switch>
 						<Route exact path="/configurator/parts/:component/:id" component={DetailPart} />
 						<Route exact path="/configurator/parts/:componentType" component={PartList} />

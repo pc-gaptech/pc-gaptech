@@ -61,12 +61,20 @@ export default function Configurator() {
 				variables: {
 					access_token: localStorage.getItem("access_token"),
 					config: {
-						...displayedConfig,
+						CPUId: displayedConfig.CPUId,
+						CPUCoolerId: displayedConfig.CPUCoolerId,
+						MotherboardId: displayedConfig.MotherboardId,
+						GPUId: displayedConfig.GPUId,
+						RAMId: displayedConfig.RAMId,
+						StorageId: displayedConfig.StorageId,
+						PowerSupplyId: displayedConfig.PowerSupplyId,
+						CasingId: displayedConfig.CasingId,
 					},
 				},
 			});
 			setIsConfigValid(true);
 		} catch (err) {
+			console.log(err);
 			setIsConfigValid(false);
 		}
 	};
@@ -74,7 +82,7 @@ export default function Configurator() {
 	const handleNext = async (e) => {
 		e.preventDefault();
 		if (isConfigValid) {
-			history.push("/configurator/finish");
+			history.push("/finished");
 		}
 	};
 

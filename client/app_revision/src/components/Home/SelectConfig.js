@@ -3,7 +3,6 @@ import {
   Button,
   CardActionArea,
   CardMedia,
-  Typography,
   makeStyles,
 } from "@material-ui/core";
 import Swal from "sweetalert2";
