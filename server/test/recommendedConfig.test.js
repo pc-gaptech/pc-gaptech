@@ -132,10 +132,10 @@ describe("Test Recommended Config", () => {
       .set("Accept", "application/json")
       .then((res) => {
         const { status, body } = res;
-        expect(status).toBe(500);
+        expect(status).toBe(400);
         expect(body).toEqual(
           expect.objectContaining({
-            message: 'invalid input syntax for type integer: "470as"',
+            message: "Component type name Invalid",
           })
         );
         done();
@@ -205,11 +205,12 @@ describe("Test Recommended Config", () => {
   test("Get recommended config based on games ratings Successfull", (done) => {
     request(app)
       .get("/recommendpc")
-      .query({ gamesId: "1,2" })
+      .query({ gamesId: "1,2,3" })
       .set("access_token", access_token)
       .set("Accept", "application/json")
       .then((res) => {
         const { status, body } = res;
+        console.log(body, "zazazazaza");
         expect(status).toBe(200);
         expect(body).toEqual(
           expect.objectContaining({

@@ -145,7 +145,9 @@ class RecommendedConfigController {
   static async getOne(req, res, next) {
     try {
       let gamesId = req.query.gamesId;
-      if (!gamesId) next({ name: "BadRequest", message: "Games is Required" });
+      if (!gamesId) {
+        res.status(400).json({ message: "Games is Required" });
+      }
       gamesId = gamesId.split(",");
 
       let highestRating = 0;
@@ -156,7 +158,7 @@ class RecommendedConfigController {
           highestRating = +game.rating;
         }
       }
-
+      console.log(highestRating, "highest");
       const result = await RecommendedConfig.findOne({
         where: { rating: highestRating },
         include: { all: true },

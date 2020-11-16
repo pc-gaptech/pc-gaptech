@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Grid, makeStyles, Typography } from "@material-ui/core";
+import { Container, CssBaseline, Grid, makeStyles, Typography } from "@material-ui/core";
 import { useMutation } from "@apollo/client";
 import { useHistory } from "react-router-dom";
 
@@ -38,13 +38,21 @@ const useStyle = makeStyles((theme) => ({
 	header: {
 		fontWeight: "bold",
 		fontSize: "1.3em",
+		marginTop: "15px",
 		marginBottom: "15px",
+
 	},
 
 	componentType: {
 		fontWeight: "bold",
 		margin: "auto",
 	},
+
+	tableHead: {
+		fontWeight: "bold",
+		letterSpacing: "0.7px",
+		fontSize: "1em"
+	}
 }));
 
 export default function Configurator() {
@@ -87,9 +95,12 @@ export default function Configurator() {
 	};
 
 	return (
-		<Container>
+		<Container component="main">
+						<CssBaseline />
 			<Typography className={classes.header}>Build your PC</Typography>
 			{/* SEMENTARA DOANG */}
+
+			<Grid xs={12} style={{backgroundColor: "#f4f4f2", padding: "30px", marginBottom: "20px"}}>
 			<button
 				onClick={(e) => {
 					handleCheck(e);
@@ -97,7 +108,7 @@ export default function Configurator() {
 			>
 				CHECK CONFIG
 			</button>
-			{isConfigValid ? <p>CONFIG COMPATIBLE</p> : <p>CONFIG TIDAK COMPATIBLE</p>}
+			{isConfigValid ? <p style={{color: "green"}}>CONFIG COMPATIBLE</p> : <p style={{color: "red"}}>CONFIG TIDAK COMPATIBLE</p>}
 			{isConfigValid ? (
 				<button
 					onClick={(e) => {
@@ -110,20 +121,21 @@ export default function Configurator() {
 				<p></p>
 			)}
 			{<p>Total Power: {restriction().total_power}</p>}
+			</Grid>
 			<Grid container spacing={1} className={classes.container}>
 				<Grid item xs={2} className={classes.componentType}>
-					Choose CPU
+					<Typography className={classes.tableHead}>Choose Components</Typography>
 				</Grid>
 				<Grid item xs={10} container>
 					<Grid item xs={0}></Grid>
 					<Grid item xs={5} className={classes.center}>
-						Products
+					<Typography className={classes.tableHead}>Products</Typography>
 					</Grid>
 					<Grid item xs={2} className={classes.center}>
-						Add
+					<Typography className={classes.tableHead}>Add</Typography>
 					</Grid>
 					<Grid item xs={2} className={classes.center}>
-						Est.Price
+					<Typography className={classes.tableHead}>Est.Price</Typography>
 					</Grid>
 					<Grid item xs={1}>
 						<Image
@@ -150,7 +162,7 @@ export default function Configurator() {
 			</Grid>
 			<Grid container>
 				<Grid item xs={2} className={classes.componentType}>
-					CPU
+				<Typography className={classes.tableHead}>CPU</Typography>
 				</Grid>
 				<Grid item xs={10}>
 					{displayedConfig.CPUId ? (
@@ -162,7 +174,7 @@ export default function Configurator() {
 			</Grid>
 			<Grid container>
 				<Grid item xs={2} className={classes.componentType}>
-					Motherboard
+				<Typography className={classes.tableHead}>Motherboard</Typography>
 				</Grid>
 				<Grid item xs={10}>
 					{displayedConfig.MotherboardId ? (
@@ -174,7 +186,7 @@ export default function Configurator() {
 			</Grid>
 			<Grid container>
 				<Grid item xs={2} className={classes.componentType}>
-					Memory
+				<Typography className={classes.tableHead}>Memory</Typography>
 				</Grid>
 				<Grid item xs={10}>
 					{displayedConfig.RAMId ? (
@@ -186,7 +198,7 @@ export default function Configurator() {
 			</Grid>
 			<Grid container>
 				<Grid item xs={2} className={classes.componentType}>
-					Power Supplies
+				<Typography className={classes.tableHead}>Power Supplies</Typography>
 				</Grid>
 				<Grid item xs={10}>
 					{displayedConfig.PowerSupplyId ? (
@@ -198,7 +210,7 @@ export default function Configurator() {
 			</Grid>
 			<Grid container>
 				<Grid item xs={2} className={classes.componentType}>
-					Video Card
+				<Typography className={classes.tableHead}>Video Card</Typography>
 				</Grid>
 				<Grid item xs={10}>
 					{displayedConfig.GPUId ? (
@@ -210,7 +222,7 @@ export default function Configurator() {
 			</Grid>
 			<Grid container>
 				<Grid item xs={2} className={classes.componentType}>
-					Case
+				<Typography className={classes.tableHead}>Case</Typography>
 				</Grid>
 				<Grid item xs={10}>
 					{displayedConfig.CasingId ? (
@@ -222,7 +234,7 @@ export default function Configurator() {
 			</Grid>
 			<Grid container>
 				<Grid item xs={2} className={classes.componentType}>
-					CPU Coolers
+				<Typography className={classes.tableHead}>CPU Cooler</Typography>
 				</Grid>
 				<Grid item xs={10}>
 					{displayedConfig.CPUCoolerId ? (
@@ -234,7 +246,7 @@ export default function Configurator() {
 			</Grid>
 			<Grid container>
 				<Grid item xs={2} className={classes.componentType}>
-					Storage
+				<Typography className={classes.tableHead}>Storage</Typography>
 				</Grid>
 				<Grid item xs={10}>
 					{displayedConfig.StorageId ? (
