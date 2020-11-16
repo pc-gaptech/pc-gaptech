@@ -9,7 +9,7 @@ import tokopedia from "../../assets/tokopedia.png";
 import shopee from "../../assets/shopee.png";
 import bukalapak from "../../assets/bukalapak.png";
 import ButtonChooser from "../../components/configurator/ButtonChooser";
-import { config } from "../../graphql/reactiveVars";
+import { config, restriction } from "../../graphql/reactiveVars";
 import { CHECK_CONFIG } from "../../graphql/mutations";
 
 const useStyle = makeStyles((theme) => ({
@@ -101,6 +101,7 @@ export default function Configurator() {
 			) : (
 				<p></p>
 			)}
+			{<p>Total Power: {restriction().total_power}</p>}
 			<Grid container spacing={1} className={classes.container}>
 				<Grid item xs={2} className={classes.componentType}>
 					Choose CPU

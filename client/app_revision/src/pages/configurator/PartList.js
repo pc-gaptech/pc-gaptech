@@ -3,6 +3,7 @@ import { Container, Grid, makeStyles, Typography } from "@material-ui/core";
 import { useQuery } from "@apollo/client";
 import { FETCH_ALL } from "../../graphql/query";
 import { useHistory, useParams } from "react-router-dom";
+import { restriction } from "../../graphql/reactiveVars";
 
 import PartItem from "../../components/configurator/PartItem";
 import Image from "material-ui-image";
@@ -51,7 +52,67 @@ export default function PartList() {
 	if (loading) return <p>Loading..</p>;
 	if (error) return <p>{error}</p>;
 
-	const filter = () => {};
+	const filter = (component) => {
+		console.log(restriction());
+		switch (component.__typename) {
+			case "CPU":
+				if (restriction().chipset) {
+					for (let i = 0; i < component.chipset.length; i++) {
+						if (component.chipset[i] === restriction().chipset) {
+							return true;
+						}
+					}
+					return false;
+				}
+				break;
+			case "CPUCooler":
+				if (restriction().socket) {
+					for (let i = 0; i < component.socket.length; i++) {
+						if (component.socket[i] === restriction().socket) {
+							return true;
+						}
+					}
+					return false;
+				}
+				break;
+			case "RAM":
+				if (restriction().chipset) {
+					for (let i = 0; i < component.chipset.length; i++) {
+						if (component.chipset[i] === restriction().chipset) {
+							return true;
+						}
+					}
+					return false;
+				}
+				break;
+			case "PowerSupply":
+				break;
+			case "Casing":
+				if (restriction().form_factor) {
+					if (component.form_factor === restriction().form_factor) {
+						return true;
+					} else {
+						return false;
+					}
+				}
+				break;
+			case "Motherboard":
+				if (restriction().socket || restriction().form_factor) {
+					if (
+						component.socket === restriction().socket ||
+						component.form_factor === restriction().form_factor
+					) {
+						return true;
+					} else {
+						return false;
+					}
+				}
+				break;
+			default:
+				break;
+		}
+		return true;
+	};
 
 	return (
 		<Container>
@@ -92,7 +153,9 @@ export default function PartList() {
 			</Grid>
 
 			{data.fetchAll[`data${componentType}`].map((item) => {
-				return <PartItem item={item} key={item.id} component={componentType} />;
+				if (filter(item)) {
+					return <PartItem item={item} key={item.id} component={componentType} />;
+				}
 			})}
 		</Container>
 	);

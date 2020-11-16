@@ -11,3 +11,10 @@ export const config = makeVar({
 	PowerSupplyId: 0,
 	CasingId: 0,
 });
+
+export const restriction = makeVar({
+	socket: "",
+	chipset: "",
+	total_power: 0,
+	form_factor: "",
+})
