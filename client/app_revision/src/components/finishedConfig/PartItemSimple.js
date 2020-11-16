@@ -1,9 +1,11 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Button, Typography, IconButton } from '@material-ui/core';
+import { Button, Typography, IconButton, Grid } from '@material-ui/core';
 
 import Image from 'material-ui-image'
 import VisibilityIcon from '@material-ui/icons/Visibility';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+
 
 const useStyle = makeStyles((theme) => ({
     button: {
@@ -13,15 +15,8 @@ const useStyle = makeStyles((theme) => ({
         paddingLeft: "10px",
         paddingRight: "10px"
     },
-    center: {
-        textAlign: "center",
-        margin: "auto"
-    },
 
-    border: {
-        paddingTop: "10px",
-
-    }
+    
 
 }))
 
@@ -31,13 +26,8 @@ export default function PartItemSimple() {
 
 
     return (
-        <>
-            <Grid item xs={1}>
-                <Image
-                    src="https://cdna.pcpartpicker.com/static/forever/images/product/0a8a0ca77620c63b68fec6323537d50a.256p.jpg"
-                />
-            </Grid>
-            <Grid item xs={} className={classes.center}>
+        <Grid container spacing={1} style={{paddingTop:"25px", paddingBottom: "25px", borderBottom: "0.5px solid grey"}}>
+            <Grid item xs={6} className={classes.center}>
                 <Typography className={classes.name}>
                     Asus ROG STRIX B550-F GAMING (WI-FI) ATX AM4
                     </Typography>
@@ -49,7 +39,7 @@ export default function PartItemSimple() {
                     See details
                     </Button>
             </Grid>
-            <Grid item xs={2} className={classes.center} style={{ fontWeight: "bold" }}>
+            <Grid item xs={3} className={classes.center} style={{ fontWeight: "bold" }}>
                 Rp.2.100.000
             </Grid>
             <Grid xs={1} className={classes.center}>
@@ -67,7 +57,7 @@ export default function PartItemSimple() {
                     <AddShoppingCartIcon />
                 </IconButton>
             </Grid>
-        </>
+        </Grid>
     )
  
 
