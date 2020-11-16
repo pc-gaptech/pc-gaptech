@@ -34,6 +34,8 @@ import {
 	FETCH_STORAGE_BY_ID,
 	FETCH_CASING_BY_ID,
 } from "../graphql/query";
+import { config, restriction } from "../graphql/reactiveVars";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -68,6 +70,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function DetailCpu() {
 	const classes = useStyles();
+	const history = useHistory();
 	const { id, component } = useParams();
 
 	let query = null;
@@ -104,6 +107,40 @@ export default function DetailCpu() {
 		variables: { id: +id, access_token: localStorage.getItem("access_token") },
 	});
 
+	const handleAddtoConfig = (e) => {
+		e.preventDefault(e);
+		let newConfig = JSON.parse(JSON.stringify(config()));
+		newConfig[`${component}Id`] = +data[`findOne${component}ById`].id;
+		config(newConfig);
+
+		let newRestriction = JSON.parse(JSON.stringify(restriction()));
+		switch (component) {
+			case "CPU":
+				newRestriction.socket = data[`findOne${component}ById`].socket;
+				newRestriction.total_power += data[`findOne${component}ById`].power_draw;
+				restriction(newRestriction);
+				break;
+			case "CPUCooler":
+				newRestriction.socket = data[`findOne${component}ById`].socket;
+				restriction(newRestriction);
+				break;
+			case "Casing":
+				newRestriction.form_factor = data[`findOne${component}ById`].form_factor;
+				restriction(newRestriction);
+				break;
+			case "Motherboard":
+				newRestriction.chipset = data[`findOne${component}ById`].chipset;
+				newRestriction.form_factor = data[`findOne${component}ById`].form_factor;
+				newRestriction.total_power += data[`findOne${component}ById`].power_draw;
+				restriction(newRestriction);
+				break;
+			default:
+				break;
+		}
+
+		history.push("/configurator");
+	};
+
 	if (loading) return <p>Loading..</p>;
 	if (error) return <p>{error}</p>;
 
@@ -131,6 +168,9 @@ export default function DetailCpu() {
 							size="large"
 							className={classes.button}
 							startIcon={<SaveIcon />}
+							onClick={(e) => {
+								handleAddtoConfig(e);
+							}}
 						>
 							Add to Your Build
 						</Button>
