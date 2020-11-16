@@ -8,6 +8,7 @@ import Register from "./pages/user/Register";
 import Login from "./pages/user/Login";
 import Configurator from "./pages/configurator/configurator";
 import PartList from "./pages/configurator/PartList";
+import Favorites from "./pages/favorite/Favorites"
 import DetailPart from "./pages/detailPart";
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
 						<Route exact path="/register" component={Register} />
 						<Route exact path="/login" component={Login} />
 						<Route exact path="/configurator" component={Configurator} />
+						<Route exact path="/favorite" component={Favorites} />
 					</Switch>
 				</Router>
 			</ApolloProvider>
