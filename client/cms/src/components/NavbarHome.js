@@ -50,7 +50,7 @@ const NavbarHome = () => {
         break;
       case "Cpu Coller":
         dataEdit(false);
-        history.push("/cpucoller");
+        history.push("/cpucooler");
         break;
 
       default:
@@ -101,10 +101,10 @@ const NavbarHome = () => {
           )}
           <Nav.Link onClick={() => goToHome("login")}>Login</Nav.Link>
         </Nav>
-        <Form inline>
+        {/* <Form inline>
           <FormControl type="text" placeholder="Search" className="mr-sm-2" />
           <Button variant="outline-success">Search</Button>
-        </Form>
+        </Form> */}
       </Navbar.Collapse>
     </Navbar>
   );

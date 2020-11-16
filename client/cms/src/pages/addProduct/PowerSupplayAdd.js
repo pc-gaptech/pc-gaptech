@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Form, Button, Container } from "react-bootstrap";
 import { dataEdit } from "../../graphQl/cache";
 import { useReactiveVar, useMutation } from "@apollo/client";
-import axios from "axios";
 import { EDIT_POWER_SUPPLY } from "../../graphQl/mutationEdit";
 import { FECTH_ALL } from "../../graphQl/query";
 import { useHistory } from "react-router-dom";
+import { ADD_POWERSUPPLY } from "../../graphQl/mutation";
 
 function PowerSupplayAdd() {
   const history = useHistory();
@@ -18,6 +18,17 @@ function PowerSupplayAdd() {
     manufacturer: "",
     price: 0,
     picture_url: "",
+  });
+  const [addPowerSupply] = useMutation(ADD_POWERSUPPLY, {
+    refetchQueries: [
+      {
+        query: FECTH_ALL,
+        variables: { access_token: localStorage.access_token },
+      },
+    ],
+    onCompleted: () => {
+      history.push("/");
+    },
   });
   const [editPowerSupply] = useMutation(EDIT_POWER_SUPPLY, {
     refetchQueries: [
@@ -48,10 +59,11 @@ function PowerSupplayAdd() {
   }, [editProduct]);
   function SumbitPowerSupplay(e) {
     e.preventDefault();
-    state.id = +state.id;
+
     state.max_power = +state.max_power;
     state.price = +state.price;
     if (checkStatus) {
+      state.id = +state.id;
       const dataPowerSupply = {
         name: state.name,
         efficiency: state.efficiency,
@@ -70,41 +82,15 @@ function PowerSupplayAdd() {
       };
 
       editPowerSupply(vars);
-      // edit method
-      // axios({
-      //     method: "PUT",
-      //     url: `http://localhost:3000/parts/powerSupplay/${editProduct.id}/update`,
-      //     headers: {
-      //         access_token: localStorage.getItem("access_token")
-      //         // access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
-      //     },
-      //     data: state
-      // })
-      //     .then(({ data }) => {
-      //         console.log(data)
-      //     })
-      //     .catch(err => {
-      //         console.log(err.response)
-      //     })
       console.log(state, "EDIT");
     } else {
-      axios({
-        method: "POST",
-        url: "http://localhost:3000/parts/powerSupply/add",
-        headers: {
+      addPowerSupply({
+        variables: {
           access_token: localStorage.getItem("access_token"),
-          // access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
+          dataPowerSupply: state,
         },
-        data: state,
-      })
-        .then(({ data }) => {
-          console.log(data);
-        })
-        .catch((err) => {
-          console.log(err.response);
-        });
+      });
     }
-    console.log(state);
   }
   function handleChange(e) {
     const { name, value } = e.target;
