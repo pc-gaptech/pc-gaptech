@@ -10,6 +10,8 @@ import Configurator from "./pages/configurator/configurator";
 import PartList from "./pages/configurator/PartList";
 import Favorites from "./pages/favorite/Favorites"
 import DetailPart from "./pages/detailPart";
+import FinishedBuild from "./pages/configurator/FinishedBuild";
+
 
 function App() {
 	return (
@@ -25,6 +27,7 @@ function App() {
 						<Route exact path="/login" component={Login} />
 						<Route exact path="/configurator" component={Configurator} />
 						<Route exact path="/favorite" component={Favorites} />
+						<Route exact path="/finished" component={FinishedBuild} />
 					</Switch>
 				</Router>
 			</ApolloProvider>
