@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Container, Grid, makeStyles, Typography } from "@material-ui/core";
 import { useQuery } from "@apollo/client";
 import { FETCH_ALL } from "../../graphql/query";
@@ -51,7 +51,8 @@ export default function PartList() {
 	if (loading) return <p>Loading..</p>;
 	if (error) return <p>{error}</p>;
 
-	console.log(data.fetchAll[`data${componentType}`]);
+	const filter = () => {};
+
 	return (
 		<Container>
 			<Typography className={classes.header}>Select Available CPUs</Typography>

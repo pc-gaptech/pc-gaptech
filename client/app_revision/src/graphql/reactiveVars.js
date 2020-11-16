@@ -2,7 +2,7 @@ import { makeVar } from "@apollo/client";
 
 export const config = makeVar({
 	name: "BUILD 1",
-	CPUId: 2,
+	CPUId: 0,
 	CPUCoolerId: 0,
 	MotherboardId: 0,
 	GPUId: 0,
