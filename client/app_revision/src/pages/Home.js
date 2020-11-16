@@ -8,7 +8,6 @@ export default function Home() {
 
   return (
     <Container className={classes.container}>
-      <h1>kdnfsn</h1>
       <div className={classes.root}>
         <Grid container spacing={3}>
           <Grid item xs={6}>

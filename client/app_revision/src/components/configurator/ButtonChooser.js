@@ -23,9 +23,9 @@ export default function ButtonChooser({ component }) {
 	const classes = useStyle();
 	return (
 		<Button
-			style={{ marginTop: "23px", marginBottom: "23px", backgroundColor: "blue" }}
+			style={{ marginTop: "23px", marginBottom: "23px", backgroundColor: "#495464" }}
 			variant="contained"
-			color="blue"
+			color="white"
 			size="medium"
 			className={classes.buttonAdd}
 			startIcon={<AddCircleIcon />}
