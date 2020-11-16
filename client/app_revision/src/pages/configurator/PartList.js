@@ -12,45 +12,47 @@ import shopee from "../../assets/shopee.png";
 import bukalapak from "../../assets/bukalapak.png";
 
 const useStyle = makeStyles((theme) => ({
-	container: {
-		paddingTop: "10px",
-		paddingBottom: "10px",
-		borderTop: "1px solid #bbbfca",
-		borderBottom: "1px solid #bbbfca",
-		textAlign: "center",
-	},
-	logo: {
-		alignSelf: "center",
-		maxWidth: "70%",
-		height: "auto",
-		margin: "auto",
-		paddingTop: "33px",
-		paddingBottom: "33px",
-	},
+  container: {
+    paddingTop: "10px",
+    paddingBottom: "10px",
+    borderTop: "1px solid #bbbfca",
+    borderBottom: "1px solid #bbbfca",
+    textAlign: "center",
+  },
+  logo: {
+    alignSelf: "center",
+    maxWidth: "70%",
+    height: "auto",
+    margin: "auto",
+    paddingTop: "33px",
+    paddingBottom: "33px",
+  },
 
-	center: {
-		textAlign: "center",
-		margin: "auto",
-		fontWeight: "bold",
-	},
+  center: {
+    textAlign: "center",
+    margin: "auto",
+    fontWeight: "bold",
+  },
 
-	header: {
-		fontWeight: "bold",
-		fontSize: "1.3em",
-		marginBottom: "15px",
-	},
+  header: {
+    fontWeight: "bold",
+    fontSize: "1.3em",
+    marginBottom: "15px",
+  },
 }));
 
 export default function PartList() {
-	const classes = useStyle();
-	const { componentType } = useParams();
-	const history = useHistory();
-	const { loading, error, data } = useQuery(FETCH_ALL, {
-		variables: { access_token: localStorage.getItem("access_token") },
-	});
+  const classes = useStyle();
+  const { componentType } = useParams();
+  const history = useHistory();
+  const { loading, error, data } = useQuery(FETCH_ALL, {
+    variables: { access_token: localStorage.getItem("access_token") },
+  });
 
-	if (loading) return <p>Loading..</p>;
-	if (error) return <p>{error}</p>;
+  if (loading) return <p>Loading..</p>;
+  if (error) return <p>{error}</p>;
+
+
 
 	const filter = (component) => {
 		console.log(restriction());
@@ -159,4 +161,5 @@ export default function PartList() {
 			})}
 		</Container>
 	);
+
 }
