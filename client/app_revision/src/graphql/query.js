@@ -214,104 +214,102 @@ export const FETCH_STORAGE_BY_ID = gql`
 `;
 
 export const GET_ALL_FAVORITE_CONFIG = gql`
-query getAllFavorite($access_token: String!) {
-	getAllFavoritesConfig(access_token: $access_token) {
-	  id
-	  name
-	  CPUId
-	  CPUCoolerId
-	  MotherboardId
-	  GPUId
-	  RAMId
-	  StorageId
-	  PowerSupplyId
-	  CasingId
-	  rating
-	  CPU {
-		id
-		name
-		socket
-		chipset
-		TDP
-		manufacturer
-		power_draw
-		core_count
-		isIGPU
-		max_rating
-		price
-		picture_url
-	  }
-	  RAM {
-		id
-		name
-		memory_type
-		chipset
-		manufacturer
-		power_draw
-		memory_speed
-		price
-		picture_url
-	  }
-	  PowerSupply {
-		id
-		name
-		efficiency
-		max_power
-		manufacturer
-		price
-		picture_url
-	  }
-	  Motherboard {
-		id
-		name
-		socket
-		chipset
-		form_factor
-		manufacturer
-		power_draw
-		price
-		picture_url
-	  }
-	  CPUCooler {
-		id
-		name
-		socket
-		TDP
-		manufacturer
-		power_draw
-		price
-		picture_url
-	  }
-	  Casing {
-		id
-		name
-		form_factor
-		manufacturer
-		price
-		picture_url
-	  }
-	  Storage {
-		id
-		name
-		capacity
-		storage_type
-		power_draw
-		manufacturer
-		price
-		picture_url
-	  }
-	  GPU {
-		id
-		name
-		power_draw
-		manufacturer
-		GPU_chipset
-		price
-		rating
-		picture_url
-	  }
+	query getAllFavorite($access_token: String!) {
+		getAllFavoritesConfig(access_token: $access_token) {
+			id
+			name
+			CPUId
+			CPUCoolerId
+			MotherboardId
+			GPUId
+			RAMId
+			StorageId
+			PowerSupplyId
+			CasingId
+			rating
+			CPU {
+				id
+				name
+				socket
+				chipset
+				TDP
+				manufacturer
+				power_draw
+				core_count
+				isIGPU
+				max_rating
+				price
+				picture_url
+			}
+			RAM {
+				id
+				name
+				memory_type
+				chipset
+				manufacturer
+				power_draw
+				memory_speed
+				price
+				picture_url
+			}
+			PowerSupply {
+				id
+				name
+				efficiency
+				max_power
+				manufacturer
+				price
+				picture_url
+			}
+			Motherboard {
+				id
+				name
+				socket
+				chipset
+				form_factor
+				manufacturer
+				power_draw
+				price
+				picture_url
+			}
+			CPUCooler {
+				id
+				name
+				socket
+				TDP
+				manufacturer
+				power_draw
+				price
+				picture_url
+			}
+			Casing {
+				id
+				name
+				form_factor
+				manufacturer
+				price
+				picture_url
+			}
+			Storage {
+				id
+				name
+				capacity
+				storage_type
+				power_draw
+				manufacturer
+				price
+				picture_url
+			}
+			GPU {
+				id
+				name
+				power_draw
+				manufacturer
+				gpu_chipset
+				price
+				rating
+				picture_url
+			}
+		}
 	}
-  }
-
-`
-
+`;
