@@ -98,7 +98,6 @@ export default function PartItemHome({ component, ID }) {
 	if (loading) return <p>Loading...</p>;
 	if (error) return <p>Error in fetch</p>;
 
-
 	return (
 		<Grid container spacing={1} className={classes.container}>
 			<Grid item xs={1}>
@@ -106,7 +105,14 @@ export default function PartItemHome({ component, ID }) {
 			</Grid>
 			<Grid item xs={4} className={classes.center}>
 				<Typography className={classes.name}>{data[`findOne${component}ById`].name}</Typography>
-				<Button size={"small"} className={classes.button} startIcon={<VisibilityIcon />}>
+				<Button
+					size={"small"}
+					className={classes.button}
+					startIcon={<VisibilityIcon />}
+					onClick={() => {
+						history.push(`/configurator/parts/${component}/${data[`findOne${component}ById`].id}`);
+					}}
+				>
 					See details
 				</Button>
 			</Grid>

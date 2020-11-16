@@ -91,7 +91,7 @@ export default function PartList() {
 			</Grid>
 
 			{data.fetchAll[`data${componentType}`].map((item) => {
-				return <PartItem item={item} key={item.id} componentId={`${componentType}Id`} />;
+				return <PartItem item={item} key={item.id} component={componentType} />;
 			})}
 		</Container>
 	);
