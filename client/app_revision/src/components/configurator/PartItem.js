@@ -6,7 +6,7 @@ import Image from "material-ui-image";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
-import { config } from "../../graphql/reactiveVars";
+import { config, restriction } from "../../graphql/reactiveVars";
 import { useHistory } from "react-router-dom";
 
 const useStyle = makeStyles((theme) => ({
@@ -44,17 +44,41 @@ const useStyle = makeStyles((theme) => ({
 }));
 
 export default function PartItem(props) {
-	const { item, componentId } = props;
+	const { item, component } = props;
 	const classes = useStyle();
 	const history = useHistory();
 
 	const handleAddtoConfig = (e) => {
 		e.preventDefault(e);
 		let newConfig = JSON.parse(JSON.stringify(config()));
-		console.log(item.id);
-		newConfig[componentId] = +item.id;
+		newConfig[`${component}Id`] = +item.id;
 		config(newConfig);
-		console.log(config(), "HAHAHAAH");
+
+		let newRestriction = JSON.parse(JSON.stringify(restriction()));
+		switch (component) {
+			case "CPU":
+				newRestriction.socket = item.socket;
+				newRestriction.total_power += item.power_draw;
+				restriction(newRestriction);
+				break;
+			case "CPUCooler":
+				newRestriction.socket = item.socket;
+				restriction(newRestriction);
+				break;
+			case "Casing":
+				newRestriction.form_factor = item.form_factor;
+				restriction(newRestriction);
+				break;
+			case "Motherboard":
+				newRestriction.chipset = item.chipset;
+				newRestriction.form_factor = item.form_factor;
+				newRestriction.total_power += item.power_draw;
+				restriction(newRestriction);
+				break;
+			default:
+				break;
+		}
+
 		history.push("/configurator");
 	};
 
@@ -65,7 +89,14 @@ export default function PartItem(props) {
 			</Grid>
 			<Grid item xs={4} className={classes.center}>
 				<Typography className={classes.name}>{item.name}</Typography>
-				<Button size={"small"} className={classes.button} startIcon={<VisibilityIcon />}>
+				<Button
+					size={"small"}
+					className={classes.button}
+					startIcon={<VisibilityIcon />}
+					onClick={() => {
+						history.push(`/configurator/parts/${component}/${item.id}`);
+					}}
+				>
 					See details
 				</Button>
 			</Grid>

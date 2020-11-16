@@ -9,7 +9,7 @@ import tokopedia from "../../assets/tokopedia.png";
 import shopee from "../../assets/shopee.png";
 import bukalapak from "../../assets/bukalapak.png";
 import ButtonChooser from "../../components/configurator/ButtonChooser";
-import { config } from "../../graphql/reactiveVars";
+import { config, restriction } from "../../graphql/reactiveVars";
 import { CHECK_CONFIG } from "../../graphql/mutations";
 
 const useStyle = makeStyles((theme) => ({
@@ -51,8 +51,7 @@ export default function Configurator() {
 	const classes = useStyle();
 	const history = useHistory();
 	const [displayedConfig] = useState(config());
-	const [isConfigValid, setIsConfigValid] = useState(true);
-
+	const [isConfigValid, setIsConfigValid] = useState(false);
 	const [checkConfig] = useMutation(CHECK_CONFIG);
 
 	const handleCheck = async (e) => {
@@ -66,18 +65,23 @@ export default function Configurator() {
 					},
 				},
 			});
-			console.log("BERHASILLLLL");
+			setIsConfigValid(true);
 		} catch (err) {
 			setIsConfigValid(false);
-			setTimeout(() => {
-				setIsConfigValid(true);
-			}, 5000);
+		}
+	};
+
+	const handleNext = async (e) => {
+		e.preventDefault();
+		if (isConfigValid) {
+			history.push("/configurator/finish");
 		}
 	};
 
 	return (
 		<Container>
 			<Typography className={classes.header}>Build your PC</Typography>
+			{/* SEMENTARA DOANG */}
 			<button
 				onClick={(e) => {
 					handleCheck(e);
@@ -85,7 +89,19 @@ export default function Configurator() {
 			>
 				CHECK CONFIG
 			</button>
-			{!isConfigValid ? <p>CONFIG TIDAK COMPATIBLE</p> : <p>CONFIG COMPATIBLE</p>}
+			{isConfigValid ? <p>CONFIG COMPATIBLE</p> : <p>CONFIG TIDAK COMPATIBLE</p>}
+			{isConfigValid ? (
+				<button
+					onClick={(e) => {
+						handleNext(e);
+					}}
+				>
+					Confim Configuration
+				</button>
+			) : (
+				<p></p>
+			)}
+			{<p>Total Power: {restriction().total_power}</p>}
 			<Grid container spacing={1} className={classes.container}>
 				<Grid item xs={2} className={classes.componentType}>
 					Choose CPU

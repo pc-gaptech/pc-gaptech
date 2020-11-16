@@ -36,3 +36,11 @@ export const CHECK_CONFIG = gql`
 		}
 	}
 `;
+
+export const DELETE_ONE_FAVORITE = gql`
+	mutation deleteOneFavorite($id: Int, $access_token: String) {
+		deleteFavoriteConfig(id: $id, access_token: $access_token) {
+			message
+		}
+	}
+`;
