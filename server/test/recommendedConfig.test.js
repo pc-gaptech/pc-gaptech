@@ -3,35 +3,76 @@
 const request = require("supertest");
 const app = require("../app");
 const { expect, test } = require("@jest/globals");
-const { sequelize, User, RecommendedConfig } = require("../models/index");
+const { sequelize, User, RecommendedConfig, Game } = require("../models/index");
 const { createToken } = require("../helpers/jwt");
 
+let idGame1;
+let idGame2;
 let access_token;
-beforeAll((done) => {
-  const userData = {
-    username: "test_username",
-    firstname: "test_firstname",
-    lastname: "test_lastname",
-    email: "test_email@email.com",
-    password: "test_password",
-    is_admin: true,
-  };
-  User.create(userData)
-    .then((data) => {
-      return User.findOne({ where: { id: data.id } });
-    })
-    .then((data) => {
-      access_token = createToken({
-        id: data.id,
-        email: data.email,
-        is_admin: data.is_admin,
-      });
-      done();
-      console.log(access_token);
-    })
-    .catch((err) => {
-      done(err);
+beforeAll(async (done) => {
+  try {
+    const createDota = await Game.create({
+      name: "dota",
+      description: "gamedota",
+      picture_url:
+        "https://cdn-5c489073f911c8147449b474.closte.com/wp-content/uploads/2020/02/Dota-2-scaled-1-1600x901.jpg",
+      rating: 8,
     });
+
+    idGame1 = createDota.id;
+
+    const createDota2 = await Game.create({
+      name: "dota2",
+      description: "gamedota2",
+      picture_url:
+        "https://cdn-5c489073f911c8147449b474.closte.com/wp-content/uploads/2020/02/Dota-2-scaled-1-1600x901.jpg",
+      rating: 8,
+    });
+
+    idGame2 = createDota2.id;
+
+    const createRecommendedConfig = await RecommendedConfig.create({
+      name: "Config Rekomen",
+      CPUId: 1,
+      CPUCoolerId: 1,
+      MotherboardId: 1,
+      GPUId: 1,
+      RAMId: 1,
+      StorageId: 1,
+      PowerSupplyId: 1,
+      CasingId: 1,
+      rating: 8,
+    });
+
+    console.log(createRecommendedConfig);
+
+    const userData = {
+      username: "test_username",
+      firstname: "test_firstname",
+      lastname: "test_lastname",
+      email: "test_email@email.com",
+      password: "test_password",
+      is_admin: true,
+    };
+    const createUser = await User.create(userData);
+    if (createUser) {
+      await User.findOne({
+        where: {
+          id: createUser.id,
+        },
+      });
+      access_token = createToken({
+        id: createUser.id,
+        email: createUser.email,
+        is_admin: createUser.is_admin,
+      });
+    }
+
+    done();
+  } catch (err) {
+    console.log(err);
+    done();
+  }
 });
 
 afterAll((done) => {
@@ -205,7 +246,7 @@ describe("Test Recommended Config", () => {
   test("Get recommended config based on games ratings Successfull", (done) => {
     request(app)
       .get("/recommendpc")
-      .query({ gamesId: "1,2,3" })
+      .query({ gamesId: `${idGame1},${idGame2}` })
       .set("access_token", access_token)
       .set("Accept", "application/json")
       .then((res) => {

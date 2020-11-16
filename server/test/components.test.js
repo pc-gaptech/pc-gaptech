@@ -1,7 +1,7 @@
 const request = require("supertest");
 const app = require("../app");
 const { expect, test } = require("@jest/globals");
-const { sequelize, User } = require("../models/index");
+const { sequelize, User, Game } = require("../models/index");
 const { createToken } = require("../helpers/jwt");
 
 let idAdminLoggedIn;
@@ -35,6 +35,9 @@ beforeAll((done) => {
 
 afterAll((done) => {
   User.destroy({ truncate: true })
+    .then((ok) => {
+      return Game.destroy({ truncate: true });
+    })
     .then((ok) => {
       done();
     })
