@@ -5,6 +5,10 @@ const errorHandler = (err, req, res, next) => {
   let message = err.message;
 
   switch (err.name) {
+    case "SequelizeDatabaseError":
+      status = 400;
+      message = "Component type name Invalid";
+      break;
     case "SequelizeValidationError":
       status = 400;
       message = err.errors[0].message;
@@ -30,6 +34,7 @@ const errorHandler = (err, req, res, next) => {
       status = 403;
       break;
     case "NotFound":
+      console.log("aaaasasasa");
       status = 404;
       break;
   }
