@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
 import AppBar from "@material-ui/core/AppBar";
@@ -60,6 +61,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Navbar() {
 	const classes = useStyles();
+	const history = useHistory();
 	const content = {
 		brand: { image: "nereus-assets/img/nereus-light.png", width: 110 },
 		link1: "Home",
@@ -89,19 +91,61 @@ export default function Navbar() {
 	return (
 		<AppBar position="static" color="inherit">
 			<Toolbar className={classes.toolbar}>
-				<Link href="#" color="primary" underline="none" variant="h5" className={classes.brand}>
+				<Link
+					onClick={(e) => {
+						e.preventDefault();
+						history.push("/");
+					}}
+					color="primary"
+					underline="none"
+					variant="h5"
+					className={classes.brand}
+				>
 					{brand}
 				</Link>
-				<Link href="/" color="textPrimary" variant="body2" className={classes.link}>
+				<Link
+					onClick={(e) => {
+						e.preventDefault();
+						history.push("/");
+					}}
+					href="/"
+					color="textPrimary"
+					variant="body2"
+					className={classes.link}
+				>
 					{content["link1"]}
 				</Link>
-				<Link href="/configurator" color="textPrimary" variant="body2" className={classes.link}>
+				<Link
+					onClick={(e) => {
+						e.preventDefault();
+						history.push("/configurator");
+					}}
+					color="textPrimary"
+					variant="body2"
+					className={classes.link}
+				>
 					{content["link2"]}
 				</Link>
-				<Link href="#" color="textPrimary" variant="body2" className={classes.link}>
+				<Link
+					onClick={(e) => {
+						e.preventDefault();
+						history.push("/favorite");
+					}}
+					color="textPrimary"
+					variant="body2"
+					className={classes.link}
+				>
 					{content["link3"]}
 				</Link>
-				<Link href="#" color="textPrimary" variant="body2" className={classes.link}>
+				<Link
+					onClick={(e) => {
+						e.preventDefault();
+						history.push("/login");
+					}}
+					color="textPrimary"
+					variant="body2"
+					className={classes.link}
+				>
 					{content["link4"]}
 				</Link>
 				<Button variant="contained" color="secondary" className={classes.primaryAction}>

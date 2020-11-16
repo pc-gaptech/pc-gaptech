@@ -10,6 +10,7 @@ export const config = makeVar({
 	StorageId: 0,
 	PowerSupplyId: 0,
 	CasingId: 0,
+	rating: 0,
 });
 
 export const restriction = makeVar({
@@ -17,4 +18,4 @@ export const restriction = makeVar({
 	chipset: "",
 	total_power: 0,
 	form_factor: "",
-})
+});
