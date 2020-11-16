@@ -95,7 +95,7 @@ export default function Navbar() {
 				<Link href="/" color="textPrimary" variant="body2" className={classes.link}>
 					{content["link1"]}
 				</Link>
-				<Link href="#" color="textPrimary" variant="body2" className={classes.link}>
+				<Link href="/configurator" color="textPrimary" variant="body2" className={classes.link}>
 					{content["link2"]}
 				</Link>
 				<Link href="#" color="textPrimary" variant="body2" className={classes.link}>

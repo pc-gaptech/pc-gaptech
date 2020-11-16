@@ -7,6 +7,7 @@ import axios from "axios";
 import { EDIT_RAM } from "../../graphQl/mutationEdit";
 import { FECTH_ALL } from "../../graphQl/query";
 import { useHistory } from "react-router-dom";
+import { ADD_RAM } from "../../graphQl/mutation";
 
 function RamAdd() {
   const history = useHistory();
@@ -21,6 +22,17 @@ function RamAdd() {
     memory_speed: 0,
     price: 0,
     picture_url: "",
+  });
+  const [addRAM] = useMutation(ADD_RAM, {
+    refetchQueries: [
+      {
+        query: FECTH_ALL,
+        variables: { access_token: localStorage.access_token },
+      },
+    ],
+    onCompleted: () => {
+      history.push("/");
+    },
   });
   const [editRAM] = useMutation(EDIT_RAM, {
     refetchQueries: [
@@ -53,7 +65,7 @@ function RamAdd() {
   }, [editProduct]);
   function submitCpu(e) {
     e.preventDefault();
-    state.id = +state.id;
+    state.memory_speed = +state.memory_speed;
     state.price = +state.price;
     state.power_draw = +state.power_draw;
     const {
@@ -61,12 +73,13 @@ function RamAdd() {
       memory_type,
       chipset,
       manufacturer,
-      power_draw0,
+      power_draw,
       memory_speed,
       price,
       picture_url,
     } = state;
     if (checkStatus) {
+      state.id = +state.id;
       const dataRAM = {
         name: state.name,
         memory_type: state.memory_type,
@@ -87,59 +100,46 @@ function RamAdd() {
       };
 
       editRAM(vars);
-      // edit method
-      // axios({
-      //     method: "PUT",
-      //     url: `http://localhost:3000/parts/ram/${editProduct.id}/update`,
-      //     headers: {
-      //         access_token: localStorage.getItem("access_token")
-      //         // access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
-      //     },
-      //     data: {
-      //         name,
-      //         memory_type,
-      //         chipset_memory: chipset,
-      //         manufacturer,
-      //         power_draw0,
-      //         memory_speed,
-      //         price,
-      //         picture_url
-      //     }
-      // })
-      //     .then(({ data }) => {
-      //         console.log(data)
-      //     })
-      //     .catch(err => {
-      //         console.log(err.response)
-      //     })
-      console.log(state, "EDIT");
     } else {
-      axios({
-        method: "POST",
-        url: "http://localhost:3000/parts/ram/add",
-        headers: {
+      addRAM({
+        variables: {
           access_token: localStorage.getItem("access_token"),
-          // access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
+          dataRAM: {
+            name,
+            memory_type,
+            chipset,
+            manufacturer,
+            power_draw,
+            // memory_speed,
+            price,
+            picture_url,
+          },
         },
-        data: {
-          name,
-          memory_type,
-          chipset_memory: chipset,
-          manufacturer,
-          power_draw0,
-          memory_speed,
-          price,
-          picture_url,
-        },
-      })
-        .then(({ data }) => {
-          console.log(data);
-        })
-        .catch((err) => {
-          console.log(err.response);
-        });
+      });
+      // axios({
+      //   method: "POST",
+      //   url: "http://localhost:3000/parts/ram/add",
+      //   data: {
+      //     name,
+      //     memory_type,
+      //     chipset_memory: chipset,
+      //     manufacturer,
+      //     power_draw,
+      //     memory_speed,
+      //     price,
+      //     picture_url,
+      //   },
+      //   headers: {
+      //     access_token,
+      //   },
+      // })
+      //   .then(async ({ data }) => {
+      //     history.push("/");
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
     }
-    console.log(state);
   }
   function handleChipset(e) {
     setstate({

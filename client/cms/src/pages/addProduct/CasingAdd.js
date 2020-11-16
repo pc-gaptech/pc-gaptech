@@ -3,9 +3,10 @@ import { Form, Button, Container } from "react-bootstrap";
 import { dataEdit } from "../../graphQl/cache";
 import { useReactiveVar, useMutation } from "@apollo/client";
 import axios from "axios";
-import { FECTH_ALL } from "../../graphQl/query";
 import { useHistory } from "react-router-dom";
+import { FECTH_ALL } from "../../graphQl/query";
 import { EDIT_CASING } from "../../graphQl/mutationEdit";
+import { ADD_CASING } from "../../graphQl/mutation";
 
 function CasingAdd() {
   const history = useHistory();
@@ -18,6 +19,18 @@ function CasingAdd() {
     price: 0,
     picture_url: 0,
   });
+  const [addCasing] = useMutation(ADD_CASING, {
+    refetchQueries: [
+      {
+        query: FECTH_ALL,
+        variables: { access_token: localStorage.access_token },
+      },
+    ],
+    onCompleted: () => {
+      history.push("/");
+    },
+  });
+
   const [editCasing] = useMutation(EDIT_CASING, {
     refetchQueries: [
       {
@@ -47,9 +60,10 @@ function CasingAdd() {
   }, [editProduct]);
   function SumbitCasing(e) {
     e.preventDefault();
-    state.id = +state.id;
+
     state.price = +state.price;
     if (checkStatus) {
+      state.id = +state.id;
       const dataCasing = {
         name: state.name,
         form_factor: state.form_factor,
@@ -67,45 +81,18 @@ function CasingAdd() {
       };
 
       editCasing(vars);
-      // edit method
-      // axios({
-      //   method: "PUT",
-      //   url: `http://localhost:3000/parts/casing/${editProduct.id}/update`,
-      //   headers: {
-      //     access_token: localStorage.getItem("access_token"),
-      //     // access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
-      //   },
-      //   data: state,
-      // })
-      //   .then(({ data }) => {
-      //     history.push("/");
-      //     console.log(data);
-      //   })
-      //   .catch((err) => {
-      //     console.log(err.response);
-      //   });
+
       console.log(state, "EDIT");
     } else {
-      axios({
-        method: "POST",
-        url: "http://localhost:3000/parts/casing/add",
-        headers: {
+      addCasing({
+        variables: {
           access_token: localStorage.getItem("access_token"),
-          // access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGRhbUBtYWlsLmNvbSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE2MDUzNzM3NzR9.wbFQH7lN92OOdsvjrLy4WEFlCdwq4hc10IsJnghq5aA"
+          dataCasing: state,
         },
-        data: state,
-      })
-        .then(({ data }) => {
-          history.push("/");
-          console.log(data);
-        })
-        .catch((err) => {
-          console.log(err.response);
-        });
+      });
     }
-    console.log(state);
   }
-  console.log(localStorage.getItem("access_token"));
+
   function handleChange(e) {
     const { name, value } = e.target;
     setstate({

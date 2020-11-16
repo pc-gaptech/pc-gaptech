@@ -9,6 +9,7 @@ import Login from "./pages/user/Login";
 import Configurator from "./pages/configurator/configurator";
 import PartList from "./pages/configurator/PartList";
 import Favorites from "./pages/favorite/Favorites"
+import DetailPart from "./pages/detailPart";
 
 function App() {
 	return (
@@ -17,6 +18,7 @@ function App() {
 				<Navbar />
 				<Router>
 					<Switch>
+						<Route exact path="/configurator/parts/:component/:id" component={DetailPart} />
 						<Route exact path="/configurator/parts/:componentType" component={PartList} />
 						<Route exact path="/" component={Home} />
 						<Route exact path="/register" component={Register} />

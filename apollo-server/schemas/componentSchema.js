@@ -29,7 +29,11 @@ enum Socket {
   LGA1200
   LGA1150
 }
-
+enum storage_type {
+  SATA_HDD, 
+  SATA_SSD, 
+  NVME_SSD,
+}
 enum Chipset {
   b450
   A320
@@ -85,11 +89,9 @@ type PowerSupply {
   ${partPowerSupply}
 }
 
-
 type RAM {
   ${partRAM}
 }
-
 
 type GPU {
   ${partGPU}

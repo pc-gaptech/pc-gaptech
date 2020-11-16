@@ -81,7 +81,7 @@ export const FETCH_ALL = gql`
 				name
 				power_draw
 				manufacturer
-				GPU_chipset
+				gpu_chipset
 				price
 				rating
 				picture_url
@@ -144,7 +144,7 @@ export const FETCH_GPU_BY_ID = gql`
 			name
 			power_draw
 			manufacturer
-			GPU_chipset
+			gpu_chipset
 			price
 			rating
 			picture_url
