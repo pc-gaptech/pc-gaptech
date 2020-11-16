@@ -12,6 +12,10 @@ const errorHandler = (err, req, res, next) => {
     case "SequelizeUniqueConstraintError":
       status = 400;
       message = err.errors[0].message;
+    case "TypeError":
+      status = 400;
+      message = "Invalid Component ID";
+      break;
     case "BadRequest":
       status = 400;
       break;
