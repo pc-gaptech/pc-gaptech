@@ -44,17 +44,15 @@ const useStyle = makeStyles((theme) => ({
 }));
 
 export default function PartItem(props) {
-	const { item, componentId } = props;
+	const { item, component } = props;
 	const classes = useStyle();
 	const history = useHistory();
 
 	const handleAddtoConfig = (e) => {
 		e.preventDefault(e);
 		let newConfig = JSON.parse(JSON.stringify(config()));
-		console.log(item.id);
-		newConfig[componentId] = +item.id;
+		newConfig[`${component}Id`] = +item.id;
 		config(newConfig);
-		console.log(config(), "HAHAHAAH");
 		history.push("/configurator");
 	};
 
@@ -65,7 +63,14 @@ export default function PartItem(props) {
 			</Grid>
 			<Grid item xs={4} className={classes.center}>
 				<Typography className={classes.name}>{item.name}</Typography>
-				<Button size={"small"} className={classes.button} startIcon={<VisibilityIcon />}>
+				<Button
+					size={"small"}
+					className={classes.button}
+					startIcon={<VisibilityIcon />}
+					onClick={() => {
+						history.push(`/configurator/parts/${component}/${item.id}`);
+					}}
+				>
 					See details
 				</Button>
 			</Grid>
