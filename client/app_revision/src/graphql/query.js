@@ -153,7 +153,7 @@ export const FETCH_GPU_BY_ID = gql`
 `;
 
 export const FETCH_RAM_BY_ID = gql`
-	query fetchRAMById($access_token: String!, $id: Int!) {
+	query fetchRAMById($access_token: String, $id: Int) {
 		findOneRAMById(id: $id, access_token: $access_token) {
 			id
 			name
@@ -411,6 +411,18 @@ export const GET_RECOMMENDED_PC = gql`
 				rating
 				picture_url
 			}
+		}
+	}
+`;
+
+export const GET_GAMES_BASED_ON_CONFIG = gql`
+	query getGamesBasedOnConfig($access_token: String, $configRating: Int) {
+		getGamesConfig(access_token: $access_token, configRating: $configRating) {
+			id
+			name
+			description
+			picture_url
+			rating
 		}
 	}
 `;

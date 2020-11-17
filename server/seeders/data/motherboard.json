@@ -48,5 +48,25 @@
 		"power_draw": 15,
 		"price": 3100000,
 		"picture_url": "https://cdna.pcpartpicker.com/static/forever/images/product/65d2e2e1dd6c41fe051500c6d88ffe0c.256p.jpg"
+	},
+	{
+		"name": "Zenith II Extreme",
+		"socket": "TR4X",
+		"chipset": "X399",
+		"form_factor": "ATX",
+		"manufacturer": "Asus",
+		"power_draw": 15,
+		"price": 4650000,
+		"picture_url": "https://cdna.pcpartpicker.com/static/forever/images/product/17842f8fa0bc6e2dc78a4a213658bbee.256p.jpg"
+	},
+	{
+		"name": "TRX40 AORUS XTREME",
+		"socket": "TR4X",
+		"chipset": "X399",
+		"form_factor": "ATX",
+		"manufacturer": "Gigabyte",
+		"power_draw": 15,
+		"price": 67500000,
+		"picture_url": "https://cdna.pcpartpicker.com/static/forever/images/product/e2424c4cee2b26ab9066cbcc7e236766.256p.jpg"
 	}
 ]

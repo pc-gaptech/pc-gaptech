@@ -115,7 +115,7 @@ export default function PartItem(props) {
 				</Button>
 			</Grid>
 			<Grid item xs={2} className={classes.center} style={{ fontWeight: "bold" }}>
-				{item.price}
+				{`Rp. ${item.price.toLocaleString("id")}`}
 			</Grid>
 			<Grid item xs={1} className={classes.center}>
 				<IconButton

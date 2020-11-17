@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, makeStyles } from "@material-ui/core";
 import { Button } from "@material-ui/core";
 import Select from "react-select";
-import { config } from "../../graphql/reactiveVars";
+import { config, configRatingTemp } from "../../graphql/reactiveVars";
 import { FECTH_GAMES } from "../../graphql/gamesQuery";
 import { useQuery } from "@apollo/client";
 import axios from "axios";
@@ -23,12 +23,13 @@ function DefaultConfig() {
 
 	function goToDefault(e) {
 		e.preventDefault();
-		let result = options.map((el) => {
+		let result = pickedGames.map((el) => {
 			return el.value;
 		});
 		setPickedGames(result.join(","));
+		console.log(result, "result");
 		axios({
-			url: `http://localhost:3000/recommendpc?gamesId=${result}`,
+			url: `http://localhost:3000/recommendpc?gamesId=${result.join(",")}`,
 			headers: {
 				"content-type": "application/json",
 				access_token: localStorage.getItem("access_token"),
@@ -49,6 +50,9 @@ function DefaultConfig() {
 					rating: data.rating,
 				};
 				config(newConfig);
+				configRatingTemp({
+					rating: data.GPU.rating > data.CPU.max_rating ? data.CPU.max_rating : data.GPU.rating,
+				});
 				history.push("/finished");
 			})
 			.catch((err) => {
@@ -57,7 +61,7 @@ function DefaultConfig() {
 	}
 
 	function pickGames(e) {
-		console.log(e);
+		setPickedGames(e);
 	}
 
 	useEffect(() => {

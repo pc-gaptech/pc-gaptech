@@ -13,6 +13,10 @@ export const config = makeVar({
 	rating: 0,
 });
 
+export const configRatingTemp = makeVar({
+	rating: 0,
+});
+
 export const restriction = makeVar({
 	socket: "",
 	chipset: "",

@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
 				},
 			},
 			socket: {
-				type: DataTypes.ENUM(["AM4", "LGA1151", "LGA1200"]),
+				type: DataTypes.ENUM(["AM4", "LGA1151", "LGA1200", "TR4X"]),
 			},
 			chipset: {
 				type: DataTypes.ENUM([
@@ -44,6 +44,9 @@ module.exports = (sequelize, DataTypes) => {
 					"H470",
 					"B460",
 					"H410",
+					"X399",
+					"H270",
+					"Z270",
 				]),
 			},
 			TDP: {
@@ -94,7 +97,7 @@ module.exports = (sequelize, DataTypes) => {
 					min: {
 						args: 1,
 						msg: "Min Rating 1",
-					}
+					},
 				},
 			},
 			price: {

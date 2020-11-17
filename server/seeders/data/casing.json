@@ -19,5 +19,19 @@
 		"manufacturer": "Silverstone",
 		"price": 980000,
 		"picture_url": "https://m.media-amazon.com/images/I/5173qS6iKoL.jpg"
+	},
+	{
+		"name": "Fractal Design Meshify C",
+		"form_factor": "ATX",
+		"manufacturer": "Fractal Design",
+		"price": 1500000,
+		"picture_url": "https://cdna.pcpartpicker.com/static/forever/images/product/5e077c6b1272ca2c11e4f7df6326370a.256p.jpg"
+	},
+	{
+		"name": "Phanteks Eclipse P300A",
+		"form_factor": "ATX",
+		"manufacturer": "Phanteks",
+		"price": 1300000,
+		"picture_url": "https://cdna.pcpartpicker.com/static/forever/images/product/7c9e187b65ab4b281bc2ca0fe41a9aa7.256p.jpg"
 	}
 ]

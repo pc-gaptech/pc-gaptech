@@ -45,6 +45,9 @@ module.exports = (sequelize, DataTypes) => {
 				"H470",
 				"B460",
 				"H410",
+				"X399",
+				"H270",
+				"Z270",
 			]),
 			manufacturer: {
 				type: DataTypes.STRING,

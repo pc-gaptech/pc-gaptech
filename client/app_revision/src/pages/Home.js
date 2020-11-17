@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles, Container, Grid } from "@material-ui/core";
+import { makeStyles, Container, Grid, Paper, Button, CssBaseline } from "@material-ui/core";
 import DefaultConfig from "../components/Home/DefaultConfig";
 import SelectConfig from "../components/Home/SelectConfig";
 import Background from "../assets/bghome.jpg";
@@ -9,8 +9,8 @@ export default function Home() {
 
   return (
     <Container className={classes.container}>
+      <CssBaseline/>
       <h1>WELCOME TO PC GAPTECH</h1>
-
       <div className={classes.root}>
         <Grid container spacing={3}>
           <Grid item xs={6}>

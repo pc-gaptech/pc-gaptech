@@ -95,25 +95,51 @@
 		"socket": "LGA1200",
 		"chipset": ["Z490", "B460", "H470", "H410"],
 		"TDP": 125,
-		"manufacturer": "AMD",
+		"manufacturer": "Intel",
 		"power_draw": 125,
 		"core_count": 8,
 		"isIGPU": true,
 		"max_rating": 10,
-		"price": 3900000,
-		"picture_url": "https://images.unsplash.com/photo-1591799265444-d66432b91588?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=60"
+		"price": 7500000,
+		"picture_url": "https://cdna.pcpartpicker.com/static/forever/images/product/6a40f9732bef504af112c33a980482b2.256p.jpg"
 	},
 	{
 		"name": "Core i9-9900k",
-		"socket": "LGA1150",
+		"socket": "LGA1151",
 		"chipset": ["Z390", "B365", "H370", "Z370"],
 		"TDP": 125,
-		"manufacturer": "AMD",
+		"manufacturer": "Intel",
 		"power_draw": 125,
 		"core_count": 8,
 		"isIGPU": true,
 		"max_rating": 10,
-		"price": 3900000,
-		"picture_url": "https://images.unsplash.com/photo-1591799265444-d66432b91588?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=60"
+		"price": 8700000,
+		"picture_url": "https://images-na.ssl-images-amazon.com/images/I/41EDFtP5hpL.jpg"
+	},
+	{
+		"name": "Threadripper 3990X",
+		"socket": "TR4X",
+		"chipset": ["X399"],
+		"TDP": 280,
+		"manufacturer": "AMD",
+		"power_draw": 280,
+		"core_count": 64,
+		"isIGPU": false,
+		"max_rating": 10,
+		"price": 54000000,
+		"picture_url": "https://cdna.pcpartpicker.com/static/forever/images/product/7e2e7fecadc261c89c70cf3965a97a28.256p.jpg"
+	},
+	{
+		"name": "Threadripper 3970X",
+		"socket": "TR4X",
+		"chipset": ["X399"],
+		"TDP": 280,
+		"manufacturer": "AMD",
+		"power_draw": 280,
+		"core_count": 32,
+		"isIGPU": false,
+		"max_rating": 10,
+		"price": 39000000,
+		"picture_url": "https://cdna.pcpartpicker.com/static/forever/images/product/7e2e7fecadc261c89c70cf3965a97a28.256p.jpg"
 	}
 ]
