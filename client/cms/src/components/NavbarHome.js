@@ -9,18 +9,21 @@ import {
 } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { dataEdit } from "../graphQl/cache";
+import { accessVar } from "../graphQl/cache";
+import { useReactiveVar } from "@apollo/client";
 
 const NavbarHome = () => {
+  const access = useReactiveVar(accessVar);
   const history = useHistory();
-  const [access, setAccess] = useState(false);
-
+  // const [access, setAccess] = useState(false);
+  let token = localStorage.access_token;
   useEffect(() => {
-    if (localStorage.getItem("access_token")) {
-      setAccess(true);
+    if (token) {
+      accessVar(true);
     } else {
-      setAccess(false);
+      accessVar(false);
     }
-  }, [access]);
+  }, [token]);
   function goToHome(destination) {
     switch (destination) {
       case "home":
@@ -88,13 +91,8 @@ const NavbarHome = () => {
           {!access ? (
             <></>
           ) : (
-            <Nav.Link onClick={() => goToHome("home")}>Home</Nav.Link>
-          )}
-
-          {!access ? (
-            <Nav.Link onClick={() => goToHome("login")}>Login</Nav.Link>
-          ) : (
             <Nav>
+              <Nav.Link onClick={() => goToHome("home")}>Home</Nav.Link>
               <NavDropdown title="AddProduct" id="basic-nav-dropdown">
                 <NavDropdown.Item onClick={() => goToHome("CPU")}>
                   CPU
@@ -132,12 +130,7 @@ const NavbarHome = () => {
               <Nav.Link onClick={logout}>Logout</Nav.Link>
             </Nav>
           )}
-          <Nav.Link onClick={() => goToHome("login")}>Login</Nav.Link>
         </Nav>
-        {/* <Form inline>
-          <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-          <Button variant="outline-success">Search</Button>
-        </Form> */}
       </Navbar.Collapse>
     </Navbar>
   );
