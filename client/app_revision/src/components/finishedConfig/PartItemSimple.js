@@ -66,6 +66,7 @@ export default function PartItemSimple({ component, ID, total }) {
 
 	const { loading, error, data } = useQuery(query, {
 		variables: { id: ID, access_token: localStorage.getItem("access_token") },
+		fetchPolicy: "network-only"
 	});
 
 	useEffect(() => {
