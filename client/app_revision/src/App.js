@@ -18,6 +18,7 @@ function App() {
 		<div className="App">
 			<ApolloProvider client={Client}>
 				<Router>
+					<Navbar />
 					<Switch>
 						<Route exact path="/configurator/parts/:component/:id" component={DetailPart} />
 						<Route exact path="/configurator/parts/:componentType" component={PartList} />

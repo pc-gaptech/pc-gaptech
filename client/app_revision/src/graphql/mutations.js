@@ -44,3 +44,21 @@ export const DELETE_ONE_FAVORITE = gql`
 		}
 	}
 `;
+
+export const SAVE_FAVORITE = gql`
+	mutation saveFavorite($access_token: String!, $config: newFavoriteConfig) {
+		addFavoriteConfig(config: $config, access_token: $access_token) {
+			id
+			name
+			CPUId
+			CPUCoolerId
+			MotherboardId
+			GPUId
+			RAMId
+			StorageId
+			PowerSupplyId
+			CasingId
+			rating
+		}
+	}
+`;
