@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Container, CssBaseline, Grid, makeStyles, Typography } from "@material-ui/core";
 import { useMutation } from "@apollo/client";
@@ -14,28 +13,27 @@ import { config, restriction, configRatingTemp } from "../../graphql/reactiveVar
 import { CHECK_CONFIG } from "../../graphql/mutations";
 
 const useStyle = makeStyles((theme) => ({
-  container: {
-    paddingTop: "10px",
-    paddingBottom: "10px",
-    borderTop: "1px solid #bbbfca",
-    borderBottom: "1px solid #bbbfca",
-    textAlign: "center",
-  },
-  logo: {
-    alignSelf: "center",
-    maxWidth: "70%",
-    height: "auto",
-    margin: "auto",
-    paddingTop: "33px",
-    paddingBottom: "33px",
-  },
+	container: {
+		paddingTop: "10px",
+		paddingBottom: "10px",
+		borderTop: "1px solid #bbbfca",
+		borderBottom: "1px solid #bbbfca",
+		textAlign: "center",
+	},
+	logo: {
+		alignSelf: "center",
+		maxWidth: "70%",
+		height: "auto",
+		margin: "auto",
+		paddingTop: "33px",
+		paddingBottom: "33px",
+	},
 
-  center: {
-    textAlign: "center",
-    margin: "auto",
-    fontWeight: "bold",
-  },
-
+	center: {
+		textAlign: "center",
+		margin: "auto",
+		fontWeight: "bold",
+	},
 
 	header: {
 		fontWeight: "bold",
@@ -57,12 +55,11 @@ const useStyle = makeStyles((theme) => ({
 }));
 
 export default function Configurator() {
-  const classes = useStyle();
-  const history = useHistory();
-  const [displayedConfig] = useState(config());
-  const [isConfigValid, setIsConfigValid] = useState(false);
-  const [checkConfig] = useMutation(CHECK_CONFIG);
-
+	const classes = useStyle();
+	const history = useHistory();
+	const [displayedConfig] = useState(config());
+	const [isConfigValid, setIsConfigValid] = useState(false);
+	const [checkConfig] = useMutation(CHECK_CONFIG);
 
 	useEffect(() => {
 		configRatingTemp({
@@ -95,14 +92,12 @@ export default function Configurator() {
 		}
 	};
 
-
-  const handleNext = async (e) => {
-    e.preventDefault();
-    if (isConfigValid) {
-      history.push("/finished");
-    }
-  };
-
+	const handleNext = async (e) => {
+		e.preventDefault();
+		if (isConfigValid) {
+			history.push("/finished");
+		}
+	};
 
 	return (
 		<Container component="main">
@@ -174,102 +169,25 @@ export default function Configurator() {
 					</Grid>
 				</Grid>
 			</Grid>
-			<Grid container>
-				<Grid item xs={2} className={classes.componentType}>
-					<Typography className={classes.tableHead}>CPU</Typography>
-				</Grid>
-				<Grid item xs={10}>
-					{displayedConfig.CPUId ? (
-						<PartItemHome ID={displayedConfig.CPUId} component={"CPU"} />
-					) : (
-						<ButtonChooser component={"CPU"} />
-					)}
-				</Grid>
-			</Grid>
-			<Grid container>
-				<Grid item xs={2} className={classes.componentType}>
-					<Typography className={classes.tableHead}>Motherboard</Typography>
-				</Grid>
-				<Grid item xs={10}>
-					{displayedConfig.MotherboardId ? (
-						<PartItemHome ID={displayedConfig.MotherboardId} component={"Motherboard"} />
-					) : (
-						<ButtonChooser component={"Motherboard"} />
-					)}
-				</Grid>
-			</Grid>
-			<Grid container>
-				<Grid item xs={2} className={classes.componentType}>
-					<Typography className={classes.tableHead}>Memory</Typography>
-				</Grid>
-				<Grid item xs={10}>
-					{displayedConfig.RAMId ? (
-						<PartItemHome ID={displayedConfig.RAMId} component={"RAM"} />
-					) : (
-						<ButtonChooser component={"RAM"} />
-					)}
-				</Grid>
-			</Grid>
-			<Grid container>
-				<Grid item xs={2} className={classes.componentType}>
-					<Typography className={classes.tableHead}>Power Supplies</Typography>
-				</Grid>
-				<Grid item xs={10}>
-					{displayedConfig.PowerSupplyId ? (
-						<PartItemHome ID={displayedConfig.PowerSupplyId} component={"PowerSupply"} />
-					) : (
-						<ButtonChooser component={"PowerSupply"} />
-					)}
-				</Grid>
-			</Grid>
-			<Grid container>
-				<Grid item xs={2} className={classes.componentType}>
-					<Typography className={classes.tableHead}>Video Card</Typography>
-				</Grid>
-				<Grid item xs={10}>
-					{displayedConfig.GPUId ? (
-						<PartItemHome ID={displayedConfig.GPUId} component={"GPU"} />
-					) : (
-						<ButtonChooser component={"GPU"} />
-					)}
-				</Grid>
-			</Grid>
-			<Grid container>
-				<Grid item xs={2} className={classes.componentType}>
-					<Typography className={classes.tableHead}>Case</Typography>
-				</Grid>
-				<Grid item xs={10}>
-					{displayedConfig.CasingId ? (
-						<PartItemHome ID={displayedConfig.CasingId} component={"Casing"} />
-					) : (
-						<ButtonChooser component={"Casing"} />
-					)}
-				</Grid>
-			</Grid>
-			<Grid container>
-				<Grid item xs={2} className={classes.componentType}>
-					<Typography className={classes.tableHead}>CPU Cooler</Typography>
-				</Grid>
-				<Grid item xs={10}>
-					{displayedConfig.CPUCoolerId ? (
-						<PartItemHome ID={displayedConfig.CPUCoolerId} component={"CPUCooler"} />
-					) : (
-						<ButtonChooser component={"CPUCooler"} />
-					)}
-				</Grid>
-			</Grid>
-			<Grid container>
-				<Grid item xs={2} className={classes.componentType}>
-					<Typography className={classes.tableHead}>Storage</Typography>
-				</Grid>
-				<Grid item xs={10}>
-					{displayedConfig.StorageId ? (
-						<PartItemHome ID={displayedConfig.StorageId} component={"Storage"} />
-					) : (
-						<ButtonChooser component={"Storage"} />
-					)}
-				</Grid>
-			</Grid>
+			{Object.entries(displayedConfig).map((key, value) => {
+				if (key[0].includes("Id")) {
+					let component = key[0].substring(0).slice(0, key[0].length - 2);
+					return (
+						<Grid container>
+							<Grid item xs={2} className={classes.componentType}>
+								<Typography className={classes.tableHead}>{component}</Typography>
+							</Grid>
+							<Grid item xs={10}>
+								{key[1] ? (
+									<PartItemHome ID={key[1]} component={component} />
+								) : (
+									<ButtonChooser component={component} />
+								)}
+							</Grid>
+						</Grid>
+					);
+				}
+			})}
 		</Container>
 	);
 }

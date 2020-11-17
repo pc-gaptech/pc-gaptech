@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Grid, Typography, IconButton } from "@material-ui/core";
 
@@ -8,6 +8,7 @@ import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import { config, restriction } from "../../graphql/reactiveVars";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
 
 const useStyle = makeStyles((theme) => ({
 	header: {
@@ -48,6 +49,8 @@ export default function PartItem(props) {
 	const classes = useStyle();
 	const history = useHistory();
 
+	const [tokpedPrice, setTokpedPrice] = useState("Processing");
+
 	const handleAddtoConfig = (e) => {
 		e.preventDefault(e);
 		let newConfig = JSON.parse(JSON.stringify(config()));
@@ -80,6 +83,22 @@ export default function PartItem(props) {
 		}
 
 		history.push("/configurator");
+	};
+
+	useEffect(() => {
+		getTokpedPrice(item.name);
+	}, [item]);
+
+	const getTokpedPrice = async (input) => {
+		try {
+			let { data } = await axios({
+				url: `http://localhost:3000/tokopedia/checkprice?q=${input}`,
+				method: "GET",
+			});
+			setTokpedPrice(`${data.result}`);
+		} catch (err) {
+			console.log(err);
+		}
 	};
 
 	return (
@@ -124,6 +143,7 @@ export default function PartItem(props) {
 					aria-label="add to shopping cart"
 				>
 					<AddShoppingCartIcon />
+					<Typography>{tokpedPrice}</Typography>
 				</IconButton>
 			</Grid>
 			<Grid item xs={1} className={classes.center}>
