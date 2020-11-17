@@ -8,23 +8,17 @@ export default function Home() {
   const classes = useStyle();
 
   return (
-    <Container className={classes.container}>
-      <CssBaseline/>
-      <h1>WELCOME TO PC GAPTECH</h1>
-      <div className={classes.root}>
-        <Grid container spacing={3}>
-          <Grid item xs={6}>
-            <Container className={classes.paper}>
-              <SelectConfig />
-            </Container>
-          </Grid>
-          <Grid item xs={6}>
-            <Container className={classes.paper}>
-              <DefaultConfig />
-            </Container>
-          </Grid>
+    <Container className={classes.container} maxWidth={"false"}>
+      <CssBaseline />
+      <Grid container spacing={0} className={classes.container}>
+        <Grid item xs={6} className={classes.mainLeft}>
+          <SelectConfig />
         </Grid>
-      </div>
+        <Grid item xs={6} className={classes.mainRight}>
+          <DefaultConfig />
+
+        </Grid>
+      </Grid>
     </Container>
   );
 }
@@ -32,6 +26,8 @@ export default function Home() {
 const useStyle = makeStyles((theme) => ({
   container: {
     width: "100%",
+    backgroundColor: "yellow",
+    padding: "0"
     backgroundImage: `url(${Background})`,
     // backgroundRepeat: "no-repeat",
   },
@@ -42,16 +38,32 @@ const useStyle = makeStyles((theme) => ({
     padding: 10,
   },
   paper: {
-    height: 600,
-    border: 1,
-    borderWidth: "1",
-    // backgroundColor: "#F9F3F1",
+    height: "100vh",
+  },
+  mainLeft: {
+    paddingTop: "50px",
+    backgroundColor: "#f4f4f2",
+    height: "100vh",
+    textAlign: "center",
+    margin: "auto",
+    // backgroundImage: `url("https://i.ytimg.com/vi/DS098d9px6o/maxresdefault.jpg")`
+  },
+
+  mainRight: {
+    paddingTop: "50px",
+    color: "white",
+    backgroundColor: "#f4f4f2",
+    height: "100vh",
+    textAlign: "center",
+    margin: "auto",
+    backgroundImage: `url("https://i.ytimg.com/vi/DS098d9px6o/maxresdefault.jpg")`
   },
 
   center: {
     textAlign: "center",
     margin: "auto",
     fontWeight: "bold",
+    alignItems: "center"
   },
 
   header: {
