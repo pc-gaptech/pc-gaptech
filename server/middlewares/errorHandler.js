@@ -34,7 +34,6 @@ const errorHandler = (err, req, res, next) => {
       status = 403;
       break;
     case "NotFound":
-      console.log("aaaasasasa");
       status = 404;
       break;
   }
