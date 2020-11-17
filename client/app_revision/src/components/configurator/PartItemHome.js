@@ -88,10 +88,10 @@ export default function PartItemHome({ component, ID }) {
 	console.log({ id: +ID, access_token: localStorage.getItem("access_token") }, "INPUT");
 
 	const { loading, error, data } = useQuery(query, {
-		variables: { id: +ID, access_token: localStorage.getItem("access_token") }
+		variables: { id: +ID, access_token: localStorage.getItem("access_token") },
 	});
 
-	const handleEdit = (e) => {
+	const handleDetail = (e) => {
 		e.preventDefault();
 		history.push(`/configurator/parts/${component}`);
 	};
@@ -127,7 +127,7 @@ export default function PartItemHome({ component, ID }) {
 					className={classes.buttonsave}
 					startIcon={<AddCircleIcon />}
 					onClick={(e) => {
-						handleEdit(e);
+						handleDetail(e);
 					}}
 				>
 					Edit

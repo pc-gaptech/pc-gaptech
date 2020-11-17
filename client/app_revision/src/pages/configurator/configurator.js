@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+
+import React, { useState, useEffect } from "react";
 import { Container, CssBaseline, Grid, makeStyles, Typography } from "@material-ui/core";
 import { useMutation } from "@apollo/client";
 import { useHistory } from "react-router-dom";
@@ -9,38 +10,38 @@ import tokopedia from "../../assets/tokopedia.png";
 import shopee from "../../assets/shopee.png";
 import bukalapak from "../../assets/bukalapak.png";
 import ButtonChooser from "../../components/configurator/ButtonChooser";
-import { config, restriction } from "../../graphql/reactiveVars";
+import { config, restriction, configRatingTemp } from "../../graphql/reactiveVars";
 import { CHECK_CONFIG } from "../../graphql/mutations";
 
 const useStyle = makeStyles((theme) => ({
-	container: {
-		paddingTop: "10px",
-		paddingBottom: "10px",
-		borderTop: "1px solid #bbbfca",
-		borderBottom: "1px solid #bbbfca",
-		textAlign: "center",
-	},
-	logo: {
-		alignSelf: "center",
-		maxWidth: "70%",
-		height: "auto",
-		margin: "auto",
-		paddingTop: "33px",
-		paddingBottom: "33px",
-	},
+  container: {
+    paddingTop: "10px",
+    paddingBottom: "10px",
+    borderTop: "1px solid #bbbfca",
+    borderBottom: "1px solid #bbbfca",
+    textAlign: "center",
+  },
+  logo: {
+    alignSelf: "center",
+    maxWidth: "70%",
+    height: "auto",
+    margin: "auto",
+    paddingTop: "33px",
+    paddingBottom: "33px",
+  },
 
-	center: {
-		textAlign: "center",
-		margin: "auto",
-		fontWeight: "bold",
-	},
+  center: {
+    textAlign: "center",
+    margin: "auto",
+    fontWeight: "bold",
+  },
+
 
 	header: {
 		fontWeight: "bold",
 		fontSize: "1.3em",
 		marginTop: "15px",
 		marginBottom: "15px",
-
 	},
 
 	componentType: {
@@ -51,16 +52,23 @@ const useStyle = makeStyles((theme) => ({
 	tableHead: {
 		fontWeight: "bold",
 		letterSpacing: "0.7px",
-		fontSize: "1em"
-	}
+		fontSize: "1em",
+	},
 }));
 
 export default function Configurator() {
-	const classes = useStyle();
-	const history = useHistory();
-	const [displayedConfig] = useState(config());
-	const [isConfigValid, setIsConfigValid] = useState(false);
-	const [checkConfig] = useMutation(CHECK_CONFIG);
+  const classes = useStyle();
+  const history = useHistory();
+  const [displayedConfig] = useState(config());
+  const [isConfigValid, setIsConfigValid] = useState(false);
+  const [checkConfig] = useMutation(CHECK_CONFIG);
+
+
+	useEffect(() => {
+		configRatingTemp({
+			rating: 0,
+		});
+	}, []);
 
 	const handleCheck = async (e) => {
 		e.preventDefault();
@@ -87,40 +95,46 @@ export default function Configurator() {
 		}
 	};
 
-	const handleNext = async (e) => {
-		e.preventDefault();
-		if (isConfigValid) {
-			history.push("/finished");
-		}
-	};
+
+  const handleNext = async (e) => {
+    e.preventDefault();
+    if (isConfigValid) {
+      history.push("/finished");
+    }
+  };
+
 
 	return (
 		<Container component="main">
-						<CssBaseline />
+			<CssBaseline />
 			<Typography className={classes.header}>Build your PC</Typography>
 			{/* SEMENTARA DOANG */}
 
-			<Grid xs={12} style={{backgroundColor: "#f4f4f2", padding: "30px", marginBottom: "20px"}}>
-			<button
-				onClick={(e) => {
-					handleCheck(e);
-				}}
-			>
-				CHECK CONFIG
-			</button>
-			{isConfigValid ? <p style={{color: "green"}}>CONFIG COMPATIBLE</p> : <p style={{color: "red"}}>CONFIG TIDAK COMPATIBLE</p>}
-			{isConfigValid ? (
+			<Grid xs={12} style={{ backgroundColor: "#f4f4f2", padding: "30px", marginBottom: "20px" }}>
 				<button
 					onClick={(e) => {
-						handleNext(e);
+						handleCheck(e);
 					}}
 				>
-					Confim Configuration
+					CHECK CONFIG
 				</button>
-			) : (
-				<p></p>
-			)}
-			{<p>Total Power: {restriction().total_power}</p>}
+				{isConfigValid ? (
+					<p style={{ color: "green" }}>CONFIG COMPATIBLE</p>
+				) : (
+					<p style={{ color: "red" }}>CONFIG TIDAK COMPATIBLE</p>
+				)}
+				{isConfigValid ? (
+					<button
+						onClick={(e) => {
+							handleNext(e);
+						}}
+					>
+						Confim Configuration
+					</button>
+				) : (
+					<p></p>
+				)}
+				{<p>Total Power: {restriction().total_power}</p>}
 			</Grid>
 			<Grid container spacing={1} className={classes.container}>
 				<Grid item xs={2} className={classes.componentType}>
@@ -129,13 +143,13 @@ export default function Configurator() {
 				<Grid item xs={10} container>
 					<Grid item xs={0}></Grid>
 					<Grid item xs={5} className={classes.center}>
-					<Typography className={classes.tableHead}>Products</Typography>
+						<Typography className={classes.tableHead}>Products</Typography>
 					</Grid>
 					<Grid item xs={2} className={classes.center}>
-					<Typography className={classes.tableHead}>Add</Typography>
+						<Typography className={classes.tableHead}>Add</Typography>
 					</Grid>
 					<Grid item xs={2} className={classes.center}>
-					<Typography className={classes.tableHead}>Est.Price</Typography>
+						<Typography className={classes.tableHead}>Est.Price</Typography>
 					</Grid>
 					<Grid item xs={1}>
 						<Image
@@ -162,7 +176,7 @@ export default function Configurator() {
 			</Grid>
 			<Grid container>
 				<Grid item xs={2} className={classes.componentType}>
-				<Typography className={classes.tableHead}>CPU</Typography>
+					<Typography className={classes.tableHead}>CPU</Typography>
 				</Grid>
 				<Grid item xs={10}>
 					{displayedConfig.CPUId ? (
@@ -174,7 +188,7 @@ export default function Configurator() {
 			</Grid>
 			<Grid container>
 				<Grid item xs={2} className={classes.componentType}>
-				<Typography className={classes.tableHead}>Motherboard</Typography>
+					<Typography className={classes.tableHead}>Motherboard</Typography>
 				</Grid>
 				<Grid item xs={10}>
 					{displayedConfig.MotherboardId ? (
@@ -186,11 +200,11 @@ export default function Configurator() {
 			</Grid>
 			<Grid container>
 				<Grid item xs={2} className={classes.componentType}>
-				<Typography className={classes.tableHead}>Memory</Typography>
+					<Typography className={classes.tableHead}>Memory</Typography>
 				</Grid>
 				<Grid item xs={10}>
 					{displayedConfig.RAMId ? (
-						<PartItemHome ID={displayedConfig.MotherboardId} component={"RAM"} />
+						<PartItemHome ID={displayedConfig.RAMId} component={"RAM"} />
 					) : (
 						<ButtonChooser component={"RAM"} />
 					)}
@@ -198,7 +212,7 @@ export default function Configurator() {
 			</Grid>
 			<Grid container>
 				<Grid item xs={2} className={classes.componentType}>
-				<Typography className={classes.tableHead}>Power Supplies</Typography>
+					<Typography className={classes.tableHead}>Power Supplies</Typography>
 				</Grid>
 				<Grid item xs={10}>
 					{displayedConfig.PowerSupplyId ? (
@@ -210,7 +224,7 @@ export default function Configurator() {
 			</Grid>
 			<Grid container>
 				<Grid item xs={2} className={classes.componentType}>
-				<Typography className={classes.tableHead}>Video Card</Typography>
+					<Typography className={classes.tableHead}>Video Card</Typography>
 				</Grid>
 				<Grid item xs={10}>
 					{displayedConfig.GPUId ? (
@@ -222,7 +236,7 @@ export default function Configurator() {
 			</Grid>
 			<Grid container>
 				<Grid item xs={2} className={classes.componentType}>
-				<Typography className={classes.tableHead}>Case</Typography>
+					<Typography className={classes.tableHead}>Case</Typography>
 				</Grid>
 				<Grid item xs={10}>
 					{displayedConfig.CasingId ? (
@@ -234,7 +248,7 @@ export default function Configurator() {
 			</Grid>
 			<Grid container>
 				<Grid item xs={2} className={classes.componentType}>
-				<Typography className={classes.tableHead}>CPU Cooler</Typography>
+					<Typography className={classes.tableHead}>CPU Cooler</Typography>
 				</Grid>
 				<Grid item xs={10}>
 					{displayedConfig.CPUCoolerId ? (
@@ -246,7 +260,7 @@ export default function Configurator() {
 			</Grid>
 			<Grid container>
 				<Grid item xs={2} className={classes.componentType}>
-				<Typography className={classes.tableHead}>Storage</Typography>
+					<Typography className={classes.tableHead}>Storage</Typography>
 				</Grid>
 				<Grid item xs={10}>
 					{displayedConfig.StorageId ? (

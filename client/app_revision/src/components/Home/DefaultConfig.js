@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, makeStyles } from "@material-ui/core";
 import { Button } from "@material-ui/core";
 import Select from "react-select";
-import { config } from "../../graphql/reactiveVars";
+import { config, configRatingTemp } from "../../graphql/reactiveVars";
 import { FECTH_GAMES } from "../../graphql/gamesQuery";
 import { useQuery } from "@apollo/client";
 import axios from "axios";
@@ -50,6 +50,9 @@ function DefaultConfig() {
 					rating: data.rating,
 				};
 				config(newConfig);
+				configRatingTemp({
+					rating: data.GPU.rating > data.CPU.max_rating ? data.CPU.max_rating : data.GPU.rating,
+				});
 				history.push("/finished");
 			})
 			.catch((err) => {
