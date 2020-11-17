@@ -85,9 +85,10 @@ export default function PartItemHome({ component, ID }) {
 		default:
 			break;
 	}
+	console.log({ id: +ID, access_token: localStorage.getItem("access_token") }, "INPUT");
 
 	const { loading, error, data } = useQuery(query, {
-		variables: { id: ID, access_token: localStorage.getItem("access_token") },
+		variables: { id: +ID, access_token: localStorage.getItem("access_token") }
 	});
 
 	const handleEdit = (e) => {
@@ -97,6 +98,8 @@ export default function PartItemHome({ component, ID }) {
 
 	if (loading) return <p>Loading...</p>;
 	if (error) return <p>Error in fetch</p>;
+
+	console.log(data, "DATA");
 
 	return (
 		<Grid container spacing={1} className={classes.container}>
@@ -131,7 +134,7 @@ export default function PartItemHome({ component, ID }) {
 				</Button>
 			</Grid>
 			<Grid item xs={2} className={classes.center} style={{ fontWeight: "bold" }}>
-				{data[`findOne${component}ById`].price}
+				{`Rp. ${data[`findOne${component}ById`].price.toLocaleString("id")}`}
 			</Grid>
 			<Grid item xs={1} className={classes.center}>
 				<IconButton
