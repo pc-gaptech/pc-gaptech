@@ -1,0 +1,294 @@
+/parts/{components}:
+    get:
+      tags:
+      - components
+      summary: Returns all data components and status per components
+      parameters:
+      - name: components
+        in: path
+        description: to pick component 
+        required: true
+        type: string
+      description: Returns a data cpu 
+      produces:
+      - application/json
+      responses:
+        200:
+          description: successful operation
+          
+  /parts/{components}/{id}/details:
+    get:
+      tags:
+      - components
+      summary: Returns all data per components and details by id
+      description: Returns a data details per componets 
+      parameters:
+      - name: components
+        in: path
+        description: to pick component 
+        required: true
+        type: string
+      - name: id
+        in: path
+        description: to pick component id 
+        required: true
+        type: string
+      produces:
+       - application/json
+      responses:
+        200:
+          description: successful operation
+  /parts/{components}/{id}/delete:
+    delete:
+      tags:
+      - components
+      summary: Returns all data per components and details by id
+      description: Returns a data details per componets 
+      parameters:
+      - name: components
+        in: path
+        description: to pick component 
+        required: true
+        type: string
+      - name: id
+        in: path
+        description: to pick component id 
+        required: true
+        type: string
+      produces:
+       - application/json
+      responses:
+        200:
+          description: successful operation
+  
+  /parts/{components}/{id}/add:
+    post:
+      tags:
+      - components
+      summary: Returns all data per components and details by id
+      description: Returns a data details per componets 
+      parameters:
+      - name: components
+        in: path
+        description: to pick component 
+        required: true
+        type: string
+      - name: id
+        in: path
+        description: to pick component id 
+        required: true
+        type: string
+      - name: manufacturer
+        in: path
+        description: to pick component manufacturer 
+        required: true
+        type: string
+      - name: price
+        in: path
+        description: to pick component price 
+        required: true
+        type: integer
+      - name: name
+        in: path
+        description: to pick component name 
+        required: true
+        type: string
+      - name: picture_url
+        in: path
+        description: to pick component picture_url 
+        required: true
+        type: string
+      produces:
+       - application/json
+      responses:
+        201:
+          description: successful operation
+          
+  /parts/{components}/{id}/update:
+    put:
+      tags:
+      - components
+      summary: Returns all data per components and details by id
+      description: Returns a data details per componets 
+      parameters:
+      - name: components
+        in: path
+        description: to pick component 
+        required: true
+        type: string
+      - name: id
+        in: path
+        description: to pick component id 
+        required: true
+        type: string
+      - name: manufacturer
+        in: path
+        description: to pick component manufacturer 
+        required: true
+        type: string
+      - name: price
+        in: path
+        description: to pick component price 
+        required: true
+        type: integer
+      - name: name
+        in: path
+        description: to pick component name 
+        required: true
+        type: string
+      - name: picture_url
+        in: path
+        description: to pick component picture_url 
+        required: true
+        type: string
+      produces:
+       - application/json
+      responses:
+        201:
+          description: successful operation
+          
+          
+  /login:
+    post:
+      tags:
+      - userPC
+      summary: Returns all data per components and details by id
+      description: Returns a data details per componets 
+      parameters:
+      - name: components
+        in: path
+        description: to pick component 
+        required: true
+        type: string
+      parameters:
+      - in: body
+        name: body
+        description: Object data register user
+        required: true
+      produces:
+       - application/json
+      responses:
+        200:
+          description: successful operation
+          
+  /register:
+    post:
+      tags:
+      - userPC
+      summary: Returns name and email user
+      description: Returns name and email user 
+      parameters:
+     parameters:
+      - in: body
+        name: body
+        description: Object data register user
+        allowedValus: String
+        required: true
+        $ref: '#/definitions/User'
+      produces:
+       - application/json
+      responses:
+        200:
+          description: successful operation
+
+          addCpuColler(part:String, addCpuColler:inputCpuColler):CpuColler
+    addMotherboard(part:String,addMotherboard:inputMotherboard):Motherboard
+    addCasing(part:String, addCasing:inputCasing):Casing
+    addGPU(part:String, addGPU:inputGPU):GPU
+    addPowerSupplay(part:String, addPowerSupplay:inputPowerSupplay):PowerSupplay
+    addRAM(part:String, addRAM:inputRAM):RAM
+    addStorage(part:String, addStorage:inputStorage):Storage
+
+
+type CpuColler{ 
+    ${partCpuColler}
+}
+input inputCpuColler {
+    ${inputCpuColler}
+}
+type Motherboard{ 
+    ${partMotherboard}
+}
+input inputMotherboard {
+    ${inputMotherboard}
+}
+type Casing{ 
+    ${partCasing}
+}
+input inputCasing {
+    ${inputCasing}
+}
+type GPU{ 
+    ${partGPU}
+}
+input inputGPU {
+    ${inputGPU}
+}
+type PowerSupplay{ 
+    ${partPowerSupplay}
+}
+input inputPowerSupplay {
+    ${inputPowerSupplay}
+}
+
+type RAM{ 
+    ${partRAM}
+}
+input inputRAM {
+    ${inputRAM}
+}
+
+type Storage{ 
+    ${partStorage}
+}
+input inputStorage {
+    ${inputStorage}
+}
+
+enum Socket {
+    AM4
+    LGA1151
+  }
+  
+enum Chipset {
+    A350
+    B450
+    X370
+    X470
+    B550
+    X570
+    B360
+    H370
+    Z370
+    Z390
+  }
+  
+enum StorageType {
+    SATA_HDD
+    SATA_SSD
+    NVME_SSD
+  }
+  
+enum FormFactor {
+    ATX
+    Micro_ATX
+    Mini_ITX
+  }
+  
+enum MemoryType {
+    DDR3
+    DDR4
+  }
+
+
+  // const { partCpuColler, inputCpuColler } = require("./mutation/CpuCollerMutation")
+// const { partMotherboard, inputMotherboard } = require("./mutation/motherboardMutation")
+// const { partCasing, inputCasing } = require("./mutation/casingMutation")
+// const { partGPU, inputGPU } = require("./mutation/GpuMutation")
+// const { partPowerSupplay, inputPowerSupplay } = require("./mutation/powerSupplayMutation")
+// const { partRAM, inputRAM } = require("./mutation/RamMutation")
+// const { partStorage, inputStorage } = require("./mutation/storageMutation")
+
+appKey  :  bb828730f8541b82cf3b0e25f2549a0b
+appSecret  :  9d654c34e8280a541fbd1475c163a031
+accessToken  :  5050ec45a5a712ca475dd7b6c3522f58

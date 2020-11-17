@@ -4,6 +4,7 @@ import {
   CardActionArea,
   CardMedia,
   makeStyles,
+  Icon,
 } from "@material-ui/core";
 import Swal from "sweetalert2";
 import { useHistory } from "react-router-dom";
@@ -50,8 +51,8 @@ function SelectConfig() {
 
 const useStyle = makeStyles((theme) => ({
   media: {
-    width: "inherice",
-    height: 200,
+    width: 600,
+    height: 400,
   },
   button: {
     marginTop: 10,
