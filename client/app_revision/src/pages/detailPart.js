@@ -1,4 +1,5 @@
-import React from "react";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
@@ -11,6 +12,7 @@ import {
   TableBody,
   TableRow,
   Button,
+  IconButton,
 } from "@material-ui/core";
 
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
@@ -72,6 +74,8 @@ export default function DetailCpu() {
   const classes = useStyles();
   const history = useHistory();
   const { id, component } = useParams();
+  const [tokpedPrice, setTokpedPrice] = useState("Processing");
+  const [bukalapakPrice, setBukalapakPrice] = useState("Processing");
 
   let query = null;
   switch (component) {
@@ -106,6 +110,32 @@ export default function DetailCpu() {
   const { loading, error, data } = useQuery(query, {
     variables: { id: +id, access_token: localStorage.getItem("access_token") },
   });
+
+  useEffect(() => {
+    if (data) {
+      const nameProduct = data[`findOne${component}ById`].name;
+      getPrice(nameProduct);
+    }
+  }, [data]);
+
+  const getPrice = async (input) => {
+    try {
+      let { data: dataTokped } = await axios({
+        url: `http://localhost:3000/tokopedia/checkprice?q=${input}`,
+        method: "GET",
+      });
+      setTokpedPrice(`${dataTokped.result}`);
+      let { data: dataBukalapak } = await axios({
+        url: `http://localhost:3000/bukalapak/checkprice?q=${input}`,
+        method: "GET",
+      });
+      setBukalapakPrice(`${dataBukalapak.result}`);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  console.log(tokpedPrice, bukalapakPrice, "kocchiii");
 
   const handleAddtoConfig = (e) => {
     e.preventDefault(e);
@@ -223,10 +253,7 @@ export default function DetailCpu() {
                   </Typography>
                 </Grid>
                 <Grid item xs={12} container>
-                  <Grid item xs={6} style={{ padding: "0" }}>
-                    <Typography style={{ fontWeight: "bold" }}>
-                      Tokopedia
-                    </Typography>
+                  <Grid item xs={6} style={{ padding: "12" }}>
                     <Image
                       imageStyle={{ width: "inherit", height: "inherit" }}
                       className={classes.logo}
@@ -235,45 +262,14 @@ export default function DetailCpu() {
                     />
                   </Grid>
                   <Grid item xs={6}>
-                    <Button
-                      variant="contained"
-                      style={{ backgroundColor: "green", color: "white" }}
-                      size="small"
-                      className={classes.button}
-                      startIcon={<AddShoppingCartIcon />}
+                    <IconButton
+                      style={{ color: "#40CB53" }}
+                      title="Research price in Tokopedia"
+                      aria-label="add to shopping cart"
                     >
-                      See Price
-                    </Button>
-                  </Grid>
-                </Grid>
-                <Grid
-                  item
-                  xs={12}
-                  container
-                  style={{ padding: "0px", margin: "0px" }}
-                >
-                  <Grid item xs={6} style={{ padding: "0px", margin: "0px" }}>
-                    <Image
-                      imageStyle={{ width: "inherit", height: "inherit" }}
-                      className={classes.logo}
-                      src={shopee}
-                      style={{ paddingTop: "0px" }}
-                    />
-                  </Grid>
-                  <Grid item xs={6} style={{ padding: "0px" }}>
-                    <Button
-                      variant="contained"
-                      style={{
-                        backgroundColor: "orange",
-                        color: "white",
-                        paddingBottom: "0px",
-                      }}
-                      size="small"
-                      className={classes.button}
-                      startIcon={<AddShoppingCartIcon />}
-                    >
-                      See Price
-                    </Button>
+                      <AddShoppingCartIcon />
+                      <Typography>{tokpedPrice}</Typography>
+                    </IconButton>
                   </Grid>
                 </Grid>
                 <Grid item xs={12} container>
@@ -286,7 +282,7 @@ export default function DetailCpu() {
                     />
                   </Grid>
                   <Grid item xs={6}>
-                    <Button
+                    {/* <Button
                       variant="contained"
                       style={{ backgroundColor: "red", color: "white" }}
                       size="small"
@@ -294,7 +290,17 @@ export default function DetailCpu() {
                       startIcon={<AddShoppingCartIcon />}
                     >
                       See Price
-                    </Button>
+                    </Button> */}
+                    <Grid item xs={1} className={classes.center}>
+                      <IconButton
+                        style={{ color: "#E00034" }}
+                        title="Research price in Bukalapak"
+                        aria-label="add to shopping cart"
+                      >
+                        <AddShoppingCartIcon />
+                        <Typography>{bukalapakPrice}</Typography>
+                      </IconButton>
+                    </Grid>
                   </Grid>
                 </Grid>
               </Grid>
