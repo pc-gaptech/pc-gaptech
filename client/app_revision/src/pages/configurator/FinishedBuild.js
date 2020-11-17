@@ -17,37 +17,38 @@ import { config, configRatingTemp } from "../../graphql/reactiveVars";
 import { useMutation, useQuery } from "@apollo/client";
 
 const useStyles = makeStyles((theme) => ({
-	root: {
-		flexGrow: 1,
-	},
-	paper: {
-		padding: theme.spacing(1),
-		textAlign: "center",
-		color: theme.palette.text.secondary,
-	},
-	price: {
-		fontWeight: "bold",
-		fontSize: "2em",
-		backgroundColor: "#f8efd4",
-		textAlign: "center",
-		margin: "auto",
-		padding: "10px",
-		marginBottom: "20px",
-		width: "100%",
-		verticalAlign: "middle",
-	},
-	logo: {
-		maxWidth: "70%",
-		height: "auto",
-		margin: "auto",
-	},
-	button: {
-		margin: "auto",
-		textAlign: "center",
-	},
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(1),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+  },
+  price: {
+    fontWeight: "bold",
+    fontSize: "2em",
+    backgroundColor: "#f8efd4",
+    textAlign: "center",
+    margin: "auto",
+    padding: "10px",
+    marginBottom: "20px",
+    width: "100%",
+    verticalAlign: "middle",
+  },
+  logo: {
+    maxWidth: "70%",
+    height: "auto",
+    margin: "auto",
+  },
+  button: {
+    margin: "auto",
+    textAlign: "center",
+  },
 }));
 
 export default function FinishedBuild() {
+
 	const classes = useStyles();
 	const history = useHistory();
 

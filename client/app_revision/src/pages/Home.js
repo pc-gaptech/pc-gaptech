@@ -2,6 +2,7 @@ import React from "react";
 import { makeStyles, Container, Grid, Paper, Button, CssBaseline } from "@material-ui/core";
 import DefaultConfig from "../components/Home/DefaultConfig";
 import SelectConfig from "../components/Home/SelectConfig";
+import Background from "../assets/bghome.jpg";
 
 export default function Home() {
   const classes = useStyle();
@@ -31,22 +32,21 @@ export default function Home() {
 const useStyle = makeStyles((theme) => ({
   container: {
     width: "100%",
+    backgroundImage: `url(${Background})`,
+    // backgroundRepeat: "no-repeat",
   },
   root: {
     flexGrow: 1,
     marginTop: 60,
-    backgroundColor: "black",
+    // backgroundColor: "#F9F3F1",
     padding: 10,
   },
   paper: {
-    height: 700,
-    backgroundColor: "White",
+    height: 600,
+    border: 1,
+    borderWidth: "1",
+    // backgroundColor: "#F9F3F1",
   },
-
-  // container: {
-  //   height: 400,
-  //   backgroundColor: "blue",
-  // },
 
   center: {
     textAlign: "center",

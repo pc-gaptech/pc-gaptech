@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Container, CssBaseline, Grid, makeStyles, Typography } from "@material-ui/core";
 import { useMutation } from "@apollo/client";
@@ -13,27 +14,28 @@ import { config, restriction, configRatingTemp } from "../../graphql/reactiveVar
 import { CHECK_CONFIG } from "../../graphql/mutations";
 
 const useStyle = makeStyles((theme) => ({
-	container: {
-		paddingTop: "10px",
-		paddingBottom: "10px",
-		borderTop: "1px solid #bbbfca",
-		borderBottom: "1px solid #bbbfca",
-		textAlign: "center",
-	},
-	logo: {
-		alignSelf: "center",
-		maxWidth: "70%",
-		height: "auto",
-		margin: "auto",
-		paddingTop: "33px",
-		paddingBottom: "33px",
-	},
+  container: {
+    paddingTop: "10px",
+    paddingBottom: "10px",
+    borderTop: "1px solid #bbbfca",
+    borderBottom: "1px solid #bbbfca",
+    textAlign: "center",
+  },
+  logo: {
+    alignSelf: "center",
+    maxWidth: "70%",
+    height: "auto",
+    margin: "auto",
+    paddingTop: "33px",
+    paddingBottom: "33px",
+  },
 
-	center: {
-		textAlign: "center",
-		margin: "auto",
-		fontWeight: "bold",
-	},
+  center: {
+    textAlign: "center",
+    margin: "auto",
+    fontWeight: "bold",
+  },
+
 
 	header: {
 		fontWeight: "bold",
@@ -55,11 +57,12 @@ const useStyle = makeStyles((theme) => ({
 }));
 
 export default function Configurator() {
-	const classes = useStyle();
-	const history = useHistory();
-	const [displayedConfig] = useState(config());
-	const [isConfigValid, setIsConfigValid] = useState(false);
-	const [checkConfig] = useMutation(CHECK_CONFIG);
+  const classes = useStyle();
+  const history = useHistory();
+  const [displayedConfig] = useState(config());
+  const [isConfigValid, setIsConfigValid] = useState(false);
+  const [checkConfig] = useMutation(CHECK_CONFIG);
+
 
 	useEffect(() => {
 		configRatingTemp({
@@ -92,12 +95,14 @@ export default function Configurator() {
 		}
 	};
 
-	const handleNext = async (e) => {
-		e.preventDefault();
-		if (isConfigValid) {
-			history.push("/finished");
-		}
-	};
+
+  const handleNext = async (e) => {
+    e.preventDefault();
+    if (isConfigValid) {
+      history.push("/finished");
+    }
+  };
+
 
 	return (
 		<Container component="main">

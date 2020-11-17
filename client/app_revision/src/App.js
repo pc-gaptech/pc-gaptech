@@ -4,6 +4,7 @@ import { ApolloProvider } from "@apollo/client";
 import Client from "./graphql/client";
 import Navbar from "./components/Navbar";
 import Navbar2 from "./components/Navbar2";
+import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Register from "./pages/user/Register";
 import Login from "./pages/user/Login";
@@ -14,6 +15,7 @@ import DetailPart from "./pages/detailPart";
 import FinishedBuild from "./pages/configurator/FinishedBuild";
 
 function App() {
+
 	return (
 		<div className="App">
 			<ApolloProvider client={Client}>

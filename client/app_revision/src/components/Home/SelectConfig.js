@@ -53,6 +53,7 @@ function SelectConfig() {
 }
 
 const useStyle = makeStyles((theme) => ({
+
 	media: {
 		width: "inherice",
 		height: 200,
