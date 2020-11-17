@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ApolloProvider } from "@apollo/client";
 import Client from "./graphql/client";
+import Navbar from "./components/Navbar";
 import Navbar2 from "./components/Navbar2";
 import Home from "./pages/Home";
 import Register from "./pages/user/Register";
@@ -18,7 +19,6 @@ function App() {
 			<ApolloProvider client={Client}>
 				<Navbar2 />
 				<Router>
-					<Navbar />
 					<Switch>
 						<Route exact path="/configurator/parts/:component/:id" component={DetailPart} />
 						<Route exact path="/configurator/parts/:componentType" component={PartList} />
