@@ -82,13 +82,14 @@ function DefaultConfig() {
 				<h1>Select Games</h1>
 				<Select onChange={pickGames} options={options} isMulti />
 				<Button
+					style={{backgroundColor: "red", color: "white", fontWeight: "bold"}}
 					variant="outlined"
 					className={classes.button}
 					onClick={(e) => {
 						goToDefault(e);
 					}}
 				>
-					Recomended Config
+					Get Recomended Configuration
 				</Button>
 			</Container>
 		</div>
