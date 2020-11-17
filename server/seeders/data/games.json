@@ -1,0 +1,50 @@
+[
+	{
+		"name": "Games Rating 3",
+		"description": "Ini Game Rating 3",
+		"picture_url": "https://upload.wikimedia.org/wikipedia/en/9/99/ACOdysseyCoverArt.png",
+		"rating": 3
+	},
+	{
+		"name": "Games Rating 4",
+		"description": "Ini Game Rating 4",
+		"picture_url": "https://upload.wikimedia.org/wikipedia/en/9/99/ACOdysseyCoverArt.png",
+		"rating": 4
+	},
+	{
+		"name": "Games Rating 5",
+		"description": "Ini Game Rating 5",
+		"picture_url": "https://upload.wikimedia.org/wikipedia/en/9/99/ACOdysseyCoverArt.png",
+		"rating": 5
+	},
+	{
+		"name": "Games Rating 6",
+		"description": "Ini Game Rating 6",
+		"picture_url": "https://upload.wikimedia.org/wikipedia/en/9/99/ACOdysseyCoverArt.png",
+		"rating": 6
+	},
+	{
+		"name": "Games Rating 7",
+		"description": "Ini Game Rating 7",
+		"picture_url": "https://upload.wikimedia.org/wikipedia/en/9/99/ACOdysseyCoverArt.png",
+		"rating": 7
+	},
+	{
+		"name": "Games Rating 8",
+		"description": "Ini Game Rating 8",
+		"picture_url": "https://upload.wikimedia.org/wikipedia/en/9/99/ACOdysseyCoverArt.png",
+		"rating": 8
+	},
+	{
+		"name": "Games Rating 9",
+		"description": "Ini Game Rating 9",
+		"picture_url": "https://upload.wikimedia.org/wikipedia/en/9/99/ACOdysseyCoverArt.png",
+		"rating": 9
+	},
+	{
+		"name": "Games Rating 10",
+		"description": "Ini Game Rating 10",
+		"picture_url": "https://upload.wikimedia.org/wikipedia/en/9/99/ACOdysseyCoverArt.png",
+		"rating": 10
+	}
+]
