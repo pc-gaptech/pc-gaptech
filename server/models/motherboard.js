@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
 					},
 				},
 			},
-			socket: DataTypes.ENUM(["AM4", "LGA1151", "LGA1200"]),
+			socket: DataTypes.ENUM(["AM4", "LGA1151", "LGA1200", "TR4X"]),
 			chipset: DataTypes.ENUM([
 				"A350",
 				"B350",
@@ -45,6 +45,9 @@ module.exports = (sequelize, DataTypes) => {
 				"H470",
 				"B460",
 				"H410",
+				"X399",
+				"H270",
+				"Z270",
 			]),
 			form_factor: DataTypes.ENUM(["ATX", "Micro-ATX", "Mini-ITX"]),
 			manufacturer: {

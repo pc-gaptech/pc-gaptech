@@ -3,8 +3,24 @@
 		"name": "HX Platinum",
 		"max_power": 1200,
 		"efficiency": "80+ Platinum",
-		"manufacturer": "Samsung",
+		"manufacturer": "Corsair",
 		"price": 3450000,
 		"picture_url": "https://cdna.pcpartpicker.com/static/forever/images/product/09a31f32abb3daaf5ed9b849bd60e675.256p.jpg"
+	},
+	{
+		"name": "Corsair RM 750",
+		"max_power": 750,
+		"efficiency": "80+ Gold",
+		"manufacturer": "Corsair",
+		"price": 2200000,
+		"picture_url": "https://cdna.pcpartpicker.com/static/forever/images/product/02951377c9eed1e21fc3d8ba6092717e.256p.jpg"
+	},
+	{
+		"name": "EVGA BR 450 W",
+		"max_power": 450,
+		"efficiency": "80+ Bronze",
+		"manufacturer": "EVGA",
+		"price": 1100000,
+		"picture_url": "https://cdna.pcpartpicker.com/static/forever/images/product/b1afc6fa49b75c09b8b94797008b1d9b.256p.jpg"
 	}
 ]

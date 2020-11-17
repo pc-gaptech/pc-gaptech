@@ -28,6 +28,7 @@ enum Socket {
   LGA1151
   LGA1200
   LGA1150
+  TR4X
 }
 enum storage_type {
   SATA_HDD, 
@@ -52,6 +53,9 @@ enum Chipset {
   H370
   Z370
   A350
+  X399
+	H270
+	Z270
 }
 
 enum FormFactor {

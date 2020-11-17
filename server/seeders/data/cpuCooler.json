@@ -7,5 +7,23 @@
 		"power_draw": 20,
 		"price": 560000,
 		"picture_url": "https://cdna.pcpartpicker.com/static/forever/images/product/ddea57de9797549e80d05fb3acb2e83d.med.256p.jpg"
+	},
+	{
+		"name": "Noctua NH-U14S TR4-SP3",
+		"socket": ["TR4X"],
+		"TDP": 300,
+		"manufacturer": "Noctua",
+		"power_draw": 20,
+		"price": 150000,
+		"picture_url": "https://cdna.pcpartpicker.com/static/forever/images/product/c1fedefbac0407a69d22cb532318dea5.256p.jpg"
+	},
+	{
+		"name": "H100i RGB PLATINUM",
+		"socket": ["AM4", "LGA1151", "LGA1200"],
+		"TDP": 300,
+		"manufacturer": "Corsair",
+		"power_draw": 20,
+		"price": 150000,
+		"picture_url": "https://cdna.pcpartpicker.com/static/forever/images/product/c1fedefbac0407a69d22cb532318dea5.256p.jpg"
 	}
 ]

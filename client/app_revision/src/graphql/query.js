@@ -153,7 +153,7 @@ export const FETCH_GPU_BY_ID = gql`
 `;
 
 export const FETCH_RAM_BY_ID = gql`
-	query fetchRAMById($access_token: String!, $id: Int!) {
+	query fetchRAMById($access_token: String, $id: Int) {
 		findOneRAMById(id: $id, access_token: $access_token) {
 			id
 			name

@@ -23,12 +23,13 @@ function DefaultConfig() {
 
 	function goToDefault(e) {
 		e.preventDefault();
-		let result = options.map((el) => {
+		let result = pickedGames.map((el) => {
 			return el.value;
 		});
 		setPickedGames(result.join(","));
+		console.log(result, "result");
 		axios({
-			url: `http://localhost:3000/recommendpc?gamesId=${result}`,
+			url: `http://localhost:3000/recommendpc?gamesId=${result.join(",")}`,
 			headers: {
 				"content-type": "application/json",
 				access_token: localStorage.getItem("access_token"),
@@ -57,7 +58,7 @@ function DefaultConfig() {
 	}
 
 	function pickGames(e) {
-		console.log(e);
+		setPickedGames(e);
 	}
 
 	useEffect(() => {
