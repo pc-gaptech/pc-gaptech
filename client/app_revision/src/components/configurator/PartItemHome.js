@@ -58,6 +58,7 @@ export default function PartItemHome({ component, ID }) {
 	const classes = useStyle();
 	const history = useHistory();
 	const [tokpedPrice, setTokpedPrice] = useState("Processing");
+	const [bukalapakPrice, setBukalapakPrice] = useState("Processing");
 	let query = null;
 	switch (component) {
 		case "CPU":
@@ -94,17 +95,22 @@ export default function PartItemHome({ component, ID }) {
 
 	useEffect(() => {
 		if (data) {
-			getTokpedPrice(data[`findOne${component}ById`].name);
+			getPrice(data[`findOne${component}ById`].name);
 		}
 	}, [data]);
 
-	const getTokpedPrice = async (input) => {
+	const getPrice = async (input) => {
 		try {
-			let { data } = await axios({
+			let { data: dataTokped } = await axios({
 				url: `http://localhost:3000/tokopedia/checkprice?q=${input}`,
 				method: "GET",
 			});
-			setTokpedPrice(`${data.result}`);
+			setTokpedPrice(`${dataTokped.result}`);
+			let { data: dataBukalapak } = await axios({
+				url: `http://localhost:3000/bukalapak/checkprice?q=${input}`,
+				method: "GET",
+			});
+			setBukalapakPrice(`${dataBukalapak.result}`);
 		} catch (err) {
 			console.log(err);
 		}
@@ -170,6 +176,7 @@ export default function PartItemHome({ component, ID }) {
 					aria-label="add to shopping cart"
 				>
 					<AddShoppingCartIcon />
+					<Typography>{bukalapakPrice}</Typography>
 				</IconButton>
 			</Grid>
 			<Grid item xs={1} className={classes.center}>
