@@ -65,7 +65,7 @@ export default function FinishedBuild() {
         <React.Fragment>
             <CssBaseline />
             <Container>
-                <Grid container spacing={2}>
+                <Grid container spacing={0}>
                     <Grid item xs={3} style={{ margin: "auto", textAlign: "center" }}>
                         <Image src="https://cdna.pcpartpicker.com/static/forever/images/product/c7baf2c9c9cc15ae23adb24c2f4316fc.256p.jpg" />
                         <Button

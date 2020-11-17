@@ -4,6 +4,7 @@ import {
   CardActionArea,
   CardMedia,
   makeStyles,
+  Typography,
 } from "@material-ui/core";
 import Swal from "sweetalert2";
 import { useHistory } from "react-router-dom";
@@ -15,9 +16,8 @@ function SelectConfig() {
   function goToConfig() {
     console.log("object");
     Swal.fire({
-      title: "Go To Config",
-      text: "you can do PC configuration",
-      imageUrl: "https://unsplash.it/400/200",
+      title: "Go to Configurator",
+      text: "Do you want to choose your own component?",
       imageWidth: 300,
       imageHeight: 100,
       confirmButtonColor: "#3085d6",
@@ -30,14 +30,16 @@ function SelectConfig() {
   }
   return (
     <div>
-      <h1>Build Guids</h1>
-      <CardActionArea>
+      <Typography>Build your PC you will win with</Typography>
+      {/* <CardActionArea>
         <CardMedia
           className={classes.media}
           image="https://www.newegg.com/insider/wp-content/uploads/2019/11/build1_1920X1080compressed.jpg"
         />
-      </CardActionArea>
+      </CardActionArea> */}
+      <Typography variant={"h5"}>Build your Own</Typography>
       <Button
+        style={{ backgroundColor: "red", color: "white", fontWeight: "bold" }}
         variant="outlined"
         className={classes.button}
         onClick={() => goToConfig()}
