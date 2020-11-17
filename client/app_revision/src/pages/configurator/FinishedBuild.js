@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
@@ -55,9 +55,27 @@ export default function FinishedBuild() {
 	const { loading, error, data } = useQuery(GET_GAMES_BASED_ON_CONFIG, {
 		variables: {
 			access_token: localStorage.getItem("access_token"),
-			configRating: config().rating || configRatingTemp().rating || 1,
+			configRating: config().rating || configRatingTemp().rating || 10,
 		},
 	});
+
+	useEffect(
+		() => () => {
+			config({
+				name: "BUILD 1",
+				CPUId: 3,
+				MotherboardId: 5,
+				GPUId: 3,
+				RAMId: 3,
+				StorageId: 3,
+				PowerSupplyId: 3,
+				CasingId: 3,
+				CPUCoolerId: 3,
+				rating: 0,
+			});
+		},
+		[],
+	);
 
 	const saveConfig = (e) => {
 		e.preventDefault();
