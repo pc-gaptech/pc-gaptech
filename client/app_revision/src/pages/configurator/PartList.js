@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Grid, makeStyles, Typography } from "@material-ui/core";
+import { Container, CssBaseline, Grid, makeStyles, Typography } from "@material-ui/core";
 import { useQuery } from "@apollo/client";
 import { FETCH_ALL } from "../../graphql/query";
 import { useHistory, useParams } from "react-router-dom";
@@ -21,11 +21,15 @@ const useStyle = makeStyles((theme) => ({
   },
   logo: {
     alignSelf: "center",
-    maxWidth: "70%",
+    maxWidth: "60%",
     height: "auto",
     margin: "auto",
-    paddingTop: "33px",
-    paddingBottom: "33px",
+    // paddingTop: "20px",
+    // paddingBottom: "20px",
+    textAlign: "center",
+    margin: "auto",
+    paddingTop: "75px",
+    paddingBottom: "20px"
   },
 
   center: {
@@ -37,8 +41,16 @@ const useStyle = makeStyles((theme) => ({
   header: {
     fontWeight: "bold",
     fontSize: "1.3em",
+    marginTop: "25px",
     marginBottom: "15px",
   },
+
+  tableHead: {
+    fontWeight: "bold",
+    fontVariant: "uppercase",
+    letterSpacing: "0.1em"
+  }
+
 }));
 
 export default function PartList() {
@@ -116,28 +128,32 @@ export default function PartList() {
 
   return (
     <Container>
+      <CssBaseline/>
       <Typography className={classes.header}>Select Available CPUs</Typography>
       {/* <p>{JSON.stringify(data)}</p> */}
       <Grid container spacing={1} className={classes.container}>
         <Grid item xs={1}></Grid>
-        <Grid xs={4} className={classes.center}>
-          Products
+        <Grid xs={3} className={classes.center}>
+          <Typography className={classes.tableHead}>Products</Typography>
         </Grid>
         <Grid xs={2} className={classes.center}>
-          Add
+        <Typography className={classes.tableHead}>Add</Typography>
         </Grid>
         <Grid xs={2} className={classes.center}>
-          Est.Price
+        <Typography className={classes.tableHead}>Est. Price</Typography>
         </Grid>
-        <Grid xs={1}>
+        <Grid xs={2}>
           <Image
+                    cover="true"
+
             imageStyle={{ width: "inherit", height: "inherit" }}
             className={classes.logo}
             src={tokopedia}
           />
         </Grid>
-        <Grid xs={1}>
+        <Grid xs={2}>
           <Image
+          cover="true"
             imageStyle={{ width: "inherit", height: "inherit" }}
             className={classes.logo}
             src={bukalapak}

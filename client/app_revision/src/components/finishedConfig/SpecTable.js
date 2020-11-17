@@ -28,10 +28,14 @@ const useStyle = makeStyles((theme) => ({
 		fontSize: "1.3em",
 		marginBottom: "15px",
 	},
+	tableTitle: {
+		padding: "17px",
+		fontWeight: "bold"
+	}
 }));
 
 export default function SpecTable() {
-	// const classes = useStyle();
+	const classes = useStyle();
 
 	const configID = JSON.parse(JSON.stringify(config()));
 	const { loading: loadingCPU, error: errorCPU, data: dataCPU } = useQuery(FETCH_CPU_BY_ID, {
@@ -96,21 +100,14 @@ export default function SpecTable() {
 		<Grid item>
 			<Grid
 				container
-				style={{ backgroundColor: "black", color: "white", fontWeight: "bold", padding: "3px" }}
+				style={{ backgroundColor: "#43658b", color: "white", fontWeight: "bold", padding: "3px" }}
 			>
-				<Grid item xs={3}>
-					<Avatar alt="spec pc" src={dataCPU.findOneCPUById.picture_url} />
-				</Grid>
 				<Grid item xs={9}>
-					<Typography>PC Sultan Spec</Typography>
-					<Typography>By Hawk</Typography>
+					<Typography className={classes.tableTitle}>Specifications</Typography>
 				</Grid>
 			</Grid>
 			<Table style={{ backgroundColor: "#f4f4f2" }}>
 				<TableBody>
-					<TableRow>
-						<Typography style={{ fontWeight: "bold" }}>Specifications</Typography>
-					</TableRow>
 					<TableRow>
 						<TableCell>
 							<Avatar alt="spec pc" src={dataCPU.findOneCPUById.picture_url} />
