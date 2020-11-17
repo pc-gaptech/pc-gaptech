@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Typography, IconButton, Grid } from "@material-ui/core";
 import VisibilityIcon from "@material-ui/icons/Visibility";
@@ -16,6 +16,7 @@ import {
 	FETCH_CASING_BY_ID,
 } from "../../graphql/query";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
 
 const useStyle = makeStyles((theme) => ({
 	button: {
@@ -30,6 +31,7 @@ const useStyle = makeStyles((theme) => ({
 export default function PartItemSimple({ component, ID, total }) {
 	const classes = useStyle();
 	const history = useHistory();
+	const [tokpedPrice, setTokpedPrice] = useState("Proccesing");
 
 	let query = null;
 	switch (component) {
@@ -71,6 +73,24 @@ export default function PartItemSimple({ component, ID, total }) {
 		}
 	}, [loading]);
 
+	useEffect(() => {
+		if (data) {
+			getTokpedPrice(data[`findOne${component}ById`].name);
+		}
+	}, [data]);
+
+	const getTokpedPrice = async (input) => {
+		try {
+			let { data } = await axios({
+				url: `http://localhost:3000/tokopedia/checkprice?q=${input}`,
+				method: "GET",
+			});
+			setTokpedPrice(`${data.result}`);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
 	if (loading) return <p>Loading...</p>;
 	if (error) return <p>Error in fetch</p>;
 
@@ -96,7 +116,7 @@ export default function PartItemSimple({ component, ID, total }) {
 				</Button>
 			</Grid>
 			<Grid item xs={3} className={classes.center} style={{ fontWeight: "bold" }}>
-				<b>{data[`findOne${component}ById`].price}</b>
+				<b>{`Rp. ${data[`findOne${component}ById`].price.toLocaleString("id")}`}</b>
 			</Grid>
 			<Grid xs={1} className={classes.center}>
 				<IconButton
@@ -105,6 +125,7 @@ export default function PartItemSimple({ component, ID, total }) {
 					aria-label="add to shopping cart"
 				>
 					<AddShoppingCartIcon />
+					<Typography>{tokpedPrice}</Typography>
 				</IconButton>
 			</Grid>
 			<Grid xs={1} className={classes.center}>

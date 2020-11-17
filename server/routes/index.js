@@ -6,11 +6,13 @@ const userRoute = require("./userRoute");
 const recommendpc = require("./recommendedRoute");
 
 const CheckConfigController = require("../controllers/checkConfigController");
+const PriceCheckController = require("../controllers/priceCheckController");
 const { authentication } = require("../middlewares/auth");
 
 router.use("/", userRoute);
 
 router.post("/checkconfig", CheckConfigController.check);
+router.get("/:shop/checkprice", PriceCheckController.checkPrice);
 
 router.use(authentication);
 

@@ -123,7 +123,7 @@ export default function Build() {
 					borderBottom: "0.5px solid grey",
 				}}
 			>
-				{totalPrice}
+				{`Rp. ${totalPrice.toLocaleString("id")}`}
 			</Typography>
 		</Container>
 	);

@@ -27,7 +27,7 @@ const useStyle = makeStyles((theme) => ({
   container: {
     width: "100%",
     backgroundColor: "yellow",
-    padding: "0"
+    padding: "0",
     backgroundImage: `url(${Background})`,
     // backgroundRepeat: "no-repeat",
   },

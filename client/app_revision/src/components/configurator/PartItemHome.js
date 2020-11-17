@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Grid, Typography, IconButton } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
@@ -19,6 +19,7 @@ import {
 	FETCH_STORAGE_BY_ID,
 	FETCH_CASING_BY_ID,
 } from "../../graphql/query";
+import axios from "axios";
 
 const useStyle = makeStyles((theme) => ({
 	header: {
@@ -56,6 +57,8 @@ const useStyle = makeStyles((theme) => ({
 export default function PartItemHome({ component, ID }) {
 	const classes = useStyle();
 	const history = useHistory();
+	const [tokpedPrice, setTokpedPrice] = useState("Processing");
+	const [bukalapakPrice, setBukalapakPrice] = useState("Processing");
 	let query = null;
 	switch (component) {
 		case "CPU":
@@ -85,11 +88,33 @@ export default function PartItemHome({ component, ID }) {
 		default:
 			break;
 	}
-	console.log({ id: +ID, access_token: localStorage.getItem("access_token") }, "INPUT");
 
 	const { loading, error, data } = useQuery(query, {
 		variables: { id: +ID, access_token: localStorage.getItem("access_token") },
 	});
+
+	useEffect(() => {
+		if (data) {
+			getPrice(data[`findOne${component}ById`].name);
+		}
+	}, [data]);
+
+	const getPrice = async (input) => {
+		try {
+			let { data: dataTokped } = await axios({
+				url: `http://localhost:3000/tokopedia/checkprice?q=${input}`,
+				method: "GET",
+			});
+			setTokpedPrice(`${dataTokped.result}`);
+			let { data: dataBukalapak } = await axios({
+				url: `http://localhost:3000/bukalapak/checkprice?q=${input}`,
+				method: "GET",
+			});
+			setBukalapakPrice(`${dataBukalapak.result}`);
+		} catch (err) {
+			console.log(err);
+		}
+	};
 
 	const handleDetail = (e) => {
 		e.preventDefault();
@@ -98,8 +123,6 @@ export default function PartItemHome({ component, ID }) {
 
 	if (loading) return <p>Loading...</p>;
 	if (error) return <p>Error in fetch</p>;
-
-	console.log(data, "DATA");
 
 	return (
 		<Grid container spacing={1} className={classes.container}>
@@ -143,6 +166,7 @@ export default function PartItemHome({ component, ID }) {
 					aria-label="add to shopping cart"
 				>
 					<AddShoppingCartIcon />
+					<Typography>{tokpedPrice}</Typography>
 				</IconButton>
 			</Grid>
 			<Grid item xs={1} className={classes.center}>
@@ -152,6 +176,7 @@ export default function PartItemHome({ component, ID }) {
 					aria-label="add to shopping cart"
 				>
 					<AddShoppingCartIcon />
+					<Typography>{bukalapakPrice}</Typography>
 				</IconButton>
 			</Grid>
 			<Grid item xs={1} className={classes.center}>

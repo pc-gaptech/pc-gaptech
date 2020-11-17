@@ -11,6 +11,7 @@ let data = "celana dalam raider";
 let query = data.split(" ").join("%20");
 console.log(query);
 // fractal design meshify c
+
 let url = `https://m.tokopedia.com/search?navsource=home&ob=5&st=product&q=${query}`;
 
 async function main() {
