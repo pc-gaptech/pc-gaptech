@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Grid, makeStyles, Typography } from "@material-ui/core";
 import { config } from "../../graphql/reactiveVars";
 
@@ -6,7 +6,6 @@ import PartItemSimple from "./PartItemSimple";
 import Image from "material-ui-image";
 import tokopedia from "../../assets/tokopedia.png";
 import shopee from "../../assets/shopee.png";
-import bukalapak from "../../assets/bukalapak.png";
 
 const useStyle = makeStyles((theme) => ({
 	container: {
@@ -53,41 +52,55 @@ export default function Build() {
 	const classes = useStyle();
 	const [displayedConfig] = useState(config());
 	const [totalPrice, setTotalPrice] = useState(0);
+	const [individualPrice, setIndividualPrice] = useState({
+		CPU: 0,
+		CPUCooler: 0,
+		GPU: 0,
+		RAM: 0,
+		Storage: 0,
+		PowerSupply: 0,
+		Casing: 0,
+		Motherboard: 0,
+	});
 
-	const handleTotal = (price) => {
-		const newPrice = totalPrice + price;
-		setTotalPrice(newPrice);
+	const handleTotal = (price, componentName) => {
+		console.log("called", componentName)
+		let newSetIndividualPrice = JSON.parse(JSON.stringify(individualPrice));
+		newSetIndividualPrice[componentName] = price;
+		setIndividualPrice(newSetIndividualPrice);
 	};
+
+	useEffect(() => {
+		let total = 0;
+		for (const componentName in individualPrice) {
+			total += individualPrice[componentName];
+		}
+		setTotalPrice(total);
+		console.log(total, "hahaha")
+	}, [individualPrice]);
 
 	return (
 		<Container>
 			<Typography className={classes.header}>Build your PC</Typography>
 			<Grid container spacing={1} className={classes.container}>
-				<Grid item xs={5} className={classes.center}>
+				<Grid item xs={4} className={classes.center}>
 					Products
 				</Grid>
 				<Grid item xs={4} className={classes.center}>
 					Est.Price
 				</Grid>
-				<Grid item xs={1}>
+				<Grid item xs={2}>
 					<Image
 						imageStyle={{ width: "inherit", height: "inherit" }}
 						className={classes.logo}
 						src={tokopedia}
 					/>
 				</Grid>
-				<Grid item xs={1}>
+				<Grid item xs={2}>
 					<Image
 						imageStyle={{ width: "inherit", height: "inherit", margin: "auto" }}
 						className={classes.logo}
 						src={shopee}
-					/>
-				</Grid>
-				<Grid item xs={1}>
-					<Image
-						imageStyle={{ width: "inherit", height: "inherit" }}
-						className={classes.logo}
-						src={bukalapak}
 					/>
 				</Grid>
 			</Grid>
