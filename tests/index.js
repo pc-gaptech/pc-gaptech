@@ -36,6 +36,35 @@ async function main() {
 }
 main();
 
+async function Shoppe(query) {
+  let url = `https://m.bukalapak.com/products?search%5Bkeywords%5D=${query}&search%5Bsort_by%5D=weekly_sales_ratio%3Adesc`;
+  let { data } = await axios.get(`${url}`);
+  let $ = await cheerio.load(data);
+  // console.log(data);
+  // $(".bl-flex-container").each((i, element) => {
+  //   const $element = $(element);
+  //   console.log($element.text());
+  // });
+  let result = [];
+  $(".dp-card__description").each((i, element) => {
+    const $element = $(element);
+    // const $name = $element.find("p.dp-card__name-tag");
+    const $price = $element.find(".dp-card__price");
+    // console.log($price.text());
+    let valuePrice = $price.text();
+    let joinValue = valuePrice.split("jt").join("00,000");
+    let datas = joinValue.trim();
+    console.log(datas);
+    // let data = {
+    //   price: datas,
+    // };
+    // result.push(datas);
+  });
+  // console.log(result);
+}
+
+Shoppe(query);
+
 // const pup = async () => {
 //   const browser = await puppeteer.launch();
 //   const page = await browser.newPage();
