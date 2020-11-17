@@ -8,11 +8,13 @@ import {
   PowerSupplayAdd,
   RamAdd,
   StorageAdd,
+  AddConfig,
+  AddGames,
 } from "./pages/addProduct";
 import { Home, Login } from "./pages";
 import client from "./config/grapql";
 import { ApolloProvider } from "@apollo/client";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch } from "react-router-dom";
 import Navbar from "./components/NavbarHome";
 import PrivateRoutes from "./components/PrivateRoutes";
 import PublicRoute from "./components/PublicRoute";
@@ -32,6 +34,8 @@ function App() {
           <PrivateRoutes path="/storage" component={StorageAdd} />
           <PrivateRoutes path="/casing" component={CasingAdd} />
           <PrivateRoutes path="/powersupplay" component={PowerSupplayAdd} />
+          <PrivateRoutes path="/games" component={AddGames} />
+          <PrivateRoutes path="/config" component={AddConfig} />
           <PrivateRoutes path="/" component={Home} />
         </Switch>
       </Router>

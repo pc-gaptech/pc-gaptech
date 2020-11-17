@@ -33,7 +33,8 @@ const Login = () => {
       })
       .catch((err) => {
         console.log(err.response);
-      });
+      })
+      .finally(() => {});
     e.preventDefault();
     console.log(inputForm);
   }
