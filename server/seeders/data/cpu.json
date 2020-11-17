@@ -52,7 +52,7 @@
 		"picture_url": "https://images.unsplash.com/photo-1591799265444-d66432b91588?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=60"
 	},
 	{
-		"name": "Ryzen 5 3700X",
+		"name": "Ryzen 7 3700X",
 		"socket": "AM4",
 		"chipset": ["A320", "B350", "X370", "B450", "X470", "B550", "X570"],
 		"TDP": 65,
@@ -65,7 +65,7 @@
 		"picture_url": "https://images.unsplash.com/photo-1591799265444-d66432b91588?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=60"
 	},
 	{
-		"name": "Ryzen 5 3900X",
+		"name": "Ryzen 9 3900X",
 		"socket": "AM4",
 		"chipset": ["A320", "B350", "X370", "B450", "X470", "B550", "X570"],
 		"TDP": 65,
@@ -78,7 +78,7 @@
 		"picture_url": "https://images.unsplash.com/photo-1591799265444-d66432b91588?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=60"
 	},
 	{
-		"name": "Ryzen 5 39500X",
+		"name": "Ryzen 9 3950X",
 		"socket": "AM4",
 		"chipset": ["A320", "B350", "X370", "B450", "X470", "B550", "X570"],
 		"TDP": 65,
