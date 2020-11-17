@@ -414,3 +414,15 @@ export const GET_RECOMMENDED_PC = gql`
 		}
 	}
 `;
+
+export const GET_GAMES_BASED_ON_CONFIG = gql`
+	query getGamesBasedOnConfig($access_token: String, $configRating: Int) {
+		getGamesConfig(access_token: $access_token, configRating: $configRating) {
+			id
+			name
+			description
+			picture_url
+			rating
+		}
+	}
+`;
