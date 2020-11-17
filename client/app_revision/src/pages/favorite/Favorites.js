@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Grid, makeStyles, Typography } from "@material-ui/core";
+import { Container, CssBaseline, Grid, makeStyles, Typography } from "@material-ui/core";
 import CardBuild from "../../components/favorite/CardBuild";
 import { useQuery } from "@apollo/client";
 import { GET_ALL_FAVORITE_CONFIG } from "../../graphql/query";
@@ -10,7 +10,20 @@ const useStyle = makeStyles((theme) => ({
 		fontWeight: "bold",
 		fontSize: "1.3em",
 		marginBottom: "15px",
+		marginTop: "25px"
 	},
+
+	top: {
+		textAlign: "center",
+		backgroundColor: "#f4f4f2",
+		padding: "100px"
+	},
+
+	quote: {
+		fontSize: "2em",
+		fontStyle: "italic",
+		fontWeight: "bold"
+	}
 }));
 export default function Favorites() {
 	const classes = useStyle();
@@ -34,6 +47,10 @@ export default function Favorites() {
 	if (error) return <p>{error}</p>;
 	return (
 		<Container style={{ marginTop: "20px" }}>
+			<CssBaseline/>
+			<Grid className={classes.top}>
+				<Typography className={classes.quote}>Save your money, build your PC, and conquer the battles.</Typography>
+			</Grid>
 			<Typography className={classes.header}>Your Favorite Build</Typography>
 			{/* {JSON.stringify(data)} */}
 			<Grid container spacing={2}>

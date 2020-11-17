@@ -5,7 +5,7 @@ import { config } from "../../graphql/reactiveVars";
 import PartItemSimple from "./PartItemSimple";
 import Image from "material-ui-image";
 import tokopedia from "../../assets/tokopedia.png";
-import shopee from "../../assets/shopee.png";
+import bukalapak from "../../assets/bukalapak.png";
 
 const useStyle = makeStyles((theme) => ({
 	container: {
@@ -20,7 +20,7 @@ const useStyle = makeStyles((theme) => ({
 		maxWidth: "70%",
 		height: "auto",
 		margin: "auto",
-		paddingTop: "30px",
+		paddingTop: "80px",
 		paddingBottom: "30px",
 	},
 
@@ -31,6 +31,7 @@ const useStyle = makeStyles((theme) => ({
 	},
 
 	header: {
+		marginTop: "23px",
 		fontWeight: "bold",
 		fontSize: "1.3em",
 		marginBottom: "15px",
@@ -46,6 +47,10 @@ const useStyle = makeStyles((theme) => ({
 		paddingBottom: "20px",
 		borderBottom: "0.1px solid grey",
 	},
+
+	tableHead: {
+		fontWeight: "bold"
+	}
 }));
 
 export default function Build() {
@@ -81,26 +86,26 @@ export default function Build() {
 
 	return (
 		<Container>
-			<Typography className={classes.header}>Build your PC</Typography>
+			<Typography className={classes.header}>Build your Gaming Setup</Typography>
 			<Grid container spacing={1} className={classes.container}>
-				<Grid item xs={4} className={classes.center}>
-					Products
+				<Grid item xs={3} className={classes.center}>
+					<Typography className={classes.tableHead}>Products</Typography>
 				</Grid>
-				<Grid item xs={4} className={classes.center}>
-					Est.Price
+				<Grid item xs={3} className={classes.center}>
+				<Typography className={classes.tableHead}>Est.Price</Typography>
 				</Grid>
-				<Grid item xs={2}>
+				<Grid item xs={3}>
 					<Image
 						imageStyle={{ width: "inherit", height: "inherit" }}
 						className={classes.logo}
 						src={tokopedia}
 					/>
 				</Grid>
-				<Grid item xs={2}>
+				<Grid item xs={3}>
 					<Image
 						imageStyle={{ width: "inherit", height: "inherit", margin: "auto" }}
 						className={classes.logo}
-						src={shopee}
+						src={bukalapak}
 					/>
 				</Grid>
 			</Grid>

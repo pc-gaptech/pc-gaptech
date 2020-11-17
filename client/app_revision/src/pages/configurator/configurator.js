@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
+  Button,
   Container,
   CssBaseline,
   Grid,
@@ -33,10 +34,10 @@ const useStyle = makeStyles((theme) => ({
   logo: {
     alignSelf: "center",
     maxWidth: "70%",
-    height: "auto",
-    margin: "auto",
-    paddingTop: "33px",
-    paddingBottom: "33px",
+    maxHeight: "70%",
+    paddingTop: "70px",
+    paddingBottom: "0px",
+    objectFit: "cover"
   },
 
   center: {
@@ -60,8 +61,20 @@ const useStyle = makeStyles((theme) => ({
   tableHead: {
     fontWeight: "bold",
     letterSpacing: "0.7px",
-    fontSize: "1em",
+    fontSize: "1.1em",
   },
+
+  button: {
+    backgroundColor: "#ea2c62",
+    color: "white",
+    fontWeight: "bold"
+  },
+
+  buttonConfirm: {
+    backgroundColor: "#9ad3bc",
+    color: "white",
+    fontWeight: "bold"
+  }
 }));
 
 export default function Configurator() {
@@ -123,29 +136,32 @@ export default function Configurator() {
           marginBottom: "20px",
         }}
       >
-        <button
+        <Button
+          className={classes.button}
+          size="large"
           onClick={(e) => {
             handleCheck(e);
           }}
         >
-          CHECK CONFIG
-        </button>
+          Check Configuration
+        </Button>
         {isConfigValid ? (
-          <p style={{ color: "green" }}>CONFIG COMPATIBLE</p>
+          <p style={{ color: "green" }}>CONFIGURATION COMPATIBLE</p>
         ) : (
-          <p style={{ color: "red" }}>CONFIG TIDAK COMPATIBLE</p>
-        )}
+            <p style={{ color: "red" }}>CONFIGURATION TIDAK COMPATIBLE</p>
+          )}
         {isConfigValid ? (
-          <button
+          <Button
+            className={classes.buttonConfirm}
             onClick={(e) => {
               handleNext(e);
             }}
           >
             Confim Configuration
-          </button>
+          </Button>
         ) : (
-          <p></p>
-        )}
+            <p></p>
+          )}
         {<p>Total Power: {restriction().total_power}</p>}
       </Grid>
       <Grid container spacing={1} className={classes.container}>
@@ -154,9 +170,9 @@ export default function Configurator() {
             Choose Components
           </Typography>
         </Grid>
-        <Grid item xs={10} container>
-          <Grid item xs={0}></Grid>
-          <Grid item xs={5} className={classes.center}>
+        <Grid item xs={10} container style={{paddingBottom: "-30px"}}>
+          {/* <Grid item xs={0}></Grid> */}
+          <Grid item xs={4} className={classes.center}>
             <Typography className={classes.tableHead}>Products</Typography>
           </Grid>
           <Grid item xs={2} className={classes.center}>
@@ -165,7 +181,7 @@ export default function Configurator() {
           <Grid item xs={2} className={classes.center}>
             <Typography className={classes.tableHead}>Est.Price</Typography>
           </Grid>
-          <Grid item xs={1}>
+          <Grid item xs={2}>
             <Image
               imageStyle={{ width: "inherit", height: "inherit" }}
               className={classes.logo}
@@ -179,7 +195,7 @@ export default function Configurator() {
 							src={shopee}
 						/>
 					</Grid> */}
-          <Grid item xs={1}>
+          <Grid item xs={2}>
             <Image
               imageStyle={{ width: "inherit", height: "inherit" }}
               className={classes.logo}
@@ -202,8 +218,8 @@ export default function Configurator() {
                 {key[1] ? (
                   <PartItemHome ID={key[1]} component={component} />
                 ) : (
-                  <ButtonChooser component={component} />
-                )}
+                    <ButtonChooser component={component} />
+                  )}
               </Grid>
             </Grid>
           );

@@ -26,6 +26,12 @@ const useStyle = makeStyles((theme) => ({
 		paddingLeft: "10px",
 		paddingRight: "10px",
 	},
+
+	center: {
+		margin: "auto",
+		textAlign: "center",
+		fontWeight: "bold"
+	}
 }));
 
 export default function PartItemSimple({ component, ID, total }) {
@@ -107,10 +113,10 @@ export default function PartItemSimple({ component, ID, total }) {
 			style={{
 				paddingTop: "25px",
 				paddingBottom: "25px",
-				borderBottom: "0.5px solid grey",
+				borderBottom: "0.5px solid #d6e0f0",
 			}}
 		>
-			<Grid item xs={4} className={classes.center}>
+			<Grid item xs={3} className={classes.center}>
 				<Typography className={classes.name}>
 					<b>{data[`findOne${component}ById`].name}</b>
 				</Typography>
@@ -125,27 +131,27 @@ export default function PartItemSimple({ component, ID, total }) {
 					See details
 				</Button>
 			</Grid>
-			<Grid item xs={4} className={classes.center} style={{ fontWeight: "bold" }}>
-				<b>{`Rp. ${data[`findOne${component}ById`].price.toLocaleString("id")}`}</b>
+			<Grid item xs={3} className={classes.center} style={{ fontWeight: "bold" }}>
+				<Typography className={classes.center}>{`Rp. ${data[`findOne${component}ById`].price.toLocaleString("id")}`}</Typography>
 			</Grid>
-			<Grid xs={2} className={classes.center}>
+			<Grid xs={3} className={classes.center}>
 				<IconButton
 					style={{ color: "#40CB53" }}
 					title="Research price in Tokopedia"
 					aria-label="add to shopping cart"
 				>
 					<AddShoppingCartIcon />
-					<Typography>{tokpedPrice}</Typography>
+					<Typography className={classes.center}>{tokpedPrice}</Typography>
 				</IconButton>
 			</Grid>
-			<Grid xs={2} className={classes.center}>
+			<Grid xs={3} className={classes.center}>
 				<IconButton
 					style={{ color: "#FF2F00" }}
 					title="Research price in Shopee"
 					aria-label="add to shopping cart"
 				>
 					<AddShoppingCartIcon />
-					<Typography>{tokpedPrice}</Typography>
+					<Typography className={classes.center}>{tokpedPrice}</Typography>
 				</IconButton>
 			</Grid>
 		</Grid>

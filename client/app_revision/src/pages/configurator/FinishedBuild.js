@@ -15,6 +15,8 @@ import { SAVE_FAVORITE } from "../../graphql/mutations";
 import { GET_ALL_FAVORITE_CONFIG, GET_GAMES_BASED_ON_CONFIG } from "../../graphql/query";
 import { config, configRatingTemp } from "../../graphql/reactiveVars";
 import { useMutation, useQuery } from "@apollo/client";
+import Carousel from 'react-material-ui-carousel'
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -103,21 +105,27 @@ export default function FinishedBuild() {
 	return (
 		<React.Fragment>
 			<CssBaseline />
-			<Container>
-				<Grid container spacing={2}>
+			<Container style={{ marginTop: "25px" }}>
+				<Grid container spacing={2} >
 					<Grid item xs={3} style={{ margin: "auto", textAlign: "center" }}>
-						<Image src="https://cdna.pcpartpicker.com/static/forever/images/product/c7baf2c9c9cc15ae23adb24c2f4316fc.256p.jpg" />
+						<Carousel>
+							<Image src="https://cdna.pcpartpicker.com/static/forever/images/product/c7baf2c9c9cc15ae23adb24c2f4316fc.256p.jpg" />
+							<Image src="https://cdna.pcpartpicker.com/static/forever/images/product/c7baf2c9c9cc15ae23adb24c2f4316fc.256p.jpg" />
+							<Image src="https://cdna.pcpartpicker.com/static/forever/images/product/c7baf2c9c9cc15ae23adb24c2f4316fc.256p.jpg" />
+							<Image src="https://cdna.pcpartpicker.com/static/forever/images/product/c7baf2c9c9cc15ae23adb24c2f4316fc.256p.jpg" />
+						</Carousel>
 						<Button
+							iconStart={<FavoriteIcon/>}
 							onClick={(e) => saveConfig(e)}
 							variant="contained"
-							color="grey"
+							style={{backgroundColor: "#f5a25d", color: "white", fontWeight: "bold"}}
 							disableElevation
 						>
 							Add to Favorite
 						</Button>
 					</Grid>
 					<Grid item xs={9} container>
-						<Typography variant="h6" style={{ fontWeight: "bold", marginBottom: "50px" }}>
+						<Typography variant="h6" style={{ fontWeight: "bold", marginBottom: "20px" }}>
 							Supported Games you can play with this build
 						</Typography>
 						<Grid item xs={12} container spacing={2}>
