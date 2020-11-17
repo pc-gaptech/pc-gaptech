@@ -17,6 +17,7 @@ import PublicRoute from "./components/guardRoute/PublicRoute";
 import FinishedRoute from "./components/guardRoute/FinishedRoute"
 
 function App() {
+
 	return (
 		<div className="App">
 			<ApolloProvider client={Client}>

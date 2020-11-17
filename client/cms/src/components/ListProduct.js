@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { DELETE } from "../graphQl/mutation";
 import { FECTH_ALL } from "../graphQl/query";
+import Swal from "sweetalert2";
 
 function ListProduct({ product, details }) {
   const history = useHistory();
@@ -17,6 +18,9 @@ function ListProduct({ product, details }) {
         },
       },
     ],
+    onCompleted: () => {
+      history.push("/");
+    },
   });
   console.log(data, error);
   function editComponent() {
@@ -26,14 +30,33 @@ function ListProduct({ product, details }) {
   }
   function deletesProduct() {
     //  delete Product method
-    deleteProduct({
-      variables: {
-        access_token: localStorage.getItem("access_token"),
-        id: product.id,
-        part: details,
-      },
-    });
-    history.push("/");
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    })
+      .then((result) => {
+        if (result.value) {
+          deleteProduct({
+            variables: {
+              access_token: localStorage.getItem("access_token"),
+              id: product.id,
+              part: details,
+            },
+          });
+          Swal.fire("Deleted!", "Your file has been deleted.", "success");
+        } else {
+          console.log("gajadi delete");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
     console.log(product.id);
   }
   return (

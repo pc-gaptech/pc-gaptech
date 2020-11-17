@@ -1,5 +1,12 @@
 import React from "react";
-import { makeStyles, Container, Grid, Paper, Button, CssBaseline } from "@material-ui/core";
+import {
+  makeStyles,
+  Container,
+  Grid,
+  Paper,
+  Button,
+  CssBaseline,
+} from "@material-ui/core";
 import DefaultConfig from "../components/Home/DefaultConfig";
 import SelectConfig from "../components/Home/SelectConfig";
 import Background from "../assets/bghome.jpg";
@@ -16,7 +23,6 @@ export default function Home() {
         </Grid>
         <Grid item xs={6} className={classes.mainRight}>
           <DefaultConfig />
-
         </Grid>
       </Grid>
     </Container>
@@ -56,14 +62,14 @@ const useStyle = makeStyles((theme) => ({
     height: "100vh",
     textAlign: "center",
     margin: "auto",
-    backgroundImage: `url("https://i.ytimg.com/vi/DS098d9px6o/maxresdefault.jpg")`
+    backgroundImage: `url("https://i.ytimg.com/vi/DS098d9px6o/maxresdefault.jpg")`,
   },
 
   center: {
     textAlign: "center",
     margin: "auto",
     fontWeight: "bold",
-    alignItems: "center"
+    alignItems: "center",
   },
 
   header: {

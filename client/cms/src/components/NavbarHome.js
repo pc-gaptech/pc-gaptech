@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Navbar,
   NavDropdown,
@@ -12,6 +12,15 @@ import { dataEdit } from "../graphQl/cache";
 
 const NavbarHome = () => {
   const history = useHistory();
+  const [access, setAccess] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem("access_token")) {
+      setAccess(true);
+    } else {
+      setAccess(false);
+    }
+  }, [access]);
   function goToHome(destination) {
     switch (destination) {
       case "home":
@@ -52,11 +61,20 @@ const NavbarHome = () => {
         dataEdit(false);
         history.push("/cpucooler");
         break;
+      case "config":
+        dataEdit(false);
+        history.push("/config");
+        break;
+      case "games":
+        dataEdit(false);
+        history.push("/games");
+        break;
 
       default:
       // code block
     }
   }
+
   function logout() {
     localStorage.clear();
     history.push("/login");
@@ -67,37 +85,52 @@ const NavbarHome = () => {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link onClick={() => goToHome("home")}>Home</Nav.Link>
-          <NavDropdown title="AddProduct" id="basic-nav-dropdown">
-            <NavDropdown.Item onClick={() => goToHome("CPU")}>
-              CPU
-            </NavDropdown.Item>
-            <NavDropdown.Item onClick={() => goToHome("Cpu Coller")}>
-              CPU Coller
-            </NavDropdown.Item>
-            <NavDropdown.Item onClick={() => goToHome("Motherboard")}>
-              Motherboard
-            </NavDropdown.Item>
-            <NavDropdown.Item onClick={() => goToHome("GPU")}>
-              GPU
-            </NavDropdown.Item>
-            <NavDropdown.Item onClick={() => goToHome("RAM")}>
-              RAM
-            </NavDropdown.Item>
-            <NavDropdown.Item onClick={() => goToHome("Storage")}>
-              Storage
-            </NavDropdown.Item>
-            <NavDropdown.Item onClick={() => goToHome("Power Supplay")}>
-              Power Supplay
-            </NavDropdown.Item>
-            <NavDropdown.Item onClick={() => goToHome("Casing")}>
-              Casing
-            </NavDropdown.Item>
-          </NavDropdown>
-          {localStorage.acces_token ? (
+          {!access ? (
+            <></>
+          ) : (
+            <Nav.Link onClick={() => goToHome("home")}>Home</Nav.Link>
+          )}
+
+          {!access ? (
             <Nav.Link onClick={() => goToHome("login")}>Login</Nav.Link>
           ) : (
-            <Nav.Link onClick={logout}>Logout</Nav.Link>
+            <Nav>
+              <NavDropdown title="AddProduct" id="basic-nav-dropdown">
+                <NavDropdown.Item onClick={() => goToHome("CPU")}>
+                  CPU
+                </NavDropdown.Item>
+                <NavDropdown.Item onClick={() => goToHome("Cpu Coller")}>
+                  CPU Coller
+                </NavDropdown.Item>
+                <NavDropdown.Item onClick={() => goToHome("Motherboard")}>
+                  Motherboard
+                </NavDropdown.Item>
+                <NavDropdown.Item onClick={() => goToHome("GPU")}>
+                  GPU
+                </NavDropdown.Item>
+                <NavDropdown.Item onClick={() => goToHome("RAM")}>
+                  RAM
+                </NavDropdown.Item>
+                <NavDropdown.Item onClick={() => goToHome("Storage")}>
+                  Storage
+                </NavDropdown.Item>
+                <NavDropdown.Item onClick={() => goToHome("Power Supplay")}>
+                  Power Supplay
+                </NavDropdown.Item>
+                <NavDropdown.Item onClick={() => goToHome("Casing")}>
+                  Casing
+                </NavDropdown.Item>
+              </NavDropdown>
+              <NavDropdown title="AddConfig" id="basic-nav-dropdown">
+                <NavDropdown.Item onClick={() => goToHome("games")}>
+                  Add Games
+                </NavDropdown.Item>
+                <NavDropdown.Item onClick={() => goToHome("config")}>
+                  Add Config
+                </NavDropdown.Item>
+              </NavDropdown>
+              <Nav.Link onClick={logout}>Logout</Nav.Link>
+            </Nav>
           )}
           <Nav.Link onClick={() => goToHome("login")}>Login</Nav.Link>
         </Nav>
