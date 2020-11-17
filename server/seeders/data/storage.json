@@ -1,6 +1,6 @@
 [
 	{
-		"name": "Samusung 970 EVO",
+		"name": "Samsung 970 EVO",
 		"capacity": 1000,
 		"storage_type": "NVME SSD",
 		"power_draw": 10,
@@ -9,7 +9,7 @@
 		"picture_url": "https://cdna.pcpartpicker.com/static/forever/images/product/09a31f32abb3daaf5ed9b849bd60e675.256p.jpg"
 	},
 	{
-		"name": "Samusung 860 EVO",
+		"name": "Samsung 860 EVO",
 		"capacity": 512,
 		"storage_type": "SATA SSD",
 		"power_draw": 10,

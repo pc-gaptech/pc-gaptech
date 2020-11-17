@@ -1,0 +1,98 @@
+[
+	{
+		"name": "Build Rating 10",
+		"CPUId": 7,
+		"CPUCoolerId": 1,
+		"MotherboardId": 1,
+		"GPUId": 1,
+		"RAMId": 1,
+		"StorageId": 1,
+		"PowerSupplyId": 1,
+		"CasingId": 1,
+		"rating": 10
+	},
+	{
+		"name": "Build Rating 9",
+		"CPUId": 6,
+		"CPUCoolerId": 1,
+		"MotherboardId": 1,
+		"GPUId": 2,
+		"RAMId": 1,
+		"StorageId": 1,
+		"PowerSupplyId": 1,
+		"CasingId": 1,
+		"rating": 9
+	},
+	{
+		"name": "Build Rating 8",
+		"CPUId": 5,
+		"CPUCoolerId": 1,
+		"MotherboardId": 1,
+		"GPUId": 3,
+		"RAMId": 1,
+		"StorageId": 1,
+		"PowerSupplyId": 1,
+		"CasingId": 1,
+		"rating": 8
+	},
+	{
+		"name": "Build Rating 7",
+		"CPUId": 3,
+		"CPUCoolerId": 1,
+		"MotherboardId": 1,
+		"GPUId": 4,
+		"RAMId": 1,
+		"StorageId": 1,
+		"PowerSupplyId": 1,
+		"CasingId": 1,
+		"rating": 7
+	},
+	{
+		"name": "Build Rating 6",
+		"CPUId": 3,
+		"CPUCoolerId": 1,
+		"MotherboardId": 1,
+		"GPUId": 5,
+		"RAMId": 1,
+		"StorageId": 1,
+		"PowerSupplyId": 1,
+		"CasingId": 1,
+		"rating": 6
+	},
+	{
+		"name": "Build Rating 5",
+		"CPUId": 1,
+		"CPUCoolerId": 1,
+		"MotherboardId": 1,
+		"GPUId": 6,
+		"RAMId": 1,
+		"StorageId": 1,
+		"PowerSupplyId": 1,
+		"CasingId": 1,
+		"rating": 5
+	},
+	{
+		"name": "Build Rating 4",
+		"CPUId": 1,
+		"CPUCoolerId": 1,
+		"MotherboardId": 1,
+		"GPUId": 7,
+		"RAMId": 1,
+		"StorageId": 1,
+		"PowerSupplyId": 1,
+		"CasingId": 1,
+		"rating": 4
+	},
+	{
+		"name": "Build Rating 3",
+		"CPUId": 1,
+		"CPUCoolerId": 1,
+		"MotherboardId": 1,
+		"GPUId": 8,
+		"RAMId": 1,
+		"StorageId": 1,
+		"PowerSupplyId": 1,
+		"CasingId": 1,
+		"rating": 3
+	}
+]

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Typography, IconButton, Grid } from "@material-ui/core";
 import VisibilityIcon from "@material-ui/icons/Visibility";
@@ -16,6 +16,7 @@ import {
 	FETCH_CASING_BY_ID,
 } from "../../graphql/query";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
 
 const useStyle = makeStyles((theme) => ({
 	button: {
@@ -30,6 +31,8 @@ const useStyle = makeStyles((theme) => ({
 export default function PartItemSimple({ component, ID, total }) {
 	const classes = useStyle();
 	const history = useHistory();
+	const [tokpedPrice, setTokpedPrice] = useState("Proccesing");
+	const [bukalapakPrice, setBukalapakPrice] = useState("Processing");
 
 	let query = null;
 	switch (component) {
@@ -67,9 +70,32 @@ export default function PartItemSimple({ component, ID, total }) {
 
 	useEffect(() => {
 		if (data) {
-			total(data[`findOne${component}ById`].price);
+			total(data[`findOne${component}ById`].price, component);
 		}
 	}, [loading]);
+
+	useEffect(() => {
+		if (data) {
+			getPrice(data[`findOne${component}ById`].name);
+		}
+	}, [data]);
+
+	const getPrice = async (input) => {
+		try {
+			let { data: dataTokped } = await axios({
+				url: `http://localhost:3000/tokopedia/checkprice?q=${input}`,
+				method: "GET",
+			});
+			setTokpedPrice(`${dataTokped.result}`);
+			let { data: dataBukalapak } = await axios({
+				url: `http://localhost:3000/bukalapak/checkprice?q=${input}`,
+				method: "GET",
+			});
+			setBukalapakPrice(`${dataBukalapak.result}`);
+		} catch (err) {
+			console.log(err);
+		}
+	};
 
 	if (loading) return <p>Loading...</p>;
 	if (error) return <p>Error in fetch</p>;
@@ -78,9 +104,13 @@ export default function PartItemSimple({ component, ID, total }) {
 		<Grid
 			container
 			spacing={1}
-			style={{ paddingTop: "25px", paddingBottom: "25px", borderBottom: "0.5px solid grey" }}
+			style={{
+				paddingTop: "25px",
+				paddingBottom: "25px",
+				borderBottom: "0.5px solid grey",
+			}}
 		>
-			<Grid item xs={6} className={classes.center}>
+			<Grid item xs={4} className={classes.center}>
 				<Typography className={classes.name}>
 					<b>{data[`findOne${component}ById`].name}</b>
 				</Typography>
@@ -95,34 +125,27 @@ export default function PartItemSimple({ component, ID, total }) {
 					See details
 				</Button>
 			</Grid>
-			<Grid item xs={3} className={classes.center} style={{ fontWeight: "bold" }}>
-				<b>{data[`findOne${component}ById`].price}</b>
+			<Grid item xs={4} className={classes.center} style={{ fontWeight: "bold" }}>
+				<b>{`Rp. ${data[`findOne${component}ById`].price.toLocaleString("id")}`}</b>
 			</Grid>
-			<Grid xs={1} className={classes.center}>
+			<Grid xs={2} className={classes.center}>
 				<IconButton
 					style={{ color: "#40CB53" }}
 					title="Research price in Tokopedia"
 					aria-label="add to shopping cart"
 				>
 					<AddShoppingCartIcon />
+					<Typography>{tokpedPrice}</Typography>
 				</IconButton>
 			</Grid>
-			<Grid xs={1} className={classes.center}>
+			<Grid xs={2} className={classes.center}>
 				<IconButton
 					style={{ color: "#FF2F00" }}
 					title="Research price in Shopee"
 					aria-label="add to shopping cart"
 				>
 					<AddShoppingCartIcon />
-				</IconButton>
-			</Grid>
-			<Grid xs={1} className={classes.center}>
-				<IconButton
-					style={{ color: "#E00034" }}
-					title="Research price in Bukalapak"
-					aria-label="add to shopping cart"
-				>
-					<AddShoppingCartIcon />
+					<Typography>{tokpedPrice}</Typography>
 				</IconButton>
 			</Grid>
 		</Grid>
