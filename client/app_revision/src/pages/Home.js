@@ -8,9 +8,9 @@ export default function Home() {
   const classes = useStyle();
 
   return (
-    <div>
+    <div className={classes.root}>
       <CssBaseline />
-      <Container className={classes.header}>
+      <Container className={classes.header} maxWidth={"false"}>
         <HeaderHome />
       </Container>
       <Container className={classes.container} maxWidth={"false"}>
@@ -39,16 +39,16 @@ const useStyle = makeStyles((theme) => ({
   container: {
     width: "100%",
     maxHeight: 720,
-    backgroundColor: "#120078",
+    backgroundColor: "#384264",
     backgroundRepeat: "no-repeat",
   },
   cardfeature: {
+    marginTop: "0",
     paddingTop: 50,
   },
   root: {
     flexGrow: 1,
-    marginTop: 60,
-    padding: 10,
+    padding: "0px"
   },
   paper: {
     height: "100vh",
@@ -79,6 +79,7 @@ const useStyle = makeStyles((theme) => ({
   },
 
   header: {
+    paddingTop: "0px",
     paddingRight: 0,
     paddingLeft: 0,
   },

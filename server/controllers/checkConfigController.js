@@ -104,8 +104,6 @@ class CheckConfigController {
       if (totalPower >= pickedPowerSupply) {
         next({ name: "BadRequest", message: "Power Supply is incefficient" });
       }
-
-      console.log(req.body, "ini klo kompatible");
       // if Part Compatible
       res.status(200).json(req.body);
     } catch (err) {

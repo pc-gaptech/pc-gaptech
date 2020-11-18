@@ -3,12 +3,6 @@
 const {
   CPU,
   GPU,
-  Motherboard,
-  CPUCooler,
-  RAM,
-  Storage,
-  Casing,
-  PowerSupply,
   SavedConfig,
 } = require("../models");
 

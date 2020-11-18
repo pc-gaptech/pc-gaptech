@@ -57,10 +57,8 @@ function SelectConfig() {
         />
       </CardActionArea>
       <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the
-          mussels, if you like. This impressive paella is a perfect party dish
+        <Typography variant="body2" color="textSecondary" component="h4">
+          Select your components based on computer specifications you need. With this option, you should pick components, otherwise use, "Get Recomendation" feature instead.
         </Typography>
         <Button
           variant="outlined"
@@ -83,14 +81,14 @@ const useStyle = makeStyles((theme) => ({
     marginTop: 10,
     width: 270,
     height: 45,
-    backgroundColor: "#ea2c62",
+    backgroundColor: "#D68300",
     color: "white",
     fontWeight: "bold",
     marginTop: 30,
     paddingBottom: 5,
   },
   cardPosition: {
-    backgroundColor: "#ede7e3",
+    backgroundColor: "#E3EDF1",
     minWidth: 500,
     marginRight: 20,
     height: 550,
