@@ -58,7 +58,9 @@ function SelectConfig() {
       </CardActionArea>
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="h4">
-          Select your components based on computer specifications you need. With this option, you should pick components, otherwise use, "Get Recomendation" feature instead.
+          Select your components based on computer specifications you need. With
+          this option, you should pick components, otherwise use, "Get
+          Recomendation" feature instead.
         </Typography>
         <Button
           variant="outlined"
@@ -81,7 +83,7 @@ const useStyle = makeStyles((theme) => ({
     marginTop: 10,
     width: 270,
     height: 45,
-    backgroundColor: "#D68300",
+    backgroundColor: "rgb(48, 46, 97)",
     color: "white",
     fontWeight: "bold",
     marginTop: 30,
