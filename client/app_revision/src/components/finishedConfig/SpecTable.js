@@ -30,11 +30,11 @@ const useStyle = makeStyles((theme) => ({
 	},
 	tableTitle: {
 		padding: "17px",
-		fontWeight: "bold"
-	}
+		fontWeight: "bold",
+	},
 }));
 
-export default function SpecTable() {
+export default function SpecTable({ addPicture }) {
 	const classes = useStyle();
 
 	const configID = JSON.parse(JSON.stringify(config()));
@@ -77,6 +77,39 @@ export default function SpecTable() {
 			variables: { id: configID.PowerSupplyId, access_token: localStorage.getItem("access_token") },
 		},
 	);
+
+	useEffect(() => {
+		if (
+			dataCPU &&
+			dataGPU &&
+			dataRAM &&
+			dataMotherboard &&
+			dataStorage &&
+			dataCPUCooler &&
+			dataPowerSupply &&
+			dataCasing
+		) {
+			addPicture([
+				dataCPU.findOneCPUById.picture_url,
+				dataGPU.findOneGPUById.picture_url,
+				dataRAM.findOneRAMById.picture_url,
+				dataMotherboard.findOneMotherboardById.picture_url,
+				dataStorage.findOneStorageById.picture_url,
+				dataCPUCooler.findOneCPUCoolerById.picture_url,
+				dataPowerSupply.findOnePowerSupplyById.picture_url,
+				dataCasing.findOneCasingById.picture_url,
+			]);
+		}
+	}, [
+		dataCPU,
+		dataGPU,
+		dataRAM,
+		dataMotherboard,
+		dataStorage,
+		dataCPUCooler,
+		dataPowerSupply,
+		dataCasing
+	]);
 
 	if (loadingCPU) return <p>Loading...</p>;
 	if (loadingGPU) return <p>Loading...</p>;
