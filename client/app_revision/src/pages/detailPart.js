@@ -13,10 +13,12 @@ import {
   TableRow,
   Button,
   IconButton,
+  Box,
+  Avatar,
 } from "@material-ui/core";
 
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
-import SaveIcon from "@material-ui/icons/Save";
+import AddIcon from "@material-ui/icons/Add";
 
 import Image from "material-ui-image";
 
@@ -38,6 +40,9 @@ import {
 } from "../graphql/query";
 import { config, restriction } from "../graphql/reactiveVars";
 import { useHistory } from "react-router-dom";
+import bukalapakIcon from ".././assets/bukalapakicon.png"
+import tokopediaIcon from ".././assets/tokopediaicon.png"
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -78,6 +83,19 @@ const useStyles = makeStyles((theme) => ({
   image: {
     padding: "5px",
     border: "0.1px solid #d6e0f0"
+  },
+
+  center: {
+    fontWeight: "bold",
+    textAlign: "center",
+    margin: "auto"
+  },
+
+  sprice: { 
+    display: "flex", 
+    textAlign: "center", 
+    margin: "auto",
+    fontWeight: "bold",
   }
 
 }));
@@ -211,10 +229,10 @@ export default function DetailCpu() {
             <Button
               variant="contained"
               color="primary"
-              style={{marginTop: "25px"}}
+              style={{ marginTop: "25px" }}
               size="large"
               className={classes.button}
-              startIcon={<SaveIcon />}
+              startIcon={<AddIcon />}
               onClick={(e) => {
                 handleAddtoConfig(e);
               }}
@@ -222,10 +240,10 @@ export default function DetailCpu() {
               Add to Your Build
             </Button>
           </Grid>
-          <Grid item xs={9} style={{marginTop: "63px"}}>
+          <Grid item xs={9} style={{ marginTop: "63px" }}>
             <Typography
               variant="h5"
-              style={{ fontWeight: "bold", marginBottom: "20px", backgroundColor: "#2d6187" , padding: "10px", color: "white", paddingLeft: "20px"}}
+              style={{ fontWeight: "bold", marginBottom: "20px", backgroundColor: "#2d6187", padding: "10px", color: "white", paddingLeft: "20px" }}
             >
               {data[`findOne${component}ById`].name}
             </Typography>
@@ -265,16 +283,9 @@ export default function DetailCpu() {
                     Rp.{data[`findOne${component}ById`].price.toLocaleString()}
                   </Typography>
                 </Grid>
-                <Grid item xs={12} container>
-                  <Grid item xs={6} style={{ padding: "12" }}>
-                    <Image
-                      imageStyle={{ width: "inherit", height: "inherit" }}
-                      className={classes.logo}
-                      src={tokopedia}
-                      style={{ paddingTop: "0px" }}
-                    />
-                  </Grid>
-                  <Grid item xs={6}>
+                <Grid className={classes.sprice}>
+                  <Avatar src={tokopediaIcon} style={{margin: "10px"}}/>
+                  <Box>
                     <IconButton
                       style={{ color: "#40CB53" }}
                       title="Research price in Tokopedia"
@@ -283,38 +294,20 @@ export default function DetailCpu() {
                       <AddShoppingCartIcon />
                       <Typography>{tokpedPrice}</Typography>
                     </IconButton>
-                  </Grid>
+                  </Box>
                 </Grid>
-                <Grid item xs={12} container>
-                  <Grid item xs={6}>
-                    <Image
-                      imageStyle={{ width: "inherit", height: "inherit" }}
-                      className={classes.logo}
-                      src={bukalapak}
-                      style={{ paddingTop: "0px" }}
-                    />
-                  </Grid>
-                  <Grid item xs={6}>
-                    {/* <Button
-                      variant="contained"
-                      style={{ backgroundColor: "red", color: "white" }}
-                      size="small"
-                      className={classes.button}
-                      startIcon={<AddShoppingCartIcon />}
+                <Grid className={classes.sprice}>
+                  <Avatar src={bukalapakIcon} />
+                  <Box>
+                    <IconButton
+                      style={{ color: "#E00034" }}
+                      title="Research price in Bukalapak"
+                      aria-label="add to shopping cart"
                     >
-                      See Price
-                    </Button> */}
-                    <Grid item xs={1} className={classes.center}>
-                      <IconButton
-                        style={{ color: "#E00034" }}
-                        title="Research price in Bukalapak"
-                        aria-label="add to shopping cart"
-                      >
-                        <AddShoppingCartIcon />
-                        <Typography>{bukalapakPrice}</Typography>
-                      </IconButton>
-                    </Grid>
-                  </Grid>
+                      <AddShoppingCartIcon />
+                      <Typography>{bukalapakPrice}</Typography>
+                    </IconButton>
+                  </Box>
                 </Grid>
               </Grid>
             </Grid>
