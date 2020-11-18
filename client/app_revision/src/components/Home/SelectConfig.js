@@ -87,8 +87,10 @@ const useStyle = makeStyles((theme) => ({
     color: "white",
     fontWeight: "bold",
     marginTop: 30,
+    paddingBottom: 5,
   },
   cardPosition: {
+    backgroundColor: "#ede7e3",
     minWidth: 500,
     marginRight: 20,
     height: 550,
