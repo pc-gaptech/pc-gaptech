@@ -178,8 +178,7 @@ export default function PartList() {
         </Grid>
         <Grid xs={2}>
           <img
-                    cover="true"
-
+            cover="true"
             imageStyle={{ width: "inherit", height: "inherit" }}
             className={classes.logo}
             src={tokopedia}
@@ -187,7 +186,7 @@ export default function PartList() {
         </Grid>
         <Grid xs={2}>
           <img
-          cover="true"
+            cover="true"
             imageStyle={{ width: "inherit", height: "inherit" }}
             className={classes.logo}
             src={bukalapak}
