@@ -6,7 +6,6 @@ import { allProdcutVar, loadingvar } from "../../graphQl/cache";
 function CasingHome() {
   const loading = loadingvar();
   const data = allProdcutVar();
-  console.log(allProdcutVar(), data);
   const components = "casing";
 
   if (loading) return <p>loading...</p>;
