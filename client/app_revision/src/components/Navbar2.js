@@ -36,7 +36,7 @@ export default function App() {
 				e.preventDefault()
 				history.push("/")
 			}}
-			style={{width: "30%", height: "auto"}}
+			style={{width: "30%", height: "auto", cursor: "pointer"}}
 				src={gaptech}
 			/>
 			</Box>

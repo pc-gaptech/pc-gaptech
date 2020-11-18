@@ -28,8 +28,8 @@ const useStyle = makeStyles((theme) => ({
     // paddingBottom: "20px",
     textAlign: "center",
     margin: "auto",
-    paddingTop: "75px",
-    paddingBottom: "20px"
+    paddingTop: "10px",
+    paddingBottom: "10px"
   },
 
   center: {
@@ -163,7 +163,7 @@ export default function PartList() {
   return (
     <Container>
       <CssBaseline/>
-      <Typography className={classes.header}>Select Available CPUs</Typography>
+      <Typography className={classes.header}>Select Compatible Component</Typography>
       {/* <p>{JSON.stringify(data)}</p> */}
       <Grid container spacing={1} className={classes.container}>
         <Grid item xs={1}></Grid>
@@ -177,7 +177,7 @@ export default function PartList() {
         <Typography className={classes.tableHead}>Est. Price</Typography>
         </Grid>
         <Grid xs={2}>
-          <Image
+          <img
                     cover="true"
 
             imageStyle={{ width: "inherit", height: "inherit" }}
@@ -186,7 +186,7 @@ export default function PartList() {
           />
         </Grid>
         <Grid xs={2}>
-          <Image
+          <img
           cover="true"
             imageStyle={{ width: "inherit", height: "inherit" }}
             className={classes.logo}
