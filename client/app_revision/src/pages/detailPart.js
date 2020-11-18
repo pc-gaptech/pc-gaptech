@@ -161,6 +161,7 @@ export default function DetailCpu() {
       });
       setBukalapakPrice(`${dataBukalapak.result}`);
     } catch (err) {
+      
       console.log(err);
     }
   };
