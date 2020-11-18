@@ -107,13 +107,6 @@ export const ADD_RAM = gql`
     addRAM(access_token: $access_token, dataRAM: $dataRAM) {
       id
       name
-      memory_type
-      chipset
-      manufacturer
-      power_draw
-      memory_speed
-      price
-      picture_url
     }
   }
 `;

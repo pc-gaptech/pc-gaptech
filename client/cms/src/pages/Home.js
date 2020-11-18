@@ -18,6 +18,7 @@ const Home = () => {
   const { loading, error, data } = useQuery(FECTH_ALL, {
     variables: { access_token: localStorage.getItem("access_token") },
   });
+  console.log(data);
   loadingvar(loading);
   if (loading) return <p>loading....</p>;
   allProdcutVar(data);

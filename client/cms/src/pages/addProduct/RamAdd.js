@@ -110,7 +110,7 @@ function RamAdd() {
             chipset,
             manufacturer,
             power_draw,
-            // memory_speed,
+            memory_speed,
             price,
             picture_url,
           },
@@ -130,7 +130,7 @@ function RamAdd() {
       //     picture_url,
       //   },
       //   headers: {
-      //     access_token,
+      //     access_token: localStorage.getItem("access_token"),
       //   },
       // })
       //   .then(async ({ data }) => {
