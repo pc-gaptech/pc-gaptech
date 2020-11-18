@@ -158,14 +158,12 @@ class RecommendedConfigController {
           highestRating = +game.rating;
         }
       }
-      console.log(highestRating, "highest");
       const result = await RecommendedConfig.findOne({
         where: { rating: highestRating },
         include: { all: true },
       });
       res.status(200).json(result);
     } catch (err) {
-      console.log(err, "masok sini geesss");
       next(err);
     }
   }

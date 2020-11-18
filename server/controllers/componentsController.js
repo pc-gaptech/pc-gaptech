@@ -12,7 +12,6 @@ const {
 
 class ComponentsController {
   static async getAll(req, res, next) {
-    console.log(req.body);
     try {
       const cpuData = await CPU.findAll();
       const gpuData = await GPU.findAll();
@@ -349,7 +348,6 @@ class ComponentsController {
           result = await Casing.update(componentInput, { where: { id } });
           break;
         default:
-          console.log("masuk sini bang");
           next({ name: "BadRequest", message: "Component type name Invalid" });
           break;
       }
@@ -357,13 +355,11 @@ class ComponentsController {
         res.status(201).json({ message: "Update Success" });
       }
     } catch (err) {
-      console.log("atau masuk sini");
       next(err);
     }
   }
 
   static async deleteOne(req, res, next) {
-    console.log(req.params);
     try {
       let result = {};
       const { component, id } = req.params;

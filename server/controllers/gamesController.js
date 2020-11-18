@@ -38,7 +38,6 @@ class GamesController {
   static async recommendedGames(req, res, next) {
     try {
       const ratingRecommendedConfig = +req.query.config_rating;
-      console.log(ratingRecommendedConfig);
 
       const resultRecommendedGames = await Game.findAll({
         where: { rating: { [Op.lte]: [ratingRecommendedConfig] } },
