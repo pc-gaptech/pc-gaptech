@@ -12,20 +12,21 @@ function HeaderHome() {
   return (
     <div className={classes.root}>
       <video
-        autoPlay
+        autoplay
+        loop
         muted
         src="https://cdn.cloudflare.steamstatic.com/steam/clusters/frontpage/ed74590b56be59b8f90e3053/webm_page_bg_english.webm?t=1605294940"
         play
-        style={{ width: "100%", height: 320, margin: 0, paddingRight: 0 }}
+        style={{ width: "100%", height: "auto", margin: 0, paddingRight: 0 }}
       />
     </div>
   );
 }
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: 0,
+    margin: "0px",
     width: "100%",
-    margin: "0",
+    padding: "0px"
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),

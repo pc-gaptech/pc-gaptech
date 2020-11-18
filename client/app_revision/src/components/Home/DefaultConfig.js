@@ -141,7 +141,7 @@ const useStyle = makeStyles((theme) => ({
     marginTop: 5,
     width: 270,
     height: 45,
-    backgroundColor: "#ea2c62",
+    backgroundColor: "#D68300",
     color: "white",
     fontWeight: "bold",
     marginTop: 30,
@@ -153,7 +153,7 @@ const useStyle = makeStyles((theme) => ({
   },
   mainPage: {
     padding: 10,
-    backgroundColor: "#e0e1dd",
+    backgroundColor: "#E3EDF1",
     color: "Black",
     width: 550,
     display: "flex",
@@ -174,7 +174,7 @@ const useStyle = makeStyles((theme) => ({
   carousel: {
     marginTop: 5,
     width: 480,
-    backgroundColor: "#120078",
+    backgroundColor: "#E3EDF1",
   },
 }));
 
