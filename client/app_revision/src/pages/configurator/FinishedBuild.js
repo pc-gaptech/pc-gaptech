@@ -15,8 +15,8 @@ import { SAVE_FAVORITE } from "../../graphql/mutations";
 import { GET_ALL_FAVORITE_CONFIG, GET_GAMES_BASED_ON_CONFIG } from "../../graphql/query";
 import { config, configRatingTemp } from "../../graphql/reactiveVars";
 import { useMutation, useQuery } from "@apollo/client";
-import Carousel from 'react-material-ui-carousel'
-import FavoriteIcon from '@material-ui/icons/Favorite';
+import Carousel from "react-material-ui-carousel";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -52,6 +52,8 @@ const useStyles = makeStyles((theme) => ({
 export default function FinishedBuild() {
 	const classes = useStyles();
 	const history = useHistory();
+
+	const [pictures, setPicture] = useState([]);
 
 	const [addOneFavorite] = useMutation(SAVE_FAVORITE);
 	const { loading, error, data } = useQuery(GET_GAMES_BASED_ON_CONFIG, {
@@ -115,6 +117,10 @@ export default function FinishedBuild() {
 		});
 	};
 
+	const addPicture = (newPicture) => {
+		setPicture(newPicture);
+	};
+
 	if (loading) return <p>Loading..</p>;
 	if (error) return <p>{error}</p>;
 
@@ -124,19 +130,18 @@ export default function FinishedBuild() {
 		<React.Fragment>
 			<CssBaseline />
 			<Container style={{ marginTop: "25px" }}>
-				<Grid container spacing={2} >
+				<Grid container spacing={2}>
 					<Grid item xs={3} style={{ margin: "auto", textAlign: "center" }}>
 						<Carousel>
-							<Image src="https://cdna.pcpartpicker.com/static/forever/images/product/c7baf2c9c9cc15ae23adb24c2f4316fc.256p.jpg" />
-							<Image src="https://cdna.pcpartpicker.com/static/forever/images/product/c7baf2c9c9cc15ae23adb24c2f4316fc.256p.jpg" />
-							<Image src="https://cdna.pcpartpicker.com/static/forever/images/product/c7baf2c9c9cc15ae23adb24c2f4316fc.256p.jpg" />
-							<Image src="https://cdna.pcpartpicker.com/static/forever/images/product/c7baf2c9c9cc15ae23adb24c2f4316fc.256p.jpg" />
+							{pictures.map((el) => {
+								return <Image src={el} />;
+							})}
 						</Carousel>
 						<Button
-							iconStart={<FavoriteIcon/>}
+							iconStart={<FavoriteIcon />}
 							onClick={(e) => saveConfig(e)}
 							variant="contained"
-							style={{backgroundColor: "#f5a25d", color: "white", fontWeight: "bold"}}
+							style={{ backgroundColor: "#f5a25d", color: "white", fontWeight: "bold" }}
 							disableElevation
 						>
 							Add to Favorite
@@ -154,7 +159,7 @@ export default function FinishedBuild() {
 					</Grid>
 					<Grid xs={12} container spacing={2}>
 						<Grid item xs={3}>
-							<SpecTable />
+							<SpecTable addPicture={addPicture}/>
 						</Grid>
 						<Grid item xs={9} container>
 							<ComponentList />
