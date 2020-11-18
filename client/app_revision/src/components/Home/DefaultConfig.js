@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, makeStyles, Paper } from "@material-ui/core";
+import { Container, makeStyles, Paper, Card } from "@material-ui/core";
 import { Button } from "@material-ui/core";
 import Select from "react-select";
 import { config, configRatingTemp } from "../../graphql/reactiveVars";
@@ -82,30 +82,33 @@ function DefaultConfig() {
   return (
     // <div>
     // <Paper elevation={4} className={classes.paper}>
-    <Container className={classes.mainPage}>
-      <div>
-        <h1 className={classes.title}>Select Games</h1>
-      </div>
-      <div>
-        <Select
-          style={classes.selects}
-          onChange={pickGames}
-          options={options}
-          isMulti
-        />
-      </div>
-      <div>
-        <Button
-          variant="outlined"
-          className={classes.button}
-          onClick={(e) => {
-            goToDefault(e);
-          }}
-        >
-          Get Configuration
-        </Button>
-      </div>
-    </Container>
+    <Card className={classes.mainPage}>
+      <Container>
+        <div>
+          <h1 className={classes.title}>Select Games</h1>
+        </div>
+        <div>
+          <Select
+            style={classes.selects}
+            onChange={pickGames}
+            options={options}
+            isMulti
+          />
+        </div>
+        <div>
+          <Button
+            variant="outlined"
+            className={classes.button}
+            onClick={(e) => {
+              goToDefault(e);
+            }}
+          >
+            Get Configuration
+          </Button>
+        </div>
+      </Container>
+    </Card>
+
     // {/* </Paper> */}
     // </div>
   );
@@ -130,13 +133,15 @@ const useStyle = makeStyles((theme) => ({
   mainPage: {
     // backgroundColor: "black",
     color: "Red",
+    width: 420,
     display: "flex",
     flexDirection: "column",
     justifyContent: "flex-start",
-    borderWidth: 1,
-    borderStyle: "solid",
-    borderColor: "black",
-    height: 320,
+    // borderWidth: 1,
+    // borderStyle: "solid",
+    // borderColor: "black",
+    // backgroundColor: "white",
+    height: 550,
     boxShadow: "10px 20px 22px -7px rgba(0,0,0,0.75);",
   },
   title: {
