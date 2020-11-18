@@ -141,7 +141,7 @@ const useStyle = makeStyles((theme) => ({
     marginTop: 5,
     width: 270,
     height: 45,
-    backgroundColor: "#D68300",
+    backgroundColor: "rgb(48, 46, 97)",
     color: "white",
     fontWeight: "bold",
     marginTop: 30,

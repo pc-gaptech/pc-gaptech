@@ -1,50 +1,50 @@
 [
 	{
-		"name": "Games Rating 3",
+		"name": "Warhammer: Vermintide 2",
 		"description": "Ini Game Rating 3",
-		"picture_url": "https://upload.wikimedia.org/wikipedia/en/9/99/ACOdysseyCoverArt.png",
+		"picture_url": "https://cdn.mos.cms.futurecdn.net/w38TFRvorh9UQmiBfchdY9-970-80.jpg",
 		"rating": 3
 	},
 	{
-		"name": "Games Rating 4",
-		"description": "Ini Game Rating 4",
-		"picture_url": "https://upload.wikimedia.org/wikipedia/en/9/99/ACOdysseyCoverArt.png",
+		"name": "Divinity: Original Sin 2",
+		"description": "Metacritic's 2004 PC Game of the Year",
+		"picture_url": "https://cdn.mos.cms.futurecdn.net/hgGM7CC2t9GMuY5ucDMxBV-970-80.jpg",
 		"rating": 4
 	},
 	{
-		"name": "Games Rating 5",
+		"name": "Rainbow Six Siege",
 		"description": "Ini Game Rating 5",
-		"picture_url": "https://upload.wikimedia.org/wikipedia/en/9/99/ACOdysseyCoverArt.png",
+		"picture_url": "https://cdn.mos.cms.futurecdn.net/t3iX3o2552asFXFqmkjgDZ-970-80.jpg",
 		"rating": 5
 	},
 	{
-		"name": "Games Rating 6",
+		"name": "PlayerUnknown's Battlegrounds",
 		"description": "Ini Game Rating 6",
-		"picture_url": "https://upload.wikimedia.org/wikipedia/en/9/99/ACOdysseyCoverArt.png",
+		"picture_url": "https://cdn.mos.cms.futurecdn.net/p5xpJzmH4NSNFvSbxbFLEP-970-80.jpg",
 		"rating": 6
 	},
 	{
-		"name": "Games Rating 7",
+		"name": "Fortnite",
 		"description": "Ini Game Rating 7",
-		"picture_url": "https://upload.wikimedia.org/wikipedia/en/9/99/ACOdysseyCoverArt.png",
+		"picture_url": "https://cdn.mos.cms.futurecdn.net/p5xpJzmH4NSNFvSbxbFLEP-970-80.jpg",
 		"rating": 7
 	},
 	{
-		"name": "Games Rating 8",
+		"name": "Valorant",
 		"description": "Ini Game Rating 8",
-		"picture_url": "https://upload.wikimedia.org/wikipedia/en/9/99/ACOdysseyCoverArt.png",
+		"picture_url": "https://cdn.mos.cms.futurecdn.net/7JPZ4vWJNZbLhbekpAUvMd-970-80.jpg",
 		"rating": 8
 	},
 	{
-		"name": "Games Rating 9",
+		"name": "Apexx Legend",
 		"description": "Ini Game Rating 9",
-		"picture_url": "https://upload.wikimedia.org/wikipedia/en/9/99/ACOdysseyCoverArt.png",
+		"picture_url": "https://www.dewa.gg/wp-content/uploads/2020/10/apex-legends-5.jpg",
 		"rating": 9
 	},
 	{
-		"name": "Games Rating 10",
+		"name": "Call of Duty: Warzone",
 		"description": "Ini Game Rating 10",
-		"picture_url": "https://upload.wikimedia.org/wikipedia/en/9/99/ACOdysseyCoverArt.png",
+		"picture_url": "https://i.ytimg.com/vi/0E44DClsX5Q/maxresdefault.jpg",
 		"rating": 10
 	}
 ]

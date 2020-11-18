@@ -39,7 +39,7 @@ const useStyle = makeStyles((theme) => ({
   container: {
     width: "100%",
     maxHeight: 720,
-    backgroundColor: "#384264",
+    backgroundColor: "rgb(48, 46, 97)",
     backgroundRepeat: "no-repeat",
   },
   cardfeature: {
@@ -48,7 +48,7 @@ const useStyle = makeStyles((theme) => ({
   },
   root: {
     flexGrow: 1,
-    padding: "0px"
+    padding: "0px",
   },
   paper: {
     height: "100vh",

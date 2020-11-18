@@ -26,7 +26,8 @@ const useStyles = makeStyles((theme) => ({
   root: {
     margin: "0px",
     width: "100%",
-    padding: "0px"
+    padding: "0px",
+    backgroundColor: "black",
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
