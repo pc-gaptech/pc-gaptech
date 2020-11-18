@@ -36,7 +36,7 @@ function DefaultConfig() {
     setPickedGames(result.join(","));
     console.log(result, "result");
     axios({
-      url: `http://localhost:3000/recommendpc?gamesId=${result.join(",")}`,
+      url: `http://13.229.97.157:3000/recommendpc?gamesId=${result.join(",")}`,
       headers: {
         "content-type": "application/json",
         access_token: localStorage.getItem("access_token"),
