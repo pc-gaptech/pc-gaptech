@@ -28,7 +28,7 @@ function App() {
 						<PrivateRoute exact path="/configurator/parts/:component/:id" component={DetailPart} />
 						<PrivateRoute exact path="/configurator/parts/:componentType" component={PartList} />
 						<PrivateRoute exact path="/" component={Home} />
-						<PrivateRoute exact path="/register" component={Register} />
+						<PublicRoute exact path="/register" component={Register} />
 						<PublicRoute exact path="/login" component={Login} />
 						<PrivateRoute exact path="/configurator" component={Configurator} />
 						<PrivateRoute exact path="/favorite" component={Favorites} />

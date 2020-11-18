@@ -20,8 +20,8 @@ const useStyle = makeStyles((theme) => ({
 		maxWidth: "70%",
 		height: "auto",
 		margin: "auto",
-		paddingTop: "80px",
-		paddingBottom: "30px",
+		paddingTop: "10px",
+		paddingBottom: "10px",
 	},
 
 	center: {
@@ -95,14 +95,14 @@ export default function Build() {
 				<Typography className={classes.tableHead}>Est.Price</Typography>
 				</Grid>
 				<Grid item xs={3}>
-					<Image
+					<img
 						imageStyle={{ width: "inherit", height: "inherit" }}
 						className={classes.logo}
 						src={tokopedia}
 					/>
 				</Grid>
 				<Grid item xs={3}>
-					<Image
+					<img
 						imageStyle={{ width: "inherit", height: "inherit", margin: "auto" }}
 						className={classes.logo}
 						src={bukalapak}
