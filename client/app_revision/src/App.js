@@ -4,6 +4,7 @@ import { ApolloProvider } from "@apollo/client";
 import Client from "./graphql/client";
 import Navbar from "./components/Navbar";
 import Navbar2 from "./components/Navbar2";
+import Navbar3 from "./components/Navbar3";
 import Home from "./pages/Home";
 import Register from "./pages/user/Register";
 import Login from "./pages/user/Login";
@@ -22,7 +23,7 @@ function App() {
 		<div className="App">
 			<ApolloProvider client={Client}>
 				<Router>
-					<Navbar />
+					<Navbar2 />
 					<Switch>
 						<PrivateRoute exact path="/configurator/parts/:component/:id" component={DetailPart} />
 						<PrivateRoute exact path="/configurator/parts/:componentType" component={PartList} />

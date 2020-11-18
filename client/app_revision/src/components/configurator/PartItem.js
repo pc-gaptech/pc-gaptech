@@ -42,6 +42,11 @@ const useStyle = makeStyles((theme) => ({
   name: {
     fontWeight: "bold",
   },
+
+  price: {
+    fontWeight: "bold"
+  }
+
 }));
 
 export default function PartItem(props) {
@@ -66,7 +71,8 @@ export default function PartItem(props) {
         restriction(newRestriction);
         break;
       case "CPUCooler":
-        newRestriction.socket = item.socket;
+        newRestriction.socket_array = JSON.parse(JSON.stringify(item.socket));
+        newRestriction.total_power += item.power_draw;
         restriction(newRestriction);
         break;
       case "Casing":
@@ -79,6 +85,19 @@ export default function PartItem(props) {
         newRestriction.total_power += item.power_draw;
         restriction(newRestriction);
         break;
+      case "RAM":
+        newRestriction.chipset_array = JSON.parse(JSON.stringify(item.chipset));
+        newRestriction.total_power += item.power_draw;
+        restriction(newRestriction);
+        break;
+      case "GPU":
+        newRestriction.total_power += item.power_draw;
+        restriction(newRestriction);
+        break
+      case "Storage":
+        newRestriction.total_power += item.power_draw;
+        restriction(newRestriction);
+        break
       default:
         break;
     }
@@ -121,7 +140,7 @@ export default function PartItem(props) {
       <Grid item xs={1}>
         <Image src={item.picture_url} />
       </Grid>
-      <Grid item xs={4} className={classes.center}>
+      <Grid item xs={3} className={classes.center}>
         <Typography className={classes.name}>{item.name}</Typography>
         <Button
           size={"small"}
@@ -137,6 +156,7 @@ export default function PartItem(props) {
       <Grid item xs={2} className={classes.center}>
         <Button
           variant="contained"
+          style={{backgroundColor: "#ffa372", color: "white"}}
           color="primary"
           size="medium"
           className={classes.buttonsave}
@@ -154,19 +174,19 @@ export default function PartItem(props) {
         className={classes.center}
         style={{ fontWeight: "bold" }}
       >
-        {`Rp. ${item.price.toLocaleString("id")}`}
+        <Typography className={classes.price}>{`Rp. ${item.price.toLocaleString("id")}`}</Typography>
       </Grid>
-      <Grid item xs={1} className={classes.center}>
+      <Grid item xs={2} className={classes.center}>
         <IconButton
           style={{ color: "#40CB53" }}
           title="Research price in Tokopedia"
           aria-label="add to shopping cart"
         >
           <AddShoppingCartIcon />
-          <Typography>{tokpedPrice}</Typography>
+          <Typography className={classes.price}>{tokpedPrice}</Typography>
         </IconButton>
       </Grid>
-      <Grid item xs={1} className={classes.center}>
+      {/* <Grid item xs={2} className={classes.center}>
         <a href={`https://www.tokopedia.com/search?st=product&q=${item.name}`}>
           <IconButton
             style={{ color: "#FF2F00" }}
@@ -176,15 +196,15 @@ export default function PartItem(props) {
             <AddShoppingCartIcon />
           </IconButton>
         </a>
-      </Grid>
-      <Grid item xs={1} className={classes.center}>
+      </Grid> */}
+      <Grid item xs={2} className={classes.center}>
         <IconButton
           style={{ color: "#E00034" }}
           title="Research price in Bukalapak"
           aria-label="add to shopping cart"
         >
           <AddShoppingCartIcon />
-          <Typography>{bukalapakPrice}</Typography>
+          <Typography className={classes.price}>{bukalapakPrice}</Typography>
         </IconButton>
       </Grid>
     </Grid>

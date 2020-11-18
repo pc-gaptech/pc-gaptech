@@ -22,4 +22,6 @@ export const restriction = makeVar({
 	chipset: "",
 	total_power: 0,
 	form_factor: "",
+	chipset_array: [],
+	socket_array: [],
 });

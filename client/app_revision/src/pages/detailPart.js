@@ -68,6 +68,18 @@ const useStyles = makeStyles((theme) => ({
     margin: "auto",
     textAlign: "center",
   },
+
+  property: {
+    fontWeight: "bold",
+    paddingTop: "12px",
+    paddingBottom: "12px"
+  },
+
+  image: {
+    padding: "5px",
+    border: "0.1px solid #d6e0f0"
+  }
+
 }));
 
 export default function DetailCpu() {
@@ -195,10 +207,11 @@ export default function DetailCpu() {
         {/* <p>{JSON.stringify(data[`findOne${component}ById`])}</p> */}
         <Grid container spacing={2} style={{ marginBottom: "50px" }}>
           <Grid item xs={3} style={{ margin: "auto", textAlign: "center" }}>
-            <Image src={data[`findOne${component}ById`].picture_url} />
+            <Image className={classes.image} src={data[`findOne${component}ById`].picture_url} />
             <Button
               variant="contained"
               color="primary"
+              style={{marginTop: "25px"}}
               size="large"
               className={classes.button}
               startIcon={<SaveIcon />}
@@ -209,10 +222,10 @@ export default function DetailCpu() {
               Add to Your Build
             </Button>
           </Grid>
-          <Grid item xs={9}>
+          <Grid item xs={9} style={{marginTop: "63px"}}>
             <Typography
               variant="h5"
-              style={{ fontWeight: "bold", marginBottom: "50px" }}
+              style={{ fontWeight: "bold", marginBottom: "20px", backgroundColor: "#2d6187" , padding: "10px", color: "white", paddingLeft: "20px"}}
             >
               {data[`findOne${component}ById`].name}
             </Typography>
@@ -230,15 +243,15 @@ export default function DetailCpu() {
                           align="left"
                           style={{ fontWeight: "bold", fontSize: "1.2em" }}
                         >
-                          Descriptions
+                          Specifications
                         </TableCell>
                         <TableCell align="left"></TableCell>
                       </TableRow>
                       {partData.map((el) => {
                         return (
                           <TableRow>
-                            <TableCell align="left">{el.property}</TableCell>
-                            <TableCell align="left">{el.value}</TableCell>
+                            <TableCell align="left" className={classes.property}>{el.property}</TableCell>
+                            <TableCell align="left" className={classes.value}>{el.value}</TableCell>
                           </TableRow>
                         );
                       })}

@@ -12,6 +12,7 @@ import Select from "react-select";
 import Swal from "sweetalert2";
 import { useHistory } from "react-router-dom";
 import { config } from "../../graphql/reactiveVars";
+import Carousel from "react-material-ui-carousel";
 const options = [
   { value: "chocolate", label: "Chocolate" },
   { value: "strawberry", label: "Strawberry" },
@@ -48,7 +49,7 @@ function SelectConfig() {
   }
   return (
     <Card className={classes.cardPosition}>
-      <h1>Build Guides</h1>
+      <h1 className={classes.title}>Build Guides</h1>
       <CardActionArea>
         <CardMedia
           className={classes.media}
@@ -59,10 +60,8 @@ function SelectConfig() {
         <Typography variant="body2" color="textSecondary" component="p">
           This impressive paella is a perfect party dish and a fun meal to cook
           together with your guests. Add 1 cup of frozen peas along with the
-          mussels, if you like.
+          mussels, if you like. This impressive paella is a perfect party dish
         </Typography>
-      </CardContent>
-      <CardContent>
         <Button
           variant="outlined"
           className={classes.button}
@@ -82,12 +81,22 @@ const useStyle = makeStyles((theme) => ({
   },
   button: {
     marginTop: 10,
-    width: 220,
+    width: 270,
     height: 45,
+    backgroundColor: "#ea2c62",
+    color: "white",
+    fontWeight: "bold",
+    marginTop: 30,
   },
   cardPosition: {
-    // minWidth: 500,
+    minWidth: 500,
+    marginRight: 20,
+    height: 550,
     boxShadow: "10px 20px 22px -7px rgba(0,0,0,0.75);",
+  },
+  title: {
+    color: "black",
+    letterSpacing: "3px",
   },
 }));
 

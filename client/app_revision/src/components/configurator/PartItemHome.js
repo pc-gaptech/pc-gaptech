@@ -43,7 +43,7 @@ const useStyle = makeStyles((theme) => ({
   },
   buttonsave: {
     color: "white",
-    backgroundColor: "grey",
+    backgroundColor: "#f37121",
     fontSize: "0.7em",
     paddingLeft: "20px",
     paddingRight: "20px",
@@ -52,6 +52,10 @@ const useStyle = makeStyles((theme) => ({
   name: {
     fontWeight: "bold",
   },
+
+  price: {
+    fontWeight: "bold"
+  }
 }));
 
 export default function PartItemHome({ component, ID }) {
@@ -130,7 +134,7 @@ export default function PartItemHome({ component, ID }) {
       <Grid item xs={1}>
         <Image src={data[`findOne${component}ById`].picture_url} />
       </Grid>
-      <Grid item xs={4} className={classes.center}>
+      <Grid item xs={3} className={classes.center}>
         <Typography className={classes.name}>
           {data[`findOne${component}ById`].name}
         </Typography>
@@ -165,23 +169,23 @@ export default function PartItemHome({ component, ID }) {
       </Grid>
       <Grid
         item
-        xs={1}
+        xs={2}
         className={classes.center}
         style={{ fontWeight: "bold" }}
       >
-        {`Rp. ${data[`findOne${component}ById`].price.toLocaleString("id")}`}
+        <Typography className={classes.price}>{`Rp. ${data[`findOne${component}ById`].price.toLocaleString("id")}`}</Typography>
       </Grid>
-      <Grid item xs={1} className={classes.center}>
+      <Grid item xs={2} className={classes.center}>
         <IconButton
           style={{ color: "#40CB53" }}
           title="Research price in Tokopedia"
           aria-label="add to shopping cart"
         >
           <AddShoppingCartIcon />
-          <Typography>{tokpedPrice}</Typography>
+          <Typography className={classes.price}>{tokpedPrice}</Typography>
         </IconButton>
       </Grid>
-      {/* <Grid item xs={1} className={classes.center}>
+      {/* <Grid item xs={} className={classes.center}>
         <IconButton
           style={{ color: "#FF2F00" }}
           title="Research price in Shopee"
@@ -190,14 +194,14 @@ export default function PartItemHome({ component, ID }) {
           <AddShoppingCartIcon />
         </IconButton>
       </Grid> */}
-      <Grid item xs={1} className={classes.center}>
+      <Grid item xs={2} className={classes.center}>
         <IconButton
           style={{ color: "#E00034" }}
           title="Research price in Bukalapak"
           aria-label="add to shopping cart"
         >
           <AddShoppingCartIcon />
-          <Typography>{bukalapakPrice}</Typography>
+          <Typography className={classes.price}>{bukalapakPrice}</Typography>
         </IconButton>
       </Grid>
     </Grid>

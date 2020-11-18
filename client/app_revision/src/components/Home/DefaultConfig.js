@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Container, makeStyles, Paper, Card } from "@material-ui/core";
+import {
+  Container,
+  makeStyles,
+  Paper,
+  Card,
+  CardContent,
+} from "@material-ui/core";
 import { Button } from "@material-ui/core";
 import Select from "react-select";
 import { config, configRatingTemp } from "../../graphql/reactiveVars";
@@ -7,6 +13,7 @@ import { FECTH_GAMES } from "../../graphql/gamesQuery";
 import { useQuery } from "@apollo/client";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import Carousel from "react-material-ui-carousel";
 
 function DefaultConfig() {
   const [options, setOptions] = useState([]);
@@ -70,11 +77,21 @@ function DefaultConfig() {
   useEffect(() => {
     if (data) {
       let games = data.getGames.map((el) => {
-        return { value: el.id, label: el.name };
+        return { value: el.id, label: el.name, picture: el.picture_url };
       });
       setOptions(games);
     }
   }, [data]);
+  let listPicGames = options.map((el) => {
+    return (
+      <Card className={classes.carousel}>
+        {" "}
+        <CardContent>
+          <img src={el.picture} style={{ width: 400, height: 250 }} />
+        </CardContent>
+      </Card>
+    );
+  });
 
   if (loading) return <p>Loading..</p>;
   if (error) return <p>{error}</p>;
@@ -94,6 +111,9 @@ function DefaultConfig() {
             options={options}
             isMulti
           />
+        </div>
+        <div>
+          <Carousel>{listPicGames}</Carousel>
         </div>
         <div>
           <Button
@@ -120,10 +140,12 @@ const useStyle = makeStyles((theme) => ({
     height: 200,
   },
   button: {
-    marginTop: 10,
-    width: 250,
+    marginTop: 5,
+    width: 270,
     height: 45,
-    backgroundColor: "red",
+    backgroundColor: "#ea2c62",
+    color: "white",
+    fontWeight: "bold",
     marginTop: 30,
   },
   selects: {
@@ -131,12 +153,13 @@ const useStyle = makeStyles((theme) => ({
     backgroundColor: "red",
   },
   mainPage: {
+    padding: 10,
     // backgroundColor: "black",
     color: "Red",
-    width: 420,
+    width: 550,
     display: "flex",
     flexDirection: "column",
-    justifyContent: "flex-start",
+    justifyContent: "space-between",
     // borderWidth: 1,
     // borderStyle: "solid",
     // borderColor: "black",
@@ -145,12 +168,17 @@ const useStyle = makeStyles((theme) => ({
     boxShadow: "10px 20px 22px -7px rgba(0,0,0,0.75);",
   },
   title: {
-    backgroundColor: "blue",
-    color: "white",
+    // backgroundColor: "blue",
+    color: "black",
+    letterSpacing: "3px",
   },
   paper: {
     height: 220,
     backgroundColor: "trasparent",
+  },
+  carousel: {
+    marginTop: 5,
+    width: 450,
   },
 }));
 
