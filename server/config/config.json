@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "postgres",
-    "password": "999999999",
+    "password": 11223344,
     "database": "pc-gaptech",
     "host": "127.0.0.1",
     "dialect": "postgres"
