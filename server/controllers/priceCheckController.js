@@ -22,13 +22,8 @@ class PriceCheckController {
             };
             result.push(value);
           });
-          if (result[1]) {
-            res.status(200).json({ result: result[1].price });
-          } else if ([result[0]]) {
-            res.status(200).json({ result: result[0].price });
-          } else {
-            res.status(200).json({ result: "Not Available" });
-          }
+          console.log(result)
+          res.status(200).json({ result: result[2].price || result[0].price || "Not Available" });
           break;
         case "bukalapak":
           url = `https://m.bukalapak.com/products?search%5Bkeywords%5D=${query}&search%5Bsort_by%5D=weekly_sales_ratio%3Adesc`;
@@ -40,14 +35,16 @@ class PriceCheckController {
             let valuePrice = $price.text();
             let joinValue = valuePrice.split("jt").join("");
             let datas = joinValue.trim();
-            if (datas.match(/,/)) {
+            if (datas.match(/rb/)) {
+              datas = datas.slice(0, datas.length - 2) + ",000"
+            } else if (datas.match(/,/)) {
               datas += "00,000";
             } else {
               datas += ",000,000";
             }
             result.push(datas);
           });
-          res.status(200).json({ result: result[2] });
+          res.status(200).json({ result: result[2] || result[1] || "Not Available" });
           break;
         default:
           next({ name: "BadRequest", message: "Invalid Request" });
