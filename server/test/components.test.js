@@ -6,6 +6,8 @@ const { createToken } = require("../helpers/jwt");
 
 let idAdminLoggedIn;
 let access_token;
+let fake_token =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0ZXN0QG1haWwuY29tIiwiaXNfYWRtaW4iOmZhbHNlLCJpYXQiOjE2MDU2Njc1MzF9.7XLcPPFjXYygdQYR8zXmv5n_AI_W1dntCYEhnQ2fGZ8";
 beforeAll((done) => {
   const userData = {
     username: "test_username",
@@ -36,9 +38,6 @@ beforeAll((done) => {
 afterAll((done) => {
   User.destroy({ truncate: true })
     .then((ok) => {
-      return Game.destroy({ truncate: true });
-    })
-    .then((ok) => {
       done();
     })
     .catch((err) => {
@@ -47,6 +46,71 @@ afterAll((done) => {
 });
 
 describe("Test Get all one type of component, (/parts/:component)", () => {
+  test("Get All component", (done) => {
+    request(app)
+      .get("/parts")
+      .set("access_token", access_token)
+      .then((res) => {
+        const { body, status } = res;
+        expect(status).toBe(200);
+        expect(body).toEqual(
+          expect.objectContaining({
+            CPU: expect.any(Object),
+            CPUCooler: expect.any(Object),
+            Motherboard: expect.any(Object),
+            GPU: expect.any(Object),
+            RAM: expect.any(Object),
+            Storage: expect.any(Object),
+            PowerSupply: expect.any(Object),
+            Casing: expect.any(Object),
+          })
+        );
+        done();
+      });
+  });
+
+  test("failed Get All component but fake access token", (done) => {
+    request(app)
+      .get("/parts")
+      .set("access_token", fake_token)
+      .then((res) => {
+        const { body, status } = res;
+        expect(status).toBe(404);
+        expect(body).toEqual(
+          expect.objectContaining({
+            message: "Not Found",
+          })
+        );
+        done();
+      });
+  });
+
+  test("successfully access / route", (done) => {
+    request(app)
+      .get("/")
+      .then((res) => {
+        const { body, status } = res;
+        expect(status).toBe(200);
+        expect(body).toEqual(expect.any(Object));
+        done();
+      });
+  });
+
+  test("failed Get All component dont have access token", (done) => {
+    request(app)
+      .get("/parts")
+      .then((res) => {
+        const { body, status } = res;
+        expect(status).toBe(401);
+        expect(body).toEqual(
+          expect.objectContaining({
+            message: "You are not authenticated",
+          })
+        );
+        done();
+      });
+  });
+
   test("Get All CPU", (done) => {
     request(app)
       .get("/parts/cpu")
@@ -67,6 +131,31 @@ describe("Test Get all one type of component, (/parts/:component)", () => {
               core_count: expect.any(Number),
               isIGPU: expect.any(Boolean),
               max_rating: expect.any(Number),
+              price: expect.any(Number),
+              picture_url: expect.any(String),
+            }),
+          ])
+        );
+        done();
+      });
+  });
+
+  test("Get All CPU_Cooler", (done) => {
+    request(app)
+      .get("/parts/cpucooler")
+      .set("access_token", access_token)
+      .then((res) => {
+        const { body, status } = res;
+        expect(status).toBe(200);
+        expect(body).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({
+              id: expect.any(Number),
+              name: expect.any(String),
+              socket: expect.arrayContaining([expect.any(String)]),
+              TDP: expect.any(Number),
+              manufacturer: expect.any(String),
+              power_draw: expect.any(Number),
               price: expect.any(Number),
               picture_url: expect.any(String),
             }),
@@ -539,6 +628,28 @@ describe("Test of /games endpoint", () => {
       });
   });
 
+  test("Successfully Add Games", (done) => {
+    request(app)
+      .post("/games/add")
+      .send(newGames)
+      .set("access_token", access_token)
+      .set("Accept", "application/json")
+      .then((response) => {
+        const { status, body } = response;
+        expect(status).toBe(201);
+        expect(body).toEqual(
+          expect.objectContaining({
+            id: expect.any(Number),
+            name: expect.any(String),
+            description: expect.any(String),
+            picture_url: expect.any(String),
+            rating: expect.any(Number),
+          })
+        );
+        done();
+      });
+  });
+
   test("Failed fetch reccommended games based on config rating", (done) => {
     request(app)
       .get("/games/recommend")
@@ -563,28 +674,6 @@ describe("Test of /games endpoint", () => {
       "https://dypdvfcjkqkg2.cloudfront.net/original/5860280-9251.png",
     rating: 5,
   };
-
-  test("Successfully Add Games", (done) => {
-    request(app)
-      .post("/games/add")
-      .send(newGames)
-      .set("access_token", access_token)
-      .set("Accept", "application/json")
-      .then((response) => {
-        const { status, body } = response;
-        expect(status).toBe(201);
-        expect(body).toEqual(
-          expect.objectContaining({
-            id: expect.any(Number),
-            name: expect.any(String),
-            description: expect.any(String),
-            picture_url: expect.any(String),
-            rating: expect.any(Number),
-          })
-        );
-        done();
-      });
-  });
 
   test("Failed Add Games name is empty", (done) => {
     const newGames = {
