@@ -22,10 +22,10 @@ const useStyle = makeStyles((theme) => ({
 	},
 	logo: {
 		alignSelf: "center",
-		maxWidth: "70%",
-		maxHeight: "70%",
-		paddingTop: "70px",
-		paddingBottom: "0px",
+		maxWidth: "90%",
+		maxHeight: "90%",
+		paddingTop: "10px",
+		paddingBottom: "10px",
 		objectFit: "cover",
 	},
 
@@ -176,7 +176,7 @@ export default function Configurator() {
 						<Typography className={classes.tableHead}>Est.Price</Typography>
 					</Grid>
 					<Grid item xs={2}>
-						<Image
+						<img
 							imageStyle={{ width: "inherit", height: "inherit" }}
 							className={classes.logo}
 							src={tokopedia}
@@ -190,7 +190,7 @@ export default function Configurator() {
 						/>
 					</Grid> */}
 					<Grid item xs={2}>
-						<Image
+						<img
 							imageStyle={{ width: "inherit", height: "inherit" }}
 							className={classes.logo}
 							src={bukalapak}

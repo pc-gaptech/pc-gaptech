@@ -16,6 +16,7 @@ import FinishedBuild from "./pages/configurator/FinishedBuild";
 import PrivateRoute from "./components/guardRoute/PrivateRoutes";
 import PublicRoute from "./components/guardRoute/PublicRoute";
 import FinishedRoute from "./components/guardRoute/FinishedRoute"
+import Footer from "./components/Footer"
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
 						<PrivateRoute exact path="/favorite" component={Favorites} />
 						<FinishedRoute exact path="/finished" component={FinishedBuild} />
 					</Switch>
+					<Footer/>
 				</Router>
 			</ApolloProvider>
 		</div>
