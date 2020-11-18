@@ -71,7 +71,8 @@ export default function PartItem(props) {
         restriction(newRestriction);
         break;
       case "CPUCooler":
-        newRestriction.socket = item.socket;
+        newRestriction.socket_array = JSON.parse(JSON.stringify(item.socket));
+        newRestriction.total_power += item.power_draw;
         restriction(newRestriction);
         break;
       case "Casing":
@@ -84,6 +85,19 @@ export default function PartItem(props) {
         newRestriction.total_power += item.power_draw;
         restriction(newRestriction);
         break;
+      case "RAM":
+        newRestriction.chipset_array = JSON.parse(JSON.stringify(item.chipset));
+        newRestriction.total_power += item.power_draw;
+        restriction(newRestriction);
+        break;
+      case "GPU":
+        newRestriction.total_power += item.power_draw;
+        restriction(newRestriction);
+        break
+      case "Storage":
+        newRestriction.total_power += item.power_draw;
+        restriction(newRestriction);
+        break
       default:
         break;
     }
