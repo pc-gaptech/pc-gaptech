@@ -64,6 +64,24 @@ export default function PartList() {
           }
           return false;
         }
+        if (restriction().socket_array.length) {
+          for (let i = 0; i < restriction().socket_array.length; i++) {
+            if (component.socket === restriction().socket_array[i]) {
+              return true;
+            }
+          }
+          return false;
+        }
+        if (restriction().chipset_array.length) {
+          for (let i = 0; i < restriction().chipset_array.length; i++) {
+            for (let j = 0; j < component.chipset.length; j++) {
+              if (component.chipset[j] === restriction().chipset_array[i]) {
+                return true;
+              }
+            }
+          }
+          return false;
+        }
         break;
       case "CPUCooler":
         if (restriction().socket) {
@@ -106,6 +124,22 @@ export default function PartList() {
           } else {
             return false;
           }
+        }
+        if (restriction().socket_array.length) {
+          for (let i = 0; i < restriction().socket_array.length; i++) {
+            if (component.socket === restriction().socket_array[i]) {
+              return true;
+            }
+          }
+          return false;
+        }
+        if (restriction().chipset_array.length) {
+          for (let i = 0; i < restriction().chipset_array.length; i++) {
+            if (component.chipset === restriction().chipset_array[i]) {
+              return true;
+            }
+          }
+          return false;
         }
         break;
       default:
