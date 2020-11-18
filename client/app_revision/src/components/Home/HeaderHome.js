@@ -1,16 +1,5 @@
 import React from "react";
-import Image from "material-ui-image";
-import backhome from "../../assets/wrench.svg";
-import {
-  makeStyles,
-  Accordion,
-  AccordionSummary,
-  Typography,
-  AccordionDetails,
-  CssBaseline,
-} from "@material-ui/core";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import Background from "../../assets/Head.jpeg";
+import { makeStyles } from "@material-ui/core";
 
 function HeaderHome() {
   const classes = useStyles();
@@ -22,24 +11,19 @@ function HeaderHome() {
 
   return (
     <div className={classes.root}>
-      <CssBaseline>
-        <video
-          autoPlay
-          muted
-          src="https://cdn.cloudflare.steamstatic.com/steam/clusters/frontpage/ed74590b56be59b8f90e3053/webm_page_bg_english.webm?t=1605294940"
-          play
-          style={{ width: "100%", height: 320, margin: 0, paddingRight: 0 }}
-        />
-        {/* <img
-          style={{ width: "100%", height: 320, margin: 0, paddingRight: 0 }}
-          src={Background}
-        /> */}
-      </CssBaseline>
+      <video
+        autoPlay
+        muted
+        src="https://cdn.cloudflare.steamstatic.com/steam/clusters/frontpage/ed74590b56be59b8f90e3053/webm_page_bg_english.webm?t=1605294940"
+        play
+        style={{ width: "100%", height: 320, margin: 0, paddingRight: 0 }}
+      />
     </div>
   );
 }
 const useStyles = makeStyles((theme) => ({
   root: {
+    marginTop: 0,
     width: "100%",
     margin: "0",
   },

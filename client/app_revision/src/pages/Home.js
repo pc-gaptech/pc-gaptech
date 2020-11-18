@@ -1,18 +1,8 @@
 import React from "react";
-import {
-  makeStyles,
-  Container,
-  Grid,
-  Paper,
-  Button,
-  CssBaseline,
-  Typography,
-} from "@material-ui/core";
-import CenterHome from "../components/Home/CenterHome";
+import { makeStyles, Container, Grid, CssBaseline } from "@material-ui/core";
 import DefaultConfig from "../components/Home/DefaultConfig";
 import SelectConfig from "../components/Home/SelectConfig";
 import HeaderHome from "../components/Home/HeaderHome";
-import Background from "../assets/wrench.svg";
 
 export default function Home() {
   const classes = useStyle();
@@ -20,11 +10,10 @@ export default function Home() {
   return (
     <div>
       <CssBaseline />
-      <Container>
+      <Container className={classes.header}>
         <HeaderHome />
       </Container>
       <Container className={classes.container} maxWidth={"false"}>
-        <h1 className={classes.title}>Descripton ....... </h1>
         <Grid container spacing={0} className={classes.cardfeature}>
           <Grid item xs={3} className={classes.mainLeft}>
             <SelectConfig />
@@ -34,6 +23,7 @@ export default function Home() {
           </Grid>
         </Grid>
       </Container>
+      <CssBaseline />
     </div>
   );
 }
@@ -48,12 +38,9 @@ const useStyle = makeStyles((theme) => ({
   },
   container: {
     width: "100%",
-    height: "50%",
+    maxHeight: 720,
     backgroundColor: "#120078",
-    // padding: "0",
-    // backgroundImage: `url(${Background})`,
     backgroundRepeat: "no-repeat",
-    // margin: 20,
   },
   cardfeature: {
     paddingTop: 50,
@@ -61,7 +48,6 @@ const useStyle = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     marginTop: 60,
-    // backgroundColor: "#F9F3F1",
     padding: 10,
   },
   paper: {
@@ -69,28 +55,20 @@ const useStyle = makeStyles((theme) => ({
   },
   mainLeft: {
     paddingTop: "0px",
-    // color: "white",
-    // backgroundColor: "#f4f4f2",
     height: "100vh",
     width: "30vh",
     textAlign: "center",
     marginTop: 0,
     margin: 100,
-
-    // backgroundImage: `url("https://i.ytimg.com/vi/DS098d9px6o/maxresdefault.jpg")`
   },
 
   mainRight: {
     paddingTop: "0px",
-    // color: "white",
-    // backgroundColor: "#f4f4f2",
     height: "100vh",
     width: "33vh",
     textAlign: "center",
     marginTop: 0,
     margin: 100,
-
-    // backgroundImage: `url("https://i.ytimg.com/vi/DS098d9px6o/maxresdefault.jpg")`,
   },
 
   center: {
@@ -101,8 +79,7 @@ const useStyle = makeStyles((theme) => ({
   },
 
   header: {
-    fontWeight: "bold",
-    fontSize: "1.3em",
-    marginBottom: "15px",
+    paddingRight: 0,
+    paddingLeft: 0,
   },
 }));

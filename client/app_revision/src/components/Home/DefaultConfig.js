@@ -77,7 +77,12 @@ function DefaultConfig() {
   useEffect(() => {
     if (data) {
       let games = data.getGames.map((el) => {
-        return { value: el.id, label: el.name, picture: el.picture_url };
+        return {
+          value: el.id,
+          label: el.name,
+          picture: el.picture_url,
+          className: classes.selects,
+        };
       });
       setOptions(games);
     }
@@ -86,8 +91,11 @@ function DefaultConfig() {
     return (
       <Card className={classes.carousel}>
         {" "}
-        <CardContent>
-          <img src={el.picture} style={{ width: 400, height: 250 }} />
+        <CardContent style={{ padding: 2 }}>
+          <img
+            src={el.picture}
+            style={{ padding: 0, width: 450, height: 250 }}
+          />
         </CardContent>
       </Card>
     );
@@ -97,20 +105,13 @@ function DefaultConfig() {
   if (error) return <p>{error}</p>;
 
   return (
-    // <div>
-    // <Paper elevation={4} className={classes.paper}>
     <Card className={classes.mainPage}>
       <Container>
         <div>
           <h1 className={classes.title}>Select Games</h1>
         </div>
         <div>
-          <Select
-            style={classes.selects}
-            onChange={pickGames}
-            options={options}
-            isMulti
-          />
+          <Select onChange={pickGames} options={options} isMulti />
         </div>
         <div>
           <Carousel>{listPicGames}</Carousel>
@@ -128,9 +129,6 @@ function DefaultConfig() {
         </div>
       </Container>
     </Card>
-
-    // {/* </Paper> */}
-    // </div>
   );
 }
 
@@ -149,26 +147,23 @@ const useStyle = makeStyles((theme) => ({
     marginTop: 30,
   },
   selects: {
-    color: "black",
-    backgroundColor: "red",
+    width: 10,
+    color: "Blue",
+    backgroundColor: "blue",
   },
   mainPage: {
     padding: 10,
-    // backgroundColor: "black",
-    color: "Red",
+    backgroundColor: "#e0e1dd",
+    color: "Black",
     width: 550,
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
-    // borderWidth: 1,
-    // borderStyle: "solid",
-    // borderColor: "black",
-    // backgroundColor: "white",
+    margin: "auto",
     height: 550,
     boxShadow: "10px 20px 22px -7px rgba(0,0,0,0.75);",
   },
   title: {
-    // backgroundColor: "blue",
     color: "black",
     letterSpacing: "3px",
   },
@@ -178,7 +173,8 @@ const useStyle = makeStyles((theme) => ({
   },
   carousel: {
     marginTop: 5,
-    width: 450,
+    width: 480,
+    backgroundColor: "#120078",
   },
 }));
 
