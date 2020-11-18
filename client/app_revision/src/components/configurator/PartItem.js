@@ -113,7 +113,7 @@ export default function PartItem(props) {
   const getTokpedPrice = async (input) => {
     try {
       let { data } = await axios({
-        url: `http://localhost:3000/tokopedia/checkprice?q=${input}`,
+        url: `http://13.229.97.157:3000/tokopedia/checkprice?q=${input}`,
         method: "GET",
       });
       setTokpedPrice(`${data.result}`);
@@ -125,7 +125,7 @@ export default function PartItem(props) {
   const getBukalapakPrice = async (input) => {
     try {
       let { data: dataBukalapak } = await axios({
-        url: `http://localhost:3000/bukalapak/checkprice?q=${input}`,
+        url: `http://13.229.97.157:3000/bukalapak/checkprice?q=${input}`,
         method: "GET",
       });
       console.log(dataBukalapak.result, "here");

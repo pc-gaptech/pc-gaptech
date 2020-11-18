@@ -151,12 +151,12 @@ export default function DetailCpu() {
   const getPrice = async (input) => {
     try {
       let { data: dataTokped } = await axios({
-        url: `http://localhost:3000/tokopedia/checkprice?q=${input}`,
+        url: `http://13.229.97.157:3000/tokopedia/checkprice?q=${input}`,
         method: "GET",
       });
       setTokpedPrice(`${dataTokped.result}`);
       let { data: dataBukalapak } = await axios({
-        url: `http://localhost:3000/bukalapak/checkprice?q=${input}`,
+        url: `http://13.229.97.157:3000/bukalapak/checkprice?q=${input}`,
         method: "GET",
       });
       setBukalapakPrice(`${dataBukalapak.result}`);
