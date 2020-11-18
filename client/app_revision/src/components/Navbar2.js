@@ -30,13 +30,17 @@ export default function App() {
 
 	return (
 		<Box display="flex" bgcolor="black" p={2} alignItems="center">
-			{/* <Box>
-			<Image
+			<Box>
+			<img
+			onClick={(e) => {
+				e.preventDefault()
+				history.push("/")
+			}}
+			style={{width: "30%", height: "auto"}}
 				src={gaptech}
 			/>
-			</Box> */}
-			<Typography className={classes.title}>PC-GAPTECH</Typography>
-			<Box style={{ marginLeft: "50px", display: "flex" }}>
+			</Box>
+			<Box style={{ marginLeft: "20px", display: "flex" }}>
 			<Button
 						startIcon={<HomeIcon />}
 						className={classes.menu}
