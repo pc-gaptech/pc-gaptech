@@ -22,7 +22,9 @@ const useStyle = makeStyles((theme) => ({
 	quote: {
 		fontSize: "2em",
 		fontStyle: "italic",
-		fontWeight: "bold"
+		fontWeight: "bold",
+		fontFamily: "'Lora', serif"
+
 	}
 }));
 export default function Favorites() {

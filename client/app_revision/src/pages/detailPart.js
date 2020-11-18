@@ -91,9 +91,9 @@ const useStyles = makeStyles((theme) => ({
     margin: "auto"
   },
 
-  sprice: { 
-    display: "flex", 
-    textAlign: "center", 
+  sprice: {
+    display: "flex",
+    textAlign: "center",
     margin: "auto",
     fontWeight: "bold",
   }
@@ -229,7 +229,7 @@ export default function DetailCpu() {
             <Button
               variant="contained"
               color="primary"
-              style={{ marginTop: "25px" }}
+              style={{ marginTop: "25px", backgroundColor: "#F30052" }}
               size="large"
               className={classes.button}
               startIcon={<AddIcon />}
@@ -284,7 +284,7 @@ export default function DetailCpu() {
                   </Typography>
                 </Grid>
                 <Grid className={classes.sprice}>
-                  <Avatar src={tokopediaIcon} style={{margin: "10px"}}/>
+                  <Avatar src={tokopediaIcon} />
                   <Box>
                     <IconButton
                       style={{ color: "#40CB53" }}
@@ -292,7 +292,7 @@ export default function DetailCpu() {
                       aria-label="add to shopping cart"
                     >
                       <AddShoppingCartIcon />
-                      <Typography>{tokpedPrice}</Typography>
+                      <Typography className={classes.center}>{tokpedPrice}</Typography>
                     </IconButton>
                   </Box>
                 </Grid>
@@ -305,7 +305,7 @@ export default function DetailCpu() {
                       aria-label="add to shopping cart"
                     >
                       <AddShoppingCartIcon />
-                      <Typography>{bukalapakPrice}</Typography>
+                      <Typography className={classes.center}>{bukalapakPrice}</Typography>
                     </IconButton>
                   </Box>
                 </Grid>
